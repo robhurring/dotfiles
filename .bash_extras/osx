@@ -1,0 +1,9 @@
+if [[ $MACHTYPE == *apple* ]]; then
+  [[ -e /sw/bin/init.sh ]] && sh /sw/bin/init.sh
+  [[ -d /opt/local/bin ]] && push_path /opt/local/bin
+  
+  # OSX puts /usr/local/bin after /usr/bin for me, so this just forces local to
+  # the front of the line (/etc/paths had no effect, so /hack)
+  export PATH=/usr/local/bin:$PATH
+	export LC_ALL=en_US.UTF-8	
+fi

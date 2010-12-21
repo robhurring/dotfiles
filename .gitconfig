@@ -1,0 +1,35 @@
+[alias]
+  st = status
+  ci = commit
+  cia = commit -a
+  br = branch
+  co = checkout
+  df = diff
+  lg = log -p
+  ls = ls-files
+  gr = grep -n
+[color]
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = cyan
+[color "diff"]
+  meta = black white
+  frag = blue
+  old = red
+  new = green
+  whitespace = red reverse
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = red
+[color "interactive"]
+  prompt = cyan bold
+  header = yellow 
+  help = yellow
+  error = red bold
+[core]
+  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	editor = nano
+  
