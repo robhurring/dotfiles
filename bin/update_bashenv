@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ -z "$BASHENV" ]; then
+  echo "Please define BASHENV as the path to the bashenv.git repo."
+  exit 1
+fi
+
+cd $BASHENV && git archive master | tar --keep-newer-files -v -x -C $HOME
