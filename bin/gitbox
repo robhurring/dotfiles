@@ -1,9 +1,6 @@
 #!/bin/bash
-
 # Searches the specified directory (default=.) for any .git repos that
 # have a dropbox remote defined, and updates it
-# Author:: Rob Hurring
-# Date:: 2010-12-09 
 
 relroot=${1:-.}
 root=`cd $relroot; pwd`
