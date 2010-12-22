@@ -34,6 +34,7 @@ if [ -d $BASH_EXTRAS ]; then
   done
 fi
 
+# Call this to rerender the prompt after changing the $PROMPT_* variables below
 update_prompt(){
   if [ "$PROMPT_COLLAPSE_PATHS" = "1" ]; then
     export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo $PROMPT_COLOR; else echo $PROMPT_ECOLOR; fi\`[\u.\h: \`if [[ `pwd|wc -c|tr -d " "` > $PROMPT_MAX_PATH_LENGTH ]]; then echo "\\W"; else echo "\\w"; fi\`]\$\[\033[0m\] "; echo -ne "\033]0;`hostname -s`:`pwd`\007"'
