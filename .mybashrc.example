@@ -1,0 +1,25 @@
+# This is an example of what you could use .mybashrc for, to give your particular machine a more
+# customized feel. basically, anything left out of .bashrc should end up in here.
+
+# used with the update_bashenv script
+# export BASHENV=$HOME/git/bashenv
+
+# change prompt to PINK so we can tell we're on the server
+# export PROMPT_COLOR="\\[\\033[35m\\]"
+
+# RH doesn't do this by default and wont listen to LS_OPTIONS
+# eval `dircolors`
+# alias ls="ls $LS_OPTIONS"
+
+# git info for this machine
+# export GIT_COMMITTER_NAME='Your Name'
+# export GIT_COMMITTER_EMAIL='your.name@example.com'
+
+# export PHP_PEAR_PHP_BIN=/usr/bin/php
+
+# This adds support for the ruby oci8 / oracle env variables
+# this should be automatically `cat` into the .bashrc so we have it
+# export LD_LIBRARY_PATH="/usr/local/oracle/instantclient_11_1"
+# export TNS_ADMIN="/usr/local/oracle/network/admin"
+# export NLS_LANG="AMERICAN_AMERICA.UTF8"
+# push_path $LD_LIBRARY_PATH 'after'
