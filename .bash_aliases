@@ -18,7 +18,8 @@ alias svn_rm_all="svn st|grep !|awk '{print \$2}'|xargs svn rm"
 
 # Rails Aliases (auto checking)
 railscmd(){
-  [[ -e './script/rails' ]] && rails $1 || ./script/$1
+  cmd=$1 && shift
+  [[ -e './script/rails' ]] && rails $cmd $* || ./script/$cmd $*
 }
 
 alias ss='railscmd server'
