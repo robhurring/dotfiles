@@ -36,18 +36,17 @@ fi
 
 # Call this to rerender the prompt after changing the $PROMPT_* variables below
 update_prompt(){
-  if [ "$PROMPT_COLLAPSE_PATHS" = "1" ]; then
-    export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo $PROMPT_COLOR; else echo $PROMPT_ECOLOR; fi\`[\u.\h: \`if [[ `pwd|wc -c|tr -d " "` > $PROMPT_MAX_PATH_LENGTH ]]; then echo "\\W"; else echo "\\w"; fi\`]\$\[\033[0m\] "; echo -ne "\033]0;`hostname -s`:`pwd`\007"'
-  else
-    export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo $PROMPT_COLOR; else echo $PROMPT_ECOLOR; fi\`[\u.\h: \w]\$\[\033[0m\] "; echo -ne "\033]0;`hostname -s`:`pwd`\007"'
-  fi
+  export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo $PROMPT_COLOR; else echo $PROMPT_ECOLOR; fi\`[\u.\h: \w]\$\[\033[0m\] "; echo -ne "\033]0;`termtitle`\007"'
+}
+
+# this is used to set the terminal title
+termtitle(){
+  echo `hostname -s`:`pwd`
 }
 
 if [ "$PS1" ]; then
-  export PROMPT_COLLAPSE_PATHS=0
   export PROMPT_COLOR="\[\033[32m\]"
   export PROMPT_ECOLOR="\[\033[31m\]"
-  export PROMPT_MAX_PATH_LENGTH=25
   # Re-run this in your .mybashrc file if you change the PROMPT_COLLAPSE_PATHS var
   update_prompt
 fi
