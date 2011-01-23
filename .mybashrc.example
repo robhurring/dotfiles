@@ -7,7 +7,7 @@
 # change prompt to PINK so we can tell we're on the server
 # export PROMPT_COLOR="\\[\\033[35m\\]"
 
-# RH doesn't do this by default and wont listen to LS_OPTIONS
+# RedHat doesn't do this by default and wont listen to LS_OPTIONS
 # eval `dircolors`
 # alias ls="ls $LS_OPTIONS"
 
@@ -15,11 +15,11 @@
 # export GIT_COMMITTER_NAME='Your Name'
 # export GIT_COMMITTER_EMAIL='your.name@example.com'
 
-# export PHP_PEAR_PHP_BIN=/usr/bin/php
+# add git branch to terminal title (or echo whatever you want in the title)
+termtitle(){
+  echo `hostname -s`:`pwd` `__git_ps1`
+}
 
-# This adds support for the ruby oci8 / oracle env variables
-# this should be automatically `cat` into the .bashrc so we have it
-# export LD_LIBRARY_PATH="/usr/local/oracle/instantclient_11_1"
-# export TNS_ADMIN="/usr/local/oracle/network/admin"
-# export NLS_LANG="AMERICAN_AMERICA.UTF8"
-# push_path $LD_LIBRARY_PATH 'after'
+# add a custom path for this machine
+# export MYCUSTOMPATH=$HOME/apps/bin
+# push_path $MYCUSTOMPATH 'after'
