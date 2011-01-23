@@ -54,8 +54,8 @@ fi
 # Aliases
 [[ -e $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
 
-# Our buddy "j"
-[[ -e $HOME/bin/j.sh ]] && source $HOME/bin/j.sh
+# Our buddy "z"
+[[ -e $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
 
 # Define custom things for each machine in ~/.mybashrc
 # (e.g.: different color prompt, different aliases, vars, etc.)
