@@ -51,6 +51,7 @@ def cls
   nil
 end
 
+# reload a single file
 def rl(file = nil)
   if file.nil?
     @__reload__ ? rl(@__reload__) : puts("Nothing to reload.")
@@ -64,7 +65,19 @@ def rl(file = nil)
   end
 end
 
-alias reload! rl unless defined?(Rails)
+def load(file)
+  IRB.conf[:LOAD_MODULES] |= Array(file)
+  super
+end
+
+# reload all included files
+def reload!
+  IRB.conf[:LOAD_MODULES].each do |file| 
+    puts "Reload: #{file}"
+    load file
+  end
+end unless defined?(Rails)
+
 alias x exit
 
 # Rails Specific Helpers
