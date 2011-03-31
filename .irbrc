@@ -22,6 +22,14 @@ class Object
   def my_instance_methods
     instance_methods.sort - ancestors[1].instance_methods
   end
+  
+  def ivg name
+    instance_variable_get name
+  end
+  
+  def ivs name, value
+    instance_variable_set name, value
+  end
 end
 
 def benchmark
@@ -56,4 +64,35 @@ def rl(file = nil)
   end
 end
 
+alias reload! rl unless defined?(Rails)
 alias x exit
+
+# Rails Specific Helpers
+
+module Rails
+  module IRBHelpers
+    def sql(query)
+      ActiveRecord::Base.connection.select_all(query)
+    end
+    
+    def include_view_helpers!
+      include ActionView::Helpers::DebugHelper
+      include ActionView::Helpers::NumberHelper
+      include ActionView::Helpers::RawOutputHelper
+      include ActionView::Helpers::SanitizeHelper
+      include ActionView::Helpers::TagHelper
+      include ActionView::Helpers::TextHelper
+      include ActionView::Helpers::TranslationHelper
+      nil
+    end
+    
+    def log_here!
+      ActiveRecord::Base.logger = Logger.new STDOUT
+      ActiveRecord::Base.clear_reloadable_connections!
+      ActionController::Base.logger = Logger.new STDOUT
+      nil
+    end
+  end
+end
+
+include Rails::IRBHelpers if defined?(Rails)
