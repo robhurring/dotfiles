@@ -13,10 +13,6 @@ alias cd--='cd ~ && cd -'
 alias www='cd /var/www'
 alias src='cd /usr/local/src'
 
-# Subversion
-alias svn_add_all="svn st|grep ?|awk '{print \$2}'|xargs svn add"
-alias svn_rm_all="svn st|grep !|awk '{print \$2}'|xargs svn rm"
-
 # Rails Aliases (auto checking)
 railscmd(){
   cmd=$1 && shift
