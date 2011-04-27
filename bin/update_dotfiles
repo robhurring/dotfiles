@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ -z "$DOTFILES" ]; then
+  echo "Please define DOTFILES as the path to the dotfiles.git repo."
+  exit 1
+fi
+
+cd $DOTFILES && git archive master | tar -v -x -C $HOME
