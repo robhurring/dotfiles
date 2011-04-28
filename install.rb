@@ -20,8 +20,8 @@ puts <<-EOF
 
 Make sure to change your git details in ~/.mybashrc
  
-  GIT_COMMITTER_NAME
-  GIT_COMMITTER_EMAIL
+  export GIT_COMMITTER_NAME=""
+  export GIT_COMMITTER_EMAIL=""
 
 See .mybashrc for example usage.
 
