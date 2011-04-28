@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
-# from http://errtheblog.com/posts/89-huba-huba
+# Usage: install.rb [-f]
+#   -f  force symlinking
+#       [Defailt: symlink if the file doesn't exist]
 
 $force = ARGV[0] == '-f'
 $home = ENV['HOME']
