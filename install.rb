@@ -18,11 +18,6 @@ Dir.chdir dotfiles_dir do
 end
 puts <<-EOF
 
-Make sure to change your git details in ~/.mybashrc
- 
-  export GIT_COMMITTER_NAME=""
-  export GIT_COMMITTER_EMAIL=""
-
-See .mybashrc for example usage.
+See .mybashrc for machine-specific example usage
 
 EOF
