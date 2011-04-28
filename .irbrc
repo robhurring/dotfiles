@@ -38,8 +38,7 @@ def benchmark
 end
 
 def pbcopy(what)
-  `echo #{what.to_s.chomp}|pbcopy`
-  what.to_s
+  IO.popen('pbcopy', 'w'){ |f| f << what.to_s }
 end
 
 def pbpaste
