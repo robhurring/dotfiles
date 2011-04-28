@@ -8,10 +8,6 @@
 # eval `dircolors`
 # alias ls="ls $LS_OPTIONS"
 
-# git info for this machine
-# export GIT_COMMITTER_NAME='Your Name'
-# export GIT_COMMITTER_EMAIL='your.name@example.com'
-
 # add git branch to terminal title (or echo whatever you want in the title)
 termtitle(){
   echo `hostname -s`:`pwd` `__git_ps1`
