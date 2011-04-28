@@ -1,9 +1,6 @@
 # This is an example of what you could use .mybashrc for, to give your particular machine a more
 # customized feel. basically, anything left out of .bashrc should end up in here.
 
-# used with the update_bashenv script
-# export BASHENV=$HOME/git/bashenv
-
 # change prompt to PINK so we can tell we're on the server
 # export PROMPT_COLOR="\\[\\033[35m\\]"
 
