@@ -30,7 +30,7 @@ push_path $HOME/bin
 export BASH_EXTRAS="$HOME/.bash_extras"
 if [ -d $BASH_EXTRAS ]; then
   for config in `ls $BASH_EXTRAS`; do
-    source $BASH_EXTRAS/$config
+    source $BASH_EXTRAS/$config 2>/dev/null
   done
 fi
 
