@@ -99,11 +99,17 @@ module Rails
       nil
     end
     
-    def log_here!
-      ActiveRecord::Base.logger = Logger.new STDOUT
-      ActiveRecord::Base.clear_reloadable_connections!
-      ActionController::Base.logger = Logger.new STDOUT
-      nil
+    def change_log(stream)
+      ActiveRecord::Base.logger = Logger.new(stream)
+      ActiveRecord::Base.clear_active_connections!
+    end
+
+    def show_log
+      change_log(STDOUT)
+    end
+
+    def hide_log
+      change_log(nil)
     end
   end
 end
