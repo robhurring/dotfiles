@@ -15,12 +15,8 @@ require 'pp'
 require 'benchmark'
 
 class Object
-  def my_methods
-    methods.sort - ancestors[1].methods
-  end
-  
-  def my_instance_methods
-    instance_methods.sort - ancestors[1].instance_methods
+  def local_methods(obj = self)
+    (obj.methods - obj.class.superclass.instance_methods).sort
   end
   
   def ivg name
