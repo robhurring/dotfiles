@@ -1,0 +1,3 @@
+source ~/.bash_extras/completions/git-completion
+complete -C ~/.bash_extras/completions/rake-completion -o default rake
+complete -C ~/.bash_extras/completions/capistrano-completion -o default cap
