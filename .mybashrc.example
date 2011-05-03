@@ -1,18 +1,22 @@
-# This is an example of what you could use .mybashrc for, to give your particular machine a more
-# customized feel. basically, anything left out of .bashrc should end up in here.
-
-# change prompt to PINK so we can tell we're on the server
+## This is an example of what you could use .mybashrc for, to give your particular machine a more
+## customized feel. basically, anything left out of .bashrc should end up in here.
+ 
+## change prompt for this machine?
 # export PROMPT_COLOR="\\[\\033[35m\\]"
 
-# RedHat doesn't do this by default and wont listen to LS_OPTIONS
-# eval `dircolors`
-# alias ls="ls $LS_OPTIONS"
+# alias p="passenger"
+# alias cdg="cd $GEM_HOME"
+# cdb(){ 
+#   cd `bundle show $1` 
+# }
 
-# add git branch to terminal title (or echo whatever you want in the title)
-termtitle(){
-  echo `hostname -s`:`pwd` `__git_ps1`
-}
+## add git branch and rvm gemset to terminal title
+# termtitle(){
+#   GEMSET=`__rvm_current_gemset`
+#   if [ $GEMSET ]; then GEMSET="@$GEMSET"; fi
+#   echo `hostname -s`:`pwd` `__git_ps1` $GEMSET
+# }
 
-# add a custom path for this machine
+## add a custom path for this machine
 # export MYCUSTOMPATH=$HOME/apps/bin
 # push_path $MYCUSTOMPATH 'after'
