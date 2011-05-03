@@ -27,7 +27,7 @@ for path in `ls -d /usr/local/*/bin 2>/dev/null`; do
 done
 push_path $HOME/bin
 
-export BASH_EXTRAS="$HOME/.bash_extras"
+export BASH_EXTRAS="$HOME/.bash"
 if [ -d $BASH_EXTRAS ]; then
   for config in `ls $BASH_EXTRAS`; do
     source $BASH_EXTRAS/$config 2>/dev/null
