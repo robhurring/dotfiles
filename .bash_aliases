@@ -20,6 +20,7 @@ railscmd(){
 }
 
 alias ss='railscmd server'
+alias ssd='railscmd server --debugger'
 alias sc='railscmd console'
 alias sdb='railscmd dbconsole'
 alias gen='railscmd generate'
