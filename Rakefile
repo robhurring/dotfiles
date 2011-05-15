@@ -51,6 +51,6 @@ def link_file(file, prefix='.')
     end
   else
     puts "linking ~/#{target}"
-    system %Q{ln -s "$PWD/#{file}" "$HOME/#{target}"}
+    system %Q{ln -shf "$PWD/#{file}" "$HOME/#{target}"}
   end
 end
