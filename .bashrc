@@ -34,21 +34,16 @@ if [ -d $BASH_EXTRAS ]; then
   done
 fi
 
-# Call this to rerender the prompt after changing the $PROMPT_* variables below
-update_prompt(){
-  export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo $PROMPT_COLOR; else echo $PROMPT_ECOLOR; fi\`[\u.\h: \w]\$\[\033[0m\] "; echo -ne "\033]0;`termtitle`\007"'
-}
-
 # this is used to set the terminal title
 termtitle(){
   echo `hostname -s`:`pwd`
 }
 
 if [ "$PS1" ]; then
-  export PROMPT_COLOR="\[\033[32m\]"
-  export PROMPT_ECOLOR="\[\033[31m\]"
-  # Re-run this in your .mybashrc file if you change the PROMPT_COLLAPSE_PATHS var
-  update_prompt
+  export PROMPT_DETAILS="[\u.\h: \w]\\$" # user, host, etc.
+  export PROMPT_COLOR="\[\033[32m\]"  # regular color
+  export PROMPT_ECOLOR="\[\033[31m\]" # error color
+  export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo $PROMPT_COLOR; else echo $PROMPT_ECOLOR; fi\`$PROMPT_DETAILS\[\033[0m\] "; echo -ne "\033]0;`termtitle`\007"'
 fi
 
 # Aliases
@@ -58,5 +53,5 @@ fi
 [[ -e $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
 
 # Define custom things for each machine in ~/.mybashrc
-# (e.g.: different color prompt, different aliases, vars, etc.)
+# (e.g.: different color prompt, prompt details, different aliases, vars, etc.)
 [[ -e $HOME/.mybashrc ]] && source $HOME/.mybashrc
