@@ -1,21 +1,36 @@
 ## This is an example of what you could use .mybashrc for, to give your particular machine a more
 ## customized feel. basically, anything left out of .bashrc should end up in here.
  
-## change prompt for this machine?
-# export PROMPT_COLOR="\\[\\033[35m\\]"
+alias e='mate'
+alias cdd='cd ~/Desktop'
+alias p='passenger'
+alias cdg='cd $GEM_HOME'
 
-# alias p="passenger"
-# alias cdg="cd $GEM_HOME"
-# cdb(){ 
-#   cd `bundle show $1` 
-# }
+# cd to gem folder
+function cdb(){
+  cd `bundle show $1`
+}
 
-## add git branch and rvm gemset to terminal title
-# termtitle(){
-#   GEMSET=`__rvm_current_gemset`
-#   if [ $GEMSET ]; then GEMSET="@$GEMSET"; fi
-#   echo `hostname -s`:`pwd` `__git_ps1` $GEMSET
-# }
+function __before_ps1(){
+  GEMSET=`__rvm_current_gemset`
+  if [ $GEMSET ]; then GEMSET="@$GEMSET"; fi
+  
+  # show prompt in yellow
+  PROMPT_COLOR="\e[33;1m"
+  
+  # show errors in red
+  ERROR_COLOR="\e[31m"
+  
+  # set a custom title with git + rvm gemset
+  TERM_TITLE="$PWD `__git_ps1` $GEMSET"
+
+  # add git details to our prompt
+  PROMPT_DETAILS="$RET$(__git_ps1 "\e[37;1m%s:\e[m$PROMPT_COLOR")\w: "
+}
+
+# RVM
+alias cdg='cd `rvm gemdir`/gems'
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 ## add a custom path for this machine
 # export MYCUSTOMPATH=$HOME/apps/bin
