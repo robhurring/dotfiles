@@ -41,9 +41,10 @@ termtitle(){
 
 if [ "$PS1" ]; then
   export PROMPT_DETAILS="[\u.\h: \w]\\$" # user, host, etc.
-  export PROMPT_COLOR="\[\033[32m\]"  # regular color
-  export PROMPT_ECOLOR="\[\033[31m\]" # error color
-  export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo $PROMPT_COLOR; else echo $PROMPT_ECOLOR; fi\`$PROMPT_DETAILS\[\033[0m\] "; echo -ne "\033]0;`termtitle`\007"'
+  export PROMPT_COLOR="\e[32m"  # regular color
+  export PROMPT_ECOLOR="\e[31m" # error color
+  export PROMPT_DCOLOR="\e[0m"  # default color 
+  export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo \[$PROMPT_COLOR\]; else echo \[$PROMPT_ECOLOR\]; fi\`$PROMPT_DETAILS\[$PROMPT_DCOLOR\] "; echo -ne "\033]0;`termtitle`\007"'
 fi
 
 # Aliases
