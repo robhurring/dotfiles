@@ -39,11 +39,12 @@ fi
 export TERM_TITLE="`hostname -s`:$PWD"
 export PROMPT_COLOR="\e[32m"  # regular color
 export PROMPT_DETAILS="[$RET\u.\h: \w]\$ "
-export ERROR_COLOR="\e[31m" # for our error status code
+export RET_COLOR="\e[31m"   # for our error status code
+export RET_FMT="\$status "  # format of this
 
 function __prompt_command(){ 
   # on $? != 0 put the exit status in $ERROR_COLOR wherever $RET is within $PROMPT_DETAILS
-  RET="\$(r=\$?;[ \$r -eq 0 ] || echo -n \"\[$ERROR_COLOR\]\$r\[$PROMPT_COLOR\] \")"
+  RET="\$(status=\$?;[ \$status -eq 0 ] || echo -n \"\[$RET_COLOR\]$RET_FMT\[$PROMPT_COLOR\]\")"
 
   # use this function `__before_ps1` to customize the above vars
   # or modify PROMPT_DETAILS/etc.
