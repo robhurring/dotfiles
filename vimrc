@@ -1,5 +1,7 @@
 " pathogen
-call pathogen#runtime_append_all_bundles() 
+filetype off 
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
 
 " set auto-indenting on for programming
 set ai
