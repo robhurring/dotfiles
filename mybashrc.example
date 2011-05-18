@@ -2,6 +2,7 @@
 ## customized feel. basically, anything left out of .bashrc should end up in here.
  
 alias e='mate'
+alias v='mvim'
 alias cdd='cd ~/Desktop'
 alias p='passenger'
 alias cdg='cd $GEM_HOME'

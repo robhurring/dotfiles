@@ -1,7 +1,7 @@
 # Global Declarations
 export ENV=$HOME/.bashrc
 export SHELL=/bin/bash
-export EDITOR="nano"
+export EDITOR="vim"
 
 export LS_OPTIONS='--color=auto'
 export CLICOLOR='Yes'
