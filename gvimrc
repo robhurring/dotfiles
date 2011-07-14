@@ -1,5 +1,5 @@
-"if has("gui_macvim")
-"  macmenu &File.New\ Tab key=<nop>
-"  map <D-t> :CommandT<CR>
-"  set fuoptions=maxvert,maxhorz
-"endif
+" peepopen
+if has("gui_macvim")
+  macmenu &File.New\ Tab key=<nop>
+  map <D-t> <Plug>PeepOpen
+end
