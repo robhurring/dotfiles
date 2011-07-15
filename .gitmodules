@@ -82,3 +82,11 @@
 	path = textmate/Bundles/MyBundle.tmbundle
 	url = https://github.com/robhurring/my_bundle.git
   ignore = dirty
+[submodule "vim/bundle/vim-colors-solarized"]
+	path = vim/bundle/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+	ignore = dirty
+[submodule "vim/bundle/vim-supertab"]
+	path = vim/bundle/vim-supertab
+	url = https://github.com/ervandew/supertab.git
+	ignore = dirty
