@@ -2,14 +2,22 @@
 ## customized feel. basically, anything left out of .bashrc should end up in here.
  
 alias e='mate'
-alias v='mvim'
+alias o='open'
 alias cdd='cd ~/Desktop'
-alias p='passenger'
 alias cdg='cd $GEM_HOME'
 
+alias p='passenger'
+alias r='rails'
+alias g='git'
+alias c='cd /usr/local/Cellar'
+
 # cd to gem folder
-function cdb(){
+cdb(){
   cd `bundle show $1`
+}
+
+eb(){
+  e `bundle show $1`
 }
 
 function __before_ps1(){
@@ -30,7 +38,6 @@ function __before_ps1(){
 }
 
 # RVM
-alias cdg='cd `rvm gemdir`/gems'
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 ## add a custom path for this machine
