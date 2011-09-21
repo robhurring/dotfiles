@@ -27,14 +27,14 @@ function __before_ps1(){
   # show prompt in yellow
   PROMPT_COLOR="\e[33;1m"
   
-  # show errors in red
-  ERROR_COLOR="\e[31m"
+  RET_FMT="\$status:"
   
   # set a custom title with git + rvm gemset
-  TERM_TITLE="$PWD `__git_ps1` $GEMSET"
+  TERM_TITLE="$PWD `__git_ps1 \"%s$GEMSET\"`"
 
   # add git details to our prompt
-  PROMPT_DETAILS="$RET$(__git_ps1 "\e[37;1m%s:\e[m$PROMPT_COLOR")\w: "
+  [[ $(__git_ps1 "%s") == "master" ]] && GITCOLOR="\[\e[37;41m\]" || GITCOLOR="\[\e[37;1m\]"
+  PROMPT_DETAILS="$RET$(__git_ps1 "$GITCOLOR%s$GEMSET:\[\e[m$PROMPT_COLOR")\]\w: "
 }
 
 # RVM
