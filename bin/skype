@@ -1,0 +1,4 @@
+#!/bin/bash
+osascript -e "tell application \"Skype\"
+	get URL \"callto:1+$1\"
+end tell" 2> /dev/null
