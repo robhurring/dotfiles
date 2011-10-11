@@ -1,0 +1,124 @@
+#!/usr/bin/env ruby
+require 'thor'
+require 'fileutils'
+
+# Small class to manage multiple dropbox accounts
+# it works by setting a unique HOME path per account you want to sync
+# 
+# Usage:
+# 
+#   $ dropbox start work
+#     => creates ~/Dropboxes/work/Dropbox
+#     => follow dropbox wizard and allow to sync
+# 
+#  $ dropbox start home
+#     => ditto, only in ~/Dropboxes/home/Dropbox
+# 
+# To switch between the 2 you can either use the full path or
+# use the "link" task
+# 
+#  $ dropbox link work
+#     => creates a link to your work dropbox in ~/Dropbox
+# 
+# To list what accounts you are managing you can use "list"
+# 
+#  $ dropbox list
+# 
+#     [account] work
+#       Linked
+#     [account] home
+#       Linked
+#       Running @ 19867
+#
+#   Linked: indicates that you've started the dropbox client with that account
+#   Running: indicates that the current account is running
+# 
+class Dropbox < Thor
+  include Thor::Actions
+  
+  Application = '/Applications/Dropbox.app/Contents/MacOS/Dropbox'
+  BaseDirectory = File.expand_path('~/Dropboxes')
+
+  desc 'switch ACCOUNT', %{Starts the dropbox client for the given account}
+  def start(account)
+    path = account_path(account)
+    empty_directory path unless File.directory?(path)
+    
+    command = %{HOME=%s && %s&} % [path, Application]    
+    system command
+    say "[started] #{account}", :green
+  end
+  
+  desc 'stop ACCOUNT', %{Stops the dropbox client for the given account (if running)}
+  def stop(account)
+    pid = pid(account)
+
+    Process.kill 'KILL', pid if pid_running?(pid)
+    say "[stopped] #{account}", :magenta
+  end
+  
+  desc 'link ACCOUNT', %{Links the given account to your ~/Dropbox folder using symlinks}
+  def link(account)
+    path = dropbox_path account
+
+    unless File.directory?(path)
+      say %{This account does not exist yet. Use "dropbox start ACCOUNT" to create a new account.}, :red
+      exit 1
+    end
+  
+    say "[linking] #{account}", :green
+    create_link(File.expand_path('~/Dropbox'), path, :symbolic => true)
+  rescue Errno::EPERM
+    say %{~/Dropbox is a directory. To be safe, we won't remove this for you.}, :red
+  end
+  
+  desc 'list', %{Lists all managed dropbox accounts}
+  def list
+    Dir[File.join(BaseDirectory, '**')].each do |path|
+      account = File.basename(path)
+      say %{[account] #{account}}, :cyan
+      
+      linked = File.directory?(dropbox_path(account))
+      say %{  Linked} if linked
+      
+      pid = pid(account)
+      say %{  Running @ #{pid}} if pid_running?(pid)
+    end
+  end
+  
+private
+
+  # searches the account's .dropbox folder for the currently running PID
+  # file is located at ~/Dropboxes/<account>/.dropbox/dropbox.pid
+  def pid(account)
+    path = File.join account_path(account), '.dropbox', 'dropbox.pid'
+    
+    if File.file?(path)
+      File.read(path).to_i
+    else
+      nil
+    end
+  end
+  
+  # checks to see if the given PID is still running
+  def pid_running?(pid)
+    Process.getpgid( pid )
+    true
+  rescue Errno::ESRCH
+    false
+  end
+  
+  # path to the account's root folder. 
+  # Example: ~/Dropboxes/<account>
+  def account_path(account)
+    File.join BaseDirectory, account
+  end
+
+  # path to the actual Dropbox folder for the account
+  # Example: ~/Dropboxes/<account>/Dropbox
+  def dropbox_path(account)
+    File.join account_path(account), 'Dropbox'
+  end
+end
+
+Dropbox.start
