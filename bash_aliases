@@ -8,6 +8,7 @@ alias ..='cd ..'
 alias cd..='cd ..'
 alias cd-='cd -'
 alias cd--='cd ~ && cd -'
+alias 'psg'='ps ax | grep '
 
 # Common Directories
 alias www='cd /var/www'
