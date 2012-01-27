@@ -1,3 +1,5 @@
+exit if RUBY_ENGINE == 'macruby'
+
 require 'rubygems'
 
 require 'irb/completion'
