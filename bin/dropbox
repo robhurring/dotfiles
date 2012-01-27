@@ -39,7 +39,7 @@ class Dropbox < Thor
   Application = '/Applications/Dropbox.app/Contents/MacOS/Dropbox'
   BaseDirectory = File.expand_path('~/Dropboxes')
 
-  desc 'switch ACCOUNT', %{Starts the dropbox client for the given account}
+  desc 'start ACCOUNT', %{Starts the dropbox client for the given account}
   def start(account)
     path = account_path(account)
     empty_directory path unless File.directory?(path)
@@ -102,7 +102,7 @@ private
   
   # checks to see if the given PID is still running
   def pid_running?(pid)
-    Process.getpgid( pid )
+    Process.getpgid(pid)
     true
   rescue Errno::ESRCH
     false
