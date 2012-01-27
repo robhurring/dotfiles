@@ -7,8 +7,6 @@ export LS_OPTIONS='--color=auto'
 export CLICOLOR='Yes'
 export LSCOLORS='exgxfxdxcxdxdxhbadexex'
 
-set -o vi
-
 if [ -t 0 ]; then
   stty erase ^H
 fi
