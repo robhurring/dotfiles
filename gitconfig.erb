@@ -8,6 +8,19 @@
   lg = log -p
   ls = ls-files
   gr = grep -n
+  # Log display from screencast, with train tracks.
+  l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+  # Alternate log display from Scott Chacon
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  # Other useful aliases:
+  unstage = reset HEAD
+  staged = diff --cached
+  unstaged = diff
+  current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+  # Usage: git track origin/feature-123-login-form
+  track = checkout -t
+[apply]
+  whitespace = warn
 [format]
 	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
 [color]
@@ -28,12 +41,19 @@
   untracked = red
 [color "interactive"]
   prompt = cyan bold
-  header = yellow 
+  header = yellow
   help = yellow
   error = red bold
 [core]
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	editor = nano
+[help]
+  autocorrect = 1
+[status]
+  submodule = 1
+[push]
+  # Only push branches that have been set up to track a remote branch.
+  default = current
 [user]
 	name = <%= print("Your Name: "); STDOUT.flush; STDIN.gets.chomp %>
 	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
