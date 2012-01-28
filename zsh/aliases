@@ -60,6 +60,5 @@ alias gstp='git stash pop'
 alias gup='git smart-pull'
 
 # Misc
-alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -nr | head -n 20"
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
 alias dec='openssl enc -d -aes-256-cbc -in '
