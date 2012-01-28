@@ -1,10 +1,10 @@
 autoload -U colors && colors
 setopt PROMPT_SUBST
 
-local prompt_color='yellow'
+export PROMPT_COLOR='yellow'
 
 project_pwd() {
-  echo $PWD | sed -e "s/\/Users\/$USER/~/" -e "s/~\/Projects\/\([^\/]*\)/%{$fg[$prompt_color]%}project:%{$fg[white]%}\\1/"
+  echo $PWD | sed -e "s/\/Users\/$USER/~/" -e "s/~\/Projects\/\([^\/]*\)/%{$fg[$PROMPT_COLOR]%}project:%{$fg[white]%}\\1/"
 }
 
 precmd() {
@@ -12,5 +12,5 @@ precmd() {
   echo -ne "\e]1;$TITLE\a"
 }
 
-export PROMPT=$'%B%{$fg[$prompt_color]%}$(project_pwd):%b%{$reset_color%} '
+export PROMPT=$'%B%{$fg[$PROMPT_COLOR]%}$(project_pwd):%b%{$reset_color%} '
 export RPROMPT=$'%(?,,ಠ_ಠ %B%{$fg[red]%}$?%b%{$reset_color%} )$(git_prompt_info)%{$reset_color%}'
