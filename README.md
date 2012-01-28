@@ -11,6 +11,13 @@ Theres not as many command line features for bash, but it is still pretty smooth
 
 ![bash screenshot](https://raw.github.com/robhurring/dotfiles/master/.images/bash-screenshot.png)
 
+How to install
+--------------
+
+Just clone this repo into ~/.dotfiles or wherever and run `rake install`
+
+*The installer will confirm before overwriting existing files.*
+
 Customizing ZSH
 ----------------
 
