@@ -1,5 +1,5 @@
-setopt PROMPT_SUBST
 autoload -U colors && colors
+setopt PROMPT_SUBST
 
 local prompt_color='yellow'
 
@@ -7,19 +7,10 @@ project_pwd() {
   echo $PWD | sed -e "s/\/Users\/$USER/~/" -e "s/~\/Projects\/\([^\/]*\)/%{$fg[$prompt_color]%}project:%{$fg[white]%}\\1/"
 }
 
-set_titlebar() {
+precmd() {
   local TITLE=$(echo $PWD | sed -e "s/\/Users\/$USER/~/" -e "s/~\/Projects\/\([^\/]*\)/project:\\1/")
   echo -ne "\e]1;$TITLE\a"
 }
-
-setTerminalText () {
-    # echo works in bash & zsh
-    local mode=$1 ; shift
-    echo -ne "\033]$mode;$@\007"
-}
-stt_both  () { setTerminalText 0 $@; }
-stt_tab   () { setTerminalText 1 $@; }
-stt_title () { setTerminalText 2 $@; }
 
 export PROMPT=$'%B%{$fg[$prompt_color]%}$(project_pwd):%b%{$reset_color%} '
 export RPROMPT=$'%(?,,ಠ_ಠ %B%{$fg[red]%}$?%b%{$reset_color%} )$(git_prompt_info)%{$reset_color%}'
