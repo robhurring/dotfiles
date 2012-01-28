@@ -19,5 +19,13 @@ eb(){
   e `bundle show $1`
 }
 
+[[ -e /sw/bin/init.sh ]] && sh /sw/bin/init.sh
+[[ -d /opt/local/bin ]] && push_path /opt/local/bin
+[[ -d /Developer/usr/bin ]] && push_path /Developer/usr/bin
+
+export LC_ALL=en_US.UTF-8
+export RAILS_ENV='development'
+export RACK_ENV='development'
+
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
