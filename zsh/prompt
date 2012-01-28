@@ -12,11 +12,25 @@ precmd() {
   echo -ne "\e]1;$TITLE\a"
 }
 
+export RVMLONG=1
 rvm_prompt_info() {
   local GEMSET=`__rvm_current_gemset`
-  local VERSION=$(ruby -v|cut -d' ' -f2)
-  if [ $GEMSET ]; then echo "%{$fg[blue]%}$VERSION@$GEMSET%{$reset_color%} "; fi
+  local VERSION=""
+
+  if [[ RVMLONG -eq 1 ]]; then
+    VERSION=$(ruby -v|cut -d' ' -f2)@
+  fi;
+
+  if [ $GEMSET ]; then echo "%{$fg[blue]%}$VERSION$GEMSET%{$reset_color%} "; fi
 }
 
-export PROMPT=$'%B%(?,,%{$fg[red]%}⚠ )%{$fg[$PROMPT_COLOR]%}$(project_pwd):%b%{$reset_color%} '
-export RPROMPT=$'%(?,,ಠ_ಠ %B%{$fg[red]%}$?%b%{$reset_color%} )$(rvm_prompt_info)$(git_prompt_info)%{$reset_color%}'
+function zle-keymap-select {
+    VIMODE="${${KEYMAP/vicmd/ ⚫ }/(main|viins)/}"
+    VIMODE_PS="%{$fg[magenta]%}${VIMODE}%{$reset_color%}"
+    zle reset-prompt
+}
+
+zle -N zle-keymap-select
+
+export PROMPT=$'%B%{$fg[$PROMPT_COLOR]%}$(project_pwd):%b%{$reset_color%} '
+export RPROMPT=$'$VIMODE_PS%(?,,ಠ_ಠ %B%{$fg[red]%}\$?%b%{$reset_color%} )$(rvm_prompt_info)$(git_prompt_info)%{$reset_color%}'
