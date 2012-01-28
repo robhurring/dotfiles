@@ -7,11 +7,11 @@ desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   (Dir['*']+Dir['bin/*']).each do |file|
-    next if %w[Rakefile bin install.rb mybashrc.example].include? file
-    
+    next if %w[Rakefile bin install.rb mybashrc.example localrc.example .rvmrc Gemfile Gemfile.lock].include? file
+
     prefix = file =~ /^bin/ ? '' : '.'
     file_s = "#{prefix}#{file.sub('.erb', '')}"
-    
+
     if File.exist?(File.join(ENV['HOME'], "#{file_s}"))
       if File.identical? file, File.join(ENV['HOME'], file_s)
         puts "identical ~/#{file_s}"

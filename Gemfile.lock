@@ -1,0 +1,16 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    colorize (0.5.8)
+    git-smart (0.1.7)
+      colorize
+    omglog (0.0.2)
+      rb-fsevent (~> 0.4.3)
+    rb-fsevent (0.4.3.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  git-smart
+  omglog
