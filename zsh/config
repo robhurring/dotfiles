@@ -19,6 +19,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 REPORTTIME=10
 
+setopt VI
 setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP
@@ -29,6 +30,8 @@ setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
+setopt autopushd
+setopt pushdignoredups
 
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY SHARE_HISTORY
