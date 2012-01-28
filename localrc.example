@@ -1,0 +1,23 @@
+# put your machine-specific settings in here
+
+alias e='mate'
+alias o='open'
+alias cdd='cd ~/Desktop'
+alias cdg='cd $GEM_HOME'
+
+alias p='passenger'
+alias r='rails'
+alias g='git'
+alias c='cd /usr/local/Cellar'
+
+# cd to gem folder
+cdb(){
+  cd `bundle show $1`
+}
+
+eb(){
+  e `bundle show $1`
+}
+
+# RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

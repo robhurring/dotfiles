@@ -1,20 +1,65 @@
-# cd
+# Navigation
+alias ls='ls -h'
+alias ll='ls -lah'
+alias la='ls -ah'
+alias l='ls -lh'
+alias grep='grep --color=auto -P'
 alias ..='cd ..'
+alias cd-='cd -'
+alias cd--='cd ~ && cd -'
+alias 'psg'='ps ax | grep '
 
-# ls
-alias ls="ls -F"
-alias l="ls -lAh"
-alias ll="ls -l"
-alias la='ls -A'
+# Common Directories
+alias www='cd /var/www'
+alias src='cd /usr/local/src'
+alias pr='cd ~/Projects'
 
-# git
-alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
+# Rails Aliases (auto checking)
+railscmd(){
+  cmd=$1 && shift
+  [[ -e './script/rails' ]] && rails $cmd $* || ./script/$cmd $*
+}
 
-# rails
-alias a='autotest -rails'
-alias tlog='tail -f log/development.log'
-alias migrate='rake db:migrate db:test:clone'
-alias rst='touch tmp/restart.txt'
+alias ss='railscmd server'
+alias ssd='railscmd server --debugger'
+alias sc='railscmd console'
+alias sdb='railscmd dbconsole'
+alias gen='railscmd generate'
 
-# commands starting with % for pasting from web
-alias %=' '
+alias taildev='tail -f log/development.log'
+alias tailprod='tail -f log/production.log'
+
+alias restart_rack='touch tmp/restart.txt'
+alias arestart_rack='touch tmp/always_restart.txt'
+
+# Git
+alias glog='git log --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
+alias gl='glog --graph'
+alias gla='gl --all'
+gls() {
+  query="$1"
+  shift
+  glog --pickaxe-regex "-S$query" "$@"
+}
+alias gm='git merge --no-ff'
+alias gmf='git merge --ff-only'
+alias gp='git push'
+alias gpt='gp --tags'
+alias gr='git reset'
+alias grb='git rebase -p'
+alias grbc='git rebase --continue'
+alias grbi='git rebase -i'
+alias grh='git reset --hard'
+alias grp='gr --patch'
+alias grsh='git reset --soft HEAD~'
+alias grv='git remote -v'
+alias gs='git show'
+alias gs.='git show --color-words="."'
+alias gst='git stash'
+alias gstp='git stash pop'
+alias gup='git smart-pull'
+
+# Misc
+alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -nr | head -n 20"
+alias enc='openssl enc -e -aes-256-cbc -salt -in '
+alias dec='openssl enc -d -aes-256-cbc -in '
