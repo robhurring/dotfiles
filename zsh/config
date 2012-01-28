@@ -4,7 +4,7 @@
 
 export LS_OPTIONS='--color=auto'
 export CLICOLOR='Yes'
-export LSCOLORS='exgxfxdxcxdxdxhbadexex'
+export LSCOLORS='exgxFxdxCxdxgxhbadexex'
 
 export EDITOR='mate_wait'
 export PATH="$HOME/bin:$HOME/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
