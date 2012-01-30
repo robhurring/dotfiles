@@ -55,9 +55,6 @@ function __prompt_command(){
 }
 export PROMPT_COMMAND=__prompt_command
 
-# Aliases
-[[ -e $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
-
 # Our buddy "z"
 [[ -e $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
 
