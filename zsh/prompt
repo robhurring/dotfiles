@@ -25,12 +25,12 @@ rvm_prompt_info() {
 }
 
 function zle-keymap-select {
-    VIMODE="${${KEYMAP/vicmd/ ⚫ }/(main|viins)/}"
-    VIMODE_PS="%{$fg[magenta]%}${VIMODE}%{$reset_color%}"
-    zle reset-prompt
+  local VIMODE="${${KEYMAP/vicmd/ ⚫}/(main|viins)/}"
+  VIMODE_PS="%{$fg[magenta]%}${VIMODE}%{$reset_color%}"
+  zle reset-prompt
 }
 
 zle -N zle-keymap-select
 
-export PROMPT=$'%B%{$fg[$PROMPT_COLOR]%}$(project_pwd):%b%{$reset_color%} '
-export RPROMPT=$'$VIMODE_PS%(?,,ಠ_ಠ %B%{$fg[red]%}\$?%b%{$reset_color%} )$(rvm_prompt_info)$(git_prompt_info)%{$reset_color%}'
+export PROMPT=$'%B%{$fg[$PROMPT_COLOR]%}$(project_pwd):%b%{$reset_color%}${VIMODE_PS} '
+export RPROMPT=$'$VIMODE_PS %(?,,ಠ_ಠ %B%{$fg[red]%}\$?%b%{$reset_color%} )$(rvm_prompt_info)$(git_prompt_info)%{$reset_color%}'
