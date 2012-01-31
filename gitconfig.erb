@@ -8,8 +8,10 @@
   lg = log -p
   ls = ls-files
   gr = grep -n
+  brt = branch-time
+  sp = smart-pull
   # Log display from screencast, with train tracks.
-  l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(green) %an, %ar%Creset'
+  l = log --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   # Alternate log display from Scott Chacon
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   # Other useful aliases:
