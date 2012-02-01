@@ -42,16 +42,17 @@ gls() {
   shift
   glog --pickaxe-regex "-S$query" "$@"
 }
+alias gs='git status --short'
 alias gm='git merge --no-ff'
 alias gmf='git merge --ff-only'
 alias gp='git push'
 alias gpt='gp --tags'
+alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grh='git reset --hard'
-alias grv='git remote -v'
 alias gst='git stash'
 alias gstp='git stash pop'
-alias gup='git smart-pull'
+alias gsp='git smart-pull'
 
 # Misc
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
