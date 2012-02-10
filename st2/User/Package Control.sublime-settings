@@ -1,0 +1,20 @@
+{
+	"auto_upgrade_last_run": 1328891629,
+	"installed_packages":
+	[
+		"alternative_autocompletion",
+		"CoffeeScript",
+		"ERB Insert and Toggle Commands",
+		"google-search",
+		"jQuery Snippets pack",
+		"LESS",
+		"Nodejs",
+		"Package Control",
+		"RubyTest",
+		"SetSyntax",
+		"SublimeREPL",
+		"SublimeTextGitX",
+		"SublimeTODO",
+		"Tag"
+	]
+}
