@@ -1,5 +1,25 @@
 [
-	{ "keys": ["command+shift+."], "command": "erb"},
+  {
+    "keys": ["super+shift+minus"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 1.0],
+      "rows": [0.0, 1.0],
+      "cells": [[0, 0, 1, 1]]
+    }
+  },
+  {
+    "keys": ["super+shift+equals"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.5, 1.0],
+      "rows": [0.0, 1.0],
+      "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+    }
+  },
+  { "keys": ["command+shift+."], "command": "erb"},
   { "keys": ["super+."], "command": "gitx_open" },
   { "keys": ["escape"], "command": "alternative_autocomplete", "context":
   [
