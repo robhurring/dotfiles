@@ -19,6 +19,8 @@
       "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
     }
   },
+  { "keys": ["ctrl+shift+]"], "command": "move_to_group", "args": { "group": 1 } },
+  { "keys": ["ctrl+shift+["], "command": "move_to_group", "args": { "group": 0 } },
   { "keys": ["command+shift+."], "command": "erb"},
   { "keys": ["super+."], "command": "gitx_open" },
   { "keys": ["escape"], "command": "alternative_autocomplete", "context":
@@ -38,5 +40,20 @@
   { "keys": ["super+shift+]"], "command": "toggle_view"},
   { "keys": ["super+shift+["], "command": "toggle_view", "args": {"direction": "previous"}},
   { "keys": ["super+shift+ctrl+["], "command": "prev_view" },
-  { "keys": ["super+shift+ctrl+]"], "command": "next_view" }
+  { "keys": ["super+shift+ctrl+]"], "command": "next_view" },
+  {
+    "args": {},
+    "command": "zen_css_mnemonic",
+    "context": [
+      {
+        "key": "selector",
+        "match_all": true,
+        "operand": "source.css, source.scss",
+        "operator": "equal"
+      }
+    ],
+    "keys": [
+      "`"
+    ]
+  }
 ]
