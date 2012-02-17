@@ -1,9 +1,12 @@
 {
+	"ignored_packages":
+	[
+		"Vintage"
+	],
 	"todo_patterns":
 	{
 		"CHANGED": "CHANGED[\\s,:]+(\\S.*)$",
 		"FIXME": "FIX ?ME[\\s,:]+(\\S.*)$",
 		"RADAR": "(.*<)ra?dar:\\/(?:\\/problem|)\\/([&0-9]+)(>.*)$"
-	},
-	"ignored_packages": ["Vintage"]
+	}
 }
