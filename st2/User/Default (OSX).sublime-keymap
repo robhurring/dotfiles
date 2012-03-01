@@ -1,4 +1,5 @@
 [
+  { "keys": ["super+shift+quote"], "command": "change_quotes" },
   { "keys": ["super+k", "super+m"], "command": "set_mark" },
   {
     "keys": ["super+shift+minus"],
