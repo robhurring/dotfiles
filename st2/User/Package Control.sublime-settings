@@ -1,9 +1,14 @@
 {
-	"auto_upgrade_last_run": 1330462919,
+	"auto_upgrade_last_run": 1330637045,
 	"installed_packages":
 	[
 		"alternative_autocompletion",
+		"ApacheConf.tmLanguage",
+		"Change Tracker",
+		"ChangeQuotes",
+		"Clipboard History",
 		"CoffeeScript",
+		"ColorPicker",
 		"Cucumber",
 		"DetectSyntax",
 		"ERB Insert and Toggle Commands",
@@ -14,14 +19,19 @@
 		"LESS",
 		"Nodejs",
 		"Package Control",
+		"Prefixr",
 		"RSpec",
+		"RSpec (snippets and syntax)",
 		"RubyTest",
 		"SCSS",
 		"Search Stack Overflow",
 		"SetSyntax",
+		"SideBarGit",
 		"SublimeCodeIntel",
 		"SublimeTextGitX",
 		"SublimeTODO",
+		"Tag",
+		"Theme - Soda",
 		"ZenCoding"
 	]
 }
