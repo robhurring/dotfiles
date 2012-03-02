@@ -10,6 +10,13 @@ alias r='rails'
 alias g='git'
 alias c='cd /usr/local/Cellar'
 
+# mm start|stop
+# launchctl load ~/Library/LaunchAgents/org.mongodb.mongod
+function mm()
+{
+  launchctl $1 org.mongodb.mongod
+}
+
 # cd to gem folder
 cdb(){
   cd `bundle show $1`
