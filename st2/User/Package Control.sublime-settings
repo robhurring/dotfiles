@@ -1,5 +1,5 @@
 {
-	"auto_upgrade_last_run": 1330731113,
+	"auto_upgrade_last_run": 1330792430,
 	"installed_packages":
 	[
 		"alternative_autocompletion",
@@ -16,6 +16,7 @@
 		"google-search",
 		"Haml",
 		"jQuery Snippets pack",
+		"JS Minifier",
 		"LESS",
 		"Nodejs",
 		"Package Control",
