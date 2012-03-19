@@ -1,4 +1,11 @@
 [
+  {"keys": ["super+k", "super+s"], "command": "shell_prompt"},
+  {"keys": ["super+k", "super+t"], "command": "subprocess_in_cwd", "args":
+    {
+      "cmd": "osascript -e 'tell application \"iTerm\"' -e 'activate' -e 'tell current terminal' -e 'launch session \"Default Session\"' -e 'tell the last session' -e 'write text \"cd '$PWD'\"' -e 'end tell' -e 'end tell' -e 'end tell'",
+      "wait": true
+    }
+  },
   { "keys": ["super+shift+quote"], "command": "change_quotes" },
   { "keys": ["super+k", "super+m"], "command": "set_mark" },
   {

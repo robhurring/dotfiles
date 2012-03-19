@@ -1,5 +1,5 @@
 {
-	"auto_upgrade_last_run": 1330792430,
+	"auto_upgrade_last_run": 1332170079,
 	"installed_packages":
 	[
 		"alternative_autocompletion",
@@ -14,24 +14,30 @@
 		"ERB Insert and Toggle Commands",
 		"Git",
 		"google-search",
+		"Guard",
 		"Haml",
 		"jQuery Snippets pack",
-		"JS Minifier",
+		"JsMinifier",
 		"LESS",
 		"Nodejs",
 		"Package Control",
 		"Prefixr",
 		"RSpec",
 		"RSpec (snippets and syntax)",
+		"rsub",
 		"RubyTest",
 		"SCSS",
 		"Search Stack Overflow",
+		"Search WordPress Codex",
 		"SetSyntax",
-		"SideBarGit",
-		"SublimeCodeIntel",
+		"Shell Turtlestein",
+		"Simple Rails Navigator",
+		"Sublime V8",
 		"SublimeTextGitX",
 		"SublimeTODO",
+		"Task",
 		"Theme - Soda",
+		"Whitespace Corrector",
 		"ZenCoding"
 	]
 }
