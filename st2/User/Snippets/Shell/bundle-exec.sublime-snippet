@@ -1,0 +1,5 @@
+<snippet>
+  <content><![CDATA[bundle exec ]]></content>
+  <tabTrigger>be</tabTrigger>
+  <scope>source.shell</scope>
+</snippet>

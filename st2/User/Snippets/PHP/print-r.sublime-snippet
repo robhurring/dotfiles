@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+print_r(\$${1:var});$0
+]]></content>
+  <tabTrigger>pr</tabTrigger>
+  <scope>source.php,text.html - source.php</scope>
+  <description>print_r()</description>
+</snippet>
