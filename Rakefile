@@ -7,7 +7,7 @@ desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   (Dir['*']+Dir['bin/*']).each do |file|
-    next if %w[Rakefile bin install.rb mybashrc.example localrc.example Gemfile Gemfile.lock templates].include? file
+    next if %w[Rakefile bin mybashrc.example localrc.example Gemfile Gemfile.lock other README.md].include? file
 
     prefix = file =~ /^bin/ ? '' : '.'
     file_s = "#{prefix}#{file.sub('.erb', '')}"
