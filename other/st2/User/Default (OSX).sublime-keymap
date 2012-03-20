@@ -31,7 +31,6 @@
   { "keys": ["ctrl+shift+]"], "command": "move_to_group", "args": { "group": 1 } },
   { "keys": ["ctrl+shift+["], "command": "move_to_group", "args": { "group": 0 } },
   { "keys": ["command+shift+."], "command": "erb"},
-  { "keys": ["super+."], "command": "gitx_open" },
   { "keys": ["escape"], "command": "alternative_autocomplete", "context":
   [
     { "key": "num_selections", "operator": "equal", "operand": 1 },
