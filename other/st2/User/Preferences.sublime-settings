@@ -17,7 +17,7 @@
 		"config.ru": "Ruby"
 	},
 	"tab_size": 2,
-	"theme": "Soda Light.sublime-theme",
+	"theme": "Pseudo OSX Light.sublime-theme",
 	"todo_patterns":
 	{
 		"CHANGED": "CHANGED[\\s,:]+(\\S.*)$",
