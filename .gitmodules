@@ -90,3 +90,6 @@
 	path = vim/bundle/vim-supertab
 	url = https://github.com/ervandew/supertab.git
 	ignore = dirty
+[submodule "other/st2/Packages/Toggle-View"]
+	path = other/st2/Packages/Toggle-View
+	url = https://github.com/robhurring/Toggle-View
