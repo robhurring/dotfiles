@@ -1,6 +1,6 @@
 # put your machine-specific settings in here
 
-alias e='mate'
+alias e='subl'
 alias o='open'
 alias cdd='cd ~/Desktop'
 alias cdg='cd $GEM_HOME'
@@ -9,6 +9,8 @@ alias p='passenger'
 alias r='rails'
 alias g='git'
 alias c='cd /usr/local/Cellar'
+
+export EDITOR='subl -w'
 
 # mm start|stop
 # launchctl load ~/Library/LaunchAgents/org.mongodb.mongod

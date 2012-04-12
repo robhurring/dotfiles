@@ -1,7 +1,7 @@
 ## This is an example of what you could use .mybashrc for, to give your particular machine a more
 ## customized feel. basically, anything left out of .bashrc should end up in here.
- 
-alias e='mate'
+
+alias e='subl'
 alias o='open'
 alias cdd='cd ~/Desktop'
 alias cdg='cd $GEM_HOME'
@@ -23,12 +23,12 @@ eb(){
 function __before_ps1(){
   GEMSET=`__rvm_current_gemset`
   if [ $GEMSET ]; then GEMSET="@$GEMSET"; fi
-  
+
   # show prompt in yellow
   PROMPT_COLOR="\e[33;1m"
-  
+
   RET_FMT="\$status:"
-  
+
   # set a custom title with git + rvm gemset
   TERM_TITLE="$PWD `__git_ps1 \"%s$GEMSET\"`"
 
