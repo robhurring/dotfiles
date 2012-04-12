@@ -9,8 +9,11 @@
 	[
 		"Vintage"
 	],
-  "rulers": [80],
 	"indent_subsequent_lines": false,
+	"rulers":
+	[
+		80
+	],
 	"set_syntax_map":
 	{
 		"Gemfile": "Ruby",
