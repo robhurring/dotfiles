@@ -20,13 +20,42 @@ class Object
   def local_methods(obj = self)
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
-  
+
   def ivg name
     instance_variable_get name
   end
-  
+
   def ivs name, value
     instance_variable_set name, value
+  end
+end
+
+# Hirb
+
+def hirb!
+  require 'hirb'
+  Hirb.enable
+end
+
+def unhirb!
+  Hirb.disable if defined?(::Hirb)
+end
+
+# Awesome print
+
+def ap!
+  begin
+    require 'awesome_print'
+
+    IRB::Irb.class_eval %{
+      def output_value
+        ap @context.last_value
+      end
+    }
+
+    "Awesomizing..."
+  rescue LoadError
+    'Can\'t get awesome :( <gem install awesome_print>'
   end
 end
 
@@ -69,7 +98,7 @@ end
 
 # reload all included files
 def reload!
-  IRB.conf[:LOAD_MODULES].each do |file| 
+  IRB.conf[:LOAD_MODULES].each do |file|
     puts "Reload: #{file}"
     load file
   end
@@ -84,7 +113,7 @@ module Rails
     def sql(query)
       ActiveRecord::Base.connection.select_all(query)
     end
-    
+
     def include_view_helpers!
       include ActionView::Helpers::DebugHelper
       include ActionView::Helpers::NumberHelper
@@ -95,7 +124,7 @@ module Rails
       include ActionView::Helpers::TranslationHelper
       nil
     end
-    
+
     def change_log(stream)
       ActiveRecord::Base.logger = Logger.new(stream)
       ActiveRecord::Base.clear_active_connections!
