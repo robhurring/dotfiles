@@ -13,7 +13,7 @@ alias pd=popd
 # Common Directories
 alias www='cd /var/www'
 alias src='cd /usr/local/src'
-alias pr='cd ~/Projects'
+alias p='cd ~/Projects'
 
 # Rails Aliases (auto checking)
 railscmd(){
