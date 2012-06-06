@@ -5,7 +5,7 @@ alias o='open'
 alias cdd='cd ~/Desktop'
 alias cdg='cd $GEM_HOME'
 
-alias p='passenger'
+alias pas='passenger'
 alias r='rails'
 alias g='git'
 alias c='cd /usr/local/Cellar'
