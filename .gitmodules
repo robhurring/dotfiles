@@ -78,10 +78,6 @@
 	path = vim/bundle/vim-command-t
 	url = https://github.com/wincent/Command-T.git
 	ignore = dirty
-[submodule "textmate/Bundles/MyBundle.tmbundle"]
-	path = textmate/Bundles/MyBundle.tmbundle
-	url = https://github.com/robhurring/my_bundle.git
-  ignore = dirty
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
