@@ -5,6 +5,12 @@ require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
 
+begin
+  require 'awesome_print'
+rescue LoadError
+  # don't care
+end
+
 IRB.conf.merge!({
   :USE_READLINE => true,
   :SAVE_HISTORY => 100,
@@ -39,24 +45,6 @@ end
 
 def unhirb!
   Hirb.disable if defined?(::Hirb)
-end
-
-# Awesome print
-
-def ap!
-  begin
-    require 'awesome_print'
-
-    IRB::Irb.class_eval %{
-      def output_value
-        ap @context.last_value
-      end
-    }
-
-    "Awesomizing..."
-  rescue LoadError
-    'Can\'t get awesome :( <gem install awesome_print>'
-  end
 end
 
 def benchmark
