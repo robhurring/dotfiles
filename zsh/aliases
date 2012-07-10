@@ -15,17 +15,18 @@ alias www='cd /var/www'
 alias src='cd /usr/local/src'
 alias pr='cd ~/Projects'
 
-# Rails Aliases (auto checking)
-railscmd(){
-  cmd=$1 && shift
-  [[ -e './script/rails' ]] && rails $cmd $* || ./script/$cmd $*
-}
+# Misc Helpers
+alias fname="noglob find -name"
+alias rake="noglob rake"
+alias git="noglob git"
+alias reload="source ~/.zshrc"
 
-alias ss='railscmd server'
-alias ssd='railscmd server --debugger'
-alias sc='railscmd console'
-alias sdb='railscmd dbconsole'
-alias gen='railscmd generate'
+# Rails
+alias ss='rails server'
+alias ssd='rails server --debugger'
+alias sc='rails console'
+alias sdb='rails dbconsole'
+alias gen='rails generate'
 
 alias taildev='tail -f log/development.log'
 alias tailprod='tail -f log/production.log'
@@ -37,11 +38,6 @@ alias arestart_rack='touch tmp/always_restart.txt'
 alias glog='git log --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(bold black) %an, %ar%Creset"'
 alias gl='glog --graph'
 alias gla='gl --all'
-gls() {
-  query="$1"
-  shift
-  glog --pickaxe-regex "-S$query" "$@"
-}
 alias gs='git status --short'
 alias gp='git push'
 alias gpt='gp --tags'
