@@ -1,17 +1,42 @@
 [
+  // oragami plugin
+  { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "right"} },
+  { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "left"} },
+
+  { "keys": ["ctrl+shift+]"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+  { "keys": ["ctrl+shift+["], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+
+  // toggle view plugin
+  // { "keys": ["super+shift+]"], "command": "toggle_view"},
+  // { "keys": ["super+shift+["], "command": "toggle_view", "args": {"direction": "previous"}},
+  // { "keys": ["super+shift+ctrl+["], "command": "prev_view" },
+  // { "keys": ["super+shift+ctrl+]"], "command": "next_view" },
+  // { "keys": ["ctrl+shift+]"], "command": "move_to_group", "args": { "group": 1 } },
+  // { "keys": ["ctrl+shift+["], "command": "move_to_group", "args": { "group": 0 } },
+
+  // file history plugin
+  {"keys": ["super+shift+o"], "command": "open_recently_closed_file"},
+
+  // "vimlike" bindings
+  {"keys": ["super+k", "super+4"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard EOL.sublime-macro"}},
+  {"keys": ["super+k", "super+0"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard BOL.sublime-macro"}},
   {"keys": ["super+k", "super+r"], "command": "shell_prompt"},
+
+  // open terminal to file directory
   {"keys": ["super+k", "super+t"], "command": "subprocess_in_cwd", "args":
     {
       "cmd": "osascript -e 'tell application \"iTerm\"' -e 'activate' -e 'tell current terminal' -e 'launch session \"Default Session\"' -e 'tell the last session' -e 'write text \"cd '$PWD'\"' -e 'end tell' -e 'end tell' -e 'end tell'",
       "wait": true
     }
   },
-  { "keys": ["super+shift+quote"], "command": "change_quotes" },
 
+  // marks
   { "keys": ["super+k", "super+m"], "command": "set_mark" },
   { "keys": ["super+k", "super+s"], "command": "select_to_mark" },
   { "keys": ["super+k", "super+x"], "command": "delete_to_mark" },
   { "keys": ["super+k", "super+w"], "command": "swap_with_mark" },
+
+  // create/remove panes
   {
     "keys": ["super+shift+minus"],
     "command": "set_layout",
@@ -32,9 +57,17 @@
       "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
     }
   },
-  { "keys": ["ctrl+shift+]"], "command": "move_to_group", "args": { "group": 1 } },
-  { "keys": ["ctrl+shift+["], "command": "move_to_group", "args": { "group": 0 } },
+
+  // erb plugin
   { "keys": ["command+shift+."], "command": "erb"},
+
+  // change quotes plugin
+  { "keys": ["super+shift+quote"], "command": "change_quotes" },
+
+  // toggle symbol plugin
+  { "keys": ["super+shift+;"], "command": "toggle_symbol" },
+
+  // alt autocomplete plugin
   { "keys": ["escape"], "command": "alternative_autocomplete", "context":
   [
     { "key": "num_selections", "operator": "equal", "operand": 1 },
@@ -49,10 +82,8 @@
       { "key": "panel_visible", "operator": "equal", "operand": false }
     ]
   },
-  { "keys": ["super+shift+]"], "command": "toggle_view"},
-  { "keys": ["super+shift+["], "command": "toggle_view", "args": {"direction": "previous"}},
-  { "keys": ["super+shift+ctrl+["], "command": "prev_view" },
-  { "keys": ["super+shift+ctrl+]"], "command": "next_view" },
+
+  // zen coding plugin
   {
     "args": {},
     "command": "zen_css_mnemonic",
