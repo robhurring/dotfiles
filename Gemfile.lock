@@ -7,6 +7,7 @@ GEM
     colorize (0.5.8)
     excon (0.14.3)
     ffi (1.0.11)
+    ffi (1.0.11-java)
     git-smart (0.1.9)
       colorize
     heroku (2.28.8)
@@ -18,8 +19,13 @@ GEM
     heroku-api (0.2.7)
       excon (~> 0.14.3)
     json (1.7.3)
+    json (1.7.3-java)
     launchy (2.1.0)
       addressable (~> 2.2.6)
+    launchy (2.1.0-java)
+      addressable (~> 2.2.6)
+      ffi (~> 1.0.9)
+      spoon (~> 0.0.1)
     method_source (0.7.1)
     mime-types (1.19)
     netrc (0.7.5)
@@ -30,6 +36,11 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
       slop (>= 2.4.4, < 3)
+    pry (0.9.9.6-java)
+      coderay (~> 1.0.5)
+      method_source (~> 0.7.1)
+      slop (>= 2.4.4, < 3)
+      spoon (~> 0.0)
     pry-theme (0.0.9)
       json
       pry (~> 0.9)
@@ -40,8 +51,10 @@ GEM
       mime-types (>= 1.16)
     rubyzip (0.9.9)
     slop (2.4.4)
+    spoon (0.0.1)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
