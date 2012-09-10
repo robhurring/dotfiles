@@ -36,6 +36,12 @@ class Object
   end
 end
 
+def desktop(filename = 'irb-session.txt', &block)
+  File.open("/Users/rob/Desktop/#{filename}", 'w+') do |f|
+    f << block.call
+  end
+end
+
 # Hirb
 
 def hirb!
