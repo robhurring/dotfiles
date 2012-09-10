@@ -1,0 +1,3 @@
+# vim bindings in IRB
+bind -v
+bind \\t rl_complete
