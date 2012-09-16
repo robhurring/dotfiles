@@ -2,3 +2,4 @@
 vim/bundle/vim-peepopen
 other/st2/User/RubyTest.last-run
 other/st2/User/FileHistory.json
+*.pyc
