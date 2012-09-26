@@ -108,17 +108,6 @@ module Rails
       ActiveRecord::Base.connection.select_all(query)
     end
 
-    def include_view_helpers!
-      include ActionView::Helpers::DebugHelper
-      include ActionView::Helpers::NumberHelper
-      include ActionView::Helpers::RawOutputHelper
-      include ActionView::Helpers::SanitizeHelper
-      include ActionView::Helpers::TagHelper
-      include ActionView::Helpers::TextHelper
-      include ActionView::Helpers::TranslationHelper
-      nil
-    end
-
     def change_log(stream)
       ActiveRecord::Base.logger = Logger.new(stream)
       ActiveRecord::Base.clear_active_connections!
@@ -135,3 +124,10 @@ module Rails
 end
 
 include Rails::IRBHelpers if defined?(Rails)
+
+# Machine specific IRB Helpers
+localirbrc = File.expand_path('.localirbrc', File.dirname(__FILE__))
+
+if File.exists?(localirbrc)
+  load localirbrc
+end
