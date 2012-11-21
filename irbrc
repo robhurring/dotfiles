@@ -125,9 +125,9 @@ end
 
 include Rails::IRBHelpers if defined?(Rails)
 
-# Machine specific IRB Helpers
-localirbrc = File.expand_path('.localirbrc', File.dirname(__FILE__))
+# Machine specific helpers
 
-if File.exists?(localirbrc)
-  load localirbrc
+localrc = File.expand_path('.localirbrc', File.dirname(__FILE__))
+if File.exists?(localrc)
+  load localrc if %w{irb script/rails}.include?($0)
 end
