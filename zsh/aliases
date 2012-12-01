@@ -34,6 +34,7 @@ alias restart_rack='touch tmp/restart.txt'
 alias arestart_rack='touch tmp/always_restart.txt'
 
 # Git
+alias git='noglob git'
 alias glog='git log --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(bold black) %an, %ar%Creset"'
 alias gl='glog --graph'
 alias gla='gl --all'
@@ -45,6 +46,7 @@ alias grbc='git rebase --continue'
 alias grh='git reset --hard'
 alias gst='git stash'
 alias gstp='git stash pop'
+alias gw='git wtf'
 
 # requires git-smart gem
 alias gsp='git smart-pull'

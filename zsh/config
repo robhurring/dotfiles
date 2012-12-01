@@ -18,12 +18,13 @@ setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS
 setopt LOCAL_TRAPS
 setopt HIST_VERIFY
-setopt SHARE_HISTORY
+#setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
 setopt autopushd
 setopt pushdignoredups
+stty erase \^H
 
 setopt APPEND_HISTORY
 #setopt INC_APPEND_HISTORY SHARE_HISTORY
