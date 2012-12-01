@@ -1,9 +1,9 @@
 {
-	"auto_upgrade_last_run": 1347815222,
+	"auto_upgrade_last_run": null,
 	"installed_packages":
 	[
 		"Abacus",
-		"alternative_autocompletion",
+		"Alternative Autocompletion",
 		"ApacheConf.tmLanguage",
 		"BeautifyRuby",
 		"cdnjs",
@@ -23,6 +23,7 @@
 		"Guard",
 		"Haml",
 		"Indent XML",
+		"Jade",
 		"Jasmine",
 		"jQuery Snippets pack",
 		"JsFormat",
@@ -47,6 +48,7 @@
 		"SideBarGit",
 		"Simple Rails Navigator",
 		"SplitScreen",
+		"Stylus",
 		"SublimePeek",
 		"SublimeTextGitX",
 		"SublimeTODO",
