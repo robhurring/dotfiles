@@ -48,11 +48,6 @@ alias gst='git stash'
 alias gstp='git stash pop'
 alias gw='git wtf'
 
-# requires git-smart gem
-alias gsp='git smart-pull'
-alias gm='git smart-merge'
-alias gl='git smart-log'
-
 # Misc
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
 alias dec='openssl enc -d -aes-256-cbc -in '
