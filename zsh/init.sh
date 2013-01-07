@@ -40,11 +40,7 @@ done
 # load all plugins to $fpath
 fpath=($ZSH_HOME/functions $fpath)
 for plugin ($plugins); do
-  if  [ -f $ZSH_HOME/plugins/$plugin/$plugin.plugin ] ||
-      [-f $ZSH_HOME/plugins/$plugin/_$plugin ];then
-    fpath=($ZSH_HOME/plugins/$plugin $fpath)
-  fi
-
+  fpath=($ZSH_HOME/plugins/$plugin $fpath)
 done
 
 # run compinit
