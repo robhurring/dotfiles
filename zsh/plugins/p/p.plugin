@@ -1,0 +1,5 @@
+#autoload -U $ZSH_HOME/plugins/p/*(:t)
+
+function p() {
+  cd ~/Projects/$1;
+}

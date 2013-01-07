@@ -1,0 +1,6 @@
+PROJECT_HOME="$HOME/Projects"
+PROJECT_FORMAT="%F{yellow}project:%F{white}\\1"
+HOME_FORMAT="~"
+
+export PROMPT=$'%B%{$fg[yellow]%}$(formatted_path):%b%F{magenta}$(vi_prompt_info) %f'
+export RPROMPT=$'%F{yellow}$(job_prompt_info) %F{magenta}$(vi_prompt_info) %F{blue}$(rvm_prompt_info) %F{black}$(git_prompt_info)'
