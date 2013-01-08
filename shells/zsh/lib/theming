@@ -20,9 +20,9 @@ formatted_path() {
   print -n $PWD|sed -e "s-$PROJECT_HOME/\([^\/]*\)-$PROJECT_FORMAT-" -e "s-$HOME-$HOME_FORMAT-"
 }
 
-THEME_JOB_ICON="⚙"
 THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f"
+THEME_JOB_ICON="⚙"
 job_prompt_info() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && print -n "${THEME_JOB_BEFORE}${THEME_JOB_ICON}${THEME_JOB_AFTER}"
 }
@@ -37,7 +37,9 @@ _in_git_repo() {
 }
 
 _git_current_branch() {
-  git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+  if _in_git_repo; then
+    git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+  fi
 }
 
 _git_head_commit() {
@@ -45,55 +47,85 @@ _git_head_commit() {
 }
 
 THEME_GIT_BEFORE_BRANCH="%F{white}"
-THEME_GIT_AFTER_BRANCH=" "
+THEME_GIT_AFTER_BRANCH=""
+git_branch() {
+  local branch=$(_git_current_branch)
+  [[ -n $branch ]] && print -n "${THEME_GIT_BEFORE_BRANCH}${branch}${THEME_GIT_AFTER_BRANCH}"
+}
+
 THEME_GIT_BEFORE_SHA="%B%F{black}"
 THEME_GIT_AFTER_SHA="%b"
-THEME_GIT_ICON_DIRTY=" %F{red}★%f"
+git_sha() {
+# _git_head_commit
+  local sha=$(_git_head_commit)
+  [[ -n $sha ]] && print -n "${THEME_GIT_BEFORE_SHA}${sha}${THEME_GIT_AFTER_SHA}"
+}
+
+THEME_GIT_DIRTY_BEFORE=" %F{red}"
+THEME_GIT_DIRTY_AFTER="%f"
+THEME_GIT_ICON_DIRTY="★"
+git_dirty() {
+  local dirty;
+  if [[ -n $(git ls-files -m) ]]; then
+    dirty=$THEME_GIT_ICON_DIRTY
+  fi
+  [[ -n $dirty ]] && print -n "${THEME_GIT_DIRTY_BEFORE}${dirty}${THEME_GIT_DIRTY_AFTEr}"
+}
+
+THEME_GIT_FLAGS_BEFORE=""
+THEME_GIT_FLAGS_AFTER=""
 THEME_GIT_ICON_BISECT="+bisect"
 THEME_GIT_ICON_MERGE="+merge"
 THEME_GIT_ICON_REBASE="+rebase"
+git_flags() {
+  local flags;
+  local repo_path=$(_git_repo_path)
+
+  if [[ -f $repo_path/BISECT_LOG ]]; then
+    flags=$THEME_GIT_ICON_BISECT
+  elif [[ -f $repo_path/MERGE_HEAD ]]; then
+    flags=$THEME_GIT_ICON_MERGE
+  elif [[ -f $repo_path/rebase ]] ||
+       [[ -f $repo_path/rebase-apply ]] ||
+       [[ -f $repo_path/rebase-merge ]] ||
+       [[ -f .dotest ]];
+  then
+    flags=$THEME_GIT_ICON_REBASE
+  fi
+
+  [[ -n $flags ]] && print -n "${THEME_GIT_FLAGS_BEFORE}${flags}${THEME_GIT_FLAGS_AFTER}"
+}
+
+THEME_GIT_BEFORE=""
+THEME_GIT_AFTER=""
 git_prompt_info () {
   local icon;
   local branch;
   local sha;
   local flags;
+  local prompt;
 
   if _in_git_repo; then
-    repo_path=$(_git_repo_path)
-    branch=$(_git_current_branch)
-    sha=$(_git_head_commit)
-
-    if [[ -n $(git ls-files -m) ]]; then
-      icon=$THEME_GIT_ICON_DIRTY
-    fi
-
-    if [[ -f $repo_path/BISECT_LOG ]]; then
-      flags=$THEME_GIT_ICON_BISECT
-    elif [[ -f $repo_path/MERGE_HEAD ]]; then
-      flags=$THEME_GIT_ICON_MERGE
-    elif [[ -f $repo_path/rebase ]] ||
-         [[ -f $repo_path/rebase-apply ]] ||
-         [[ -f $repo_path/rebase-merge ]] ||
-         [[ -f .dotest ]];
-    then
-      flags=$THEME_GIT_ICON_REBASE
-    fi
-
-    print -n "${THEME_GIT_BEFORE_BRANCH}${branch}${flags}${THEME_GIT_AFTER_BRANCH}"
-    print -n "${THEME_GIT_BEFORE_SHA}${sha}${THEME_GIT_AFTER_SHA}${icon}"
+    branch=$(git_branch)
+    sha=$(git_sha)
+    flags=$(git_flags)
+    icon=$(git_dirty)
+    prompt="${branch}${flags}${sha}${icon}"
   fi
+
+  [[ -n $prompt ]] && print -n "${THEME_GIT_BEFORE}${prompt}${THEME_GIT_AFTER}"
 }
 
 VI_PROMPT_INFO=""
-THEME_VI_BEFORE_MODE="%F{magenta}"
-THEME_VI_AFTER_MODE="%f"
-THEME_VI_MODE_ICON=" ☰"
+THEME_VI_BEFORE="%F{magenta}"
+THEME_VI_AFTER="%f"
+THEME_VI_ICON_MODE=" ☰"
 vi_prompt_info() {
-  print -n "${THEME_VI_BEFORE_MODE}${VI_PROMPT_INFO}${THEME_VI_AFTER_MODE}"
+  print -n "${THEME_VI_BEFORE}${VI_PROMPT_INFO}${THEME_VI_AFTER}"
 }
 
 function zle-keymap-select {
-  VI_PROMPT_INFO="${${KEYMAP/vicmd/$THEME_VI_MODE_ICON}/(main|viins)/}"
+  VI_PROMPT_INFO="${${KEYMAP/vicmd/$THEME_VI_ICON_MODE}/(main|viins)/}"
   zle reset-prompt
 }
 
