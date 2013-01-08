@@ -31,6 +31,12 @@ task :vim do
   safe_replace_file '~/.vim', 'shells/vim'
 end
 
+desc 'link up oh-my-zsh custom files'
+task :omz do
+  safe_replace_file '~/.omz-custom', 'shells/omz-custom'
+  puts "\nset ZSH_CUSTOM=~/.omz-custom in your ~/.zshrc file"
+end
+
 # Helpers
 $replace_all = false
 

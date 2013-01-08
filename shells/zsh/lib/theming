@@ -1,3 +1,9 @@
+export LS_OPTIONS='--color=auto'
+export CLICOLOR='Yes'
+export LSCOLORS='exgxFxdxCxdxgxhbadexex'
+
+autoload -U colors && colors
+
 RVM_PROMPT_OPTIONS="gemset"
 function rvm_prompt_info() {
   [ -f $HOME/.rvm/bin/rvm-prompt ] || return
