@@ -7,18 +7,16 @@ alias grep='grep --color=auto'
 alias ..='cd ..'
 alias cd-='cd -'
 alias cd--='cd ~ && cd -'
-alias 'psg'='ps ax | grep '
+alias psg='ps ax | grep '
 alias pd=popd
 
 # Common Directories
 alias www='cd /var/www'
 alias src='cd /usr/local/src'
-alias pr='cd ~/Projects'
 
 # Misc Helpers
 alias fname="noglob find -name"
 alias rake="noglob rake"
-alias reload="source ~/.zshrc"
 
 # Rails
 alias ss='rails server'
@@ -26,9 +24,6 @@ alias ssd='rails server --debugger'
 alias sc='rails console'
 alias sdb='rails dbconsole'
 alias gen='rails generate'
-
-alias taildev='tail -f log/development.log'
-alias tailprod='tail -f log/production.log'
 
 alias restart_rack='touch tmp/restart.txt'
 alias arestart_rack='touch tmp/always_restart.txt'

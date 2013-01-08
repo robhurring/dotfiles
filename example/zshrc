@@ -3,56 +3,9 @@ DOTFILES=~/.dotfiles
 ZSH=~/.zsh
 ZSH_THEME=default
 
+plugins=(brew cap gem git-smart h heroku osx p rvm thor bundler)
+
 # load our zsh environment
 [[ -f ~/.zsh/init.sh ]] && . ~/.zsh/init.sh
 
 # customize like a mofo!
-
-# alias e='subl'
-# alias o='open'
-# alias cdd='cd ~/Desktop'
-# alias cdg='cd $GEM_HOME'
-
-# alias pas='passenger'
-# alias r='rails'
-# alias g='git'
-# alias c='cd /usr/local/Cellar'
-
-# export EDITOR='subl -w'
-
-# # mm start|stop
-# # launchctl load ~/Library/LaunchAgents/org.mongodb.mongod
-# function mm()
-# {
-#   launchctl $1 org.mongodb.mongod
-# }
-
-# # cd to gem folder
-# cdb(){
-#   cd `bundle show $1`
-# }
-
-# eb(){
-#   e `bundle show $1`
-# }
-
-# [[ -e /sw/bin/init.sh ]] && sh /sw/bin/init.sh
-# [[ -d /opt/local/bin ]] && push_path /opt/local/bin
-# [[ -d /Developer/usr/bin ]] && push_path /Developer/usr/bin
-
-# export PROMPT_COLOR='yellow'
-
-# export LC_ALL=en_US.UTF-8
-# export RAILS_ENV='development'
-# export RACK_ENV='development'
-
-# # RVM
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-# PATH=$PATH:$HOME/.rvm/bin
-
-# # ruby express GC
-# export RUBY_HEAP_MIN_SLOTS=1250000
-# export RUBY_HEAP_SLOTS_INCREMENT=100000
-# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-# export RUBY_GC_MALLOC_LIMIT=30000000
-# export RUBY_HEAP_FREE_MIN=12500

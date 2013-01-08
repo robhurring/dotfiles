@@ -1,39 +1,58 @@
-My Dotfiles.
-============
+# My Dotfiles.
 
 This is a compilation of my env scripts and config along with pieces from other people which I thought were awesome.
 
-Theres some pretty awesome features on the ZSH side:
+Heres how it looks when using ZSH:
 
 ![zsh screenshot](https://raw.github.com/robhurring/dotfiles/master/.images/zsh-screenshot.png)
 
-Theres not as many command line features for bash, but it is still pretty smooth :)
+And heres how it looks when using BASH: (outdated so may not be the same)
 
 ![bash screenshot](https://raw.github.com/robhurring/dotfiles/master/.images/bash-screenshot.png)
 
-How to install
---------------
+## Install
 
-Just clone this repo into ~/.dotfiles or wherever and run `rake install`
+clone this repo somewhere `git clone https://github.com/robhurring/dotfiles.git` (i use ~/.dotfiles)
 
-*The installer will confirm before overwriting existing files.*
+*note:* The installers are safe and will ask before overwriting any existing files.
 
-Customizing ZSH
-----------------
+### ZSH Install
 
-For ZSH copy the localrc.example to ~/.localrc, you can change the prompt color too if you want (good to set different machines apart as I'm not a huge
-fan of having the user/host in my PS1)
+1. cd ~/.dotfiles (or wherever repo lives)
+2. `rake zsh` to link zsh env files
+3. `cp ~/.dotfiles/example/zshrc ~/.zshrc`
+  1. modify the example zshrc paths for `DOTFILES`
+  2. add any customizations below the init line
 
-Set `PROMPT_COLOR='colorname'` in ~/.localrc to change it:
+### Bash Install
+
+1. cd ~/.dotfiles (or wherever repo lives)
+2. `rake bash` to link zsh env files
+3. `cp ~/.dotfiles/example/bashrc ~/.bashrc`
+  1. modify the example bashrc paths for `DOTFILES`
+  2. add any customizations below the init line
+
+### oh-my-zsh Install
+
+Experimental, but there is a `rake omz` task that will link up the custom plugins/themes
+
+### vim Install
+
+1. cd ~/.dotfiles (or wherever repo lives)
+2. update submodules
+2. `rake vim` to link vimrc and ~/.vim
+
+## Customizing ZSH
+
+See `~/.zsh/themes/default` for how to configure this theme
 
 ![colors!](https://raw.github.com/robhurring/dotfiles/master/.images/zsh-colors.png)
 
-You can also configure how RVM's statusline is displayed (with or without the current ruby version) by setting `RVMLONG` to 0 for no version information or 1 (default).
+And when using git + rvm
 
 ![colors!](https://raw.github.com/robhurring/dotfiles/master/.images/zsh-rvm-status.png)
 
-Customizing Bash
------------------
+## Customizing Bash
 
-Bash has the same thing, only it uses ~/.mybashrc as its local config. You can also edit the PS1 color by editing the function `__before_ps1()`
-and changing `PROMPT_COLOR="\e[33;1m"` to any color you want. There is also an ERROR_COLOR too which is red by default.
+Edit ~/.bashrc before the init line to set the colors. You can also edit the PS1 color by editing the function `__before_ps1()`
+and changing `PROMPT_COLOR="\e[33;1m"` to any color you want. There is also an `ERROR_COLOR` too which is red by default.
