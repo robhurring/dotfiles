@@ -1,8 +1,0 @@
-# Environments
-if [ "$TERM_PROGRAM" ]; then
-  export RAILS_ENV='development'
-  export RACK_ENV='development'
-else
-  export RAILS_ENV='production'
-  export RACK_ENV='production'
-fi

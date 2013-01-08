@@ -33,14 +33,14 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
 # load our config files
-for lib ($ZSH_HOME/lib/*); do
+for lib ($ZSH/lib/*); do
   source $lib
 done
 
 # load all plugins to $fpath
-fpath=($ZSH_HOME/functions $fpath)
+fpath=($ZSH/functions $fpath)
 for plugin ($plugins); do
-  fpath=($ZSH_HOME/plugins/$plugin $fpath)
+  fpath=($ZSH/plugins/$plugin $fpath)
 done
 
 # run compinit
@@ -49,13 +49,13 @@ compinit -i
 
 # load all our plugins
 for plugin ($plugins); do
-  if [ -f $ZSH_HOME/plugins/$plugin/$plugin.plugin ]; then
-    source $ZSH_HOME/plugins/$plugin/$plugin.plugin
+  if [ -f $ZSH/plugins/$plugin/$plugin.plugin ]; then
+    source $ZSH/plugins/$plugin/$plugin.plugin
   fi
 done
 
-# autoload -U $ZSH_HOME/plugins/*(:t)
+# autoload -U $ZSH/plugins/*(:t)
 typeset -U path manpath fpath
 autoload -U colors && colors
 
-source $ZSH_HOME/themes/$ZSH_THEME
+source $ZSH/themes/$ZSH_THEME
