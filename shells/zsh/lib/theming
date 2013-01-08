@@ -6,10 +6,10 @@ autoload -U colors && colors
 
 THEME_RVM_BEFORE=""
 THEME_RVM_AFTER=""
-RVM_PROMPT_OPTIONS="gemset"
+THEME_RVM_PROMPT_OPTIONS=(gemset)
 rvm_prompt_info() {
   [ -f $HOME/.rvm/bin/rvm-prompt ] || return
-  local rvm_info=$($HOME/.rvm/bin/rvm-prompt ${RVM_PROMPT_OPTIONS} 2>/dev/null)
+  local rvm_info=$($HOME/.rvm/bin/rvm-prompt ${THEME_RVM_PROMPT_OPTIONS} 2>/dev/null)
   print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
 }
 
