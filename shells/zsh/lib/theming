@@ -4,30 +4,96 @@ export LSCOLORS='exgxFxdxCxdxgxhbadexex'
 
 autoload -U colors && colors
 
+THEME_RVM_BEFORE=""
+THEME_RVM_AFTER=""
 RVM_PROMPT_OPTIONS="gemset"
-function rvm_prompt_info() {
+rvm_prompt_info() {
   [ -f $HOME/.rvm/bin/rvm-prompt ] || return
-  print -Pn $($HOME/.rvm/bin/rvm-prompt ${RVM_PROMPT_OPTIONS} 2>/dev/null)
+  local rvm_info=$($HOME/.rvm/bin/rvm-prompt ${RVM_PROMPT_OPTIONS} 2>/dev/null)
+  print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
 }
 
 PROJECT_HOME="$HOME/Projects"
 PROJECT_FORMAT="\\1"
 HOME_FORMAT="~"
-function formatted_path() {
+formatted_path() {
   print -n $PWD|sed -e "s-$PROJECT_HOME/\([^\/]*\)-$PROJECT_FORMAT-" -e "s-$HOME-$HOME_FORMAT-"
 }
 
-function job_prompt_info() {
-  [[ $(jobs -l | wc -l) -gt 0 ]] && print -n "⚙"
+THEME_JOB_ICON="⚙"
+THEME_JOB_BEFORE="%F{yellow}"
+THEME_JOB_AFTER="%f"
+job_prompt_info() {
+  [[ $(jobs -l | wc -l) -gt 0 ]] && print -n "${THEME_JOB_BEFORE}${THEME_JOB_ICON}${THEME_JOB_AFTER}"
+}
+
+_git_repo_path() {
+  git rev-parse --git-dir 2>/dev/null
+}
+
+_in_git_repo() {
+  local repo_path=$(_git_repo_path)
+  [[ -d $repo_path ]] && [[ $repo_path != "~" ]] && [[ $repo_path != "$HOME/.git" ]]
+}
+
+_git_current_branch() {
+  git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+}
+
+_git_head_commit() {
+  git rev-parse --short HEAD 2>/dev/null
+}
+
+THEME_GIT_BEFORE_BRANCH="%F{white}"
+THEME_GIT_AFTER_BRANCH=" "
+THEME_GIT_BEFORE_SHA="%B%F{black}"
+THEME_GIT_AFTER_SHA="%b"
+THEME_GIT_ICON_DIRTY=" %F{red}★%f"
+THEME_GIT_ICON_BISECT="+bisect"
+THEME_GIT_ICON_MERGE="+merge"
+THEME_GIT_ICON_REBASE="+rebase"
+git_prompt_info () {
+  local icon;
+  local branch;
+  local sha;
+  local flags;
+
+  if _in_git_repo; then
+    repo_path=$(_git_repo_path)
+    branch=$(_git_current_branch)
+    sha=$(_git_head_commit)
+
+    if [[ -n $(git ls-files -m) ]]; then
+      icon=$THEME_GIT_ICON_DIRTY
+    fi
+
+    if [[ -f $repo_path/BISECT_LOG ]]; then
+      flags=$THEME_GIT_ICON_BISECT
+    elif [[ -f $repo_path/MERGE_HEAD ]]; then
+      flags=$THEME_GIT_ICON_MERGE
+    elif [[ -f $repo_path/rebase ]] ||
+         [[ -f $repo_path/rebase-apply ]] ||
+         [[ -f $repo_path/rebase-merge ]] ||
+         [[ -f .dotest ]];
+    then
+      flags=$THEME_GIT_ICON_REBASE
+    fi
+
+    print -n "${THEME_GIT_BEFORE_BRANCH}${branch}${flags}${THEME_GIT_AFTER_BRANCH}"
+    print -n "${THEME_GIT_BEFORE_SHA}${sha}${THEME_GIT_AFTER_SHA}${icon}"
+  fi
 }
 
 VI_PROMPT_INFO=""
-function vi_prompt_info() {
-  print -Pn $VI_PROMPT_INFO
+THEME_VI_BEFORE_MODE="%F{magenta}"
+THEME_VI_AFTER_MODE="%f"
+THEME_VI_MODE_ICON=" ☰"
+vi_prompt_info() {
+  print -n "${THEME_VI_BEFORE_MODE}${VI_PROMPT_INFO}${THEME_VI_AFTER_MODE}"
 }
 
 function zle-keymap-select {
-  VI_PROMPT_INFO="${${KEYMAP/vicmd/ ☰}/(main|viins)/}"
+  VI_PROMPT_INFO="${${KEYMAP/vicmd/$THEME_VI_MODE_ICON}/(main|viins)/}"
   zle reset-prompt
 }
 
@@ -50,12 +116,12 @@ function title {
   fi
 }
 
-ZSH_THEME_TERM_TAB_TITLE_IDLE="%15<..<%~%<<" #15 char left truncated PWD
-ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
+THEME_TERM_TAB_TITLE_IDLE="%15<..<%~%<<" #15 char left truncated PWD
+THEME_TERM_TITLE_IDLE="%n@%m: %~"
 
 #Appears when you have the prompt
 function omz_termsupport_precmd {
-  title $ZSH_THEME_TERM_TAB_TITLE_IDLE $ZSH_THEME_TERM_TITLE_IDLE
+  title $THEME_TERM_TAB_TITLE_IDLE $THEME_TERM_TITLE_IDLE
 }
 
 #Appears at the beginning of (and during) of command execution
