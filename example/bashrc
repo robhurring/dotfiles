@@ -1,3 +1,11 @@
+DOTFILES=~/.dotfiles
+BASH=~/.bash
+
+# load our bash environment
+[[ -f $BASH/init.sh ]] && . $BASH/init.sh
+
+# customize like a mofo!
+
 ## This is an example of what you could use .mybashrc for, to give your particular machine a more
 ## customized feel. basically, anything left out of .bashrc should end up in here.
 
@@ -36,10 +44,3 @@ function __before_ps1(){
   [[ $(__git_ps1 "%s") == "master" ]] && GITCOLOR="\[\e[37;41m\]" || GITCOLOR="\[\e[37;1m\]"
   PROMPT_DETAILS="$RET$(__git_ps1 "$GITCOLOR%s$GEMSET:\[\e[m$PROMPT_COLOR")\]\w: "
 }
-
-# RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-## add a custom path for this machine
-# export MYCUSTOMPATH=$HOME/apps/bin
-# push_path $MYCUSTOMPATH 'after'

@@ -12,29 +12,28 @@ if [ -t 0 ]; then
 fi
 
 push_path(){
-	if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
+  if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
     if [ "$2" = "after" ] ; then
       PATH=$PATH:$1
     else
       PATH=$1:$PATH
     fi
-	fi
+  fi
 }
 
 push_path /usr/local/bin
 for path in `ls -d /usr/local/*/bin 2>/dev/null`; do
-	push_path $path
+  push_path $path
 done
 push_path $HOME/bin
 
-export BASH_EXTRAS="$HOME/.bash"
-if [ -d $BASH_EXTRAS ]; then
-  for config in `ls $BASH_EXTRAS`; do
-    source $BASH_EXTRAS/$config 2>/dev/null
+if [ -d $BASH/lib ]; then
+  for config in `ls $BASH/lib`; do
+    source $BASH/$config 2>/dev/null
   done
 fi
 
-# overwrite in .mybashrc to customize these for each machine 
+# overwrite in .mybashrc to customize these for each machine
 # (or use __before_ps1 to dynamically update these)
 export TERM_TITLE="`hostname -s`:$PWD"
 export PROMPT_COLOR="\e[32m"  # regular color
@@ -42,7 +41,7 @@ export PROMPT_DETAILS="[$RET\u.\h: \w]\$ "
 export RET_COLOR="\e[31m"   # for our error status code
 export RET_FMT="\$status "  # format of this
 
-function __prompt_command(){ 
+function __prompt_command(){
   # on $? != 0 put the exit status in $ERROR_COLOR wherever $RET is within $PROMPT_DETAILS
   RET="\$(status=\$?;[ \$status -eq 0 ] || echo -n \"\[$RET_COLOR\]$RET_FMT\[$PROMPT_COLOR\]\")"
 
@@ -54,10 +53,3 @@ function __prompt_command(){
   PS1="\[${PROMPT_COLOR}\]${PROMPT_DETAILS}\[\e[0m\]"
 }
 export PROMPT_COMMAND=__prompt_command
-
-# Our buddy "z"
-[[ -e $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
-
-# Define custom things for each machine in ~/.mybashrc
-# (e.g.: different color prompt, prompt details, different aliases, vars, etc.)
-[[ -e $HOME/.mybashrc ]] && source $HOME/.mybashrc
