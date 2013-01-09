@@ -27,7 +27,7 @@ end
 
 desc 'link up vim dotfiles to home'
 task :vim do
-  safe_replace_file '~/.vimrc', 'etc/vimrc'
+  link_tree Dir['shells/vim/config/*'], '~', '.'
   safe_replace_file '~/.vim', 'shells/vim'
 end
 
