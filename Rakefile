@@ -1,6 +1,9 @@
 require 'rake'
 require 'erb'
 
+task :default => :zsh
+task :env => [:etc, :bin]
+
 desc 'link shared dotfiles to ~'
 task :etc do
   link_tree Dir['etc/*'], '~', '.'
@@ -10,8 +13,6 @@ desc 'link shared binfiles to ~/bin'
 task :bin do
   link_tree Dir['bin/*'], '~/bin', ''
 end
-
-task :env => [:etc, :bin]
 
 desc 'install the ZSH dotfiles to home'
 task :zsh => :env do
@@ -37,7 +38,23 @@ task :omz do
   puts "\nset ZSH_CUSTOM=~/.omz-custom in your ~/.zshrc file"
 end
 
-task :default => :zsh
+namespace :install do
+  desc 'install RVM'
+  task :rvm do
+    %x{curl -L https://get.rvm.io | bash -s stable}
+  end
+
+  desc 'install homebrew'
+  task :brew do
+    %x{ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"}
+  end
+
+  desc 'install common libraries'
+  task :libs => :brew do
+    libs = %w{autoconf automake cmake curl git sqlite wget redis phantomjs libxml2 heroku-toolbelt}
+    %x{brew install #{libs.join(' ')}}
+  end
+end
 
 # Helpers
 $replace_all = false
