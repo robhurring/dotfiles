@@ -23,6 +23,12 @@ formatted_path() {
   print -n "${THEME_PATH_BEFORE}${fmt_path}${THEME_PATH_AFTER}"
 }
 
+THEME_RETURN_BAD_ICON="%F{red}%?%f"
+THEME_RETURN_GOOD_ICON=""
+return_prompt_info() {
+  print -n "%(?.${THEME_RETURN_GOOD_ICON}.${THEME_RETURN_BAD_ICON})"
+}
+
 THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f"
 THEME_JOB_ICON="⚙"
@@ -66,13 +72,25 @@ git_sha() {
 
 THEME_GIT_DIRTY_BEFORE=""
 THEME_GIT_DIRTY_AFTER=""
-THEME_GIT_ICON_DIRTY="★"
-git_dirty() {
-  local dirty;
+THEME_GIT_ICON_DIRTY="✗"
+THEME_GIT_CLEAN_BEFORE=""
+THEME_GIT_CLEAN_AFTER=""
+THEME_GIT_ICIN_CLEAN="✓"
+git_icon() {
+  local icon;
+  local icon_before;
+  local icon_after;
+
   if [[ -n $(git ls-files -m) ]]; then
-    dirty=$THEME_GIT_ICON_DIRTY
+    icon_before=$THEME_GIT_DIRTY_BEFORE
+    icon_after=$THEME_GIT_DIRTY_AFTER
+    icon=$THEME_GIT_ICON_DIRTY
+  else
+    icon_before=$THEME_GIT_CLEAN_BEFORE
+    icon_after=$THEME_GIT_CLEAN_AFTER
+    icon=$THEME_GIT_ICIN_CLEAN
   fi
-  [[ -n $dirty ]] && print -n "${THEME_GIT_DIRTY_BEFORE}${dirty}${THEME_GIT_DIRTY_AFTEr}"
+  [[ -n $icon ]] && print -n "${icon_before}${icon}${icon_after}"
 }
 
 THEME_GIT_FLAGS_BEFORE=""
@@ -112,7 +130,7 @@ git_prompt_info () {
     branch=$(git_branch)
     sha=$(git_sha)
     flags=$(git_flags)
-    icon=$(git_dirty)
+    icon=$(git_icon)
     prompt="${branch}${flags}${sha}${icon}"
   fi
 
