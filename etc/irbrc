@@ -1,9 +1,9 @@
 exit if RUBY_ENGINE == 'macruby'
 
 require 'rubygems'
-
 require 'irb/completion'
 require 'irb/ext/save-history'
+require 'pp'
 
 begin
   require 'awesome_print'
@@ -19,14 +19,7 @@ IRB.conf.merge!({
   :PROMPT_MODE => :SIMPLE
 })
 
-require 'pp'
-require 'benchmark'
-
 class Object
-  def local_methods(obj = self)
-    (obj.methods - obj.class.superclass.instance_methods).sort
-  end
-
   def ivg name
     instance_variable_get name
   end
@@ -34,69 +27,30 @@ class Object
   def ivs name, value
     instance_variable_set name, value
   end
+
+  def copy
+    IO.popen('pbcopy', 'w'){ |f| f << self.to_s }
+    self
+  end
 end
 
-def desktop(filename = 'irb-session.txt', &block)
-  File.open("/Users/rob/Desktop/#{filename}", 'w+') do |f|
+def save(filename = '/Desktop/irb-session.txt', &block)
+  path = File.join ENV['HOME'], filename
+  File.open(path, 'w+') do |f|
     f << block.call
   end
 end
 
-# Hirb
-
-def hirb!
-  require 'hirb'
-  Hirb.enable
-end
-
-def unhirb!
-  Hirb.disable if defined?(::Hirb)
-end
-
 def benchmark
+  require 'benchmark'
   bm = Benchmark.realtime{ yield }
   puts "%0.2f Second(s)" % bm
 end
+alias bm benchmark
 
-def pbcopy(what)
-  IO.popen('pbcopy', 'w'){ |f| f << what.to_s }
-end
-
-def pbpaste
+def paste
   `pbpaste`.chomp
 end
-
-def cls
-  system 'clear'
-  nil
-end
-
-# reload a single file
-def rl(file = nil)
-  if file.nil?
-    @__reload__ ? rl(@__reload__) : puts("Nothing to reload.")
-  else
-    file = file.to_s unless file.is_a?(String)
-    file << ".rb" unless file =~ /\.rb$/i
-    @__reload__ = file
-    puts "Loading: #{@__reload__}"
-    load @__reload__
-    nil
-  end
-end
-
-def load(file)
-  IRB.conf[:LOAD_MODULES] |= Array(file)
-  super
-end
-
-# reload all included files
-def reload!
-  IRB.conf[:LOAD_MODULES].each do |file|
-    puts "Reload: #{file}"
-    load file
-  end
-end unless defined?(Rails)
 
 alias x exit
 
@@ -126,8 +80,7 @@ end
 include Rails::IRBHelpers if defined?(Rails)
 
 # Machine specific helpers
-
-localrc = File.expand_path('.localirbrc', File.dirname(__FILE__))
+localrc = File.expand_path('.localirbrc', ENV['HOME'])
 if File.exists?(localrc)
-  load localrc if %w{irb script/rails}.include?($0)
+  load localrc.to_s
 end
