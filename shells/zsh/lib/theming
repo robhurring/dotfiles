@@ -13,11 +13,14 @@ rvm_prompt_info() {
   print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
 }
 
-PROJECT_HOME="$HOME/Projects"
-PROJECT_FORMAT="\\1"
-HOME_FORMAT="~"
+THEME_PROJECT_PATH="$HOME/Projects"
+THEME_PROJECT_FORMAT="\\1"
+THEME_HOME_FORMAT="~"
+THEME_PATH_BEFORE=""
+THEME_PATH_AFTER=""
 formatted_path() {
-  print -n $PWD|sed -e "s-$PROJECT_HOME/\([^\/]*\)-$PROJECT_FORMAT-" -e "s-$HOME-$HOME_FORMAT-"
+  local fmt_path=$(pwd|sed -e "s-${THEME_PROJECT_PATH}/\([^\/]*\)-${THEME_PROJECT_FORMAT}-" -e "s-${HOME}-${THEME_HOME_FORMAT}-")
+  print -n "${THEME_PATH_BEFORE}${fmt_path}${THEME_PATH_AFTER}"
 }
 
 THEME_JOB_BEFORE="%F{yellow}"
@@ -46,23 +49,23 @@ _git_head_commit() {
   git rev-parse --short HEAD 2>/dev/null
 }
 
-THEME_GIT_BEFORE_BRANCH="%F{white}"
+THEME_GIT_BEFORE_BRANCH=""
 THEME_GIT_AFTER_BRANCH=""
 git_branch() {
   local branch=$(_git_current_branch)
   [[ -n $branch ]] && print -n "${THEME_GIT_BEFORE_BRANCH}${branch}${THEME_GIT_AFTER_BRANCH}"
 }
 
-THEME_GIT_BEFORE_SHA="%B%F{black}"
-THEME_GIT_AFTER_SHA="%b"
+THEME_GIT_BEFORE_SHA=""
+THEME_GIT_AFTER_SHA=""
 git_sha() {
 # _git_head_commit
   local sha=$(_git_head_commit)
   [[ -n $sha ]] && print -n "${THEME_GIT_BEFORE_SHA}${sha}${THEME_GIT_AFTER_SHA}"
 }
 
-THEME_GIT_DIRTY_BEFORE=" %F{red}"
-THEME_GIT_DIRTY_AFTER="%f"
+THEME_GIT_DIRTY_BEFORE=""
+THEME_GIT_DIRTY_AFTER=""
 THEME_GIT_ICON_DIRTY="★"
 git_dirty() {
   local dirty;
@@ -117,9 +120,9 @@ git_prompt_info () {
 }
 
 VI_PROMPT_INFO=""
-THEME_VI_BEFORE="%F{magenta}"
-THEME_VI_AFTER="%f"
-THEME_VI_ICON_MODE=" ☰"
+THEME_VI_BEFORE=""
+THEME_VI_AFTER=""
+THEME_VI_ICON_MODE=" (VI)"
 vi_prompt_info() {
   print -n "${THEME_VI_BEFORE}${VI_PROMPT_INFO}${THEME_VI_AFTER}"
 }
