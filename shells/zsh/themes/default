@@ -29,9 +29,11 @@ THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f "
 THEME_JOB_ICON="↺"
 
-PROJECT_HOME="$HOME/Projects"
-PROJECT_FORMAT="%F{yellow}project:%F{white}\\1"
-HOME_FORMAT="~"
+THEME_PROJECT_PATH="$HOME/Projects"
+THEME_PROJECT_FORMAT="%F{yellow}project:%F{white}\\1"
+THEME_HOME_FORMAT="~"
+THEME_PATH_BEFORE=""
+THEME_PATH_AFTER=""
 
 export PROMPT=$'%B%{$fg[yellow]%}$(formatted_path):%b$(vi_prompt_info) '
 export RPROMPT=$'$(vi_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'
