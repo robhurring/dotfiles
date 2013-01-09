@@ -1,4 +1,18 @@
 #compdef bundle
+# ------------------------------------------------------------------------------
+# Description
+# -----------
+#
+#  Completion script for Bundler (http://gembundler.com).
+#
+# ------------------------------------------------------------------------------
+# Authors
+# -------
+#
+#  * Bruno Michel (https://github.com/nono)
+#
+# ------------------------------------------------------------------------------
+
 
 local curcontext="$curcontext" state line _gems _opts ret=1
 
@@ -23,27 +37,15 @@ case $state in
       "viz[Generate a visual representation of your dependencies]" \
       "init[Generate a simple Gemfile, placed in the current directory]" \
       "gem[Create a simple gem, suitable for development with bundler]" \
-      "help[Describe available tasks or one specific task]"
+      "help[Describe available tasks or one specific task]" \
+      "platform[Displays platform compatibility information]" \
+      "outdated[Show all of the outdated gems in the current bundle]"
     ret=0
     ;;
   args)
     case $line[1] in
       help)
-        _values 'commands' \
-                    'install' \
-                    'update' \
-                    'package' \
-                    'exec' \
-                    'config' \
-                    'check' \
-                    'list' \
-                    'show' \
-                    'console' \
-                    'open' \
-                    'viz' \
-                    'init' \
-                    'gem' \
-                    'help' && ret=0
+        _values 'commands' 'install update package exec config check list show console open viz init gem help' && ret=0
         ;;
       install)
         _arguments \
@@ -80,3 +82,11 @@ case $state in
 esac
 
 return ret
+
+# Local Variables:
+# mode: Shell-Script
+# sh-indentation: 2
+# indent-tabs-mode: nil
+# sh-basic-offset: 2
+# End:
+# vim: ft=zsh sw=2 ts=2 et
