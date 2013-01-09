@@ -37,6 +37,8 @@ task :omz do
   puts "\nset ZSH_CUSTOM=~/.omz-custom in your ~/.zshrc file"
 end
 
+task :default => :zsh
+
 # Helpers
 $replace_all = false
 
