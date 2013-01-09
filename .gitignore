@@ -5,3 +5,4 @@ other/st2/User/FileHistory.json
 *.pyc
 other/st2/User/Package Control.last-run
 *.orig
+shells/vim/.netrwhist
