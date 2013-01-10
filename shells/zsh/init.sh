@@ -7,6 +7,8 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export REPORTTIME=10
 
+stty erase \^H
+
 setopt VI
 setopt NO_BG_NICE
 setopt NO_HUP
@@ -14,19 +16,22 @@ setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS
 setopt LOCAL_TRAPS
 setopt HIST_VERIFY
-#setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
-setopt autopushd
-setopt pushdignoredups
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
 setopt PROMPT_SUBST
-stty erase \^H
-
 setopt APPEND_HISTORY
+#setopt SHARE_HISTORY
 #setopt INC_APPEND_HISTORY SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
+setopt AUTO_PARAM_SLASH
+setopt AUTO_MENU
+
+bindkey '^r'   history-beginning-search-backward
+bindkey '^t'   history-beginning-search-forward
 
 # load our config files
 for lib ($ZSH/lib/*); do
