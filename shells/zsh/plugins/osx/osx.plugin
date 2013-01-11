@@ -1,3 +1,26 @@
+# Random url schemes for mac apps
+function define() {
+  open dict://$1
+}
+
+function google() {
+  open "https://www.google.com/search?q=$1&ie=UTF-8"
+}
+
+function facetime() {
+  open facetime://$1
+}
+
+function im() {
+  open im://$1
+}
+
+function dash() {
+  open dash://$1
+}
+
+# iterm/terminal functions
+
 function tab() {
   local command="cd \\\"$PWD\\\""
   (( $# > 0 )) && command="${command}; $*"
