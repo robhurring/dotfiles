@@ -19,7 +19,8 @@ THEME_HOME_FORMAT="~"
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=""
 formatted_path() {
-  local fmt_path=$(pwd|sed -e "s-${THEME_PROJECT_PATH}/\([^\/]*\)-${THEME_PROJECT_FORMAT}-" -e "s-${HOME}-${THEME_HOME_FORMAT}-")
+  local fmt_path
+  fmt_path=$(pwd|sed -e "s-${THEME_PROJECT_PATH}/\([^\/]*\)-${THEME_PROJECT_FORMAT}-" -e "s-${HOME}-${THEME_HOME_FORMAT}-")
   print -n "${THEME_PATH_BEFORE}${fmt_path}${THEME_PATH_AFTER}"
 }
 
