@@ -1,7 +1,7 @@
 [
   // oragami plugin
   { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "right"} },
-  { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "left"} },
+  { "keys": ["super+shift+["], "command": "travel_to_pane", "args": {"direction": "left"} },
 
   { "keys": ["ctrl+shift+]"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
   { "keys": ["ctrl+shift+["], "command": "carry_file_to_pane", "args": {"direction": "left"} },
@@ -65,38 +65,38 @@
   { "keys": ["super+shift+quote"], "command": "change_quotes" },
 
   // toggle symbol plugin
-  { "keys": ["super+shift+;"], "command": "toggle_symbol" },
+  { "keys": ["super+shift+;"], "command": "toggle_symbol" }
 
   // alt autocomplete plugin
-  { "keys": ["escape"], "command": "alternative_autocomplete", "context":
-  [
-    { "key": "num_selections", "operator": "equal", "operand": 1 },
-    { "key": "overlay_visible", "operator": "equal", "operand": false },
-    { "key": "panel_visible", "operator": "equal", "operand": false }
-  ]
-  },
-  { "keys": ["shift+escape"], "command": "alternative_autocomplete", "args": {"cycle": "previous"}, "context":
-    [
-      { "key": "num_selections", "operator": "equal", "operand": 1 },
-      { "key": "overlay_visible", "operator": "equal", "operand": false },
-      { "key": "panel_visible", "operator": "equal", "operand": false }
-    ]
-  },
+  // { "keys": ["escape"], "command": "alternative_autocomplete", "context":
+  // [
+  //   { "key": "num_selections", "operator": "equal", "operand": 1 },
+  //   { "key": "overlay_visible", "operator": "equal", "operand": false },
+  //   { "key": "panel_visible", "operator": "equal", "operand": false }
+  // ]
+  // },
+  // { "keys": ["shift+escape"], "command": "alternative_autocomplete", "args": {"cycle": "previous"}, "context":
+  //   [
+  //     { "key": "num_selections", "operator": "equal", "operand": 1 },
+  //     { "key": "overlay_visible", "operator": "equal", "operand": false },
+  //     { "key": "panel_visible", "operator": "equal", "operand": false }
+  //   ]
+  // }
 
   // zen coding plugin
-  {
-    "args": {},
-    "command": "zen_css_mnemonic",
-    "context": [
-      {
-        "key": "selector",
-        "match_all": true,
-        "operand": "source.css, source.scss",
-        "operator": "equal"
-      }
-    ],
-    "keys": [
-      "`"
-    ]
-  }
+  // {
+  //   "args": {},
+  //   "command": "zen_css_mnemonic",
+  //   "context": [
+  //     {
+  //       "key": "selector",
+  //       "match_all": true,
+  //       "operand": "source.css, source.scss",
+  //       "operator": "equal"
+  //     }
+  //   ],
+  //   "keys": [
+  //     "`"
+  //   ]
+  // }
 ]
