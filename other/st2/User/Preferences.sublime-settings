@@ -9,7 +9,8 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
+		"Sublime-ApiDock"
 	],
 	"indent_subsequent_lines": false,
 	"rulers":

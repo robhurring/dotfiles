@@ -656,9 +656,9 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>267 618 924 485 0 0 2560 1418 </string>
+	<string>307 567 924 485 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 87 1152 812 0 0 2560 1418 </string>
+	<string>3 87 1274 782 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>183 427 570 451 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
@@ -1091,11 +1091,11 @@
 			<key>Name</key>
 			<string>Twilight</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 12</string>
+			<string>Monaco 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 12</string>
+			<string>Monaco 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -3138,7 +3138,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-01-10T14:24:05Z</date>
+	<date>2013-01-28T14:25:59Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>

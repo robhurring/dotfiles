@@ -6,23 +6,15 @@
   { "keys": ["ctrl+shift+]"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
   { "keys": ["ctrl+shift+["], "command": "carry_file_to_pane", "args": {"direction": "left"} },
 
-  // toggle view plugin
-  // { "keys": ["super+shift+]"], "command": "toggle_view"},
-  // { "keys": ["super+shift+["], "command": "toggle_view", "args": {"direction": "previous"}},
-  // { "keys": ["super+shift+ctrl+["], "command": "prev_view" },
-  // { "keys": ["super+shift+ctrl+]"], "command": "next_view" },
-  // { "keys": ["ctrl+shift+]"], "command": "move_to_group", "args": { "group": 1 } },
-  // { "keys": ["ctrl+shift+["], "command": "move_to_group", "args": { "group": 0 } },
-
   // file history plugin
-  {"keys": ["super+shift+o"], "command": "open_recently_closed_file"},
+  {"keys": ["super+ctrl+o"], "command": "open_recent_files"},
 
   // "vimlike" bindings
   {"keys": ["super+k", "super+4"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard EOL.sublime-macro"}},
   {"keys": ["super+k", "super+0"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard BOL.sublime-macro"}},
-  {"keys": ["super+k", "super+r"], "command": "shell_prompt"},
 
   // open terminal to file directory
+  {"keys": ["super+k", "super+r"], "command": "shell_prompt"},
   {"keys": ["super+k", "super+t"], "command": "subprocess_in_cwd", "args":
     {
       "cmd": "osascript -e 'tell application \"iTerm\"' -e 'activate' -e 'tell current terminal' -e 'launch session \"Default Session\"' -e 'tell the last session' -e 'write text \"cd '$PWD'\"' -e 'end tell' -e 'end tell' -e 'end tell'",
@@ -35,6 +27,7 @@
   { "keys": ["super+k", "super+s"], "command": "select_to_mark" },
   { "keys": ["super+k", "super+x"], "command": "delete_to_mark" },
   { "keys": ["super+k", "super+w"], "command": "swap_with_mark" },
+  { "keys": ["super+k", "super+d"], "command": "find_under_expand_skip" },
 
   // create/remove panes
   {
