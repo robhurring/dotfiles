@@ -79,6 +79,10 @@ end
 
 include Rails::IRBHelpers if defined?(Rails)
 
+unless defined?(y)
+  require 'syck'
+end
+
 # Machine specific helpers
 localrc = File.expand_path('.localirbrc', ENV['HOME'])
 if File.exists?(localrc)
