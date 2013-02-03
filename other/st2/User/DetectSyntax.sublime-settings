@@ -96,6 +96,12 @@
 			]
 		},
 		{
+			"name": "YAML",
+			"rules": [
+				{"file_name": ".*\\.fdoc(\\..*)?$"}
+			]
+		},
+		{
 			"name": "PHP",
 			"rules": [
 				{"file_name": ".*\\.(php|inc)$"},
