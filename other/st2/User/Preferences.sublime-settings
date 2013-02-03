@@ -1,6 +1,6 @@
 {
 	"auto_complete": true,
-	"auto_complete_delay": 50,
+	"auto_complete_delay": 100,
 	"auto_complete_size_limit": 90210,
 	"caret_style": "wide",
 	"color_scheme": "Packages/Color Scheme - Default/Twilight.tmTheme",
