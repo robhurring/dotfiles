@@ -1,5 +1,5 @@
 {
-	"auto_complete": true,
+	"auto_complete": false,
 	"auto_complete_delay": 100,
 	"auto_complete_size_limit": 90210,
 	"caret_style": "wide",
