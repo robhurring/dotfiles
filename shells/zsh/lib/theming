@@ -13,7 +13,6 @@ rvm_prompt_info() {
   print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
 }
 
-THEME_HOME_FORMAT="~"
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=""
 PATH_MATCHERS=("$HOME")
