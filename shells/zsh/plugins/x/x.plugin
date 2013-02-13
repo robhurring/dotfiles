@@ -1,0 +1,3 @@
+function x() {
+  cd ~/XCode/$1;
+}
