@@ -35,9 +35,9 @@ THEME_JOB_ICON="↺"
 THEME_RETURN_BAD_ICON="%F{red}ಠ_ಠ %?%f "
 THEME_RETURN_GOOD_ICON=""
 
-THEME_PROJECT_PATH="$HOME/Projects"
-THEME_PROJECT_FORMAT="%F{yellow}project:%F{white}\\1"
-THEME_HOME_FORMAT="~"
+# make ~/Projects/app show up as project:app
+PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
+PATH_REPLACER+=("%F{yellow}project:%F{white}\\1")
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=""
 

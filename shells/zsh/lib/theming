@@ -13,14 +13,22 @@ rvm_prompt_info() {
   print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
 }
 
-THEME_PROJECT_PATH="$HOME/Projects"
-THEME_PROJECT_FORMAT="\\1"
 THEME_HOME_FORMAT="~"
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=""
+PATH_MATCHERS=("$HOME")
+PATH_REPLACER=("~")
 formatted_path() {
-  local fmt_path
-  fmt_path=$(pwd|sed -e "s-${THEME_PROJECT_PATH}/\([^\/]*\)-${THEME_PROJECT_FORMAT}-" -e "s-${HOME}-${THEME_HOME_FORMAT}-")
+  local fmt_path=$(pwd)
+  local matcher
+  local replace
+
+  for (( i = 1; i <= $#PATH_MATCHERS; i++ )) do
+    matcher=$PATH_MATCHERS[$i]
+    replace=$PATH_REPLACER[$i]
+    fmt_path=$(echo -n $fmt_path|sed -e "s-${matcher}-${replace}-")
+  done
+
   print -n "${THEME_PATH_BEFORE}${fmt_path}${THEME_PATH_AFTER}"
 }
 
