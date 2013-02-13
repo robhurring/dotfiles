@@ -1,0 +1,18 @@
+export SIMPLE_COV_DIRECTORY=coverage
+
+ocov() {
+  local COVERAGE_FILE=$SIMPLE_COV_DIRECTORY/index.html
+  [[ -f $COVERAGE_FILE ]] && open $COVERAGE_FILE || echo "No coverage file found!"
+}
+
+cov() {
+  local COVERAGE_FILE=$SIMPLE_COV_DIRECTORY/.last_run.json
+  local PERCENT;
+
+  if [[ -f $COVERAGE_FILE ]]; then
+    PERCENT=$(cat $COVERAGE_FILE|grep covered_percent|cut -d ":" -f 2)
+    print -n "Coverage:$PERCENT% "
+  else
+    echo "No coverage last run file found!"
+  fi
+}
