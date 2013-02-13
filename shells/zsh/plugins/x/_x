@@ -1,0 +1,2 @@
+#compdef x
+_files -W ~/XCode -/
