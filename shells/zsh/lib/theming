@@ -26,7 +26,7 @@ formatted_path() {
   for (( i = 1; i <= $#PATH_MATCHERS; i++ )) do
     matcher=$PATH_MATCHERS[$i]
     replace=$PATH_REPLACER[$i]
-    fmt_path=$(echo -n $fmt_path|sed -e "s-${matcher}-${replace}-")
+    fmt_path=$(echo -n $fmt_path|sed -e "s!${matcher}!${replace}!")
   done
 
   print -n "${THEME_PATH_BEFORE}${fmt_path}${THEME_PATH_AFTER}"
