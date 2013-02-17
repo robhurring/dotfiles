@@ -17,7 +17,7 @@ cov() {
   fi
 }
 
-SIMPLE_COV_THRESHOLD=90
+SIMPLE_COV_THRESHOLD=95
 SIMPLE_COV_ICON_GOOD="%F{green}✓%f"
 SIMPLE_COV_ICON_BAD="%F{red}✗%f"
 simple_cov_prompt_info() {
@@ -25,7 +25,7 @@ simple_cov_prompt_info() {
 
   if [[ -f $SIMPLE_COV_DATA_FILE ]]; then
     PERCENT=$(cat $SIMPLE_COV_DATA_FILE|grep covered_percent|cut -d ":" -f 2)
-    if [[ $PERCENT -gte $SIMPLE_COV_THRESHOLD ]]; then
+    if [[ $PERCENT -gt $SIMPLE_COV_THRESHOLD ]]; then
       ICON=$SIMPLE_COV_ICON_GOOD
     else
       ICON=$SIMPLE_COV_ICON_BAD
