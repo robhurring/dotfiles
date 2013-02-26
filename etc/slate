@@ -27,9 +27,10 @@ alias mon-imac     2560x1440
 
   # [1][3][4]
   # [1][3][4]
-  # [1][3][_]
-  # [2][3][_]
-  # [2][3][_]
+  # [1][3][5]
+  # [1][3][5]
+  # [2][3][6]
+  # [2][3][6]
 
   # Cell Aliases
   alias dev1-c1-width     screenSizeX/2.75
@@ -40,30 +41,43 @@ alias mon-imac     2560x1440
   alias dev1-c3-width     screenSizeX/2.25
   alias dev1-c4-offsetx   screenOriginX+${dev1-c1-width}+${dev1-c3-width}
   alias dev1-c4-width     screenSizeX/5
-  alias dev1-c4-height    screenSizeY/2.5
+  alias dev1-c4-height    screenSizeY/3
+  alias dev1-c5-offsetx   ${dev1-c4-offsetx}
+  alias dev1-c5-offsety   screenOriginY+${dev1-c4-height}
+  alias dev1-c5-width     ${dev1-c4-width}
+  alias dev1-c5-height    screenSizeY/3
+  alias dev1-c6-offsetx   ${dev1-c4-offsetx}
+  alias dev1-c6-offsety   screenOriginY+${dev1-c4-height}+${dev1-c5-height}
+  alias dev1-c6-width     ${dev1-c4-width}
+  alias dev1-c6-height    screenSizeY/3
 
   # Cells
-  alias dev1-c1 move screenOriginX;screenOriginY          ${dev1-c1-width};${dev1-c1-height}   ${mon-imac}
-  alias dev1-c2 move screenOriginX;${dev1-c2-offsety}     ${dev1-c1-width};${dev1-c2-height}   ${mon-imac}
-  alias dev1-c3 move ${dev1-c3-offsetx};screenOriginY     ${dev1-c3-width};screenSizeY         ${mon-imac}
-  alias dev1-c4 move ${dev1-c4-offsetx};screenOriginY     ${dev1-c4-width};${dev1-c4-height}   ${mon-imac}
+  alias dev1-c1 move screenOriginX;screenOriginY           ${dev1-c1-width};${dev1-c1-height}   ${mon-imac}
+  alias dev1-c2 move screenOriginX;${dev1-c2-offsety}      ${dev1-c1-width};${dev1-c2-height}   ${mon-imac}
+  alias dev1-c3 move ${dev1-c3-offsetx};screenOriginY      ${dev1-c3-width};screenSizeY         ${mon-imac}
+  alias dev1-c4 move ${dev1-c4-offsetx};screenOriginY      ${dev1-c4-width};${dev1-c4-height}   ${mon-imac}
+  alias dev1-c5 move ${dev1-c5-offsetx};${dev1-c5-offsety} ${dev1-c5-width};${dev1-c5-height}   ${mon-imac}
+  alias dev1-c6 move ${dev1-c6-offsetx};${dev1-c6-offsety} ${dev1-c5-width};${dev1-c6-height}   ${mon-imac}
 
   # iMac Monitor layout
   layout dev1 'Google Chrome':MAIN_FIRST      ${dev1-c1}
   layout dev1 'iTerm':MAIN_FIRST              ${dev1-c2}
   layout dev1 'Sublime Text 2':MAIN_FIRST     ${dev1-c3}
   layout dev1 'Flint':MAIN_FIRST              ${dev1-c4}
+  layout dev1 'Messages':MAIN_FIRST           ${dev1-c5}
+  layout dev1 'Firefox':MAIN_FIRST            ${dev1-c6}
 
   # Binding
   bind 1:ctrl;alt;cmd layout dev1
 
 # Layout dev2: iMac/27" Dev layout left (box layout)
   # 3/4 overlap by ~25%
-  # [1][__3][3/4][4][_]
-  # [1][__3][3/4][4][_]
-  # [1][__3][3/4][4][_]
-  # [2][2/3][3/4][4][_]
-  # [2][2/3][3/4][4][_]
+  # [1][__3][3/4][4/5][5]
+  # [1][__3][3/4][4/5][5]
+  # [1][__3][3/4][4_6][6]
+  # [2][2/3][3/4][4_6][6]
+  # [2][2/3][3/4][4/7][7]
+  # [2][2/3][3/4][4/6][7]
 
   # Panels (o=offset, w=width)
   alias dev2-c1-width     screenSizeX/4
@@ -76,17 +90,35 @@ alias mon-imac     2560x1440
   alias dev2-c4-offsetx   screenOriginX+${dev2-c1-width}+200
   alias dev2-c4-width     screenSizeX/2
 
+  alias dev2-c5-offsetx   screenOriginX+${dev2-c1-width}+${dev2-c3-width}
+  alias dev2-c5-width     screenSizeX-${dev2-c1-width}-${dev2-c3-width}
+  alias dev2-c5-height    screenSizeY/3
+  alias dev2-c6-offsetx   ${dev2-c5-offsetx}
+  alias dev2-c6-offsety   screenOriginY+${dev2-c5-height}
+  alias dev2-c6-width     ${dev2-c5-width}
+  alias dev2-c6-height    screenSizeY/3
+
+  alias dev2-c7-offsetx   ${dev2-c5-offsetx}
+  alias dev2-c7-offsety   screenOriginY+${dev2-c5-height}+${dev2-c6-height}
+  alias dev2-c7-width     ${dev2-c5-width}
+  alias dev2-c7-height    screenSizeY/3
+
   # Cells
-  alias dev2-c1 move screenOriginX;screenOriginY          ${dev2-c1-width};${dev2-c1-height}    ${mon-imac}
-  alias dev2-c2 move screenOriginX;${dev2-c2-offsety}     ${dev2-c2-width};${dev2-c2-height}    ${mon-imac}
-  alias dev2-c3 move ${dev2-c3-offsetx};screenOriginY     ${dev2-c3-width};screenSizeY          ${mon-imac}
-  alias dev2-c4 move ${dev2-c4-offsetx};screenOriginY     ${dev2-c4-width};screenSizeY          ${mon-imac}
+  alias dev2-c1 move screenOriginX;screenOriginY            ${dev2-c1-width};${dev2-c1-height}    ${mon-imac}
+  alias dev2-c2 move screenOriginX;${dev2-c2-offsety}       ${dev2-c2-width};${dev2-c2-height}    ${mon-imac}
+  alias dev2-c3 move ${dev2-c3-offsetx};screenOriginY       ${dev2-c3-width};screenSizeY          ${mon-imac}
+  alias dev2-c4 move ${dev2-c4-offsetx};screenOriginY       ${dev2-c4-width};screenSizeY          ${mon-imac}
+  alias dev2-c5 move ${dev2-c5-offsetx};screenOriginY       ${dev2-c5-width};${dev2-c5-height}    ${mon-imac}
+  alias dev2-c6 move ${dev2-c6-offsetx};${dev2-c6-offsety}  ${dev2-c6-width};${dev2-c6-height}    ${mon-imac}
+  alias dev2-c7 move ${dev2-c7-offsetx};${dev2-c7-offsety}  ${dev2-c7-width};${dev2-c7-height}    ${mon-imac}
 
   # iMac Monitor layout
   layout dev2 'Flint':MAIN_FIRST              ${dev2-c1}
   layout dev2 'iTerm':MAIN_FIRST              ${dev2-c2}
   layout dev2 'Google Chrome':MAIN_FIRST      ${dev2-c3}
   layout dev2 'Sublime Text 2':MAIN_FIRST     ${dev2-c4}
+  layout dev2 'Messages':MAIN_FIRST           ${dev2-c5}
+  layout dev2 'Firefox':MAIN_FIRST            ${dev2-c7}
 
   # Binding
   bind 2:ctrl;alt;cmd layout dev2
