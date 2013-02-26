@@ -1,0 +1,127 @@
+# Configs
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config secondsBetweenRepeat 0.1
+config checkDefaultsOnLoad true
+config focusCheckWidthMax 3000
+
+# Global Bindings
+
+bind esc:cmd  hint
+bind esc:ctrl grid
+
+# Focus Bindings
+
+bind right:ctrl;alt;cmd    focus right
+bind left:ctrl;alt;cmd     focus left
+bind up:ctrl;alt;cmd       focus up
+bind down:ctrl;alt;cmd     focus down
+
+# Monitor Aliases
+
+alias mon-air      1680x1050
+alias mon-imac     2560x1440
+
+# Layout dev1: iMac/27" Dev layout left
+
+  # [1][3][4]
+  # [1][3][4]
+  # [1][3][_]
+  # [2][3][_]
+  # [2][3][_]
+
+  # Cell Aliases
+  alias dev1-c1-width     screenSizeX/2.75
+  alias dev1-c1-height    screenSizeY/1.75
+  alias dev1-c2-offsety   screenOriginY+${dev1-c1-height}
+  alias dev1-c2-height    screenSizeY-${dev1-c1-height}
+  alias dev1-c3-offsetx   screenOriginX+${dev1-c1-width}
+  alias dev1-c3-width     screenSizeX/2.25
+  alias dev1-c4-offsetx   screenOriginX+${dev1-c1-width}+${dev1-c3-width}
+  alias dev1-c4-width     screenSizeX/5
+  alias dev1-c4-height    screenSizeY/2.5
+
+  # Cells
+  alias dev1-c1 move screenOriginX;screenOriginY          ${dev1-c1-width};${dev1-c1-height}   ${mon-imac}
+  alias dev1-c2 move screenOriginX;${dev1-c2-offsety}     ${dev1-c1-width};${dev1-c2-height}   ${mon-imac}
+  alias dev1-c3 move ${dev1-c3-offsetx};screenOriginY     ${dev1-c3-width};screenSizeY         ${mon-imac}
+  alias dev1-c4 move ${dev1-c4-offsetx};screenOriginY     ${dev1-c4-width};${dev1-c4-height}   ${mon-imac}
+
+  # iMac Monitor layout
+  layout dev1 'Google Chrome':MAIN_FIRST      ${dev1-c1}
+  layout dev1 'iTerm':MAIN_FIRST              ${dev1-c2}
+  layout dev1 'Sublime Text 2':MAIN_FIRST     ${dev1-c3}
+  layout dev1 'Flint':MAIN_FIRST              ${dev1-c4}
+
+  # Binding
+  bind 1:ctrl;alt;cmd layout dev1
+
+# Layout dev2: iMac/27" Dev layout left (box layout)
+  # 3/4 overlap by ~25%
+  # [1][__3][3/4][4][_]
+  # [1][__3][3/4][4][_]
+  # [1][__3][3/4][4][_]
+  # [2][2/3][3/4][4][_]
+  # [2][2/3][3/4][4][_]
+
+  # Panels (o=offset, w=width)
+  alias dev2-c1-width     screenSizeX/4
+  alias dev2-c1-height    screenSizeY/2.25
+  alias dev2-c2-offsety   screenOriginY+${dev2-c1-height}
+  alias dev2-c2-width     ${dev2-c1-width}+200
+  alias dev2-c2-height    screenSizeY-${dev2-c1-height}
+  alias dev2-c3-offsetx   screenOriginX+${dev2-c1-width}
+  alias dev2-c3-width     screenSizeX/2
+  alias dev2-c4-offsetx   screenOriginX+${dev2-c1-width}+200
+  alias dev2-c4-width     screenSizeX/2
+
+  # Cells
+  alias dev2-c1 move screenOriginX;screenOriginY          ${dev2-c1-width};${dev2-c1-height}    ${mon-imac}
+  alias dev2-c2 move screenOriginX;${dev2-c2-offsety}     ${dev2-c2-width};${dev2-c2-height}    ${mon-imac}
+  alias dev2-c3 move ${dev2-c3-offsetx};screenOriginY     ${dev2-c3-width};screenSizeY          ${mon-imac}
+  alias dev2-c4 move ${dev2-c4-offsetx};screenOriginY     ${dev2-c4-width};screenSizeY          ${mon-imac}
+
+  # iMac Monitor layout
+  layout dev2 'Flint':MAIN_FIRST              ${dev2-c1}
+  layout dev2 'iTerm':MAIN_FIRST              ${dev2-c2}
+  layout dev2 'Google Chrome':MAIN_FIRST      ${dev2-c3}
+  layout dev2 'Sublime Text 2':MAIN_FIRST     ${dev2-c4}
+
+  # Binding
+  bind 2:ctrl;alt;cmd layout dev2
+
+# Resize Bindings
+# NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
+# bind right:ctrl resize +10% +0
+# bind left:ctrl  resize -10% +0
+# bind up:ctrl    resize +0   -10%
+# bind down:ctrl  resize +0   +10%
+# bind right:alt  resize -10% +0 bottom-right
+# bind left:alt   resize +10% +0 bottom-right
+# bind up:alt     resize +0   +10% bottom-right
+# bind down:alt   resize +0   -10% bottom-right
+
+# Push Bindings
+# NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
+# bind right:ctrl;shift push right bar-resize:screenSizeX/3
+# bind left:ctrl;shift  push left  bar-resize:screenSizeX/3
+# bind up:ctrl;shift    push up    bar-resize:screenSizeY/2
+# bind down:ctrl;shift  push down  bar-resize:screenSizeY/2
+
+# Nudge Bindings
+# NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
+# bind right:ctrl;alt nudge +10% +0
+# bind left:ctrl;alt  nudge -10% +0
+# bind up:ctrl;alt    nudge +0   -10%
+# bind down:ctrl;alt  nudge +0   +10%
+
+# Throw Bindings
+# NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
+# bind pad1:ctrl;alt      throw 2 resize
+# bind pad2:ctrl;alt      throw 1 resize
+# bind pad3:ctrl;alt      throw 0 resize
+# bind right:ctrl;alt;cmd throw right resize
+# bind left:ctrl;alt;cmd  throw left  resize
+# bind up:ctrl;alt;cmd    throw up    resize
+# bind down:ctrl;alt;cmd  throw down  resize
