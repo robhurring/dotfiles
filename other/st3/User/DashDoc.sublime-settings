@@ -1,0 +1,28 @@
+{
+  "syntax_sensitive": false,
+  "syntax_docset_map":
+  {
+    "ActionScript": "actionscript",
+    "C"           : "c",
+    "C++"         : "cpp",
+    "Clojure"     : "clojure",
+    "CSS"         : "css",
+    "Erlang"      : "erlang",
+    "Groovy"      : "groovy",
+    "Haskell"     : "haskell",
+    "HTML"        : "html",
+    "Java"        : "java7",
+    "JavaScript"  : "js",
+    "Lisp"        : "lisp",
+    "Lua"         : "lua",
+    "Perl"        : "perl",
+    "PHP"         : "php",
+    "Python"      : "python2",
+    "Rails"       : "rails",
+    "Ruby"        : "rb",
+    "Scala"       : "scala",
+    "ShellScript" : "man",
+    "SQL"         : "psql",
+    "TCL"         : "tcl"
+  }
+}

@@ -1,0 +1,22 @@
+{
+	"installed_packages":
+	[
+		"Alignment",
+		"Apidock",
+		"BeautifyRuby",
+		"cdnjs",
+		"CoffeeCompile",
+		"CoffeeScript",
+		"DashDoc",
+		"DetectSyntax",
+		"ERB Insert and Toggle Commands",
+		"JsFormat",
+		"Origami",
+		"Package Control",
+		"PackageControl",
+		"Pretty JSON",
+		"Rails Latest Migration",
+		"RubyToggleString",
+		"SCSS"
+	]
+}

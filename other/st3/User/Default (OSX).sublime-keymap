@@ -1,0 +1,63 @@
+[
+  // oragami plugin
+  { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "right"} },
+  { "keys": ["super+shift+["], "command": "travel_to_pane", "args": {"direction": "left"} },
+
+  { "keys": ["ctrl+shift+]"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+  { "keys": ["ctrl+shift+["], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+
+  // file history plugin
+  {"keys": ["super+ctrl+o"], "command": "open_recent_files"},
+
+  // marks
+  { "keys": ["super+k", "super+m"], "command": "set_mark" },
+  { "keys": ["super+k", "super+s"], "command": "select_to_mark" },
+  { "keys": ["super+k", "super+x"], "command": "delete_to_mark" },
+  { "keys": ["super+k", "super+w"], "command": "swap_with_mark" },
+  { "keys": ["super+k", "super+d"], "command": "find_under_expand_skip" },
+
+  // create/remove panes
+  {
+    "keys": ["super+shift+minus"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 1.0],
+      "rows": [0.0, 1.0],
+      "cells": [[0, 0, 1, 1]]
+    }
+  },
+  {
+    "keys": ["super+shift+equals"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.5, 1.0],
+      "rows": [0.0, 1.0],
+      "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+    }
+  },
+
+  // erb plugin
+  { "keys": ["command+shift+."], "command": "erb"},
+
+  // ruby toggle string plugin
+  { "keys": ["super+shift+'"], "command": "ruby_toggle_string" },
+  { "keys": ["super+shift+;"], "command": "ruby_toggle_string_and_symbol" }
+
+  // alt autocomplete plugin
+  // { "keys": ["escape"], "command": "alternative_autocomplete", "context":
+  // [
+  //   { "key": "num_selections", "operatror": "equal", "operand": 1 },
+  //   { "key": "overlay_visible", "operator": "equal", "operand": false },
+  //   { "key": "panel_visible", "operator": "equal", "operand": false }
+  // ]
+  // },
+  // { "keys": ["shift+escape"], "command": "alternative_autocomplete", "args": {"cycle": "previous"}, "context":
+  //   [
+  //     { "key": "num_selections", "operator": "equal", "operand": 1 },
+  //     { "key": "overlay_visible", "operator": "equal", "operand": false },
+  //     { "key": "panel_visible", "operator": "equal", "operand": false }
+  //   ]
+  // }
+]
