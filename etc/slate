@@ -5,10 +5,15 @@ config resizePercentOf screenSize
 config secondsBetweenRepeat 0.1
 config checkDefaultsOnLoad true
 config focusCheckWidthMax 3000
+
 config windowHintsIgnoreHiddenWindows false
+config windowHintsShowIcons true
 config windowHintsSpread true
-config windowHintsShowIcons false
-config windowHintsSpread true
+# config windowHintsTopLeftX 20
+# config windowHintsTopLeftY 20
+config windowHintsRoundedCornerSize 10
+config windowHintsSpreadSearchWidth 200
+config windowHintsSpreadSearchHeight 200
 
 # Global Bindings
 
