@@ -35,13 +35,25 @@ bind down:ctrl;alt;cmd     focus down
 alias mon-air      1680x1050
 alias mon-imac     2560x1440
 
+# Dev layout - 1
+
 layout dev1 'Flint':MAIN_FIRST        move    0;0             ${span-3};${row-5}
 layout dev1 'Google Chrome':REPEAT    move    ${push-3};0     ${span-5};${row-12}
-layout dev1 'iTerm':MAIN_FIRST        move    0;${drop-5}     ${span-4};${row-7}
-layout dev1 'Sublime Text 2':REPEAT   move    ${push-4};0     ${span-5};${row-12}
-layout dev1 'Messages':MAIN_FIRST     move    ${push-9};0     ${span-3};${row-5}
+layout dev1 'iTerm':REPEAT            move    0;${drop-5}     ${span-4};${row-7}
+layout dev1 'Sublime Text 2':REPEAT   move    ${push-4};0     ${span-5}+100;${row-12}
+layout dev1 'Messages':MAIN_FIRST     move    ${push-9};0    ${span-3};${row-5}
 
-bind 3:ctrl;alt;cmd layout dev1
+bind 1:ctrl;alt;cmd layout dev1
+
+# Dev layout - 2
+
+layout dev2 'Google Chrome':REPEAT    move    0;0             ${span-4};${row-6}
+layout dev2 'Sublime Text 2':REPEAT   move    ${push-4};0     ${span-5};${row-8}
+layout dev2 'iTerm':MAIN_FIRST        move    0;${drop-6}     ${span-4};${row-6} | move ${push-4};${drop-9} ${span-5};${row-3}
+layout dev2 'Flint':MAIN_FIRST        move    ${push-9};0     ${span-3};${row-5}
+layout dev2 'Messages':MAIN_FIRST     move    ${push-9};${drop-5}     ${span-3};${row-5}
+
+bind 2:ctrl;alt;cmd layout dev2
 
 # Resize Bindings
 # NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
