@@ -5,11 +5,17 @@ require 'irb/completion'
 require 'irb/ext/save-history'
 require 'pp'
 
-begin
-  require 'awesome_print'
-rescue LoadError
-  # don't care
+def try_require(*names)
+  names.each do |name|
+    begin
+      require name.to_s
+    rescue LoadError
+      # don't care
+    end
+  end
 end
+
+try_require :awesome_print, :commands
 
 IRB.conf.merge!({
   :USE_READLINE => true,

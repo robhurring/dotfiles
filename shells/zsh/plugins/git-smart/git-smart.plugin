@@ -1,4 +1,3 @@
 # requires git-smart gem
 alias gsp='git smart-pull'
 alias gm='git smart-merge'
-alias gl='git smart-log'

@@ -17,7 +17,7 @@ config windowHintsSpreadSearchHeight 200
 
 # Global Bindings
 
-bind `:cmd  hint
+bind esc:cmd  hint
 bind esc:ctrl switch
 
 # Focus Bindings
@@ -69,9 +69,9 @@ alias mon-imac     2560x1440
   alias dev1-c6 move ${dev1-c6-offsetx};${dev1-c6-offsety} ${dev1-c5-width};${dev1-c6-height}   ${mon-imac}
 
   # iMac Monitor layout
-  layout dev1 'Google Chrome':MAIN_FIRST      ${dev1-c1}
+  layout dev1 'Google Chrome':REPEAT          ${dev1-c1}
   layout dev1 'iTerm':MAIN_FIRST              ${dev1-c2}
-  layout dev1 'Sublime Text 2':MAIN_FIRST     ${dev1-c3}
+  layout dev1 'Sublime Text 2':REPEAT         ${dev1-c3}
   layout dev1 'Flint':MAIN_FIRST              ${dev1-c4}
   layout dev1 'Messages':MAIN_FIRST           ${dev1-c5}
   layout dev1 'Firefox':MAIN_FIRST            ${dev1-c6}
@@ -124,8 +124,8 @@ alias mon-imac     2560x1440
   # iMac Monitor layout
   layout dev2 'Flint':MAIN_FIRST              ${dev2-c1}
   layout dev2 'iTerm':MAIN_FIRST              ${dev2-c2}
-  layout dev2 'Google Chrome':MAIN_FIRST      ${dev2-c3}
-  layout dev2 'Sublime Text 2':MAIN_FIRST     ${dev2-c4}
+  layout dev2 'Google Chrome':REPEAT          ${dev2-c3}
+  layout dev2 'Sublime Text 2':REPEAT         ${dev2-c4}
   layout dev2 'Messages':MAIN_FIRST           ${dev2-c5}
   layout dev2 'Firefox':MAIN_FIRST            ${dev2-c7}
 
