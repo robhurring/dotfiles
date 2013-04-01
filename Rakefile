@@ -117,7 +117,7 @@ def link_file(source, target)
     target = target.sub /\.erb$/, ''
     puts "generating: #{source} -> #{target}"
 
-    data = ERB.new(File.read(source)).result(binding)
+    data = ERB.new(File.read(source), nil, '-').result(binding)
     File.open(File.join(target), 'w') do |new_file|
       new_file.write data
     end
