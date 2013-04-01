@@ -2,20 +2,20 @@
   st = status
   ci = commit
   cia = commit -a
+  cp = cherry-pick
   br = branch
   co = checkout
-  df = diff
-  lg = log -p
   ls = ls-files
   gr = grep -n
   brt = branch-time
-  sp = smart-pull
-  rank = shortlog -s -n --no-merges
-  # Log display from screencast, with train tracks.
+  who = shortlog -s -n --no-merges
+  up = !git fetch origin && git rebase -p origin/$(git current-branch)
+# Log Aliases
   l = log --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-  # Alternate log display from Scott Chacon
+  ll = log --numstat --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
+  lg = log -p
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
-  # Other useful aliases:
+# Other useful aliases:
   unstage = reset HEAD
   staged = diff --cached
   unstaged = diff

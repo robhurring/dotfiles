@@ -41,23 +41,32 @@
   // erb plugin
   { "keys": ["command+shift+."], "command": "erb"},
 
-  // ruby toggle string plugin
-  { "keys": ["super+shift+'"], "command": "ruby_toggle_string" },
-  { "keys": ["super+shift+;"], "command": "ruby_toggle_string_and_symbol" }
+  // change quotes plugin
+  { "keys": ["super+shift+quote"], "command": "change_quotes" },
+
+  // toggle symbol plugin
+  { "keys": ["super+shift+;"], "command": "toggle_symbol" },
 
   // alt autocomplete plugin
-  // { "keys": ["escape"], "command": "alternative_autocomplete", "context":
-  // [
-  //   { "key": "num_selections", "operatror": "equal", "operand": 1 },
-  //   { "key": "overlay_visible", "operator": "equal", "operand": false },
-  //   { "key": "panel_visible", "operator": "equal", "operand": false }
-  // ]
-  // },
-  // { "keys": ["shift+escape"], "command": "alternative_autocomplete", "args": {"cycle": "previous"}, "context":
-  //   [
-  //     { "key": "num_selections", "operator": "equal", "operand": 1 },
-  //     { "key": "overlay_visible", "operator": "equal", "operand": false },
-  //     { "key": "panel_visible", "operator": "equal", "operand": false }
-  //   ]
-  // }
+[
+  {
+    "keys": ["escape"],
+    "command": "alternative_autocomplete",
+    "context": [
+      {"key": "num_selections", "operator": "equal", "operand": 1},
+      {"key": "overlay_visible", "operator": "equal", "operand": false},
+      {"key": "panel_visible", "operator": "equal", "operand": false}
+    ]
+  },
+  {
+    "keys": ["shift+escape"],
+    "command": "alternative_autocomplete",
+    "args": {"cycle": "previous"},
+    "context": [
+      {"key": "num_selections", "operator": "equal", "operand": 1},
+      {"key": "overlay_visible", "operator": "equal", "operand": false},
+      {"key": "panel_visible", "operator": "equal", "operand": false}
+    ]
+  }
+]
 ]

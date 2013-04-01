@@ -1,4 +1,7 @@
 [
+  // default override
+  { "keys": ["super+shift+a"], "command": "expand_selection", "args": {"to": "brackets"} },
+
   // oragami plugin
   { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "right"} },
   { "keys": ["super+shift+["], "command": "travel_to_pane", "args": {"direction": "left"} },
@@ -52,7 +55,7 @@
   },
 
   // erb plugin
-  { "keys": ["command+shift+."], "command": "erb"},
+  { "keys": ["super+shift+."], "command": "erb"},
 
   // change quotes plugin
   { "keys": ["super+shift+quote"], "command": "change_quotes" },
@@ -74,22 +77,22 @@
       { "key": "overlay_visible", "operator": "equal", "operand": false },
       { "key": "panel_visible", "operator": "equal", "operand": false }
     ]
-  }
+  },
 
-  // zen coding plugin
-  // {
-  //   "args": {},
-  //   "command": "zen_css_mnemonic",
-  //   "context": [
-  //     {
-  //       "key": "selector",
-  //       "match_all": true,
-  //       "operand": "source.css, source.scss",
-  //       "operator": "equal"
-  //     }
-  //   ],
-  //   "keys": [
-  //     "`"
-  //   ]
-  // }
+  {
+    "keys" : [ "ctrl+shift+k" ],
+    "command" : "block_nav",
+    "args" : {
+      "v_dir" : -1,
+      "depth_offset" : 0
+    }
+  },
+  {
+    "keys" : [ "ctrl+shift+j" ],
+    "command" : "block_nav",
+    "args" : {
+      "v_dir" : 1,
+      "depth_offset" : 0
+    }
+  }
 ]

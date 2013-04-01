@@ -4,7 +4,9 @@
 		"Alignment",
 		"Apidock",
 		"BeautifyRuby",
+		"Boron Color Scheme",
 		"cdnjs",
+		"ChangeQuotes",
 		"CoffeeCompile",
 		"CoffeeScript",
 		"DashDoc",
@@ -14,9 +16,9 @@
 		"Origami",
 		"Package Control",
 		"PackageControl",
-		"Pretty JSON",
 		"Rails Latest Migration",
 		"RubyToggleString",
-		"SCSS"
+		"SCSS",
+		"Toggle Symbol to String"
 	]
 }

@@ -30,9 +30,10 @@ alias arestart_rack='touch tmp/always_restart.txt'
 
 # Git
 alias git='noglob git'
-alias glog='git log --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(bold black) %an, %ar%Creset"'
+alias glog='git log --pretty=format":%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset"'
 alias gl='glog --graph'
-alias gla='gl --all'
+alias gla='glog --graph --all'
+alias glv='glog --graph --numstat'
 alias gs='git status -sb'
 alias gd='git diff'
 alias gdw='git diff -w'
@@ -44,7 +45,8 @@ alias grbc='git rebase --continue'
 alias grh='git reset --hard'
 alias gst='git stash'
 alias gstp='git stash pop'
-alias gw='git wtf'
+alias grb='git rebase -p'
+alias gup='git up'
 
 # Misc
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
