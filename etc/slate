@@ -15,10 +15,12 @@ config windowHintsRoundedCornerSize 10
 config windowHintsSpreadSearchWidth 200
 config windowHintsSpreadSearchHeight 200
 
+source ~/.slate.grid if_exists
+
 # Global Bindings
 
 bind esc:cmd  hint
-bind esc:ctrl switch
+#bind esc:ctrl grid
 
 # Focus Bindings
 
@@ -31,6 +33,19 @@ bind down:ctrl;alt;cmd     focus down
 
 alias mon-air      1680x1050
 alias mon-imac     2560x1440
+
+alias top-left-quarter    move 0;0          ${span-6};${row-6}
+alias top-right-quarter   move ${push-6};0  ${span-6};${row-6}
+
+layout dev3 'Flint':MAIN_FIRST        move    0;0             ${span-3};${row-5}
+layout dev3 'Google Chrome':REPEAT    move    ${push-3};0     ${span-5};${row-12}
+layout dev3 'iTerm':MAIN_FIRST        move    0;${drop-5}     ${span-4};${row-7}
+layout dev3 'Sublime Text 2':REPEAT   move    ${push-4};0     ${span-5};${row-12}
+# layout dev1 'Messages':MAIN_FIRST           ${dev1-c5}
+# layout dev1 'Firefox':MAIN_FIRST            ${dev1-c6}
+
+bind 3:ctrl;alt;cmd layout dev3
+
 
 # Layout dev1: iMac/27" Dev layout left
 
