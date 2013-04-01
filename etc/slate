@@ -6,15 +6,16 @@ config secondsBetweenRepeat 0.1
 config checkDefaultsOnLoad true
 config focusCheckWidthMax 3000
 
+# config windowHintsTopLeftX 20
+# config windowHintsTopLeftY 20
 config windowHintsIgnoreHiddenWindows false
 config windowHintsShowIcons true
 config windowHintsSpread true
-# config windowHintsTopLeftX 20
-# config windowHintsTopLeftY 20
 config windowHintsRoundedCornerSize 10
 config windowHintsSpreadSearchWidth 200
 config windowHintsSpreadSearchHeight 200
 
+# load our grid
 source ~/.slate.grid if_exists
 
 # Global Bindings
@@ -34,118 +35,13 @@ bind down:ctrl;alt;cmd     focus down
 alias mon-air      1680x1050
 alias mon-imac     2560x1440
 
-alias top-left-quarter    move 0;0          ${span-6};${row-6}
-alias top-right-quarter   move ${push-6};0  ${span-6};${row-6}
+layout dev1 'Flint':MAIN_FIRST        move    0;0             ${span-3};${row-5}
+layout dev1 'Google Chrome':REPEAT    move    ${push-3};0     ${span-5};${row-12}
+layout dev1 'iTerm':MAIN_FIRST        move    0;${drop-5}     ${span-4};${row-7}
+layout dev1 'Sublime Text 2':REPEAT   move    ${push-4};0     ${span-5};${row-12}
+layout dev1 'Messages':MAIN_FIRST     move    ${push-9};0     ${span-3};${row-5}
 
-layout dev3 'Flint':MAIN_FIRST        move    0;0             ${span-3};${row-5}
-layout dev3 'Google Chrome':REPEAT    move    ${push-3};0     ${span-5};${row-12}
-layout dev3 'iTerm':MAIN_FIRST        move    0;${drop-5}     ${span-4};${row-7}
-layout dev3 'Sublime Text 2':REPEAT   move    ${push-4};0     ${span-5};${row-12}
-# layout dev1 'Messages':MAIN_FIRST           ${dev1-c5}
-# layout dev1 'Firefox':MAIN_FIRST            ${dev1-c6}
-
-bind 3:ctrl;alt;cmd layout dev3
-
-
-# Layout dev1: iMac/27" Dev layout left
-
-  # [1][3][4]
-  # [1][3][4]
-  # [1][3][5]
-  # [1][3][5]
-  # [2][3][6]
-  # [2][3][6]
-
-  # Cell Aliases
-  alias dev1-c1-width     screenSizeX/2.75
-  alias dev1-c1-height    screenSizeY/1.75
-  alias dev1-c2-offsety   screenOriginY+${dev1-c1-height}
-  alias dev1-c2-height    screenSizeY-${dev1-c1-height}
-  alias dev1-c3-offsetx   screenOriginX+${dev1-c1-width}
-  alias dev1-c3-width     screenSizeX/2.25
-  alias dev1-c4-offsetx   screenOriginX+${dev1-c1-width}+${dev1-c3-width}
-  alias dev1-c4-width     screenSizeX/5
-  alias dev1-c4-height    screenSizeY/3
-  alias dev1-c5-offsetx   ${dev1-c4-offsetx}
-  alias dev1-c5-offsety   screenOriginY+${dev1-c4-height}
-  alias dev1-c5-width     ${dev1-c4-width}
-  alias dev1-c5-height    screenSizeY/3
-  alias dev1-c6-offsetx   ${dev1-c4-offsetx}
-  alias dev1-c6-offsety   screenOriginY+${dev1-c4-height}+${dev1-c5-height}
-  alias dev1-c6-width     ${dev1-c4-width}
-  alias dev1-c6-height    screenSizeY/3
-
-  # Cells
-  alias dev1-c1 move screenOriginX;screenOriginY           ${dev1-c1-width};${dev1-c1-height}   ${mon-imac}
-  alias dev1-c2 move screenOriginX;${dev1-c2-offsety}      ${dev1-c1-width};${dev1-c2-height}   ${mon-imac}
-  alias dev1-c3 move ${dev1-c3-offsetx};screenOriginY      ${dev1-c3-width};screenSizeY         ${mon-imac}
-  alias dev1-c4 move ${dev1-c4-offsetx};screenOriginY      ${dev1-c4-width};${dev1-c4-height}   ${mon-imac}
-  alias dev1-c5 move ${dev1-c5-offsetx};${dev1-c5-offsety} ${dev1-c5-width};${dev1-c5-height}   ${mon-imac}
-  alias dev1-c6 move ${dev1-c6-offsetx};${dev1-c6-offsety} ${dev1-c5-width};${dev1-c6-height}   ${mon-imac}
-
-  # iMac Monitor layout
-  layout dev1 'Google Chrome':REPEAT          ${dev1-c1}
-  layout dev1 'iTerm':MAIN_FIRST              ${dev1-c2}
-  layout dev1 'Sublime Text 2':REPEAT         ${dev1-c3}
-  layout dev1 'Flint':MAIN_FIRST              ${dev1-c4}
-  layout dev1 'Messages':MAIN_FIRST           ${dev1-c5}
-  layout dev1 'Firefox':MAIN_FIRST            ${dev1-c6}
-
-  # Binding
-  bind 1:ctrl;alt;cmd layout dev1
-
-# Layout dev2: iMac/27" Dev layout left (box layout)
-  # 3/4 overlap by ~25%
-  # [1][3][3][4][4][5][5]
-  # [1][3][3][4][4][5][5]
-  # [1][3][3][4][4][6][6]
-  # [2][2][3][4][4][6][6]
-  # [2][2][3][4][4][7][7]
-  # [2][2][3][4][4][7][7]
-
-  # Panels (o=offset, w=width)
-  alias dev2-c1-width     screenSizeX/4
-  alias dev2-c1-height    screenSizeY/2.25
-  alias dev2-c2-offsety   screenOriginY+${dev2-c1-height}
-  alias dev2-c2-width     ${dev2-c1-width}+200
-  alias dev2-c2-height    screenSizeY-${dev2-c1-height}
-  alias dev2-c3-offsetx   screenOriginX+${dev2-c1-width}
-  alias dev2-c3-width     screenSizeX/2
-  alias dev2-c4-offsetx   screenOriginX+${dev2-c1-width}+200
-  alias dev2-c4-width     screenSizeX/2
-
-  alias dev2-c5-offsetx   screenOriginX+${dev2-c1-width}+${dev2-c3-width}
-  alias dev2-c5-width     screenSizeX-${dev2-c1-width}-${dev2-c3-width}
-  alias dev2-c5-height    screenSizeY/3
-  alias dev2-c6-offsetx   ${dev2-c5-offsetx}
-  alias dev2-c6-offsety   screenOriginY+${dev2-c5-height}
-  alias dev2-c6-width     ${dev2-c5-width}
-  alias dev2-c6-height    screenSizeY/3
-
-  alias dev2-c7-offsetx   ${dev2-c5-offsetx}
-  alias dev2-c7-offsety   screenOriginY+${dev2-c5-height}+${dev2-c6-height}
-  alias dev2-c7-width     ${dev2-c5-width}
-  alias dev2-c7-height    screenSizeY/3
-
-  # Cells
-  alias dev2-c1 move screenOriginX;screenOriginY            ${dev2-c1-width};${dev2-c1-height}    ${mon-imac}
-  alias dev2-c2 move screenOriginX;${dev2-c2-offsety}       ${dev2-c2-width};${dev2-c2-height}    ${mon-imac}
-  alias dev2-c3 move ${dev2-c3-offsetx};screenOriginY       ${dev2-c3-width};screenSizeY          ${mon-imac}
-  alias dev2-c4 move ${dev2-c4-offsetx};screenOriginY       ${dev2-c4-width};screenSizeY          ${mon-imac}
-  alias dev2-c5 move ${dev2-c5-offsetx};screenOriginY       ${dev2-c5-width};${dev2-c5-height}    ${mon-imac}
-  alias dev2-c6 move ${dev2-c6-offsetx};${dev2-c6-offsety}  ${dev2-c6-width};${dev2-c6-height}    ${mon-imac}
-  alias dev2-c7 move ${dev2-c7-offsetx};${dev2-c7-offsety}  ${dev2-c7-width};${dev2-c7-height}    ${mon-imac}
-
-  # iMac Monitor layout
-  layout dev2 'Flint':MAIN_FIRST              ${dev2-c1}
-  layout dev2 'iTerm':MAIN_FIRST              ${dev2-c2}
-  layout dev2 'Google Chrome':REPEAT          ${dev2-c3}
-  layout dev2 'Sublime Text 2':REPEAT         ${dev2-c4}
-  layout dev2 'Messages':MAIN_FIRST           ${dev2-c5}
-  layout dev2 'Firefox':MAIN_FIRST            ${dev2-c7}
-
-  # Binding
-  bind 2:ctrl;alt;cmd layout dev2
+bind 3:ctrl;alt;cmd layout dev1
 
 # Resize Bindings
 # NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
