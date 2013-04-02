@@ -1,8 +1,12 @@
 .DS_Store
-vim/bundle/vim-peepopen
 other/st2/User/RubyTest.last-run
 other/st2/User/FileHistory.json
 *.pyc
 other/st2/User/Package Control.last-run
 *.orig
-shells/vim/.netrwhist
+
+/shells/vim/yankring_history*
+/shells/vim/viminfo
+/shells/vim/swap
+/shells/vim/undo
+.netrwhist
