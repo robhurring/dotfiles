@@ -30,8 +30,10 @@ alias arestart_rack='touch tmp/always_restart.txt'
 
 # Git
 alias git='noglob git'
+alias gf='git fetch'
 alias gc='git commit'
 alias gca='git commit -a'
+alias gcam='git commit --amend'
 alias glog='git log --pretty=format":%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset"'
 alias gl='glog --graph'
 alias gla='glog --graph --all'

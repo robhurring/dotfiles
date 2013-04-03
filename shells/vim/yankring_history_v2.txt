@@ -1,2 +1,3 @@
 	hello world,V
+2:COMMIT_EDITMSG,v
 # Please enter the commit message for your changes. Lines starting,V
