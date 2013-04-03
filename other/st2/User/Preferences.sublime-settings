@@ -48,9 +48,7 @@
 		".svn",
 		".git",
 		".hg",
-		"CVS",
-		"tmp",
-		"log"
+		"CVS"
 	],
 	"font_face": "Monaco",
 	"font_size": 16.0,

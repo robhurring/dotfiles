@@ -12,10 +12,6 @@
   // file history plugin
   {"keys": ["super+ctrl+o"], "command": "open_recent_files"},
 
-  // "vimlike" bindings
-  {"keys": ["super+k", "super+4"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard EOL.sublime-macro"}},
-  {"keys": ["super+k", "super+0"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard BOL.sublime-macro"}},
-
   // open terminal to file directory
   {"keys": ["super+k", "super+r"], "command": "shell_prompt"},
   {"keys": ["super+k", "super+t"], "command": "subprocess_in_cwd", "args":
@@ -80,7 +76,7 @@
   },
 
   {
-    "keys" : [ "ctrl+shift+k" ],
+    "keys" : [ "ctrl+k" ],
     "command" : "block_nav",
     "args" : {
       "v_dir" : -1,
@@ -88,7 +84,7 @@
     }
   },
   {
-    "keys" : [ "ctrl+shift+j" ],
+    "keys" : [ "ctrl+j" ],
     "command" : "block_nav",
     "args" : {
       "v_dir" : 1,
