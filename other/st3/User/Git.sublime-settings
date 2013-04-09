@@ -1,0 +1,12 @@
+{
+  "diff_panel": true
+
+  // Annotations default to being on for all files. Can be slow in some cases.
+  ,"annotations": false
+
+  // statusbar
+  ,"statusbar_branch": true
+  // Symbols for quick git status in status bar
+  ,"statusbar_status": false
+  ,"statusbar_status_symbols" : {"modified": "≠", "added": "+", "deleted": "×", "untracked": "?", "conflicts": "‼", "renamed":"R", "copied":"C", "clean": "√", "separator": " "}
+}
