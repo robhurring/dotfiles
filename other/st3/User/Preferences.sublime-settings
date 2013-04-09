@@ -1,8 +1,10 @@
 {
-	"auto_complete": false,
+	"always_show_minimap_viewport": true,
+	"auto_close_tags": true,
+	"auto_complete": true,
 	"auto_complete_commit_on_tab": false,
 	"auto_complete_delay": 50,
-	"auto_complete_selector": "source - comment",
+	"auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin",
 	"auto_complete_size_limit": 4194304,
 	"auto_complete_triggers":
 	[
@@ -12,20 +14,26 @@
 		}
 	],
 	"auto_complete_with_fields": false,
-	"color_scheme": "Packages/Color Scheme - Default/Twilight.tmTheme",
+	"caret_style": "wide",
+	"color_scheme": "Packages/User/Themes/Twilight.tmTheme",
 	"draw_minimap_border": true,
 	"font_face": "Monaco",
-	"font_size": 16,
+	"font_size": 16.0,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
+		"Pretty JSON"
 	],
 	"rulers":
 	[
 		80
 	],
+	"show_tab_close_buttons": true,
 	"tab_size": 2,
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
-	"use_tab_stops": true
+	"use_tab_stops": true,
+	"word_wrap": false
 }

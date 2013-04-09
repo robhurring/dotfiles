@@ -1,24 +1,22 @@
 {
 	"installed_packages":
 	[
-		"Alignment",
-		"Apidock",
+		"Abacus",
+		"Alternative Autocompletion",
 		"BeautifyRuby",
+		"Block Nav",
 		"Boron Color Scheme",
-		"cdnjs",
 		"ChangeQuotes",
-		"CoffeeCompile",
-		"CoffeeScript",
-		"DashDoc",
-		"DetectSyntax",
+		"Emmet",
 		"ERB Insert and Toggle Commands",
-		"JsFormat",
+		"GitGutter",
+		"GoldenRatio",
 		"Origami",
 		"Package Control",
-		"PackageControl",
+		"Pretty JSON",
 		"Rails Latest Migration",
-		"RubyToggleString",
-		"SCSS",
+		"Ruby on Rails snippets",
+		"Slate",
 		"Toggle Symbol to String"
 	]
 }
