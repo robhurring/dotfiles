@@ -5,9 +5,9 @@ other/st2/User/FileHistory.json
 other/st2/User/Package Control.last-run
 *.orig
 
-/shells/vim/yankring_history*
 /shells/vim/viminfo
 /shells/vim/bundle
 /shells/vim/swap
 /shells/vim/undo
+/shells/vim/tmp
 .netrwhist
