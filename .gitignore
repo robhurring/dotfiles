@@ -7,6 +7,7 @@ other/st2/User/Package Control.last-run
 
 /shells/vim/yankring_history*
 /shells/vim/viminfo
+/shells/vim/bundle
 /shells/vim/swap
 /shells/vim/undo
 .netrwhist
