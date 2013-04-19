@@ -16,6 +16,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'vim-scripts/YankRing.vim'
+Bundle 'Townk/vim-autoclose'
 
 filetype plugin indent on     " required!
 
@@ -77,7 +78,7 @@ set showmatch
 "   "500 : save up to 500 lines for each register
 "   :100 : up to 100 lines of command-line history will be remembered
 "   n... : where to save the viminfo files
-set viminfo=%100,'100,/100,h,\"500,:100,n~/.vim/viminfo
+set viminfo='100,/100,h,\"500,:100,n~/.vim/viminfo
 
 " Keybindings to native vim features
 let mapleader=","
@@ -103,6 +104,8 @@ set shortmess+=A
 set pastetoggle=<F12>
 
 au BufNewFile,BufRead *.less set filetype=less
+
+imap <S-CR> <CR><CR>end<Esc>-cc
 
 """""""""""""""""""""
 " Plugins

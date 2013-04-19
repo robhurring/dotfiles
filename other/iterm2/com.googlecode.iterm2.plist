@@ -675,7 +675,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>406 598 924 485 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 96 852 762 0 0 2560 1418 </string>
+	<string>38 116 1210 656 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>183 427 570 451 0 0 1440 878 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -3091,6 +3091,8 @@
 			<string>/Users/hurrinre</string>
 		</dict>
 	</array>
+	<key>NoSyncNeverRemindPrefsChangesCopy</key>
+	<true/>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -3157,7 +3159,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-04-01T13:22:56Z</date>
+	<date>2013-04-18T13:34:39Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
