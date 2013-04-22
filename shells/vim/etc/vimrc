@@ -17,6 +17,12 @@ Bundle 'sjl/gundo.vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'Townk/vim-autoclose'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/vim-snippets"
+Bundle "garbas/vim-snipmate"
+Bundle "ervandew/supertab"
+Bundle 'tpope/vim-surround'
 
 filetype plugin indent on     " required!
 
