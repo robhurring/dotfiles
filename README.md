@@ -40,7 +40,8 @@ Experimental, but there is a `rake omz` task that will link up the custom plugin
 
 1. cd ~/.dotfiles (or wherever repo lives)
 2. update submodules
-2. `rake vim` to link vimrc and ~/.vim
+3. `rake vim` to link vimrc and ~/.vim
+4. `vim +:BundleInstall` to install bundles
 
 ## Customizing ZSH
 
