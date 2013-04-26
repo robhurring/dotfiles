@@ -3,20 +3,18 @@ alias ls='ls -h'
 alias ll='ls -lah'
 alias la='ls -ah'
 alias l='ls -lh'
-alias grep='grep --color=auto'
 alias ..='cd ..'
 alias cd-='cd -'
 alias cd--='cd ~ && cd -'
-alias psg='ps ax | grep '
-alias pd=popd
-
-# Common Directories
-alias www='cd /var/www'
-alias src='cd /usr/local/src'
 
 # Misc Helpers
 alias fname="noglob find -name"
 alias rake="noglob rake"
+alias grep='noglob pcregrep --color=auto'
+alias psg='ps ax | grep '
+alias tf='tail -f'
+alias enc='openssl enc -e -aes-256-cbc -salt -in '
+alias dec='openssl enc -d -aes-256-cbc -in '
 
 # Rails
 alias ss='rails server'
@@ -30,7 +28,7 @@ alias arestart_rack='touch tmp/always_restart.txt'
 
 # Git
 alias git='noglob git'
-alias gf='git fetch'
+alias gs='git status -sb'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gcam='git commit --amend'
@@ -39,20 +37,17 @@ alias gl='glog --graph'
 alias gla='glog --graph --all'
 alias glp='glog -p'
 alias glv='glog --graph --numstat'
-alias gs='git status -sb'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grb='git rebase -p'
 alias gd='git diff'
 alias gdw='git diff -w'
 alias gds='git diff --stat'
-alias gp='git push'
-alias gpt='gp --tags'
-alias grba='git rebase --abort'
-alias grbc='git rebase --continue'
-alias grh='git reset --hard'
-alias gst='git stash'
-alias gstp='git stash pop'
-alias grb='git rebase -p'
 alias gup='git up'
-
-# Misc
-alias enc='openssl enc -e -aes-256-cbc -salt -in '
-alias dec='openssl enc -d -aes-256-cbc -in '
+alias gp='git push'
+alias gpt='git push --tags'
+alias gpr='git pull --rebase'
+alias gf='git fetch'
+alias grh='git reset --hard'
+alias stash='git stash'
+alias unstash='git stash pop'
