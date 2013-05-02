@@ -49,7 +49,7 @@ alias mon-imac     2560x1440
 # Dev layout - 1
 
 layout dev1 'Flint':MAIN_FIRST        move    0;0             ${span-3};${row-5}
-layout dev1 'Google Chrome':REPEAT    move    ${push-3};0     ${span-6};${row-12}
+layout dev1 'Google Chrome':REPEAT    move    ${push-3};0     ${span-5};${row-12}
 layout dev1 'iTerm':REPEAT            move    0;${drop-5}     ${span-5};${row-7}
 layout dev1 'Sublime Text 2':REPEAT   move    ${push-4};0     ${span-5}+100;${row-12}
 layout dev1 'Sublime Text':REPEAT     move    ${push-4};0     ${span-5}+100;${row-12}
