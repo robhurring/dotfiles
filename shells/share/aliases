@@ -28,6 +28,10 @@ alias arestart_rack='touch tmp/always_restart.txt'
 
 # Git
 alias git='noglob git'
+alias g='git'
+alias ga='git add'
+alias gaa='git add -A'
+alias gau='git add -u'
 alias gs='git status -sb'
 alias gc='git commit'
 alias gca='git commit -a'
