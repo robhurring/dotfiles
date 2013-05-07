@@ -6,5 +6,6 @@ set show-rev-graph = yes
 set show-refs = yes
 set commit-order = topo
 set read-git-colors = yes
-set line-graphics = "ascii"
+set line-graphics = utf-8
 set tab-size = 4
+set show-id = yes
