@@ -56,3 +56,7 @@ alias gpt='git push --tags'
 alias gpr='git pull --rebase'
 alias gf='git fetch'
 alias grh='git reset --hard'
+
+# Tig
+alias ts='tig status'
+alias tb='tig blame'
