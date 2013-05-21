@@ -10,18 +10,21 @@
   brt = branch-time
   who = shortlog -s -n --no-merges
   up = !git fetch origin && git rebase -p origin/$(git current-branch)
-# Log Aliases
   l = log --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   ll = log --numstat --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   lg = log -p
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
-# Other useful aliases:
   unstage = reset HEAD
   staged = diff --cached
   unstaged = diff
   current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
-  # Usage: git track origin/feature-123-login-form
   track = checkout -t
+  assume   = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 [apply]
   whitespace = warn
 [format]
