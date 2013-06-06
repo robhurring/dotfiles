@@ -35,6 +35,13 @@ bind left:ctrl;alt;cmd  resize -213.33  +0
 bind up:ctrl;alt;cmd    resize +0       -120
 bind down:ctrl;alt;cmd  resize +0       +120
 
+# Throw Bindings
+bind left:ctrl;alt;shift    push left   bar-resize:screenSizeX/2
+bind right:ctrl;alt;shift   push right  bar-resize:screenSizeX/2
+bind up:ctrl;alt;shift      push up     bar-resize:screenSizeY/2
+bind down:ctrl;alt;shift    push down   bar-resize:screenSizeY/2
+
+
 # Focus Bindings
 # bind right:ctrl;alt;cmd    focus right
 # bind left:ctrl;alt;cmd     focus left
