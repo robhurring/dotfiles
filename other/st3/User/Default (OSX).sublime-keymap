@@ -2,6 +2,10 @@
   // default override
   { "keys": ["super+shift+a"], "command": "expand_selection", "args": {"to": "brackets"} },
 
+  // default to paste with indent
+  { "keys": ["super+v"], "command": "paste_and_indent" },
+  { "keys": ["super+shift+v"], "command": "paste" },
+
   // oragami plugin
   { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "right"} },
   { "keys": ["super+shift+["], "command": "travel_to_pane", "args": {"direction": "left"} },
