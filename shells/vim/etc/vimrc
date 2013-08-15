@@ -23,6 +23,7 @@ Bundle "honza/vim-snippets"
 Bundle "garbas/vim-snipmate"
 Bundle "ervandew/supertab"
 Bundle 'tpope/vim-surround'
+Bundle 'godlygeek/tabular'
 
 filetype plugin indent on     " required!
 
@@ -148,15 +149,16 @@ set laststatus=2
 let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*/log/*,*.zip,*.so,*.swp
+"let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_open_new_file = 'h'
 let g:ctrlp_open_multiple_files = 'h'
 " let g:ctrlp_custom_ignore = '\.o\|\.so'
 
-noremap <Leader>t= :Tabularize /=<CR>
-noremap <Leader>t: :Tabularize /^[^:]*:\zs/l0l1<CR>
-noremap <Leader>t> :Tabularize /=><CR>
-noremap <Leader>t, :Tabularize /,\zs/l0l1<CR>
-noremap <Leader>t{ :Tabularize /{<CR>
-noremap <Leader>t\| :Tabularize /\|<CR>
+noremap <leader>a= :Tabularize /=<CR>
+noremap <leader>a: :Tabularize /^[^:]*:\zs/l0l1<CR>
+noremap <leader>a> :Tabularize /=><CR>
+noremap <leader>a, :Tabularize /,\zs/l0l1<CR>
+noremap <leader>a{ :Tabularize /{<CR>
+noremap <leader>a\| :Tabularize /\|<CR>
 
