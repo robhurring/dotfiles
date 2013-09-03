@@ -8,8 +8,9 @@ export SAVEHIST=1000
 export REPORTTIME=10
 
 stty erase \^H
+bindkey -e
 
-setopt VI
+# setopt VI
 setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP
