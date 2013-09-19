@@ -86,7 +86,7 @@ end
 include Rails::IRBHelpers if defined?(Rails)
 
 unless defined?(y)
-  require 'syck'
+  try_require 'syck'
 end
 
 # Machine specific helpers
