@@ -1,8 +1,5 @@
 .DS_Store
-other/st2/User/RubyTest.last-run
-other/st2/User/FileHistory.json
 *.pyc
-other/st2/User/Package Control.last-run
 *.orig
 
 /shells/vim/viminfo
@@ -11,3 +8,9 @@ other/st2/User/Package Control.last-run
 /shells/vim/undo
 /shells/vim/tmp
 .netrwhist
+
+# ignore package control stuff
+
+*.last-run
+other/st2/User/FileHistory.json
+other/st3/User/Package Control.cache/*
