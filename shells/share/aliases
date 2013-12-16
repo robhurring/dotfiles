@@ -6,6 +6,7 @@ alias l='ls -lh'
 alias ..='cd ..'
 alias cd-='cd -'
 alias cd--='cd ~ && cd -'
+alias cdd='cd ~/Desktop'
 
 # Misc Helpers
 alias fname="noglob find -name"
@@ -15,8 +16,9 @@ alias psg='ps ax | grep '
 alias tf='tail -f'
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
 alias dec='openssl enc -d -aes-256-cbc -in '
+alias c='cd /usr/local/Cellar'
 
-# Rails
+# Ruby/Rails
 alias ss='rails server'
 alias ssd='rails server --debugger'
 alias sc='rails console'
@@ -25,6 +27,18 @@ alias gen='rails generate'
 
 alias restart_rack='touch tmp/restart.txt'
 alias arestart_rack='touch tmp/always_restart.txt'
+
+alias bc='bundle console'
+alias fm=foreman
+alias fms="foreman start"
+alias fws="forewoman start"
+
+function back() {
+  ack "$@" `bundle show --paths`
+}
+
+# Node
+alias bower='noglob bower'
 
 # Git
 alias git='noglob git'
