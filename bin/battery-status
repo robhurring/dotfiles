@@ -1,0 +1,31 @@
+# Get the current battery details
+# Parameters:
+#   $1: output format, [default="%Y %P Remaining: %R (%S)"]
+#     Substitutions available:
+#     - "%P" the current percentage
+#     - "%R" time remaining
+#     - "%S" the current status
+#     - "%Y" the unicode symbol for battery percentage
+
+# load battery details
+BATT=($(pmset -g batt|grep Battery))
+PERCENT=${BATT[1]%;}
+STATUS=${BATT[2]%;}
+REMAINING=${BATT[3]}
+DEFAULT_FORMAT="%Y %P Remaining: %R (%S)"
+# strip out the percent sign
+PCT=${PERCENT%%%}
+SYMBOL="⚠"
+
+if   ((PCT>=90));            then SYMBOL="█"
+elif ((PCT>=50 && PCT<=75)); then SYMBOL="▅"
+elif ((PCT>=25 && PCT<=50)); then SYMBOL="▃"
+fi
+
+# format output
+OUT=${1:-$DEFAULT_FORMAT}
+OUT=${OUT//%P/$PERCENT}
+OUT=${OUT//%R/$REMAINING}
+OUT=${OUT//%S/$STATUS}
+OUT=${OUT//%Y/$SYMBOL}
+echo $OUT
