@@ -153,12 +153,12 @@ vi_prompt_info() {
   print -n "${THEME_VI_BEFORE}${VI_PROMPT_INFO}${THEME_VI_AFTER}"
 }
 
-# function zle-keymap-select {
-#   VI_PROMPT_INFO="${${KEYMAP/vicmd/$THEME_VI_ICON_MODE}/(main|viins)/}"
-#   zle reset-prompt
-# }
+function zle-keymap-select {
+  VI_PROMPT_INFO="${${KEYMAP/vicmd/$THEME_VI_ICON_MODE}/(main|viins)/}"
+  zle reset-prompt
+}
 
-# zle -N zle-keymap-select
+zle -N zle-keymap-select
 
 #usage: title short_tab_title looooooooooooooooooooooggggggg_windows_title
 #http://www.faqs.org/docs/Linux-mini/Xterm-Title.html#ss3.1
