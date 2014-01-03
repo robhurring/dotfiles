@@ -1,7 +1,7 @@
 export EDITOR='vim'
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/share/man:$MANPATH"
-
+export TERM="xterm-256color"
 export HISTFILE=~/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=1000
