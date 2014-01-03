@@ -1,29 +1,9 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rails.git'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'kien/ctrlp.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'Townk/vim-autoclose'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/vim-snippets"
-Bundle "garbas/vim-snipmate"
-Bundle "ervandew/supertab"
-Bundle 'tpope/vim-surround'
-Bundle 'godlygeek/tabular'
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 
 filetype plugin indent on     " required!
 
@@ -67,6 +47,7 @@ noremap j gj
 set autoindent smartindent
 set smarttab
 set tabstop=2
+set expandtab
 set shiftwidth=2
 
 " Search settings
@@ -150,10 +131,22 @@ let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*/log/*,*.zip,*.so,*.swp
-"let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_open_new_file = 'h'
 let g:ctrlp_open_multiple_files = 'h'
-" let g:ctrlp_custom_ignore = '\.o\|\.so'
+"let g:ctrlp_custom_ignore = '\.o\|\.so'
+"let g:ctrlp_user_command = 'find %s -type f'
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 noremap <leader>a= :Tabularize /=<CR>
 noremap <leader>a: :Tabularize /^[^:]*:\zs/l0l1<CR>
