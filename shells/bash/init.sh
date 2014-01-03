@@ -2,7 +2,7 @@
 export ENV=$HOME/.bashrc
 export SHELL=/bin/bash
 export EDITOR="vim"
-
+export TERM="xterm-256color"
 export LS_OPTIONS='--color=auto'
 export CLICOLOR='Yes'
 export LSCOLORS='exgxfxdxcxdxdxhbadexex'
