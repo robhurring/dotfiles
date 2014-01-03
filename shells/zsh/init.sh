@@ -7,7 +7,7 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export REPORTTIME=10
 
-stty erase \^H
+#stty erase \^H
 bindkey -e
 
 # setopt VI
