@@ -3,9 +3,65 @@ DOTFILES=~/.dotfiles
 ZSH=~/.zsh
 ZSH_THEME=default
 
-plugins=(brew cap gem git-smart h heroku osx p rvm thor bundler)
+plugins=(brew cap gem git-smart h heroku osx p rvm tmux)
 
 # load our zsh environment
 [[ -f ~/.zsh/init.sh ]] && . ~/.zsh/init.sh
 
 # customize like a mofo!
+
+# Custom matcher for my projects colder
+# PATH_MATCHERS+=("~/Projects")
+# PATH_REPLACER+=("%B%F{yellow}projects%b")
+
+# Some common aliases
+# alias cdd='cd ~/Desktop'
+# alias c='cd /usr/local/Cellar'
+# alias bc='bundle console'
+# alias fm=foreman
+# alias fms="foreman start"
+# alias bower='noglob bower'
+
+# Tmux (use with tmux plugin)
+# alias tma=tmux-attach-or-new
+# alias tms=tmux-force-switch
+# alias tmd="tmux detach"
+# alias tmx="tmux kill-session -t"
+
+# Some random helpers
+# # Edit gem from bundle in sublime
+# eb() {
+#   local gem=$1
+#   local editor_flags=$2
+
+#   if _bundler_installed; then
+#     EDITOR="subl $editor_flags" bundle open $gem
+#   else
+#     echo "Bundler is not installed!"
+#   fi
+# }
+
+# # Edit gem from bundle in sublime (append to project)
+# eba() {
+#   eb $1 -a
+# }
+
+# # Search bundle paths for something
+# function back() {
+#   ack "$@" `bundle show --paths`
+# }
+
+# # Dump pg database
+# # Usage: dbdump DBNAME > DUMPFILE
+# function dbdump() {
+#   DBUSER=${DBUSER:-postgres} # default to postgres
+#   pg_dump -Fc --no-acl --no-owner -h localhost -U $DBUSER $@
+# }
+
+# # Restore pg database
+# # Usage: dbrestore DBNAME < DUMPFILE
+# function dbrestore() {
+#   DBHOST=${DBHOST:-localhost}
+#   DBUSER=${DBUSER:-postgres}
+#   pg_restore --verbose --clean --no-acl --no-owner -h $DBHOST -U $DBUSER -d $@
+# }
