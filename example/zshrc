@@ -13,20 +13,21 @@ plugins=(brew cap gem git-smart h heroku osx p rvm tmux)
 # Custom matcher for my projects colder
 # PATH_MATCHERS+=("~/Projects")
 # PATH_REPLACER+=("%B%F{yellow}projects%b")
+# THEME_PROMPT_COLOR="yellow"
 
 # Some common aliases
-# alias cdd='cd ~/Desktop'
-# alias c='cd /usr/local/Cellar'
-# alias bc='bundle console'
-# alias fm=foreman
-# alias fms="foreman start"
-# alias bower='noglob bower'
+#alias cdd='cd ~/Desktop'
+#alias c='cd /usr/local/Cellar'
+#alias bc='bundle console'
+#alias fm=foreman
+#alias fms="foreman start"
+#alias bower='noglob bower'
 
 # Tmux (use with tmux plugin)
-# alias tma=tmux-attach-or-new
-# alias tms=tmux-force-switch
-# alias tmd="tmux detach"
-# alias tmx="tmux kill-session -t"
+#alias tma=tmux-attach-or-new
+#alias tms=tmux-force-switch
+#alias tmd="tmux detach"
+#alias tmx="tmux kill-session -t"
 
 # Some random helpers
 # # Edit gem from bundle in sublime

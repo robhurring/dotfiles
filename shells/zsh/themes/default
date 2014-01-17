@@ -42,5 +42,7 @@ PATH_REPLACER+=("%B%F{yellow}project:%b%F{white}\\1")
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=":"
 
-export PROMPT=$'%B%{$fg[yellow]%}$(formatted_path)%b$(vi_prompt_info) '
+THEME_PROMPT_COLOR="yellow"
+
+export PROMPT=$'%B%{$fg[$THEME_PROMPT_COLOR]%}$(formatted_path)%b$(vi_prompt_info) '
 export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'
