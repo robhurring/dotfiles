@@ -155,3 +155,6 @@ noremap <leader>a, :Tabularize /,\zs/l0l1<CR>
 noremap <leader>a{ :Tabularize /{<CR>
 noremap <leader>a\| :Tabularize /\|<CR>
 
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
