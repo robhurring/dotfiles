@@ -21,7 +21,6 @@ clean:
 
 .setup:
 	@mkdir -p $HOME/bin
-	chsh -s $(which zsh)
 
 .zsh: $(HOME)/.zsh $(HOME)/.zshrc
 .vim: $(HOME)/.vim $(HOME)/.vimrc $(HOME)/.vimrc.bundles
