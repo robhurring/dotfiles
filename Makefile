@@ -8,7 +8,7 @@ DOTFILES=$(ETC:%=$(HOME)/.%)
 BIN = ack battery-status git-branch-time git-wtf weather
 BINFILES=$(BIN:%=$(HOME)/bin/%)
 
-all: $(DOTFILES) .bin .zsh .vim
+all: .setup $(DOTFILES) $(BINFILES) .zsh .vim
 	git submodule update --init --recursive
 	vim +BundleInstall +qall
 	@echo "All good."
@@ -19,18 +19,17 @@ clean:
 	rm -rf ~/.zsh ~/.zshrc
 	rm -rf ~/.vim ~/.vimrc ~/.vimrc.bundles ~/.vimrc.local
 
+.setup:
+	@mkdir -p $HOME/bin
+	chsh -s $(which zsh)
+
 .zsh: $(HOME)/.zsh $(HOME)/.zshrc
 .vim: $(HOME)/.vim $(HOME)/.vimrc $(HOME)/.vimrc.bundles
-.bin: $(HOME)/bin $(BINFILES)
 
 # link ETC files
 $(HOME)/.%: $(CWD)/etc/%
 	@echo "linking:	$< -> $@"
 	@ln -sf $< $@
-
-# make sure we have a bin
-$(HOME)/bin:
-	@mkdir -p $@
 
 # link bin files
 $(HOME)/bin/%: $(CWD)/bin/%
