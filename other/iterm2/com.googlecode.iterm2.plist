@@ -682,11 +682,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>665 345 924 485 0 0 2560 1418 </string>
+	<string>244 307 924 485 0 0 1440 878 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1088 967 384 129 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>377 190 1210 656 0 0 2560 1418 </string>
+	<string>0 74 1065 784 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>183 427 570 451 0 0 1440 878 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -3814,7 +3814,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-01-16T15:30:31Z</date>
+	<date>2014-01-21T15:05:52Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
