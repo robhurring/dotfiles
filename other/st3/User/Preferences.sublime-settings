@@ -38,8 +38,8 @@
 	"ignored_packages":
 	[
 		"SassBeautify",
-		"JavaScript",
-		"Vintage"
+		"Vintage",
+		"JavaScript"
 	],
 	"indent_to_bracket": false,
 	"rulers":
