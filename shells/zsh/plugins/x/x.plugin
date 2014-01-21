@@ -1,3 +1,12 @@
 function x() {
-  cd ~/XCode/$1;
+  case "$1" in
+    -o)
+      shift
+      cd ~/XCode/$1
+      find . -name '*.xcodeproj'|xargs open -a XCode
+      ;;
+    *)
+      cd ~/XCode/$1
+      ;;
+  esac
 }
