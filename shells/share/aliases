@@ -11,8 +11,9 @@ alias cdd='cd ~/Desktop'
 # Misc Helpers
 alias fname="noglob find -name"
 alias rake="noglob rake"
-alias -g tf='tail -f'
+alias grep='noglob pcregrep --color=auto'
 alias psg='ps ax | grep '
+alias tf='tail -f'
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
 alias dec='openssl enc -d -aes-256-cbc -in '
 alias c='cd /usr/local/Cellar'
@@ -24,11 +25,10 @@ alias sc='rails console'
 alias sdb='rails dbconsole'
 alias gen='rails generate'
 
-alias be='bundle exec'
 alias bc='bundle console'
 alias fm=foreman
-alias -g fms="foreman start"
-alias -g fws="forewoman start"
+alias fms="foreman start"
+alias fws="forewoman start"
 
 function back() {
   ack "$@" `bundle show --paths`

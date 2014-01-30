@@ -26,10 +26,11 @@ plugins=(brew cap gem git-smart h heroku osx p rvm tmux)
 #alias bower='noglob bower'
 
 # Tmux (use with tmux plugin)
-# alias tma=tmux-attach-or-new
-# alias tms=tmux-force-switch
-# alias tmd="tmux detach"
-# alias tmx="tmux kill-session -t"
+#alias tml="tmux list-sessions"
+#alias tma=tmux-attach-or-new
+#alias tms=tmux-force-switch
+#alias tmd="tmux detach"
+#alias tmx="tmux kill-session -t"
 
 # Some random helpers
 # # Edit gem from bundle in sublime

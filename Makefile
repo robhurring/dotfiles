@@ -62,5 +62,3 @@ $(HOME)/.vimrc.bundles:
 $(HOME)/.vim:
 	@echo "vim:	.vim"
 	@ln -sf $(CWD)/shells/vim $@
-
-.PHONY: install
