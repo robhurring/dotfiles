@@ -36,20 +36,18 @@ bind up:ctrl;alt;cmd    resize +0       -120
 bind down:ctrl;alt;cmd  resize +0       +120
 
 # Throw Bindings
-bind left:ctrl;alt;shift    push left   bar-resize:screenSizeX/2
-bind right:ctrl;alt;shift   push right  bar-resize:screenSizeX/2
-bind up:ctrl;alt;shift      push up     bar-resize:screenSizeY/2
-bind down:ctrl;alt;shift    push down   bar-resize:screenSizeY/2
-
+# bind left:ctrl;alt;shift    push left   bar-resize:screenSizeX/2
+# bind right:ctrl;alt;shift   push right  bar-resize:screenSizeX/2
+# bind up:ctrl;alt;shift      push up     bar-resize:screenSizeY/2
+# bind down:ctrl;alt;shift    push down   bar-resize:screenSizeY/2
 
 # Focus Bindings
-# bind right:ctrl;alt;cmd    focus right
-# bind left:ctrl;alt;cmd     focus left
-# bind up:ctrl;alt;cmd       focus up
-# bind down:ctrl;alt;cmd     focus down
+bind right:alt;cmd    focus right
+bind left:alt;cmd     focus left
+bind up:alt;cmd       focus up
+bind down:alt;cmd     focus down
 
 # Monitor Aliases
-
 alias mon-air      1680x1050
 alias mon-imac     2560x1440
 
@@ -76,20 +74,3 @@ layout dev2 'HipChat':MAIN_FIRST      move    ${push-9};0     ${span-3};${row-5}
 layout dev2 'Messages':MAIN_FIRST     move    ${push-9};${drop-5}     ${span-3};${row-5}
 
 bind 2:ctrl;alt;cmd layout dev2
-
-# Push Bindings
-# NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
-# bind right:ctrl;shift push right bar-resize:screenSizeX/3
-# bind left:ctrl;shift  push left  bar-resize:screenSizeX/3
-# bind up:ctrl;shift    push up    bar-resize:screenSizeY/2
-# bind down:ctrl;shift  push down  bar-resize:screenSizeY/2
-
-# Throw Bindings
-# NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
-# bind pad1:ctrl;alt      throw 2 resize
-# bind pad2:ctrl;alt      throw 1 resize
-# bind pad3:ctrl;alt      throw 0 resize
-# bind right:ctrl;alt;cmd throw right resize
-# bind left:ctrl;alt;cmd  throw left  resize
-# bind up:ctrl;alt;cmd    throw up    resize
-# bind down:ctrl;alt;cmd  throw down  resize
