@@ -23,6 +23,7 @@ THEME_PROMPT_COLOR="yellow"
 THEME_PATH_BEFORE="%n@%m "
 
 # Some common aliases
+#alias -g ls="ls $LS_OPTIONS"
 #alias cdd='cd ~/Desktop'
 #alias c='cd /usr/local/Cellar'
 #alias bc='bundle console'
