@@ -185,7 +185,7 @@ defaults write com.apple.screencapture disable-shadow -bool true
 defaults write -g com.apple.scrollwheel.scaling 1
 
 # tweak mouse acceleration curve
-defaults write -g com.apple.mouse.scaling 1.5
+defaults write -g com.apple.mouse.scaling 2.0
 
 # ###############################################################################
 # # Finder                                                                      #
