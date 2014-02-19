@@ -1,0 +1,8 @@
+{
+  "white": true,
+  "vars": false,
+  "nomen": true,
+  "plusplus": true,
+  "unparam": true,
+  "indent": 2
+}
