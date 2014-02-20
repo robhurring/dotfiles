@@ -4,5 +4,7 @@
   "nomen": true,
   "plusplus": true,
   "unparam": true,
+  "stupid": true,
+  "sloppy": true,
   "indent": 2
 }
