@@ -1,4 +1,5 @@
 'use strict';
+/*jslint todo:true */
 /*global slate:true */
 
 /**
@@ -10,33 +11,57 @@
  *  var grid = new Grid(12);    // create a new 12x12 grid
  *  var grid = new Grid(16);    // create a new 16x16 grid
  *
+ * TODO: fix the multi-screen handling stuff, clean it up
+ * TODO: offsetting columns on second screen need to be fixed (using the main screen)
  */
-var Grid = function(gridSize) {
+var Grid = function(gridSize, opts) {
   this.gridSize = gridSize || 12;
-  this.screenRect = slate.screen().rect();
+  this.titleBarAdjust = opts.titleBarAdjust || 0;
+  this.bottomAdjust = opts.bottomAdjust || 0;
+};
 
-  this.left = this.screenRect.x;
-  this.top = this.screenRect.y;
+Grid.prototype.rectForScreen = function(screenId) {
+  return slate.screenForRef(screenId || '0').rect();
+};
+
+Grid.prototype.top = function(screenId) {
+  return this.rectForScreen(screenId).y;
+};
+
+Grid.prototype.left = function(screenId) {
+  return this.rectForScreen(screenId).x;
+};
+
+// Returns the absolute position to start the column
+Grid.prototype.x = function(columns, screenId) {
+  return this.left(screenId) + this.columns(columns, screenId);
+};
+
+// Returns the absolute position to start the row
+Grid.prototype.y = function(rows, screenId) {
+  return this.top(screenId) + this.titleBarAdjust + this.rows(rows, screenId);
 };
 
 // Returns the pixel size for the amount of columns
-Grid.prototype.columns = function(columns) {
-  return (this.screenRect.width / this.gridSize) * Number(columns);
+Grid.prototype.columns = function(columns, screenId) {
+  var rect = this.rectForScreen(screenId);
+  return (rect.width / this.gridSize) * Number(columns);
 };
 
 // Returns the pixel size for the amount of rows
-Grid.prototype.rows = function(rows) {
-  return (this.screenRect.height / this.gridSize) * Number(rows);
+Grid.prototype.rows = function(rows, screenId) {
+  var rect = this.rectForScreen(screenId);
+  return ((rect.height - this.bottomAdjust) / this.gridSize) * Number(rows);
 };
 
 // Returns the full height of the screen
-Grid.prototype.allRows = function() {
-  return this.rows(this.gridSize);
+Grid.prototype.allRows = function(screenId) {
+  return this.rows(this.gridSize, screenId);
 };
 
 // Returns the full width of the screen
-Grid.prototype.allColumns = function() {
-  return this.columns(this.gridSize);
+Grid.prototype.allColumns = function(screenId) {
+  return this.columns(this.gridSize, screenId);
 };
 
 // Convert the column width to a string for use with operations like `nudge`
@@ -44,7 +69,7 @@ Grid.prototype.allColumns = function() {
 // Examples for colString:
 //  '+1'    Add 1 column-width to the current window size
 //  '-1'    Remove 1 column width from the current window size
-Grid.prototype.normalizeColumns = function(colString) {
+Grid.prototype.normalizeColumns = function(colString, screenId) {
   if(colString === undefined) {
     return '+0';
   }
@@ -52,7 +77,7 @@ Grid.prototype.normalizeColumns = function(colString) {
   var columns = parseInt(colString, 10)
     , operation = (columns > 0 ? '+' : '-');
 
-  return operation + this.columns(Math.abs(columns));
+  return operation + this.columns(Math.abs(columns), screenId);
 };
 
 // Convert the row height to a string for use with operations like `nudge`
@@ -60,7 +85,7 @@ Grid.prototype.normalizeColumns = function(colString) {
 // Examples for rowString:
 //  '+1'    Add 1 row-height to the current window size
 //  '-1'    Remove 1 row height from the current window size
-Grid.prototype.normalizeRows = function(rowString) {
+Grid.prototype.normalizeRows = function(rowString, screenId) {
   if(rowString === undefined) {
     return '+0';
   }
@@ -68,7 +93,7 @@ Grid.prototype.normalizeRows = function(rowString) {
   var rows = parseInt(rowString, 10)
     , operation = (rows > 0 ? '+' : '-');
 
-  return operation + this.rows(Math.abs(rows));
+  return operation + this.rows(Math.abs(rows), screenId);
 };
 
 // Return an object with x, y converted to our grid sizes
@@ -80,8 +105,8 @@ Grid.prototype.normalizeRows = function(rowString) {
 //  slate.operation('nudge', grid.move({y: '-1'}))  // move window up 1 row
 Grid.prototype.move = function(movement) {
   return {
-    x: this.normalizeColumns(movement.x),
-    y: this.normalizeRows(movement.y)
+    x: this.normalizeColumns(movement.x, movement.screen),
+    y: this.normalizeRows(movement.y, movement.screen)
   };
 };
 
@@ -91,10 +116,10 @@ Grid.prototype.move = function(movement) {
 // Examples:
 //  slate.operation('resize', grid.size({width: '+1'}))   // grow window by 1 col
 //  slate.operation('resize', grid.size({height: '-1'}))  // shrink window by 1 row
-Grid.prototype.size = function(sizing) {
+Grid.prototype.size = function(sizing, screenId) {
   return {
-    width: this.normalizeColumns(sizing.width),
-    height: this.normalizeRows(sizing.height)
+    width: this.normalizeColumns(sizing.width, screenId),
+    height: this.normalizeRows(sizing.height, screenId)
   };
 };
 
@@ -121,13 +146,15 @@ Grid.prototype.rect = function(rect) {
     rect.width = split[1] || '*';
   }
 
+  // turn a '*' into the full width
   if(rect.width === '*') { rect.width = this.gridSize; }
   if(rect.height === '*') { rect.height = this.gridSize; }
 
-  newX = rect.column ? this.column(rect.column) : this.left;
-  newY = rect.row ? this.row(rect.row) : this.top;
-  newWidth = rect.width ? this.columns(rect.width) : 0;
-  newHeight = rect.height ? this.rows(rect.height) : 0;
+  rect.screen = rect.screen || '0';
+  newX = rect.column ? this.x(rect.column, rect.screen) : this.left(rect.screen);
+  newY = rect.row ? this.y(rect.row, rect.screen) : this.top(rect.screen);
+  newWidth = rect.width ? this.columns(rect.width, rect.screen) : 0;
+  newHeight = rect.height ? this.rows(rect.height, rect.screen) : 0;
 
   return {
     x: newX,
@@ -136,12 +163,6 @@ Grid.prototype.rect = function(rect) {
     height: newHeight
   };
 };
-
-// alias `column` -> `columns`
-Grid.prototype.column = Grid.prototype.columns;
-
-// alias `row` -> `rows`
-Grid.prototype.row = Grid.prototype.rows;
 
 // alias `fullHeight` -> `allRows`
 Grid.prototype.fullHeight = Grid.prototype.allRows;
