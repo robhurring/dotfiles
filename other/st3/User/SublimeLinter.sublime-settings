@@ -1,15 +1,32 @@
 {
-    "user": {
-        "gutter_theme": "Packages/SublimeLinter/gutter-themes/Default/Default.gutter-theme",
-        "lint_mode": "background",
-        "linters": {
-            "jslint": {
-                "@disable": false,
-                "args": [],
-                "excludes": []
-            }
-        },
-        "mark_style": "squiggly underline",
-        "show_errors_on_save": false
-    }
+	"user":
+	{
+		"gutter_theme": "Packages/SublimeLinter/gutter-themes/Default/Default.gutter-theme",
+		"lint_mode": "background",
+		"linters":
+		{
+			"jslint":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				]
+			},
+			"ruby":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				]
+			}
+		},
+		"mark_style": "squiggly underline",
+		"show_errors_on_save": false
+	}
 }
