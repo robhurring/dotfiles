@@ -61,7 +61,7 @@
   # Only push branches that have been set up to track a remote branch.
   default = current
 [user]
-	name = <%= print("Your Name: "); STDOUT.flush; STDIN.gets.chomp %>
-	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
+	name = robhurring
+	email = robhurring@gmail.com
 [credential]
   helper = osxkeychain
