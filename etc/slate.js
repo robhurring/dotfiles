@@ -20,26 +20,17 @@ slate.configAll({
 // load our grid
 slate.source('~/.slate.grid.js');
 
-// see which machine we're on
-var Machine = {
-  mainScreen: null,
-  secondaryScreen: null,
-  init: function() {
-    if(slate.screenCount() > 1) {
-      this.mainScreen = slate.screenForRef(0);
-      this.secondaryScreen = slate.screenForRef(1);
-    } else {
-      this.mainScreen = slate.screenForRef(0);
-    }
-  }
-};
-Machine.init();
+// load our layouts
+slate.source('~/.slate.layouts.js');
 
+// create a grid for nudging and such
 var grid = new Grid(12, {
   bottomAdjust: 22,     // adjust bottom positioning for the title bar
   titleBarAdjust: 22    // when stacking windows drop them so the title bar shows
 });
+
 slate.bind('esc:cmd', slate.operationFromString('hint'));
+slate.bind('`:cmd', slate.operationFromString('grid'));
 
 var nudgeWindow = function(opts) {
   return function(window) {
@@ -54,25 +45,6 @@ var resizeWindow = function(opts) {
     opts.screen = window.screen().id();
     var op = slate.operation('resize', grid.size(opts));
     window.doOperation(op);
-  };
-};
-
-// opts can be an array, the index will match the screenId
-var moveWindow = function(opts) {
-  return function(window) {
-    var screenId = window.screen().id()
-      , moveOp
-      , rectOpts;
-
-    if(Array.isArray(opts)) {
-      rectOpts = opts[Number(screenId)];
-    } else {
-      rectOpts = opts;
-    }
-
-    rectOpts.screen = screenId;
-    moveOp = slate.operation('move', grid.rect(rectOpts));
-    window.doOperation(moveOp);
   };
 };
 
@@ -94,41 +66,14 @@ slate.bind('left:alt;cmd', slate.operation('focus', {direction: 'left'}));
 slate.bind('up:alt;cmd', slate.operation('focus', {direction: 'up'}));
 slate.bind('down:alt;cmd', slate.operation('focus', {direction: 'down'}));
 
-// main layout for landscape monitors
-var devLandscape = slate.layout('DevLandscape', {
-  'Flint': {
-    'operations': [moveWindow([
-      {size: '5x3'},
-      {row: 4, size: '4x6'}
-    ])]
-  },
-  'HipChat': {
-    'operations': [moveWindow([
-      {size: '5x3'},
-      {size: '4x*'}
-    ])]
-  },
-  'Google Chrome': {
-    'operations': [moveWindow({column: 3, size: '*x5'})]
-  },
-  'iTerm': {
-    'operations': [moveWindow([
-      {row: 5, size: "7x5"},
-      {row: 8, size: "4x*"}
-    ])]
-  },
-  'Sublime Text': {
-    'operations': [moveWindow({column: 4, size: "*x5"})]
-  },
-  'Messages': {
-    'operations': [moveWindow([
-      {column: 9, size: "5x3"},
-      {row: 4, column: 5, size: '4x*'}]
-    )]
-  }
-});
+var defaultSnapshotName = 'default-snapshot';
+slate.bind('1:shift;ctrl;alt;cmd', slate.operation("snapshot", {
+  "name" : defaultSnapshotName,
+  "save" : true,
+  "stack" : false
+}));
 
-var layoutName = 'DevLandscape';
-slate.bind('1:ctrl;alt;cmd', slate.operation('layout', {
-  name: layoutName
+slate.bind('1:ctrl;alt;cmd', slate.operation("activate-snapshot", {
+  "name" : defaultSnapshotName,
+  "delete" : false
 }));
