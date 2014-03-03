@@ -26,18 +26,6 @@ task :bash => :env do
   puts "\ncopy #{File.expand_path './example/bashrc'} to ~/.bashrc to setup ZSH\n"
 end
 
-desc 'link up vim dotfiles to home'
-task :vim do
-  link_tree Dir['shells/vim/etc/*'], '~', '.'
-  safe_replace_file '~/.vim', 'shells/vim'
-end
-
-desc 'link up oh-my-zsh custom files'
-task :omz do
-  safe_replace_file '~/.omz-custom', 'shells/omz-custom'
-  puts "\nset ZSH_CUSTOM=~/.omz-custom in your ~/.zshrc file"
-end
-
 namespace :install do
   desc 'install RVM'
   task :rvm do
@@ -60,7 +48,6 @@ end
 $replace_all = false
 
 def link_tree(from, destination = ENV['HOME'], prefix = '.')
-  replace_all = false
   destination = File.expand_path(destination)
 
   Array(from).each do |source|
@@ -114,7 +101,7 @@ def link_file(source, target)
   source = File.expand_path(source)
 
   if File.extname(source) == '.erb'
-    target = target.sub /\.erb$/, ''
+    target = target.sub(/\.erb$/, '')
     puts "generating: #{source} -> #{target}"
 
     data = ERB.new(File.read(source), nil, '-').result(binding)

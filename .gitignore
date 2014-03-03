@@ -1,12 +1,6 @@
 .DS_Store
 *.pyc
 *.orig
-
-/shells/vim/viminfo
-/shells/vim/bundle
-/shells/vim/swap
-/shells/vim/undo
-/shells/vim/tmp
 .netrwhist
 
 # ignore package control stuff
