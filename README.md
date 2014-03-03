@@ -32,16 +32,9 @@ clone this repo somewhere `git clone https://github.com/robhurring/dotfiles.git`
   1. modify the example bashrc paths for `DOTFILES`
   2. add any customizations below the init line
 
-### oh-my-zsh Install
-
-Experimental, but there is a `rake omz` task that will link up the custom plugins/themes
-
 ### vim Install
 
-1. cd ~/.dotfiles (or wherever repo lives)
-2. update submodules
-3. `rake vim` to link vimrc and ~/.vim
-4. `vim +:BundleInstall` to install bundles
+This has been moved to [https://github.com/robhurring/dotvim](https://github.com/robhurring/dotvim) to keep it separate.
 
 ## Customizing ZSH
 
@@ -54,6 +47,8 @@ And when using git + rvm
 ![colors!](https://raw.github.com/robhurring/dotfiles/master/.images/zsh-rvm-status.png)
 
 ## Customizing Bash
+
+**Note: This is old and I have no idea if this will even work well anymore**
 
 Edit ~/.bashrc before the init line to set the colors. You can also edit the PS1 color by editing the function `__before_ps1()`
 and changing `PROMPT_COLOR="\e[33;1m"` to any color you want. There is also an `ERROR_COLOR` too which is red by default.
