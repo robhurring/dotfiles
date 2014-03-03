@@ -2,6 +2,8 @@
 # encoding: UTF-8
 
 require 'rubygems'
+gem 'rest_client'
+
 require 'rest_client'
 require 'json'
 require 'date'
