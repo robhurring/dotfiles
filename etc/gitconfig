@@ -2,22 +2,24 @@
   st = status
   ci = commit
   cia = commit -a
-  cp = cherry-pick
+  pick = cherry-pick
   br = branch
   co = checkout
   ls = ls-files
   gr = grep -n
+  sm = submodule
   brt = branch-time
-  who = shortlog -s -n --no-merges
-  up = !git fetch origin && git rebase -p origin/$(git current-branch)
+  who = shortlog -sne --no-merges
+  rb = rebase -p
+  fa = fetch --all
+  up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase -p ${1:-origin}/$(git current-branch)' -
+  current-branch = rev-parse --abbrev-ref HEAD
   l = log --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   ll = log --numstat --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   lg = log -p
-  lol = log --pretty=oneline --abbrev-commit --graph --decorate
   unstage = reset HEAD
   staged = diff --cached
   unstaged = diff
-  current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
   track = checkout -t
   assume   = update-index --assume-unchanged
   unassume = update-index --no-assume-unchanged
@@ -63,5 +65,7 @@
 [user]
 	name = robhurring
 	email = robhurring@gmail.com
+[mailmap]
+  file = $HOME/.mailmap
 [credential]
   helper = osxkeychain
