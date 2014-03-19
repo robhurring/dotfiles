@@ -1,4 +1,6 @@
 [alias]
+  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+  what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   st = status
   ci = commit
   cia = commit -a
@@ -27,6 +29,9 @@
   snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
   ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
   theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+  edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
+  add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
+  serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
 [apply]
   whitespace = warn
 [format]
@@ -65,7 +70,13 @@
 [user]
 	name = robhurring
 	email = robhurring@gmail.com
-[mailmap]
-  file = $HOME/.mailmap
 [credential]
   helper = osxkeychain
+[instaweb]
+  local = true
+  httpd = webrick
+  port = 8080
+[browser "ch"]
+	cmd = open -a \"/Applications/Google Chrome.app\"
+[web]
+	browser = ch
