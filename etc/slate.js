@@ -30,7 +30,7 @@ var grid = new Grid(12, {
 });
 
 slate.bind('esc:cmd', slate.operationFromString('hint'));
-slate.bind('`:cmd', slate.operationFromString('grid'));
+// slate.bind('`:cmd', slate.operationFromString('grid'));
 
 var nudgeWindow = function(opts) {
   return function(window) {
