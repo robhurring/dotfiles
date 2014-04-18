@@ -8,7 +8,7 @@ function dclean(){
   echo "Cleaning old ps"
   drma
   echo "Cleaning old containers"
-  docker images | grep "<none>" | awk '{print $3}'
+  docker images | grep "<none>" | awk '{print $3}' | xargs docker rmi
 }
 
 function dsh(){
