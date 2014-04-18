@@ -45,6 +45,7 @@ for lib ($DOTFILES/shells/share/*); do
 done
 
 # load all plugins to $fpath
+fpath=(/usr/local/share/zsh/site-functions $fpath)
 fpath=($ZSH/functions $fpath)
 for plugin ($plugins); do
   fpath=($ZSH/plugins/$plugin $fpath)
