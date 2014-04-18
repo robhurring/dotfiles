@@ -22,9 +22,13 @@ function dbuild() {
 # Usage: docker-port-forward guestnginx 80
 # http://blog.alvinlai.com/easy-boot2docker-osx-port-forwarding/
 function dfwd {
-  VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port$1,tcp,127.0.0.1,$1,,$1"
+  VBoxManage controlvm "boot2docker-vm" natpf1 "tcp-port$1,tcp,127.0.0.1,$1,,$1"
+}
+
+function ddinfo {
+  VBoxManage showvminfo "boot2docker-vm"
 }
 
 function ddfwd {
-  VBoxManage modifyvm "boot2docker-vm" --natpf1 delete "tcp-port$1"
+  VBoxManage controlvm "boot2docker-vm" natpf1 delete "tcp-port$1"
 }
