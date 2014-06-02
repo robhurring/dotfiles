@@ -66,7 +66,7 @@
   submodule = 1
 [push]
   # Only push branches that have been set up to track a remote branch.
-  default = current
+	default = upstream
 [user]
 	name = robhurring
 	email = robhurring@gmail.com
