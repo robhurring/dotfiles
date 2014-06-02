@@ -44,23 +44,27 @@ for lib ($DOTFILES/shells/share/*); do
   source $lib
 done
 
+function load_plugin() {
+  local plugin_name=$1
+  local plugin_root=$2
+  local plugin_path=$plugin_root/$plugin_name
+
+  fpath=($plugin_path $fpath)
+  if [ -f $plugin_path/$plugin_name.plugin ]; then
+    source $plugin_path/$plugin_name.plugin
+  fi
+}
+
 # load all plugins to $fpath
 fpath=(/usr/local/share/zsh/site-functions $fpath)
 fpath=($ZSH/functions $fpath)
 for plugin ($plugins); do
-  fpath=($ZSH/plugins/$plugin $fpath)
+  load_plugin $plugin $ZSH/plugins
 done
 
 # run compinit
 autoload -U compinit
 compinit -i
-
-# load all our plugins (OMZ style!)
-for plugin ($plugins); do
-  if [ -f $ZSH/plugins/$plugin/$plugin.plugin ]; then
-    source $ZSH/plugins/$plugin/$plugin.plugin
-  fi
-done
 
 typeset -U path manpath fpath
 
