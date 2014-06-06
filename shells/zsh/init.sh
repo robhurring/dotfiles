@@ -55,6 +55,11 @@ function load_plugin() {
   fi
 }
 
+function reload_completions() {
+  autoload -U compinit
+  compinit -i
+}
+
 # load all plugins to $fpath
 fpath=(/usr/local/share/zsh/site-functions $fpath)
 fpath=($ZSH/functions $fpath)
@@ -63,9 +68,7 @@ for plugin ($plugins); do
 done
 
 # run compinit
-autoload -U compinit
-compinit -i
-
+reload_completions
 typeset -U path manpath fpath
 
 if [ -f $ZSH_THEME ]; then

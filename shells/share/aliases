@@ -11,7 +11,7 @@ alias cdd='cd ~/Desktop'
 # Misc Helpers
 alias fname="noglob find -name"
 alias rake="noglob rake"
-alias grep='noglob pcregrep --color=auto'
+#alias grep='noglob pcregrep --color=auto'
 alias psg='ps ax | grep '
 alias tf='tail -f'
 alias enc='openssl enc -e -aes-256-cbc -salt -in '

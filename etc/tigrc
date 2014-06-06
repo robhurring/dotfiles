@@ -1,11 +1,12 @@
-# http://jonas.nitro.dk/tig/tigrc.5.html
-
-set show-author = abbreviated
-set show-date = relative
-set show-rev-graph = yes
-set show-refs = yes
-set commit-order = topo
-set read-git-colors = yes
-set line-graphics = utf-8
-set tab-size = 4
-set show-id = yes
+#set line-graphics = utf-8
+#set show-changes = yes
+#set tab-size = 4
+##set diff-context = 4
+#set mouse = yes
+#
+#set main-view = \
+  #id:yes \
+  #ref:yes \
+  #date:relative \
+  #author:abbreviated \
+  #line-number: yes,interval=5 text
