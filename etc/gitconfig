@@ -68,8 +68,8 @@
   # Only push branches that have been set up to track a remote branch.
 	default = upstream
 [user]
-	name = robhurring
-	email = robhurring@gmail.com
+	name = rob hurring
+	email = rob.hurring@lendkey.com
 [credential]
   helper = osxkeychain
 [instaweb]
@@ -80,3 +80,7 @@
 	cmd = open -a \"/Applications/Google Chrome.app\"
 [web]
 	browser = ch
+[tig]
+  line-graphics = utf-8
+  tab-size = 4
+  main-view = id date:relative author:full commit-title:graph=yes,refs=yes
