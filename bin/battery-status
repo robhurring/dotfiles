@@ -8,7 +8,7 @@
 #     - "%Y" the unicode symbol for battery percentage
 
 # load battery details
-BATT=($(pmset -g batt|grep Battery))
+BATT=($(pmset -g batt|grep InternalBattery))
 PERCENT=${BATT[1]%;}
 STATUS=${BATT[2]%;}
 REMAINING=${BATT[3]}
