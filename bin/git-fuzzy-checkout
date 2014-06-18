@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+def fuzzy_checkout(search)
+  branches = %x{git branch -a}.split.map{ |b| b.split('/').last }.uniq.sort
+  regexp = Regexp.new(search)
+  matches = []
+
+  branches.each do |branch|
+    next if branch.to_s == 'HEAD'
+
+    if branch =~ regexp
+      matches << branch
+    end
+  end
+
+  case matches.size
+  when 0
+    puts "\033[31mNo branches matched this search: \033[37m#{search}\033[0m"
+    1
+  when 1
+    %x{git checkout #{matches.pop}}
+    0
+  else
+    puts "\033[31mToo many branches match this search: \033[37m#{search}\033[0m"
+    puts matches
+    2
+  end
+rescue => error
+  puts "\033[31m#{error}\033[0m"
+  1
+end
+
+exit fuzzy_checkout(ARGV[0]).to_i
