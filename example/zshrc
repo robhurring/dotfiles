@@ -22,6 +22,9 @@ THEME_PROMPT_COLOR="yellow"
 # Add user and host before the path
 THEME_PATH_BEFORE="%n@%m "
 
+# Used in the `finddir` command
+export DEFAULT_SEARCH_PATHS="~/Projects:~/XCode"
+
 # Some common aliases
 #alias -g ls="ls $LS_OPTIONS"
 #alias cdd='cd ~/Desktop'

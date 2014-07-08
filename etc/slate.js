@@ -21,7 +21,7 @@ slate.configAll({
 slate.source('~/.slate.grid.js');
 
 // load our layouts
-slate.source('~/.slate.layouts.js');
+// slate.source('~/.slate.layouts.js');
 
 // create a grid for nudging and such
 var grid = new Grid(12, {
