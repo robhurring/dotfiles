@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+require 'pathname'
+
+# Search the `search_paths` for any directory that matches of your search term
+# If a single match is found it is printed out, otherwise it will exit(1)
+#
+# Usage: finddir PATTERN [PATH, ...]
+
+
+# Set this up in your env to specify where to search
+# export DEFAULT_SEARCH_PATHS="~/Sites:~/Projects[:OTHER_PATHS]"
+
+DEFAULT_SEARCH_PATHS = \
+  if paths = ENV['DEFAULT_SEARCH_PATHS']
+    paths.split(':')
+  else
+    []
+  end
+
+if ARGV.count < 1
+  puts "Usage: #{File.basename $0} PATTERN [PATH, ...]"
+  exit 1
+end
+
+matches = []
+search = ARGV[0]
+if ARGV.size > 1
+  search_paths = ARGV[1..-1]
+else
+  search_paths = DEFAULT_SEARCH_PATHS
+end
+matcher = Regexp.new(search)
+
+search_paths.each do |root|
+  path = File.expand_path(root)
+
+  Pathname.new(path).children.each do |child|
+    name = child.basename.to_s
+    if matcher.match(name)
+      matches << child
+    end
+  end
+end
+
+case matches.size
+when 0
+  STDERR.puts "No matches found for '#{ARGV[0]}'"
+  exit 1
+when 1
+  STDOUT.print matches.first
+  exit 0
+else
+  STDERR.puts "Found #{matches.size} matches:"
+  matches.each do |match|
+    STDERR.puts match.to_s
+  end
+  exit 1
+end
