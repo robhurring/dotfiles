@@ -1,33 +1,110 @@
 #!/usr/bin/env ruby
+require 'optparse'
 
-def fuzzy_checkout(search)
-  branches = %x{git branch -a}.split.map{ |b| b.split('/').last }.uniq.sort
-  regexp = Regexp.new(search)
-  matches = []
+class FuzzyCheckout
+  class << self
+    def run(args=ARGV)
+      options = {
+        interactive: false
+      }
 
-  branches.each do |branch|
-    next if branch.to_s == 'HEAD'
+      OptionParser.new do |opts|
+        opts.banner = "Usage: #{$0} [options]"
+        opts.on("-i", "--interactive", "Run interactively") do |i|
+          options[:interactive] = i
+        end
+      end.parse!
 
-    if branch =~ regexp
-      matches << branch
+      new(options).search(ARGV[0])
     end
   end
 
-  case matches.size
-  when 0
-    puts "\033[31mNo branches matched this search: \033[37m#{search}\033[0m"
-    1
-  when 1
-    %x{git checkout #{matches.pop}}
-    0
-  else
-    puts "\033[31mToo many branches match this search: \033[37m#{search}\033[0m"
-    puts matches
-    2
+  COLORS = {
+    red: "\e[31m",
+    green: "\e[32m",
+    white: "\e[37m",
+    magenta: "\e[35m",
+    clear: "\e[0m"
+  }
+
+  attr_reader :options, :last_search, :matches
+
+  def initialize(options = {})
+    @options = options
+    @matches = []
   end
-rescue => error
-  puts "\033[31m#{error}\033[0m"
-  1
+
+  def search(term)
+    @last_search = term
+    @matches = []
+    regexp = Regexp.new(term)
+
+    branches.each do |branch|
+      next if branch.to_s == 'HEAD'
+
+      if branch =~ regexp
+        @matches << branch
+      end
+    end
+
+    handle_search_results
+  end
+
+private
+
+  def handle_search_results
+    case matches.size
+    when 0
+      say "%{red}No branches matched this search: %{white}#{last_search}%{clear}"
+      exit 1
+    when 1
+      switch_branch matches.first
+      exit 0
+    else
+      if options[:interactive]
+        handle_interactive
+      else
+        say "%{red}Too many branches match this earch: %{white}#{last_search}%{clear}"
+        say matches.join("\n")
+      end
+    end
+  end
+
+  def handle_interactive
+    say "%{green}The following branches match this search: %{white}#{last_search}%{clear}\n"
+    matches.each.with_index do |match, i|
+      say "%{magenta}#{i + 1})%{clear} #{match}"
+    end
+    say "\n%{white}Enter branch number: "
+    selection = STDIN.gets.to_i
+
+    if selection.zero? || selection > matches.size
+      say "%{red}Bad selection, bozo.%{clear}"
+      exit 1
+    else
+      branch = matches[selection - 1]
+      switch_branch branch
+    end
+  end
+
+  def switch_branch(name)
+    %x{git checkout #{name}}
+  end
+
+  def say(what)
+    output = what % COLORS
+
+    # ending in a space will just print
+    unless what[-1] == ' '
+      output << "\n"
+    end
+
+    print output
+  end
+
+  def branches
+    @_branches ||= %x{git branch -a}.split.map{ |b| b.split('/').last }.uniq.sort
+  end
 end
 
-exit fuzzy_checkout(ARGV[0]).to_i
+FuzzyCheckout.run
