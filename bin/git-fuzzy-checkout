@@ -1,94 +1,40 @@
 #!/usr/bin/env ruby
 require 'optparse'
 
-class FuzzyCheckout
-  class << self
-    def run(args=ARGV)
-      options = {
-        interactive: false
-      }
-
-      OptionParser.new do |opts|
-        opts.banner = "Usage: #{$0} [options]"
-        opts.on("-i", "--interactive", "Run interactively") do |i|
-          options[:interactive] = i
-        end
-      end.parse!
-
-      new(options).search(ARGV[0])
-    end
-  end
-
+module CLI
   COLORS = {
+    black: "\e[30;1m",
     red: "\e[31m",
     green: "\e[32m",
+    blue: "\e[34m",
     white: "\e[37m",
     magenta: "\e[35m",
     clear: "\e[0m"
   }
 
-  attr_reader :options, :last_search, :matches
+  def prompt_user_selection(choices = [], banner = nil, &callback)
+    say banner unless banner.nil?
 
-  def initialize(options = {})
-    @options = options
-    @matches = []
-  end
-
-  def search(term)
-    @last_search = term
-    @matches = []
-    regexp = Regexp.new(term)
-
-    branches.each do |branch|
-      next if branch.to_s == 'HEAD'
-
-      if branch =~ regexp
-        @matches << branch
+    choices.each.with_index do |match, i|
+      if block_given?
+        match = yield match
       end
-    end
 
-    handle_search_results
-  end
-
-private
-
-  def handle_search_results
-    case matches.size
-    when 0
-      say "%{red}No branches matched this search: %{white}#{last_search}%{clear}"
-      exit 1
-    when 1
-      switch_branch matches.first
-      exit 0
-    else
-      if options[:interactive]
-        handle_interactive
-      else
-        say "%{red}Too many branches match this earch: %{white}#{last_search}%{clear}"
-        say matches.join("\n")
-      end
-    end
-  end
-
-  def handle_interactive
-    say "%{green}The following branches match this search: %{white}#{last_search}%{clear}\n"
-    matches.each.with_index do |match, i|
       say "%{magenta}#{i + 1})%{clear} #{match}"
     end
-    say "\n%{white}Enter branch number: "
-    selection = STDIN.gets.to_i
 
-    if selection.zero? || selection > matches.size
-      say "%{red}Bad selection, bozo.%{clear}"
-      exit 1
+    selection = prompt_user "\n%{white}Selection>%{clear} "
+
+    if selection.zero? || selection > choices.size
+      nil
     else
-      branch = matches[selection - 1]
-      switch_branch branch
+      choices[selection - 1]
     end
   end
 
-  def switch_branch(name)
-    %x{git checkout #{name}}
+  def prompt_user(message = ">")
+    say message
+    STDIN.gets.to_i
   end
 
   def say(what)
@@ -101,9 +47,112 @@ private
 
     print output
   end
+end
+
+class FuzzyCheckout
+  include CLI
+
+  class << self
+    def run(args=ARGV)
+      options = {
+        interactive: false
+      }
+
+      parser = OptionParser.new do |opts|
+        opts.banner = "Usage: #{File.basename $0} [options]"
+        opts.on("-i", "--interactive", "Run interactively") do |i|
+          options[:interactive] = i
+        end
+      end
+      parser.parse!
+      search_term = ARGV[0]
+
+      if search_term.nil?
+        puts parser
+        exit 1
+      else
+        new(options).checkout(search_term)
+      end
+    end
+  end
+
+  attr_reader :options
+
+  def initialize(options = {})
+    @options = options
+  end
+
+  def checkout(term)
+    matches = []
+    regexp = Regexp.new(term)
+
+    branches.each do |branch|
+      next if branch.to_s == 'HEAD'
+
+      if branch =~ regexp
+        matches << branch
+      end
+    end
+
+    if matches.any?
+      checkout_proper_branch(term, matches)
+    else
+      say "%{red}No branches matched: %{white}#{term}%{clear}"
+      exit 1
+    end
+  end
+
+private
+
+  def checkout_proper_branch(term, matches)
+    case matches.size
+    when 1
+      switch_branch matches.first
+      exit 0
+    else
+      say "%{green}Found #{matches.size} matches for: %{white}#{term}%{clear}\n"
+
+      if options[:interactive]
+        selected_branch = prompt_user_selection(matches) do |match|
+          info = branch_times[match]
+
+          if info
+            info = "%{black}(#{info})%{clear}"
+          end
+
+          "#{match} %{black}#{info}%{clear}"
+        end
+
+        if selected_branch
+          switch_branch selected_branch
+        else
+          say "%{red}Invalid selection%{clear}"
+          exit 1
+        end
+      else
+        say "%{red}Cannot determine which branch to switch to.\nTry running with the '-i' flag.%{clear}"
+        exit 1
+      end
+    end
+  end
+
+  def switch_branch(name)
+    %x{git checkout #{name}}
+  end
 
   def branches
-    @_branches ||= %x{git branch -a}.split.map{ |b| b.split('/').last }.uniq.sort
+    @_branches ||= %x{git branch -a}.split.map{ |b| b.split('/').last }.uniq.sort_by{ |b| normalize(b) }
+  end
+
+  def branch_times
+    @_branch_times ||= begin
+      Hash[%x{git for-each-ref --sort='-authordate:iso8601' --format='%(refname:short)~%(authordate:relative) by %(authorname)' refs/heads}.split("\n").map{ |b| b.split("~") }]
+    end
+  end
+
+  # keeps semantic versioning in proper sort order
+  def normalize(name)
+    name.to_s.scan(%r/\d+/o).map(&:to_i)
   end
 end
 
