@@ -33,6 +33,9 @@
   edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
   add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
   serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+  last-tag = describe --abbrev=0
+  changelog ="!git log $(git last-tag)..HEAD"
+  cl ="!echo \"\\033[36m\\nChanges since: $(git last-tag)\\n\\033[0m\"; git l $(git last-tag)..HEAD"
 [apply]
   whitespace = warn
 [format]
