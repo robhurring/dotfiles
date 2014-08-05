@@ -42,6 +42,16 @@ export DEFAULT_SEARCH_PATHS="~/Projects:~/XCode"
 #alias tmx="tmux kill-session -t"
 
 # Some random helpers
+
+# # Fuzzy CD (using ~/bin/finddir)
+# function cds {
+#   local search=$1;
+#   local found=$(noglob finddir $search ~/Sites/gems ~/Sites/apps)
+#   if [ $? -eq 0 ]; then
+#     cd $found
+#   fi
+# }
+
 # # Edit gem from bundle in sublime
 # eb() {
 #   local gem=$1
