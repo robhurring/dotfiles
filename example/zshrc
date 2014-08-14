@@ -26,6 +26,7 @@ THEME_PATH_BEFORE="%n@%m "
 export DEFAULT_SEARCH_PATHS="~/Projects:~/XCode"
 
 # Some common aliases
+#alias less='less -R'
 #alias -g ls="ls $LS_OPTIONS"
 #alias cdd='cd ~/Desktop'
 #alias c='cd /usr/local/Cellar'
