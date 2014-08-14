@@ -1,0 +1,229 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+require 'optparse'
+require 'pathname'
+require 'pp'
+
+# Helper module
+module CLI
+  COLORS = {
+    black: "\e[30;1m",
+    red: "\e[31m",
+    green: "\e[32m",
+    blue: "\e[34m",
+    white: "\e[37m",
+    magenta: "\e[35m",
+    clear: "\e[0m"
+  }
+
+  def prompt_user_selection(choices = [], banner = nil, &callback)
+    say banner unless banner.nil?
+
+    choices.each.with_index do |match, i|
+      if block_given?
+        match = yield match
+      end
+
+      say "%{magenta}#{i + 1})%{clear} #{match}"
+    end
+
+    selection = prompt_user "\n%{white}Selection>%{clear} "
+
+    if selection.zero? || selection > choices.size
+      nil
+    else
+      choices[selection - 1]
+    end
+  end
+
+  def prompt_user(message = ">")
+    say message
+    STDIN.gets.to_i
+  end
+
+  def say(what)
+    output = what % COLORS
+
+    # ending in a space will just print
+    unless what[-1] == ' '
+      output << "\n"
+    end
+
+    print output
+  end
+end
+
+class Notes
+  include CLI
+
+  # Quick scan using mdfind to see whch files have our patterns. Much quicker
+  # than grepping or walking the filesystem
+  # TODO: this is quirky since it relies on `mdfind` figure out a better way
+  class PreScanner
+    attr_reader :path, :tokens
+
+    def initialize(path = '.', tokens = [])
+      @path, @tokens = path, tokens
+    end
+
+    def search_query
+      tokens.map{ |key| "kMDItemTextContent='#{key}*'cd" }.join('||')
+    end
+
+    def scan
+      # NOTE: maybe use kMDItemTextContent ?
+      cmd = %{mdfind -onlyin #{path} "(#{search_query}) && kMDItemKind != 'Folder'"}
+      %x{#{cmd}}.split("\n")
+    end
+  end
+
+  class FileScanner
+    def self.scan(file, patterns = {}); new(file, patterns).scan; end
+
+    attr_reader :file, :patterns
+
+    def initialize(file, patterns)
+      @file, @patterns = file, patterns
+    end
+
+    def scan
+      data = []
+
+      File.open(file) do |lines|
+        lines.each do |line|
+          begin
+            results = scan_line(line)
+            data << results unless results.empty?
+          rescue ArgumentError => e
+            # This is usually from bad encoding or trying to read binary files
+            # puts "\e[31mBad data:\e[0m #{file}"
+          end
+        end
+      end
+
+      data.flatten
+    end
+
+  private
+
+    def scan_line(line, number = $.)
+      matches = []
+
+      patterns.each do |(key, pattern)|
+        if match = line.match(pattern)
+          matches << {
+            type: key,
+            data: match[:data],
+            file: file,
+            line: number,
+            pos: Regexp.last_match.begin(0)
+          }
+        end
+      end
+
+      matches
+    end
+  end
+
+  attr_reader :path, :options, :patterns
+
+  def initialize(path, options = {})
+    @path, @options = path, options
+    @patterns = options[:patterns]
+    @prescan_keywords = Array(@patterns.keys)
+    @ignore = Array(options[:ignore])
+  end
+
+  def run!
+    files = filter_files(prescan_file_list)
+
+    if files.empty?
+      nil
+    else
+      results = scan_files(files)
+      output_data results
+    end
+  end
+
+private
+
+  def output_data(data)
+    all = data.flat_map{ |(file, notes)| notes }
+    by_patterns = Hash.new{ |h,k| h[k] = [] }
+
+    patterns.keys.each do |key|
+      by_patterns[key] = all.select{ |note| note[:type] == key }
+    end
+
+    by_patterns.each do |pattern, notes|
+      say "%{blue}##{pattern} (#{notes.size}):%{clear}"
+      notes.each do |note|
+        # NOTE: Pathname#relative_path_from is bugged, so we'll cheat a bit
+        note[:relative] = note[:file].gsub(/#{File.expand_path(path)}/i, '.')
+        note[:data].gsub! /%/, '%%' # protects us from the CLI.say choking on '%'
+        say "%%{black}%{relative}:%%{clear}%%{green}%{line} %%{white}%{data}%%{clear}" % note
+      end
+      puts
+    end
+  end
+
+  def filter_files(files)
+    files.reject do |file|
+      return true if File.directory?(file)
+
+      @ignore.any? do |filter|
+        file.match(filter)
+      end
+    end
+  end
+
+  def scan_files(files)
+    data = {}
+
+    files.each do |file|
+      results = scan_file(file)
+      data[file] = results unless results.empty?
+    end
+
+    data
+  end
+
+  def scan_file(file)
+    FileScanner.scan(file, patterns)
+  end
+
+  def prescan_file_list
+    @_prescan_file_list ||= PreScanner.new(path, @prescan_keywords).scan
+  end
+end
+
+# helper to build the particular type of patterns (must have a <data> capture!)
+def build_pattern(keyword)
+  %r{#{keyword}[\s]*?:?\s*(?<data>.*)$}
+end
+
+# Parse CLI args
+note_types = ['TODO', 'FIXME', 'NOTE']
+
+# CLI options
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename $0} [options] PATH"
+  opts.on("-t TODO,FIXME", Array, "Types of notes to scan for") do |list|
+    note_types = list
+  end
+end
+parser.parse!
+
+note_types.map(&:upcase!)
+options = {
+  patterns: Hash[note_types.zip(note_types.map{ |type| build_pattern(type) })],
+  ignore: [
+    %r{coverage/index.html},
+    %r{.git/},
+    %r{.log},
+    %r{db/seeds/}
+  ]
+}
+
+# NOTE: ohai
+Notes.new(ARGV[0] || '.', options).run!
