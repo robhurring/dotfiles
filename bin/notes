@@ -132,6 +132,7 @@ class Notes
     @patterns = options[:patterns]
     @prescan_keywords = Array(@patterns.keys)
     @ignore = Array(options[:ignore])
+    @filters = Array(options[:filters])
   end
 
   def run!
@@ -149,6 +150,7 @@ private
 
   def output_data(data)
     all = data.flat_map{ |(file, notes)| notes }
+
     by_patterns = Hash.new{ |h,k| h[k] = [] }
 
     patterns.keys.each do |key|
@@ -168,6 +170,14 @@ private
   end
 
   def filter_files(files)
+    if @filters.any?
+      files = files.select do |file|
+        @filters.any? do |filter|
+          file.match(filter)
+        end
+      end
+    end
+
     files.reject do |file|
       return true if File.directory?(file)
 
@@ -212,7 +222,8 @@ options = {
     %r{.git/},
     %r{.log},
     %r{db/seeds/}
-  ]
+  ],
+  filters: []
 }
 
 # CLI options
@@ -221,8 +232,11 @@ parser = OptionParser.new do |opts|
   opts.on("-t TODO,FIXME", Array, "Types of notes to scan for") do |list|
     note_types = list
   end
-  opts.on("-i IGNORE", "Types of notes to scan for") do |ignore|
+  opts.on("-i IGNORE", "Ignore files containing this") do |ignore|
     options[:ignore] << %r{#{ignore}}
+  end
+  opts.on("-f FILTER", "Only show notes from files containing this") do |filter|
+    options[:filters] << %r{#{filter}}
   end
 end
 parser.parse!
