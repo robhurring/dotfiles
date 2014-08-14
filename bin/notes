@@ -205,18 +205,8 @@ end
 # Parse CLI args
 note_types = ['TODO', 'FIXME', 'NOTE']
 
-# CLI options
-parser = OptionParser.new do |opts|
-  opts.banner = "Usage: #{File.basename $0} [options] PATH"
-  opts.on("-t TODO,FIXME", Array, "Types of notes to scan for") do |list|
-    note_types = list
-  end
-end
-parser.parse!
-
-note_types.map(&:upcase!)
 options = {
-  patterns: Hash[note_types.zip(note_types.map{ |type| build_pattern(type) })],
+  patterns: {},
   ignore: [
     %r{coverage/index.html},
     %r{.git/},
@@ -224,6 +214,22 @@ options = {
     %r{db/seeds/}
   ]
 }
+
+# CLI options
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename $0} [options] PATH"
+  opts.on("-t TODO,FIXME", Array, "Types of notes to scan for") do |list|
+    note_types = list
+  end
+  opts.on("-i IGNORE", "Types of notes to scan for") do |ignore|
+    options[:ignore] << %r{#{ignore}}
+  end
+end
+parser.parse!
+
+# update our patterns
+note_types.map(&:upcase!)
+options[:patterns] = Hash[note_types.zip(note_types.map{ |type| build_pattern(type) })]
 
 # NOTE: ohai
 Notes.new(ARGV[0] || '.', options).run!
