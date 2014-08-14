@@ -4,6 +4,12 @@ require 'optparse'
 require 'pathname'
 require 'pp'
 
+begin
+  gem 'ruby-progressbar'
+  require 'ruby-progressbar'
+rescue LoadError
+end
+
 # Helper module
 module CLI
   COLORS = {
@@ -125,6 +131,8 @@ class Notes
     end
   end
 
+  PROGRESS_BAR_THRESHOLD = 250
+
   attr_reader :path, :options, :patterns
 
   def initialize(path, options = {})
@@ -190,12 +198,47 @@ private
   def scan_files(files)
     data = {}
 
-    files.each do |file|
-      results = scan_file(file)
-      data[file] = results unless results.empty?
+    with_progress_bar files.size do |bar|
+      files.each do |file|
+        results = scan_file(file)
+        data[file] = results unless results.empty?
+        bar.increment
+      end
     end
 
     data
+  end
+
+  def with_progress_bar(total, &block)
+    use_progress_bar = total >= PROGRESS_BAR_THRESHOLD
+
+    if use_progress_bar
+      progress_bar.total = total
+      yield progress_bar
+      progress_bar.finish
+    else
+      yield progress_bar_stub
+    end
+  end
+
+  def progress_bar
+    @_progress_bar ||= begin
+      if defined?(::ProgressBar)
+        ProgressBar.create(format: 'Scanning (%c/%C) |%B|')
+      else
+        progress_bar_stub
+      end
+    end
+  end
+
+  def progress_bar_stub
+    @_progress_bar_stub ||= begin
+      Class.new do
+        def increment; end
+        def total=(*); end
+        def finish; end
+      end.new
+    end
   end
 
   def scan_file(file)
