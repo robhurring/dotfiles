@@ -1,0 +1,71 @@
+// Place your settings in the file "User/CTags.sublime-settings", which
+// overrides the settings in here.
+{
+    // Enable debugging
+    "debug": false,
+
+    // Enable autocomplete
+    "autocomplete": true,
+
+    // Alter this value if your ctags command is not in the PATH, or if using
+    // a different version of ctags to that in the path (i.e. for OSX).
+    //
+    // NOTE: You *should not* place entire commands here. These commands are
+    // built automatically using the values below. For example:
+    //   GOOD: "command": "/usr/bin/ctags"
+    //   BAD:  "command": "ctags -R -f .tags --exclude=some/path"
+    "command": "/usr/local/bin/ctags",
+
+    // Set to false to disable recursive search for ctag generation. This
+    // translates the `-R` parameter
+    "recursive" : true,
+
+    // Default read/write location of the tags file. This translates to the
+    // `-f [FILENAME]` parameter
+    "tag_file" : ".git/tags",
+
+    // Additional options to pass to ctags, i.e.
+    // ["--exclude=some/path", "--exclude=some/other/path", ...]
+    "opts" : [
+        "--exclude=coverage",
+        "--exclude=.git"
+    ],
+
+    //
+    "filters": {
+        "source.python": {"type":"^i$"}
+    },
+
+    //
+    "definition_filters": {
+        "source.php": {"type":"^v$"}
+    },
+
+    //
+    "definition_current_first": true,
+
+    // Show the ctags menu in the context menus
+    "show_context_menus": true,
+
+    // Paths to additional tag files to include in tag search. This is a list
+    // of items in the form [["language", "platform"], "path"]
+    "extra_tag_paths": [
+        [["source.python", "windows"], "C:\\Python27\\Lib\\tags"],
+        [["source.ruby", "osx"], "~/Sites/gems/duzica/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/bucare/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/beybun/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/clavel/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/daphne/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/decisionator/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/kamala/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/patuju/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/pullson/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/apps/shapla/.git/tags"],
+    ],
+
+    // Additional tag files to search
+    "extra_tag_files": [".gemtags", "tags", ".git/tags", ".git/gemtags", "~/.rvmtags"],
+
+    // Set to false so as not to select searched symbol (in Vintage mode)
+    "select_searched_symbol": true
+}
