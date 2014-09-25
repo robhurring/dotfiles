@@ -36,6 +36,7 @@
   last-tag = describe --abbrev=0
   changelog ="!git log $(git last-tag)..HEAD"
   cl ="!echo \"\\033[36m\\nChanges since: $(git last-tag)\\n\\033[0m\"; git l $(git last-tag)..HEAD"
+	ctags = !.git/hooks/ctags
 [apply]
   whitespace = warn
 [format]
