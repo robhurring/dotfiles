@@ -1,0 +1,23 @@
+{
+  "patterns": {
+    "TODO": "TODO[\\s]*?:+(?P<todo>.*)$",
+    "NOTE": "NOTE[\\s]*?:+(?P<note>.*)$",
+    "FIXME": "FIX ?ME[\\s]*?:+(?P<fixme>.*)$",
+    "CHANGED": "CHANGED[\\s]*?:+(?P<changed>.*)$"
+  },
+  "exclude_folders": [
+    "*.git*",
+    "coverage",
+    "node_modules"
+  ],
+  "exclude_files": [
+    "*.sublime-workspace",
+    "*.sublime-project",
+    "coverage/index.html"
+  ],
+  "case_sensitive": false,
+  "render_include_folder": true,
+  "render_spaces": 1,
+  "navigation_forward_skip" : 10,
+  "navigation_backward_skip" : 10
+}
