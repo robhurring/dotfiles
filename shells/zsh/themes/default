@@ -37,7 +37,7 @@ THEME_RETURN_GOOD_ICON=""
 
 # make ~/Projects/app show up as project:app
 PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
-PATH_REPLACER+=("%B%F{yellow}project:%b%F{white}\\1")
+PATH_REPLACER+=("%B%F{yellow}project:%F{white}\\1")
 
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=":"
