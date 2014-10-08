@@ -9,11 +9,11 @@
   { "keys": ["super+shift+v"], "command": "paste" },
 
   // oragami plugin
-  { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "down"} },
-  { "keys": ["super+shift+["], "command": "travel_to_pane", "args": {"direction": "up"} },
+  { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "right"} },
+  { "keys": ["super+shift+["], "command": "travel_to_pane", "args": {"direction": "left"} },
 
-  { "keys": ["ctrl+shift+]"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
-  { "keys": ["ctrl+shift+["], "command": "carry_file_to_pane", "args": {"direction": "up"} },
+  { "keys": ["ctrl+shift+]"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+  { "keys": ["ctrl+shift+["], "command": "carry_file_to_pane", "args": {"direction": "left"} },
 
   // erb plugin
   { "keys": ["super+shift+."], "command": "erb"},
@@ -56,5 +56,25 @@
       "v_dir" : 1,
       "depth_offset" : 0
     }
-  }
+  },
+
+  // rubytest
+  { "keys": ["super+ctrl+r"], "command": "run_single_ruby_test",
+    "context": [ { "key": "selector", "operator": "equal",
+                   "operand": "source.ruby, source.rspec, text.gherkin.feature"
+               } ]
+  }, // single test
+
+
+  { "keys": ["super+ctrl+t"], "command": "run_all_ruby_test",
+      "context": [ { "key": "selector", "operator": "equal",
+         "operand": "source.ruby, source.rspec, text.gherkin.feature"
+                } ]
+  }, // test file
+
+
+  { "keys": ["super+ctrl+e"], "command": "run_last_ruby_test" }, // test last test file
+
+  { "keys": ["super+ctrl+x"], "command": "show_test_panel" }, // show test panel
+
 ]
