@@ -169,7 +169,13 @@ private
       say "%{blue}##{pattern} (#{notes.size}):%{clear}"
       notes.each do |note|
         # NOTE: Pathname#relative_path_from is bugged, so we'll cheat a bit
-        note[:relative] = note[:file].gsub(/#{File.expand_path(path)}/i, '.')
+        note[:relative] = begin
+          if path == '.'
+            note[:file].gsub(/#{File.expand_path(path)}/i, '.')
+          else
+            note[:file]
+          end
+        end
         note[:data].gsub! /%/, '%%' # protects us from the CLI.say choking on '%'
         say "%%{black}%{relative}:%%{clear}%%{green}%{line} %%{white}%{data}%%{clear}" % note
       end
@@ -288,5 +294,4 @@ parser.parse!
 note_types.map(&:upcase!)
 options[:patterns] = Hash[note_types.zip(note_types.map{ |type| build_pattern(type) })]
 
-# NOTE: ohai
 Notes.new(ARGV[0] || '.', options).run!
