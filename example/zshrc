@@ -34,6 +34,9 @@ export FINDDIR_SEARCH_PATHS="~/Projects:~/XCode"
 #alias fm=foreman
 #alias fms="foreman start"
 #alias bower='noglob bower'
+#alias rake='noglob rake'
+#alias c='cd /usr/local/Cellar'
+#alias grep='pcregrep --color=auto'
 
 # Tmux (use with tmux plugin)
 #alias tml="tmux list-sessions"
@@ -41,6 +44,16 @@ export FINDDIR_SEARCH_PATHS="~/Projects:~/XCode"
 #alias tms=tmux-force-switch
 #alias tmd="tmux detach"
 #alias tmx="tmux kill-session -t"
+
+# Tig
+#alias ts='tig status'
+#alias tb='tig blame'
+#alias ta='tig --all'
+#alias ts='tig status'
+#alias tg='tig grep'
+#function tl(){
+  #$(git log --all --decorate --format='commit %h %an: %s' $* | tig)
+#}
 
 # Some random helpers
 
