@@ -10,13 +10,10 @@ alias cdd='cd ~/Desktop'
 
 # Misc Helpers
 alias fname="find -name"
-alias rake="rake"
-#alias grep='pcregrep --color=auto'
 alias psg='ps ax | grep '
 alias tf='tail -f'
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
 alias dec='openssl enc -d -aes-256-cbc -in '
-alias c='cd /usr/local/Cellar'
 
 # Ruby/Rails
 alias ss='rails server'
@@ -34,9 +31,6 @@ function back() {
   ack "$@" `bundle show --paths`
 }
 
-# Node
-alias bower='bower'
-
 # Git
 alias git='git'
 alias g='git'
@@ -48,11 +42,6 @@ alias gc='git commit'
 alias gca='git commit -a'
 alias gcam='git commit --amend'
 alias gl='git l'
-# alias glog='git log --pretty=format":%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset"'
-# alias gl='glog --graph'
-# alias gla='glog --graph --all'
-# alias glp='glog -p'
-# alias glv='glog --graph --numstat'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grb='git rebase -p'
@@ -66,9 +55,5 @@ alias gups='stash;git up;unstash'
 alias gp='git push'
 alias gpt='git push --tags'
 alias gpr='git pull --rebase'
-alias gf='git fetch'
+alias gf='git fetch --all'
 alias grh='git reset --hard'
-
-# Tig
-alias ts='tig status'
-alias tb='tig blame'
