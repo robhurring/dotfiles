@@ -23,7 +23,7 @@ THEME_PROMPT_COLOR="yellow"
 THEME_PATH_BEFORE="%n@%m "
 
 # Used in the `finddir` command
-export DEFAULT_SEARCH_PATHS="~/Projects:~/XCode"
+export FINDDIR_SEARCH_PATHS="~/Projects:~/XCode"
 
 # Some common aliases
 #alias less='less -R'

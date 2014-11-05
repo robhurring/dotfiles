@@ -8,10 +8,10 @@ require 'pathname'
 
 
 # Set this up in your env to specify where to search
-# export DEFAULT_SEARCH_PATHS="~/Sites:~/Projects[:OTHER_PATHS]"
+# export FINDDIR_SEARCH_PATHS="~/Sites:~/Projects[:OTHER_PATHS]"
 
-DEFAULT_SEARCH_PATHS = \
-  if paths = ENV['DEFAULT_SEARCH_PATHS']
+FINDDIR_SEARCH_PATHS = \
+  if paths = ENV['FINDDIR_SEARCH_PATHS']
     paths.split(':')
   else
     []
@@ -27,7 +27,7 @@ search = ARGV[0]
 if ARGV.size > 1
   search_paths = ARGV[1..-1]
 else
-  search_paths = DEFAULT_SEARCH_PATHS
+  search_paths = FINDDIR_SEARCH_PATHS
 end
 matcher = Regexp.new(search)
 
