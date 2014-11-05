@@ -71,7 +71,7 @@
   default = upstream
 [user]
   name = robhurring
-  email = rob.hurring@lendkey.com
+  email = robhurring@gmail.com
 [credential]
   helper = osxkeychain
 [instaweb]
