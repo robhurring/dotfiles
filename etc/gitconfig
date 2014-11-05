@@ -17,7 +17,7 @@
   up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase -p ${1:-origin}/$(git current-branch)' -
   current-branch = rev-parse --abbrev-ref HEAD
   push-set = !"git push --set-upstream origin $(git current-branch)"
-  l = log --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
+  l = log --graph --all --decorate --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   ll = log --numstat --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   lg = log -p
   unstage = reset HEAD
