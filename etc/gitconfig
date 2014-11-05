@@ -36,11 +36,8 @@
   last-tag = describe --abbrev=0
   changelog ="!git log $(git last-tag)..HEAD"
   cl ="!echo \"\\033[36m\\nChanges since: $(git last-tag)\\n\\033[0m\"; git l $(git last-tag)..HEAD"
-	ctags = !.git/hooks/ctags
 [apply]
   whitespace = warn
-[format]
-	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
 [color]
   ui = auto
 [color "branch"]
@@ -64,17 +61,17 @@
   error = red bold
 [core]
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	editor = vim
+  editor = vim
 [help]
   autocorrect = 1
 [status]
   submodule = 1
 [push]
   # Only push branches that have been set up to track a remote branch.
-	default = upstream
+  default = upstream
 [user]
-	name = rob hurring
-	email = rob.hurring@lendkey.com
+  name = robhurring
+  email = rob.hurring@lendkey.com
 [credential]
   helper = osxkeychain
 [instaweb]
@@ -82,10 +79,6 @@
   httpd = webrick
   port = 8080
 [browser "ch"]
-	cmd = open -a \"/Applications/Google Chrome.app\"
+  cmd = open -a \"/Applications/Google Chrome.app\"
 [web]
-	browser = ch
-[tig]
-  line-graphics = utf-8
-  tab-size = 4
-  main-view = id date:relative author:full commit-title:graph=yes,refs=yes
+  browser = ch

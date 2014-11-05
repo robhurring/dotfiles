@@ -9,9 +9,9 @@ alias cd--='cd ~ && cd -'
 alias cdd='cd ~/Desktop'
 
 # Misc Helpers
-alias fname="noglob find -name"
-alias rake="noglob rake"
-#alias grep='noglob pcregrep --color=auto'
+alias fname="find -name"
+alias rake="rake"
+#alias grep='pcregrep --color=auto'
 alias psg='ps ax | grep '
 alias tf='tail -f'
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
@@ -35,10 +35,10 @@ function back() {
 }
 
 # Node
-alias bower='noglob bower'
+alias bower='bower'
 
 # Git
-alias git='noglob git'
+alias git='git'
 alias g='git'
 alias ga='git add'
 alias gaa='git add -A'
@@ -47,11 +47,12 @@ alias gs='git status -sb'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gcam='git commit --amend'
-alias glog='git log --pretty=format":%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset"'
-alias gl='glog --graph'
-alias gla='glog --graph --all'
-alias glp='glog -p'
-alias glv='glog --graph --numstat'
+alias gl='git l'
+# alias glog='git log --pretty=format":%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset"'
+# alias gl='glog --graph'
+# alias gla='glog --graph --all'
+# alias glp='glog -p'
+# alias glv='glog --graph --numstat'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grb='git rebase -p'
