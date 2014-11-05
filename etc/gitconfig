@@ -4,11 +4,12 @@
   st = status
   ci = commit
   cia = commit -a
-  pick = cherry-pick
+  cp = cherry-pick
   br = branch
   co = checkout
   ls = ls-files
   gr = grep -n
+  mt = mergetool
   sm = submodule
   brt = branch-time
   who = shortlog -sne --no-merges
@@ -26,6 +27,8 @@
   track = checkout -t
   assume   = update-index --assume-unchanged
   unassume = update-index --no-assume-unchanged
+  unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+  assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
   assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
   snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
   ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
@@ -34,8 +37,11 @@
   add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
   serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   last-tag = describe --abbrev=0
-  changelog ="!git log $(git last-tag)..HEAD"
-  cl ="!echo \"\\033[36m\\nChanges since: $(git last-tag)\\n\\033[0m\"; git l $(git last-tag)..HEAD"
+  changelog ="!git l $(git last-tag)..HEAD"
+  cl ="!echo \"\\033[36m\\nChanges since: $(git last-tag)\\n\\033[0m\"; git changelog"
+  ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+  this = !git init && git add . && git commit -m \"initial commit\"
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
 [apply]
   whitespace = warn
 [color]
@@ -79,6 +85,15 @@
   httpd = webrick
   port = 8080
 [browser "ch"]
-  cmd = open -a \"/Applications/Google Chrome.app\"
+  cmd = open
 [web]
   browser = ch
+[merge]
+	tool = opendiff
+[mergetool "opendiff"]
+  cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  insteadOf = "git://github.com/"
+[url "git@gist.github.com:"]
+  insteadOf = "gist:"
