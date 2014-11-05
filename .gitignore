@@ -6,6 +6,7 @@
 # ignore package control stuff
 
 *.last-run
+*.cache
 other/st2/User/FileHistory.json
 other/st3/User/*.cache
 other/st3/User/Package\ Control.system-ca-bundle
