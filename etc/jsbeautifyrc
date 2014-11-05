@@ -2,13 +2,13 @@
   // Details: https://github.com/victorporof/Sublime-HTMLPrettify#using-your-own-jsbeautifyrc-options
   // Documentation: https://github.com/einars/js-beautify/
   "html": {
-    "brace_style": "collapse", // "expand", "end-expand", "expand-strict"
+    "brace_style": "expand-strict", // "expand", "end-expand", "expand-strict"
     "indent_char": " ",
     "indent_scripts": "keep", // "separate", "normal"
     "indent_size": 2,
-    "max_preserve_newlines": 10,
+    "max_preserve_newlines": 1,
     "preserve_newlines": true,
-    "unformatted": ["a", "sub", "sup", "b", "i", "u"],
+    "unformatted": [],
     "wrap_line_length": 0
   },
   "css": {
@@ -27,7 +27,7 @@
     "jslint_happy": false,
     "keep_array_indentation": true,
     "keep_function_indentation": true,
-    "max_preserve_newlines": 10,
+    "max_preserve_newlines": 2,
     "preserve_newlines": true,
     "space_before_conditional": false,
     "space_in_paren": false,

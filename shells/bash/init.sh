@@ -11,6 +11,8 @@ if [ -t 0 ]; then
   stty erase ^H
 fi
 
+source $DOTFILES/shells/share/aliases
+
 push_path(){
   if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
     if [ "$2" = "after" ] ; then
