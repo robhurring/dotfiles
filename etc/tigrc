@@ -144,13 +144,24 @@ set mouse-scroll    = 3   # Number of lines to scroll via the mouse
 #   %(prompt)   Prompt for the argument value.
 
 # bind main C ?git cherry-pick %(commit)
-bind main H ?git checkout %(head)
+bind main H @git checkout %(head)
 bind main C @git checkout %(branch)
+# bind main > ?git checkout %(commit)
 bind main \ @git checkout origin/HEAD
+bind main > ?git cherry-pick %(commit)
+
 bind status D !rm %(file)     # Delete file
-bind status R ?git reset --hard origin/HEAD
+bind status <C-r> ?git reset --hard origin/HEAD
+bind status C <git commit
+bind status c !git commit
+
 bind pager @ :/^@@     # Jump to next (c)hunk
+
 bind generic E @subl -w %(file)
+bind generic J move-page-down
+bind generic K move-page-up
+bind generic <C-j> move-page-down
+bind generic <C-k> move-page-up
 
 # Option manipulation
 # bind generic  o options     # Open the options menu
