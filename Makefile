@@ -2,10 +2,10 @@
 # without the ruby dependency. For the full experience use the rake tasks
 CWD=$(shell pwd)
 
-ETC = ackrc gemrc gitconfig irbrc pryrc rdebugrc tigrc tmux.conf
+ETC=$(shell ls ./etc)
 DOTFILES=$(ETC:%=$(HOME)/.%)
 
-BIN = ack git-branch-time git-wtf
+BIN=$(shell ls ./bin)
 BINFILES=$(BIN:%=$(HOME)/bin/%)
 
 all: .setup $(DOTFILES) $(BINFILES) .zsh
