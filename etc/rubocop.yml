@@ -1,9 +1,9 @@
 # This is the default configuration file. Enabling and disabling is configured
 # in separate files. This file adds all other parameters apart from Enabled.
 
-inherit_from:
-  - enabled.yml
-  - disabled.yml
+# inherit_from:
+#   - enabled.yml
+#   - disabled.yml
 
 # Common configuration.
 AllCops:
@@ -115,7 +115,7 @@ Style/AlignParameters:
   #
   #     method_call(a,
   #       b)
-  EnforcedStyle: with_first_parameter
+  EnforcedStyle: with_fixed_indentation
   SupportedStyles:
     - with_first_parameter
     - with_fixed_indentation
@@ -222,12 +222,6 @@ Style/EmptyLineBetweenDefs:
   # need an empty line between them.
   AllowAdjacentOneLineDefs: false
 
-Style/EmptyLinesAroundBlockBody:
-  EnforcedStyle: no_empty_lines
-  SupportedStyles:
-    - empty_lines
-    - no_empty_lines
-
 Style/EmptyLinesAroundClassBody:
   EnforcedStyle: no_empty_lines
   SupportedStyles:
@@ -242,7 +236,7 @@ Style/EmptyLinesAroundModuleBody:
 
 # Checks whether the source file has a utf-8 encoding comment or not
 Style/Encoding:
-  EnforcedStyle: always
+  EnforcedStyle: when_needed
   SupportedStyles:
     - when_needed
     - always
@@ -281,6 +275,7 @@ Style/HashSyntax:
   SupportedStyles:
     - ruby19
     - hash_rockets
+  Enabled: false
 
 Style/IfUnlessModifier:
   MaxLineLength: 80
@@ -550,6 +545,7 @@ Metrics/CyclomaticComplexity:
   Max: 6
 
 Metrics/LineLength:
+  Enabled: false
   Max: 80
   AllowURI: true
   URISchemes:
@@ -559,6 +555,7 @@ Metrics/LineLength:
 Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 10
+  Enabled: false
 
 Metrics/ParameterLists:
   Max: 5
