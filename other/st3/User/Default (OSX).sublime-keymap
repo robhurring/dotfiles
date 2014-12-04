@@ -3,6 +3,7 @@
   { "keys": ["super+shift+a"], "command": "expand_selection", "args": {"to": "brackets"} },
   { "keys": ["super+alt+p"], "command": "prompt_select_workspace" },
   { "keys": ["super+k", "super+t"], "command": "title_case" },
+  { "keys": ["ctrl+shift+space"], "command": "expand_selection", "args": {"to": "scope"} },
 
   // default to paste with indent
   { "keys": ["super+v"], "command": "paste_and_indent" },

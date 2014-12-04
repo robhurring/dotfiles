@@ -33,7 +33,7 @@
                 "excludes": []
             },
             "ruby": {
-                "@disable": false,
+                "@disable": true,
                 "args": [],
                 "excludes": []
             },
