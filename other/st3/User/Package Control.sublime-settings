@@ -60,6 +60,7 @@
 		"SublimeLinter-coffee",
 		"SublimeLinter-jshint",
 		"SublimeLinter-jsxhint",
+		"SublimeLinter-rubocop",
 		"SublimeLinter-ruby",
 		"SublimeTextGitX",
 		"TernJS",

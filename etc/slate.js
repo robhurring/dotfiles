@@ -3,8 +3,8 @@
 
 slate.configAll({
   defaultToCurrentScreen: true,
-  nudgePercentOf: "screenSize",
-  resizePercentOf: "screenSize",
+  nudgePercentOf: 'screenSize',
+  resizePercentOf: 'screenSize',
   secondsBetweenRepeat: 0.1,
   checkDefaultsOnLoad: true,
   focusCheckWidthMax: 3000,
@@ -30,6 +30,7 @@ var grid = new Grid(12, {
 });
 
 slate.bind('esc:cmd', slate.operationFromString('hint'));
+// slate.bind('tab:space', slate.operationFromString('hint'));
 // slate.bind('`:cmd', slate.operationFromString('grid'));
 
 var nudgeWindow = function(opts) {
@@ -67,13 +68,13 @@ slate.bind('up:alt;cmd', slate.operation('focus', {direction: 'up'}));
 slate.bind('down:alt;cmd', slate.operation('focus', {direction: 'down'}));
 
 var defaultSnapshotName = 'default-snapshot';
-slate.bind('1:shift;ctrl;alt;cmd', slate.operation("snapshot", {
-  "name" : defaultSnapshotName,
-  "save" : true,
-  "stack" : false
+slate.bind('1:shift;ctrl;alt;cmd', slate.operation('snapshot', {
+  'name' : defaultSnapshotName,
+  'save' : true,
+  'stack' : false
 }));
 
-slate.bind('1:ctrl;alt;cmd', slate.operation("activate-snapshot", {
-  "name" : defaultSnapshotName,
-  "delete" : false
+slate.bind('1:ctrl;alt;cmd', slate.operation('activate-snapshot', {
+  'name' : defaultSnapshotName,
+  'delete' : false
 }));
