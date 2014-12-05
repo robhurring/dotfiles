@@ -26,9 +26,13 @@ AllCops:
     - '**/Vagabondfile'
   Exclude:
     - 'vendor/**/*'
+    - db/schema.rb
   # By default, the rails cops are not run. Override in project or home
   # directory .rubocop.yml files, or by giving the -R/--rails option.
   RunRailsCops: false
+
+Documentation:
+  Enabled: false
 
 # Indent private/protected/public as deep as method definitions
 Style/AccessModifierIndentation:
@@ -119,6 +123,7 @@ Style/AlignParameters:
   SupportedStyles:
     - with_first_parameter
     - with_fixed_indentation
+  Enabled: false
 
 Style/AndOr:
   # Whether `and` and `or` are banned only in conditionals (conditionals)
@@ -178,6 +183,7 @@ Style/ClassAndModuleChildren:
   SupportedStyles:
     - nested
     - compact
+  Enabled: false
 
 Style/ClassCheck:
   EnforcedStyle: is_a?
@@ -279,6 +285,7 @@ Style/HashSyntax:
 
 Style/IfUnlessModifier:
   MaxLineLength: 80
+  Enabled: false
 
 Style/IndentationWidth:
   # Number of spaces for each indentation level.

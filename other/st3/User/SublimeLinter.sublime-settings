@@ -29,7 +29,7 @@
             },
             "rubocop": {
                 "@disable": false,
-                "args": [],
+                "args": ["-D"],
                 "excludes": []
             },
             "ruby": {
