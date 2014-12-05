@@ -52,15 +52,8 @@
     "extra_tag_paths": [
         [["source.python", "windows"], "C:\\Python27\\Lib\\tags"],
         [["source.ruby", "osx"], "~/Sites/gems/duzica/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/bucare/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/beybun/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/clavel/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/daphne/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/decisionator/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/kamala/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/patuju/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/pullson/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/apps/shapla/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/gems/sakura/.git/tags"],
+        [["source.ruby", "osx"], "~/Sites/gems/rsa_authority/.git/tags"],
     ],
 
     // Additional tag files to search
