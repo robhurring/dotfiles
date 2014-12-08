@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+source "$rvm_path/scripts/rvm"
+
+paths=(${~@:-.})
+
+function arrow() {
+  case $1 in
+    fat)
+      sed "s/^/=====> /"
+      ;;
+    *)
+      sed "s/^/-----> /"
+      ;;
+  esac
+}
+
+function indent() {
+  sed "s/^/       /"
+}
+
+ignore_flags="--exclude=*.sql --exclude=*.yml"
+ctags=/usr/local/bin/ctags
+
+for repo in $paths; do
+  pushd $repo
+
+  gemfile="$repo/Gemfile"
+  gemtagfile="$repo/.git/gemtags"
+  tagfile="$repo/.git/tags"
+  name=$(basename $repo)
+
+  echo "\033[1;35mUpdating ctags for \033[1;35m$name\033[0m" | arrow fat
+
+  echo "updating code tags -> $tagfile" | arrow
+  $ctags --verbose=no $ignore_flags -R -f $tagfile $repo 2>/dev/null | indent
+
+  if [[ -f $gemfile ]]; then
+    echo "updating bundle tags -> $gemtagfile" | arrow
+    if [ -f "$rvm_path/scripts/rvm" ] && [ -f ".ruby-version" ] && [ -f ".ruby-gemset" ]; then
+      rvm use `cat .ruby-version`@`cat .ruby-gemset` | indent
+    fi
+    $ctags --verbose=no $ignore_flags -R -f $gemtagfile $(bundle show --paths) 2>/dev/null | indent
+  fi
+done
