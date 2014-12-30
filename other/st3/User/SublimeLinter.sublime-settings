@@ -29,7 +29,9 @@
             },
             "rubocop": {
                 "@disable": false,
-                "args": ["-D"],
+                "args": [
+                    "-D"
+                ],
                 "excludes": []
             },
             "ruby": {
