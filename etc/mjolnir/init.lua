@@ -29,63 +29,63 @@ end)
 
 -- Resizing Windows
 
--- hotkey.bind({"cmd", "alt", "ctrl"}, "RIGHT", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.w = f.w + resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"cmd", "alt", "ctrl"}, "RIGHT", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.w = f.w + resize_size
+  win:setframe(f)
+end)
 
--- hotkey.bind({"cmd", "alt", "ctrl"}, "LEFT", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.w = f.w - resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"cmd", "alt", "ctrl"}, "LEFT", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.w = f.w - resize_size
+  win:setframe(f)
+end)
 
--- hotkey.bind({"cmd", "alt", "ctrl"}, "UP", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.h = f.h - resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"cmd", "alt", "ctrl"}, "UP", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.h = f.h - resize_size
+  win:setframe(f)
+end)
 
--- hotkey.bind({"cmd", "alt", "ctrl"}, "DOWN", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.h = f.h + resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"cmd", "alt", "ctrl"}, "DOWN", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.h = f.h + resize_size
+  win:setframe(f)
+end)
 
 -- -- Moving Windows
 
--- hotkey.bind({"ctrl", "alt"}, "RIGHT", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.x = f.x + resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"ctrl", "alt"}, "RIGHT", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.x = f.x + resize_size
+  win:setframe(f)
+end)
 
--- hotkey.bind({"ctrl", "alt"}, "LEFT", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.x = f.x - resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"ctrl", "alt"}, "LEFT", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.x = f.x - resize_size
+  win:setframe(f)
+end)
 
--- hotkey.bind({"ctrl", "alt"}, "UP", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.y = f.y - resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"ctrl", "alt"}, "UP", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.y = f.y - resize_size
+  win:setframe(f)
+end)
 
--- hotkey.bind({"ctrl", "alt"}, "DOWN", function()
---   local win = window.focusedwindow()
---   local f = win:frame()
---   f.y = f.y + resize_size
---   win:setframe(f)
--- end)
+hotkey.bind({"ctrl", "alt"}, "DOWN", function()
+  local win = window.focusedwindow()
+  local f = win:frame()
+  f.y = f.y + resize_size
+  win:setframe(f)
+end)
 
 -- -- Snapping Windows
 
