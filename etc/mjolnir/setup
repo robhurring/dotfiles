@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+function arrow {
+  sed "s/^/-----> /"
+}
+
+function indent {
+  sed "s/^/       /"
+}
+
+echo "Installing lua" | arrow
+brew update
+brew install lua luarocks
+
+echo "Setting up luarocks config" | arrow
+mkdir -p ~/.luarocks
+if [ ! -f ~/.luarocks/config.lua ]; then
+  echo "Adding rocks servers" | indent
+  echo 'rocks_servers = { "http://rocks.moonscript.org" }' > ~/.luarocks/config.lua
+fi
+echo 'OK' | indent
+
+echo "Installing mjolnir base mods" | arrow
+luarocks install mjolnir.hotkey
+luarocks install mjolnir.application
+
+# Add any extra mods here
