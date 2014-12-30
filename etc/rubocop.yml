@@ -275,6 +275,7 @@ Style/GlobalVars:
 # needs to have to trigger this cop
 Style/GuardClause:
   MinBodyLength: 1
+  Enabled: false
 
 Style/HashSyntax:
   EnforcedStyle: ruby19
@@ -396,6 +397,7 @@ Style/RaiseArgs:
 Style/RedundantReturn:
   # When true allows code like `return x, y`.
   AllowMultipleReturnValues: false
+  Enabled: false
 
 Style/RegexpLiteral:
   # The maximum number of (escaped) slashes that a slash-delimited regexp is
@@ -407,6 +409,7 @@ Style/Semicolon:
   AllowAsExpressionSeparator: false
 
 Style/SignalException:
+  Enabled: false
   EnforcedStyle: semantic
   SupportedStyles:
     - only_raise
@@ -444,6 +447,7 @@ Style/SpaceAroundEqualsInParameterDefault:
     - no_space
 
 Style/SpaceBeforeBlockBraces:
+  Enabled: false
   EnforcedStyle: space
   SupportedStyles:
     - space
@@ -460,6 +464,7 @@ Style/SpaceInsideBlockBraces:
   SpaceBeforeBlockParameters: true
 
 Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
   EnforcedStyle: space
   EnforcedStyleForEmptyBraces: no_space
   SupportedStyles:
