@@ -50,14 +50,11 @@
     // Paths to additional tag files to include in tag search. This is a list
     // of items in the form [["language", "platform"], "path"]
     "extra_tag_paths": [
-        [["source.python", "windows"], "C:\\Python27\\Lib\\tags"],
-        [["source.ruby", "osx"], "~/Sites/gems/duzica/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/gems/sakura/.git/tags"],
-        [["source.ruby", "osx"], "~/Sites/gems/rsa_authority/.git/tags"],
+        [["source.python", "windows"], "C:\\Python27\\Lib\\tags"]
     ],
 
     // Additional tag files to search
-    "extra_tag_files": [".gemtags", "tags", ".git/tags", ".git/gemtags", "~/.rvmtags"],
+    "extra_tag_files": ["tags", ".git/tags"],
 
     // Set to false so as not to select searched symbol (in Vintage mode)
     "select_searched_symbol": true
