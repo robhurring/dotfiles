@@ -18,14 +18,13 @@ function indent() {
   sed "s/^/       /"
 }
 
-ignore_flags="--exclude=*.sql --exclude=*.yml"
+ignore_flags="--exclude=*.yml"
 ctags=/usr/local/bin/ctags
 
 for repo in $paths; do
   pushd $repo
 
   gemfile="$repo/Gemfile"
-  gemtagfile="$repo/.git/gemtags"
   tagfile="$repo/.git/tags"
   name=$(basename $repo)
 
@@ -34,11 +33,13 @@ for repo in $paths; do
   echo "updating code tags -> $tagfile" | arrow
   $ctags --verbose=no $ignore_flags -R -f $tagfile $repo 2>/dev/null | indent
 
+  [[ -f .git/gemtags ]] && rm .git/gemtags
+
   if [[ -f $gemfile ]]; then
-    echo "updating bundle tags -> $gemtagfile" | arrow
+    echo "updating gem tags -> $tagfile" | arrow
     if [ -f "$rvm_path/scripts/rvm" ] && [ -f ".ruby-version" ] && [ -f ".ruby-gemset" ]; then
       rvm use `cat .ruby-version`@`cat .ruby-gemset` | indent
     fi
-    $ctags --verbose=no $ignore_flags -R -f $gemtagfile $(bundle show --paths) 2>/dev/null | indent
+    $ctags --verbose=no $ignore_flags -R -f $tagfile -a $(bundle show --paths) 2>/dev/null | indent
   fi
 done
