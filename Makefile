@@ -14,7 +14,7 @@ all: .setup $(DOTFILES) $(BINFILES) .zsh
 clean:
 	rm -rf $(DOTFILES)
 	rm -rf $(BINFILES)
-	rm -rf ~/.zsh ~/.zshrc
+	rm -rf ~/.zsh
 
 .setup:
 	@mkdir -p $HOME/bin
