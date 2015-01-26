@@ -1,7 +1,10 @@
 #!/usr/bin/env zsh
 source "$rvm_path/scripts/rvm"
 
-paths=(${~@:-.})
+# NOTE: if you set paths to "." and store the tags in .git/tags all the file
+#       paths will be relative to .git, which isn't what we want. Make sure to
+#       always pass `pwd` instead of `.` here.
+paths=(${~@:-$(pwd)})
 
 function arrow() {
   case $1 in
