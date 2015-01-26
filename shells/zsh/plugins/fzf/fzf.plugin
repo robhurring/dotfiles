@@ -1,7 +1,11 @@
+# Requires: FZF
+# Download: https://github.com/junegunn/fzf
+
+# Paths to search for `fuzzy-cds` command.
 export FUZZY_SEARCH_PATHS="~/Sites:~/Sites/apps:~/Sites/gems:~/Projects:~/XCode"
 
 # FZF: cd to `FUZZY_SEARCH_PATHS`
-cds() {
+fuzzy-cds() {
 local dir=$(cat << EOS | ruby | fzf -1 -e -0 --query=$1
   (ENV["FUZZY_SEARCH_PATHS"]||"").split(":").each{|p| puts Dir["#{File.expand_path(p)}/*"]}
 EOS)
@@ -9,7 +13,7 @@ cd "$dir"
 }
 
 # FZF: git checkout
-co() {
+fuzzy-co() {
   local query=$1
   local flags
 
@@ -34,7 +38,7 @@ EOS)
 }
 
 # FZF: edit gem
-eb() {
+fuzzy-bundle-open() {
   local gem
 
   if [[ -f Gemfile ]]; then
@@ -46,18 +50,18 @@ eb() {
 }
 
 # FZF: edit file
-ef() {
+fuzzy-edit() {
   local file=$(fzf --query="$1" --select-1 --exit-0)
   [[ $file ]] && subl -a "$file"
 }
 
 # FZF: cd
-fd() {
+fuzzy-cd() {
   local dir=$(find \. -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m --query=$1)
   [[ $dir ]] && cd "$dir"
 }
 
 # FZF: fuzzy kill process
-fkill() {
+fuzzy-kill() {
   ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
 }
