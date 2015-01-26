@@ -1,0 +1,63 @@
+export FUZZY_SEARCH_PATHS="~/Sites:~/Sites/apps:~/Sites/gems:~/Projects:~/XCode"
+
+# FZF: cd to `FUZZY_SEARCH_PATHS`
+cds() {
+local dir=$(cat << EOS | ruby | fzf -1 -e -0 --query=$1
+  (ENV["FUZZY_SEARCH_PATHS"]||"").split(":").each{|p| puts Dir["#{File.expand_path(p)}/*"]}
+EOS)
+cd "$dir"
+}
+
+# FZF: git checkout
+co() {
+  local query=$1
+  local flags
+
+  if [[ $1 =~ ^\- ]]; then
+    flags=${@:1:-1}
+    query=${@[-1]}
+  fi
+
+  if [[ $query =~ /^- ]]; then
+    flags="$flags $query"
+    query=""
+  fi
+
+  local branch=$(cat << EOS | ruby | fzf -1 +s -i $flags --query=$query
+    puts %x{git branch -a}.split.map{|b| b.split('/').last}.reject{|b|['*','HEAD','->'].include?(b)}.uniq.sort_by{|b|b.to_s.scan(%r/\\d+/o).map(&:to_i)}
+EOS)
+
+  if [[ $branch ]]; then
+    [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
+    git checkout $branch
+  fi
+}
+
+# FZF: edit gem
+eb() {
+  local gem
+
+  if [[ -f Gemfile ]]; then
+    gem=$(bundle show|grep -v "^Gems"|sed -e 's/([^()]*)//g'|sed -e 's/[ *]*//g'|fzf -1 --query=$1)
+    [[ $gem ]] && EDITOR="subl -a" bundle open $gem
+  else
+    echo "No Gemfile found!"
+  fi
+}
+
+# FZF: edit file
+ef() {
+  local file=$(fzf --query="$1" --select-1 --exit-0)
+  [[ $file ]] && subl -a "$file"
+}
+
+# FZF: cd
+fd() {
+  local dir=$(find \. -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m --query=$1)
+  [[ $dir ]] && cd "$dir"
+}
+
+# FZF: fuzzy kill process
+fkill() {
+  ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
+}
