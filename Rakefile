@@ -32,6 +32,11 @@ namespace :install do
     %x{curl -L https://get.rvm.io | bash -s stable}
   end
 
+  desc 'install FZF'
+  task :fzf do
+    %x{git clone https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install}
+  end
+
   desc 'install homebrew'
   task :brew do
     %x{ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"}
