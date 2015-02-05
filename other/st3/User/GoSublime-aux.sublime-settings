@@ -1,0 +1,21 @@
+{
+	"9o.hist./Users/rhurring/Projects/lk":
+	[
+		"replay",
+		"run"
+	],
+	"9o.hist./Users/rhurring/Projects/lk/lk":
+	[
+		"cd .."
+	],
+	"9o.hist./Users/rhurring/Projects/lk/lk/retag":
+	[
+		"build",
+		"run",
+		"run main.go",
+		"cd .."
+	],
+	"ann": "a14.02.25-1",
+	"install_version": "r14.12.06-1",
+	"version": "r14.12.06-1"
+}
