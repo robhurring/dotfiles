@@ -7,8 +7,8 @@
   // in values, $PATH and ${PATH} are replaced with
   // the corresponding environment(PATH) variable, if it exists.
   "env": {
-    "GOPATH": "/usr/local/go",
-    "GOBIN": "/usr/local/go/bin",
+    "GOPATH": "$HOME/Go",
+    "GOBIN": "$GOPATH/bin",
     "PATH": "$PATH:$GOBIN"
   },
 
@@ -26,7 +26,7 @@
   // /bin/sh which in most cases is not what you want
   //
   // the special entry "$CMD" is replaced by the actual command
-  "shell": [],
+  "shell": ["/usr/local/bin/zsh", "--login", "-c", "$CMD"],
 
   // whether or not pkg files should be automatically saved when necessary (e.g. when running 9o `replay` or `go test` commands)
   "autosave": true,
@@ -48,7 +48,7 @@
   // e.g. ["goimports"]
   // the command will be passed, to its stdin, the contents of the file
   // it must output the new file contents
-  "fmt_cmd": [],
+  "fmt_cmd": ["goimports"],
 
   // Whether or not gslint is enabled
   "gslint_enabled": true,

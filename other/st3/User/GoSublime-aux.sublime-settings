@@ -1,4 +1,18 @@
 {
+	"9o.hist./Users/rhurring/Desktop":
+	[
+		"run",
+		"retag",
+		"which rvm",
+		"pwd",
+		"cds OffsetsUpToTestTimezone",
+		"cds otto",
+		"cd ~/Sites/apps/cds otto"
+	],
+	"9o.hist./Users/rhurring/Library/Application Support/Sublime Text 3/Packages/User":
+	[
+		"retag"
+	],
 	"9o.hist./Users/rhurring/Projects/lk":
 	[
 		"replay",
@@ -11,9 +25,9 @@
 	"9o.hist./Users/rhurring/Projects/lk/lk/retag":
 	[
 		"build",
-		"run",
 		"run main.go",
-		"cd .."
+		"cd ..",
+		"run"
 	],
 	"ann": "a14.02.25-1",
 	"install_version": "r14.12.06-1",
