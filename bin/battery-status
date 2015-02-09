@@ -1,31 +1,56 @@
-# Get the current battery details
-# Parameters:
-#   $1: output format, [default="%Y %P Remaining: %R (%S)"]
-#     Substitutions available:
-#     - "%P" the current percentage
-#     - "%R" time remaining
-#     - "%S" the current status
-#     - "%Y" the unicode symbol for battery percentage
+#!/usr/bin/env ruby
+require 'optparse'
 
-# load battery details
-BATT=($(pmset -g batt|grep InternalBattery))
-PERCENT=${BATT[1]%;}
-STATUS=${BATT[2]%;}
-REMAINING=${BATT[3]}
-DEFAULT_FORMAT="%Y %P Remaining: %R (%S)"
-# strip out the percent sign
-PCT=${PERCENT%%%}
-SYMBOL="⚠"
+class Battery
+  DEFAULT_FORMAT = "P (S: R)"
 
-if   ((PCT>=90));            then SYMBOL="█"
-elif ((PCT>=50 && PCT<=75)); then SYMBOL="▅"
-elif ((PCT>=25 && PCT<=50)); then SYMBOL="▃"
-fi
+  def self.status
+    _, percent, status, remaining, _ = %x{pmset -g batt|grep InternalBattery}.split(/\t|;/).map(&:strip)
 
-# format output
-OUT=${1:-$DEFAULT_FORMAT}
-OUT=${OUT//%P/$PERCENT}
-OUT=${OUT//%R/$REMAINING}
-OUT=${OUT//%S/$STATUS}
-OUT=${OUT//%Y/$SYMBOL}
-echo $OUT
+    percent.gsub!(/%/, '')
+    remaining.gsub!(/[\(\)]/, '')
+    remaining.gsub!(/\s*remaining/, '')
+
+    new(percent, status, remaining)
+  end
+
+  attr_reader :percent, :status, :remaining
+
+  def initialize(percent, status, remaining)
+    @percent, @status, @remaining = percent, status, remaining
+  end
+
+  def charging?
+    status != 'discharging'
+  end
+
+  def to_s(format = nil)
+    format ||= DEFAULT_FORMAT
+    format
+      .gsub(/P/, percent)
+      .gsub(/R/, remaining)
+      .gsub(/S/, status)
+  end
+end
+
+options = {
+  discharging: false
+}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{$0} [options]"
+
+  opts.on("-d", "Only show when discharging") do |d|
+    options[:discharging] = true
+  end
+end.parse!
+
+battery = Battery.status
+
+if options[:discharging]
+  if battery.charging?
+    exit 0
+  end
+end
+
+print battery.to_s(ARGV[0])
