@@ -51,6 +51,22 @@
     }
   },
   {
+    "keys" : [ "ctrl+h" ],
+    "command" : "block_nav",
+    "args" : {
+      "v_dir" : -1,
+      "depth_offset" : -1
+    }
+  },
+  {
+    "keys" : [ "ctrl+l" ],
+    "command" : "block_nav",
+    "args" : {
+      "v_dir" : 1,
+      "depth_offset" : 1
+    }
+  },
+  {
     "keys" : [ "ctrl+j" ],
     "command" : "block_nav",
     "args" : {

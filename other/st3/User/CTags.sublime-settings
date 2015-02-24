@@ -28,7 +28,8 @@
     // ["--exclude=some/path", "--exclude=some/other/path", ...]
     "opts" : [
         "--exclude=coverage",
-        "--exclude=.git"
+        "--exclude=.git",
+        "--fields=+KSn"
     ],
 
     //
@@ -50,7 +51,6 @@
     // Paths to additional tag files to include in tag search. This is a list
     // of items in the form [["language", "platform"], "path"]
     "extra_tag_paths": [
-        [["source.python", "windows"], "C:\\Python27\\Lib\\tags"]
     ],
 
     // Additional tag files to search
