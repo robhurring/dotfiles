@@ -61,6 +61,7 @@
   // gs.types - do a typecheck using the go/types package(like the old gotype)
   //            disabled by default until it's ready(copied from tip)
   "lint_filter": [
+    "gs.syntax",
     "gs.flag.parse",
     "gs.types"
   ],
@@ -182,7 +183,7 @@
   //     import (
   //         foo "gosubli.me/go-foo"
   //     )
-  "use_named_imports": false,
+  "use_named_imports": true,
 
   // whether or not MarGo may automatically run `go install` for packages that are missing
   // when you `import`, or `autocomplete` them
@@ -303,7 +304,8 @@
   //    "gro": "sh grep $_args 2>/dev/null", // call grep through your shell and discard stderr
   // }
   //
-  "9o_aliases": {},
+  "9o_aliases": {
+  },
 
   // what 9o command to run when (super or )ctrl+dot,ctrl+b us pressed
   // e.g. ["go", "build"]

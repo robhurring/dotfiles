@@ -29,6 +29,26 @@
 		"cd ..",
 		"run"
 	],
+	"9o.hist./Users/rob/Desktop":
+	[
+		"clear",
+		"run",
+		"ctags",
+		"reta",
+		"retag"
+	],
+	"9o.hist./Users/rob/Dropbox/Config/lendkey/zsh/Go/lk":
+	[
+		"run",
+		"run tag",
+		"build",
+		"go install",
+		"go build"
+	],
+	"9o.hist./Users/rob/Go/src/github.com/robhurring/jit":
+	[
+		"run"
+	],
 	"ann": "a14.02.25-1",
 	"install_version": "r14.12.06-1",
 	"version": "r14.12.06-1"

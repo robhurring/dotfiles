@@ -94,3 +94,8 @@ localrc = File.expand_path('.localirbrc', ENV['HOME'])
 if File.exists?(localrc)
   load localrc.to_s
 end
+
+lkirbrc = File.expand_path('.irbrc', ENV['LENDKEY_ENV'])
+if File.exists?(lkirbrc)
+  load lkirbrc.to_s
+end
