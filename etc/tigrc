@@ -101,7 +101,7 @@ set ignore-case       = no    # Ignore case when searching?
 set focus-child       = yes   # Move focus to child view when opened?
 set horizontal-scroll = 50%   # Number of columns to scroll as % of width
 set split-view-height = 67%   # Height of the bottom view for horizontal splits
-set vertical-split    = auto   # Enum: horizontal, vertical, auto; Use auto to
+set vertical-split    = vertical   # Enum: horizontal, vertical, auto; Use auto to
                                # switch to horizontal split when width allows it
 set editor-line-number    = yes   # Automatically pass line number to editor? Used
                                   # for opening file at specific line e.g. from a diff
@@ -148,14 +148,24 @@ bind main o @git checkout origin/dev
 bind main H @git checkout %(head)
 bind main B @git checkout %(branch)
 bind main c @git checkout %(commit)
+bind main C @git checkout %(branch)
+bind main c @git checkout %(commit)
+bind main B !git rebase -i %(commit)
+bind main ! !git revert %(commit)
+
 # bind main > ?git checkout %(commit)
 bind main \ @git checkout origin/HEAD
 bind main > ?git cherry-pick %(commit)
+bind main <C-r> @git fetch --all
 
 bind status D !rm %(file)     # Delete file
 bind status <C-r> ?git reset --hard origin/HEAD
 bind status C <git commit
 bind status c !git commit
+bind status D !@?rm %(file)
+bind status S !?git stash save --keep-index %(prompt)
+
+bind refs n !@git branch "%(prompt Enter branch name: )"
 
 bind pager @ :/^@@     # Jump to next (c)hunk
 
@@ -164,6 +174,9 @@ bind generic J move-page-down
 bind generic K move-page-up
 bind generic <C-j> move-page-down
 bind generic <C-k> move-page-up
+bind generic y !@sh -c "echo %(commit) | pbcopy"
+bind generic + !git commit --amend
+bind generic O @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
 
 # Option manipulation
 # bind generic  o options     # Open the options menu
@@ -214,108 +227,108 @@ bind generic <C-k> move-page-up
 # Note the four leading spaces in the string to match. This is because
 # Git automatically indents commit messages by four spaces.
 
-color "diff --"     yellow  default
-color "@@"      magenta default
-color "+"     green default
-color " +"      green default
-color "-"     red default
-color " -"      red default
-color "index "      blue  default
-color "old file mode "    yellow  default
-color "new file mode "    yellow  default
-color "deleted file mode "  yellow  default
-color "copy from "    yellow  default
-color "copy to "    yellow  default
-color "rename from "    yellow  default
-color "rename to "    yellow  default
-color "similarity "   yellow  default
-color "dissimilarity "    yellow  default
-color "diff-tree "    blue  default
-color "Author: "    cyan  default
-color "Commit: "    magenta default
-color "Tagger: "    magenta default
-color "Merge: "     blue  default
-color "Date: "      yellow  default
-color "AuthorDate: "    yellow  default
-color "CommitDate: "    yellow  default
-color "TaggerDate: "    yellow  default
-color "Refs: "      red default
-color "Reflog: "    red default
-color "Reflog message: "  yellow  default
-color "stash@{"     magenta default
-color "commit "     green default
-color "parent "     blue  default
-color "tree "     blue  default
-color "author "     green default
-color "committer "    magenta default
-color "    Signed-off-by" yellow  default
-color "    Acked-by"    yellow  default
-color "    Tested-by"   yellow  default
-color "    Reviewed-by"   yellow  default
-color default     default default normal
-color cursor      white green bold
-color status      green default
-color delimiter     magenta default
-color date      blue  default
-color mode      cyan  default
-color id      magenta default
-color overflow      red default
-color header      yellow  default
-color section     cyan  default
-color directory     yellow  default
-color file      default default
-color grep.file     blue  default
-color file-size     default default
-color line-number   cyan  default
-color title-blur    white blue
-color title-focus   white blue  bold
-color main-commit   default default
-color main-tag      magenta default bold
-color main-local-tag    magenta default
-color main-remote   yellow  default
-color main-replace    cyan  default
-color main-tracked    yellow  default bold
-color main-ref      cyan  default
-color main-head     cyan  default bold
-color stat-none     default default
-color stat-staged   magenta default
-color stat-unstaged   magenta default
-color stat-untracked    magenta default
-color help-group    blue  default
-color help-action   yellow  default
-color diff-stat     blue  default
-color palette-0     magenta default
-color palette-1     yellow  default
-color palette-2     cyan  default
-color palette-3     green default
-color palette-4     default default
-color palette-5     white default
-color palette-6     red default
-color graph-commit    blue  default
+# color "diff --"     yellow  default
+# color "@@"      magenta default
+# color "+"     green default
+# color " +"      green default
+# color "-"     red default
+# color " -"      red default
+# color "index "      blue  default
+# color "old file mode "    yellow  default
+# color "new file mode "    yellow  default
+# color "deleted file mode "  yellow  default
+# color "copy from "    yellow  default
+# color "copy to "    yellow  default
+# color "rename from "    yellow  default
+# color "rename to "    yellow  default
+# color "similarity "   yellow  default
+# color "dissimilarity "    yellow  default
+# color "diff-tree "    blue  default
+# color "Author: "    cyan  default
+# color "Commit: "    magenta default
+# color "Tagger: "    magenta default
+# color "Merge: "     blue  default
+# color "Date: "      yellow  default
+# color "AuthorDate: "    yellow  default
+# color "CommitDate: "    yellow  default
+# color "TaggerDate: "    yellow  default
+# color "Refs: "      red default
+# color "Reflog: "    red default
+# color "Reflog message: "  yellow  default
+# color "stash@{"     magenta default
+# color "commit "     green default
+# color "parent "     blue  default
+# color "tree "     blue  default
+# color "author "     green default
+# color "committer "    magenta default
+# color "    Signed-off-by" yellow  default
+# color "    Acked-by"    yellow  default
+# color "    Tested-by"   yellow  default
+# color "    Reviewed-by"   yellow  default
+# color default     default default normal
+# color cursor      white green bold
+# color status      green default
+# color delimiter     magenta default
+# color date      blue  default
+# color mode      cyan  default
+# color id      magenta default
+# color overflow      red default
+# color header      yellow  default
+# color section     cyan  default
+# color directory     yellow  default
+# color file      default default
+# color grep.file     blue  default
+# color file-size     default default
+# color line-number   cyan  default
+# color title-blur    white blue
+# color title-focus   white blue  bold
+# color main-commit   default default
+# color main-tag      magenta default bold
+# color main-local-tag    magenta default
+# color main-remote   yellow  default
+# color main-replace    cyan  default
+# color main-tracked    yellow  default bold
+# color main-ref      cyan  default
+# color main-head     cyan  default bold
+# color stat-none     default default
+# color stat-staged   magenta default
+# color stat-unstaged   magenta default
+# color stat-untracked    magenta default
+# color help-group    blue  default
+# color help-action   yellow  default
+# color diff-stat     blue  default
+# color palette-0     magenta default
+# color palette-1     yellow  default
+# color palette-2     cyan  default
+# color palette-3     green default
+# color palette-4     default default
+# color palette-5     white default
+# color palette-6     red default
+# color graph-commit    blue  default
 
 # set git-colors = no
 # Mappings for colors read from git configuration.
 # Set to "no" to disable.
-set git-colors = \
-  branch.current=main-head \
-  branch.local=main-ref \
-  branch.plain=main-ref \
-  branch.remote=main-remote \
-  \
-  diff.meta=diff-header \
-  diff.meta=diff-index \
-  diff.meta=diff-oldmode \
-  diff.meta=diff-newmode \
-  diff.frag=diff-chunk \
-  diff.old=diff-del \
-  diff.new=diff-add \
-  \
-  grep.filename=grep.file \
-  grep.linenumber=grep.line-number \
-  grep.separator=grep.delimiter \
-  \
-  status.branch=status.header \
-  status.added=stat-staged \
-  status.updated=stat-staged \
-  status.changed=stat-unstaged \
-  status.untracked=stat-untracked
+# set git-colors = \
+#   branch.current=main-head \
+#   branch.local=main-ref \
+#   branch.plain=main-ref \
+#   branch.remote=main-remote \
+#   \
+#   diff.meta=diff-header \
+#   diff.meta=diff-index \
+#   diff.meta=diff-oldmode \
+#   diff.meta=diff-newmode \
+#   diff.frag=diff-chunk \
+#   diff.old=diff-del \
+#   diff.new=diff-add \
+#   \
+#   grep.filename=grep.file \
+#   grep.linenumber=grep.line-number \
+#   grep.separator=grep.delimiter \
+#   \
+#   status.branch=status.header \
+#   status.added=stat-staged \
+#   status.updated=stat-staged \
+#   status.changed=stat-unstaged \
+#   status.untracked=stat-untracked
