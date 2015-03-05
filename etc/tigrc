@@ -101,7 +101,7 @@ set ignore-case       = no    # Ignore case when searching?
 set focus-child       = yes   # Move focus to child view when opened?
 set horizontal-scroll = 50%   # Number of columns to scroll as % of width
 set split-view-height = 67%   # Height of the bottom view for horizontal splits
-set vertical-split    = vertical   # Enum: horizontal, vertical, auto; Use auto to
+set vertical-split    = horizontal   # Enum: horizontal, vertical, auto; Use auto to
                                # switch to horizontal split when width allows it
 set editor-line-number    = yes   # Automatically pass line number to editor? Used
                                   # for opening file at specific line e.g. from a diff
