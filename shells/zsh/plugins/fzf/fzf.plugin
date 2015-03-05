@@ -43,7 +43,7 @@ fuzzy-bundle-open() {
 
   if [[ -f Gemfile ]]; then
     gem=$(bundle show|grep -v "^Gems"|sed -e 's/([^()]*)//g'|sed -e 's/[ *]*//g'|fzf -1 --query=$1)
-    [[ $gem ]] && EDITOR="subl -a" bundle open $gem
+    [[ $gem ]] && $EDITOR bundle open $gem
   else
     echo "No Gemfile found!"
   fi
@@ -52,7 +52,7 @@ fuzzy-bundle-open() {
 # FZF: edit file
 fuzzy-edit() {
   local file=$(fzf --query="$1" --select-1 --exit-0)
-  [[ $file ]] && subl -a "$file"
+  [[ $file ]] && $EDITOR "$file"
 }
 
 # FZF: cd

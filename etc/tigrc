@@ -144,8 +144,10 @@ set mouse-scroll    = 3   # Number of lines to scroll via the mouse
 #   %(prompt)   Prompt for the argument value.
 
 # bind main C ?git cherry-pick %(commit)
+bind main o @git checkout origin/dev
 bind main H @git checkout %(head)
-bind main C @git checkout %(branch)
+bind main B @git checkout %(branch)
+bind main c @git checkout %(commit)
 # bind main > ?git checkout %(commit)
 bind main \ @git checkout origin/HEAD
 bind main > ?git cherry-pick %(commit)
