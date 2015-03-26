@@ -149,8 +149,8 @@ bind main H @git checkout %(head)
 bind main B @git checkout %(branch)
 bind main c @git checkout %(commit)
 bind main C @git checkout %(branch)
-bind main c @git checkout %(commit)
-bind main B !git rebase -i %(commit)
+bind main M !@git checkout -b "%(prompt Enter branch name: )" %(commit)
+bind main D @git branch -D %(branch)
 bind main ! !git revert %(commit)
 
 # bind main > ?git checkout %(commit)
@@ -170,6 +170,9 @@ bind refs n !@git branch "%(prompt Enter branch name: )"
 bind pager @ :/^@@     # Jump to next (c)hunk
 
 bind generic E @subl -w %(file)
+bind generic ? view-help
+bind generic h scroll-left
+bind generic l scroll-right
 bind generic J move-page-down
 bind generic K move-page-up
 bind generic <C-j> move-page-down
