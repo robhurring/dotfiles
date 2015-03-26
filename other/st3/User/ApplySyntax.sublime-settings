@@ -27,6 +27,23 @@
         "rules": [
           {"function": {"name": "is_rails_file"}}
         ]
+      },
+      {
+        "name": "Ruby/Ruby",
+        "rules": [
+          {"file_name": ".*\\.irbrc.*$"},
+        ]
+      },
+      {
+        "name": "ShellScript/Shell-Unix-Generic",
+        "extensions": ["bash", "sh", "zsh"],
+        "rules": [
+          {"file_name": ".*\\.bash.*$"},
+          {"file_name": ".*\\.tigrc.*$"},
+          {"file_name": ".*\\.z(shrc|shenv|profile|login|logout).*$"},
+          {"file_name": ".*\\.(bash|sh|zsh)$"},
+          {"first_line": "^#\\!(?:.+)env"}
+        ]
       }
     ]
 }
