@@ -40,10 +40,17 @@
         "rules": [
           {"file_name": ".*\\.bash.*$"},
           {"file_name": ".*\\.tigrc.*$"},
+          {"file_name": ".*\\.powrc.*$"},
           {"file_name": ".*\\.z(shrc|shenv|profile|login|logout).*$"},
           {"file_name": ".*\\.(bash|sh|zsh)$"},
           {"first_line": "^#\\!(?:.+)env"}
         ]
+      },
+      {
+          "name": "ReactJS/syntax/jsx/tmLanguage/JavaScript (JSX)",
+          "rules": [
+            {"file_name": ".*\\.jsx$"},
+          ]
       }
     ]
 }
