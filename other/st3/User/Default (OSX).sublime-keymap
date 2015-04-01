@@ -25,6 +25,22 @@
   // toggle symbol plugin
   { "keys": ["super+shift+;"], "command": "toggle_symbol" },
 
+  // sidebar "vimlike"
+  { "keys": ["h"], "command": "move", "args": {"by": "characters", "forward": false}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+  { "keys": ["j"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+  { "keys": ["k"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+  { "keys": ["l"], "command": "move", "args": {"by": "characters", "forward": true}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+
+  // sidebar actions
+  { "keys": ["a"], "command": "side_bar_new_file", "args":{}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+  { "keys": ["d"], "command": "side_bar_duplicate", "args":{}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+  { "keys": ["c"], "command": "side_bar_copy_path", "args":{}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+  { "keys": ["m"], "command": "side_bar_move", "args":{}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+
+  // destructive
+  { "keys": ["D"], "command": "side_bar_delete", "args":{}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+  { "keys": ["R"], "command": "side_bar_rename", "args":{}, "context": [ {"key": "control", "operand": "sidebar_tree"} ] },
+
   // alt autocomplete plugin
   // { "keys": ["escape"], "command": "alternative_autocomplete", "context":
   // [
