@@ -1,5 +1,5 @@
 {
-	"always_show_minimap_viewport": true,
+	"always_show_minimap_viewport": false,
 	"auto_close_tags": true,
 	"auto_complete": true,
 	"auto_complete_commit_on_tab": false,
@@ -14,9 +14,13 @@
 		}
 	],
 	"auto_complete_with_fields": false,
-	"caret_style": "wide",
-	"color_scheme": "Packages/User/Twilight.base16 (SL).tmTheme",
-	"draw_minimap_border": true,
+	"caret_extra_bottom": 0,
+	"caret_extra_top": 0,
+	"caret_extra_width": 3,
+	"caret_style": "solid",
+	"color_scheme": "Packages/User/Twilight (SL).tmTheme",
+	"create_window_at_startup": false,
+	"draw_minimap_border": false,
 	"file_exclude_patterns":
 	[
 		".tags",
@@ -37,7 +41,7 @@
 		"coverage"
 	],
 	"font_face": "Monaco",
-	"font_size": 14.0,
+	"font_size": 13.0,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
@@ -47,18 +51,22 @@
 		"Vintage"
 	],
 	"indent_to_bracket": false,
+	"quick_panel_small": true,
 	"rulers":
 	[
 		80
 	],
 	"save_on_focus_lost": false,
 	"show_tab_close_buttons": true,
+	"sidebar_size_12": true,
 	"soda_classic_tabs": false,
 	"soda_folder_icons": false,
 	"tab_size": 2,
-	"theme": "Default.sublime-theme",
+	"tabs_small": true,
+	"theme": "Flatgrammer.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
-	"word_wrap": false
+	"word_wrap": false,
+	"bold_folder_labels": false
 }
