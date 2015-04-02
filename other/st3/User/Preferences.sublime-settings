@@ -14,11 +14,12 @@
 		}
 	],
 	"auto_complete_with_fields": false,
+	"bold_folder_labels": false,
 	"caret_extra_bottom": 1,
 	"caret_extra_top": 1,
 	"caret_extra_width": 2,
 	"caret_style": "solid",
-	"color_scheme": "Packages/User/Twilight (SL).tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/Jellybeams (SL).tmTheme",
 	"create_window_at_startup": false,
 	"draw_minimap_border": false,
 	"file_exclude_patterns":
@@ -67,6 +68,5 @@
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,
-	"word_wrap": false,
-	"bold_folder_labels": false
+	"word_wrap": false
 }
