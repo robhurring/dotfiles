@@ -8,7 +8,7 @@ set -o vi
 plugins=(brew cap gem heroku osx p h x tmux)
 
 # load our zsh environment
-[[ -f ~/.zsh/init.sh ]] && . ~/.zsh/init.sh
+[[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
 
 # ---> Local Config
 
@@ -56,6 +56,8 @@ export FINDDIR_SEARCH_PATHS="~/Projects:~/XCode"
 #}
 
 # ---> FZF (requires fzf plugin)
+
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # export FUZZY_SEARCH_PATHS="~/Projects:~/XCode:~/Sites/apps:~/Sites/gems:~/Sites"
 alias cds=fuzzy-cds

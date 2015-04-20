@@ -2,7 +2,7 @@ DOTFILES=~/.dotfiles
 BASH=~/.bash
 
 # load our bash environment
-[[ -f $BASH/init.sh ]] && . $BASH/init.sh
+[[ -f $BASH/init.bash ]] && . $BASH/init.bash
 
 # customize like a mofo!
 
