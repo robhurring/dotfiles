@@ -5,24 +5,24 @@
 	<key>comment</key>
 	<string>http://chriskempson.com</string>
 	<key>name</key>
-	<string>Tomorrow Night - Bright</string>
+	<string>Tomorrow Night</string>
 	<key>settings</key>
 	<array>
 		<dict>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#000000</string>
+				<string>#1D1F21</string>
 				<key>caret</key>
-				<string>#9F9F9F</string>
+				<string>#AEAFAD</string>
 				<key>foreground</key>
-				<string>#DEDEDE</string>
+				<string>#C5C8C6</string>
 				<key>invisibles</key>
-				<string>#343434</string>
+				<string>#4B4E55</string>
 				<key>lineHighlight</key>
-				<string>#2A2A2A</string>
+				<string>#282A2E</string>
 				<key>selection</key>
-				<string>#424242</string>
+				<string>#373B41</string>
 			</dict>
 		</dict>
 		<dict>
@@ -44,9 +44,9 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
-				<string>#EEEEEE</string>
+				<string>#CED1CF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -57,7 +57,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#D54E53</string>
+				<string>#CC6666</string>
 			</dict>
 		</dict>
 		<dict>
@@ -68,9 +68,9 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
-				<string>#E78C45</string>
+				<string>#DE935F</string>
 			</dict>
 		</dict>
 		<dict>
@@ -81,9 +81,9 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
-				<string>#E7C547</string>
+				<string>#F0C674</string>
 			</dict>
 		</dict>
 		<dict>
@@ -94,9 +94,9 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
-				<string>#B9CA4A</string>
+				<string>#B5BD68</string>
 			</dict>
 		</dict>
 		<dict>
@@ -107,7 +107,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#70C0B1</string>
+				<string>#8ABEB7</string>
 			</dict>
 		</dict>
 		<dict>
@@ -118,9 +118,9 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
-				<string>#7AA6DA</string>
+				<string>#81A2BE</string>
 			</dict>
 		</dict>
 		<dict>
@@ -131,9 +131,9 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
-				<string>#C397D8</string>
+				<string>#B294BB</string>
 			</dict>
 		</dict>
 		<dict>
@@ -146,7 +146,7 @@
 				<key>background</key>
 				<string>#DF5F5F</string>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#CED2CF</string>
 			</dict>
@@ -174,13 +174,43 @@
 				<key>background</key>
 				<string>#B798BF</string>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#CED2CF</string>
 			</dict>
 		</dict>
-	</array>
+	<dict>
+            <key>name</key>
+            <string>SublimeLinter Gutter Mark</string>
+            <key>scope</key>
+            <string>sublimelinter.gutter-mark</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#FFFFFF</string>
+            </dict>
+        </dict><dict>
+            <key>name</key>
+            <string>SublimeLinter Warning</string>
+            <key>scope</key>
+            <string>sublimelinter.mark.warning</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#DDB700</string>
+            </dict>
+        </dict><dict>
+            <key>name</key>
+            <string>SublimeLinter Error</string>
+            <key>scope</key>
+            <string>sublimelinter.mark.error</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#D02000</string>
+            </dict>
+        </dict></array>
 	<key>uuid</key>
-	<string>33D8C715-AD3A-455B-8DF2-56F708909FFE</string>
+	<string>F96223EB-1A60-4617-92F3-D24D4F13DB09</string>
 </dict>
 </plist>

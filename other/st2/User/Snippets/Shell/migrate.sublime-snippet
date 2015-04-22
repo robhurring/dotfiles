@@ -1,7 +1,0 @@
-<snippet>
-  <content><![CDATA[
-bundle exec rake db:migrate
-]]></content>
-  <tabTrigger>mig</tabTrigger>
-  <scope>source.shell</scope>
-</snippet>
