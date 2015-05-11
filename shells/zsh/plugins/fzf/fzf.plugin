@@ -28,7 +28,7 @@ fuzzy-co() {
   fi
 
   local branch=$(cat << EOS | ruby | fzf -1 -i $flags --query=$query
-    puts %x{git branch -a}.split.map{|b| b.split('/').last}.reject{|b|['*','HEAD','->'].include?(b)}.uniq.sort_by{|b|b.to_s.scan(%r/\\d+/o).map(&:to_i)}
+    puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
 EOS)
 
   if [[ $branch ]]; then
