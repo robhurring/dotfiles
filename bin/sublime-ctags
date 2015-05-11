@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+ctags $@
+if [[ -f Gemfile ]]; then
+  ctags $@ -a $(bundle show --paths)
+fi

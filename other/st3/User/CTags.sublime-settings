@@ -14,7 +14,7 @@
     // built automatically using the values below. For example:
     //   GOOD: "command": "/usr/bin/ctags"
     //   BAD:  "command": "ctags -R -f .tags --exclude=some/path"
-    "command": "/usr/local/bin/ctags",
+    "command": "~/bin/sublime-ctags",
 
     // Set to false to disable recursive search for ctag generation. This
     // translates the `-R` parameter
@@ -51,6 +51,7 @@
     // Paths to additional tag files to include in tag search. This is a list
     // of items in the form [["language", "platform"], "path"]
     "extra_tag_paths": [
+        [["source.ruby.rails", "osx"], "~"]
     ],
 
     // Additional tag files to search
