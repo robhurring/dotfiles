@@ -39,6 +39,7 @@
 		"CVS",
 		"tmp",
 		"log",
+		"tags",
 		"coverage"
 	],
 	"font_face": "Monaco",

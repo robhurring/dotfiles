@@ -9,6 +9,10 @@
   { "keys": ["super+v"], "command": "paste_and_indent" },
   { "keys": ["super+shift+v"], "command": "paste" },
 
+  // command pallette movement
+  { "keys": ["ctrl+j"], "command": "move", "args":{"by": "lines", "forward": true}, "context": []},
+  { "keys": ["ctrl+k"], "command": "move", "args":{"by": "lines", "forward": false}, "context": []},
+
   // oragami plugin
   { "keys": ["super+shift+]"], "command": "travel_to_pane", "args": {"direction": "right"} },
   { "keys": ["super+shift+["], "command": "travel_to_pane", "args": {"direction": "left"} },
@@ -58,38 +62,38 @@
   // },
 
   // block nav plugin
-  {
-    "keys" : [ "ctrl+k" ],
-    "command" : "block_nav",
-    "args" : {
-      "v_dir" : -1,
-      "depth_offset" : 0
-    }
-  },
-  {
-    "keys" : [ "ctrl+h" ],
-    "command" : "block_nav",
-    "args" : {
-      "v_dir" : -1,
-      "depth_offset" : -1
-    }
-  },
-  {
-    "keys" : [ "ctrl+l" ],
-    "command" : "block_nav",
-    "args" : {
-      "v_dir" : 1,
-      "depth_offset" : 1
-    }
-  },
-  {
-    "keys" : [ "ctrl+j" ],
-    "command" : "block_nav",
-    "args" : {
-      "v_dir" : 1,
-      "depth_offset" : 0
-    }
-  },
+  // {
+  //   "keys" : [ "ctrl+k" ],
+  //   "command" : "block_nav",
+  //   "args" : {
+  //     "v_dir" : -1,
+  //     "depth_offset" : 0
+  //   }
+  // },
+  // {
+  //   "keys" : [ "ctrl+h" ],
+  //   "command" : "block_nav",
+  //   "args" : {
+  //     "v_dir" : -1,
+  //     "depth_offset" : -1
+  //   }
+  // },
+  // {
+  //   "keys" : [ "ctrl+l" ],
+  //   "command" : "block_nav",
+  //   "args" : {
+  //     "v_dir" : 1,
+  //     "depth_offset" : 1
+  //   }
+  // },
+  // {
+  //   "keys" : [ "ctrl+j" ],
+  //   "command" : "block_nav",
+  //   "args" : {
+  //     "v_dir" : 1,
+  //     "depth_offset" : 0
+  //   }
+  // },
 
   // rubytest
   { "keys": ["super+ctrl+r"], "command": "run_single_ruby_test",
@@ -105,9 +109,6 @@
                 } ]
   }, // test file
 
-
   { "keys": ["super+ctrl+e"], "command": "run_last_ruby_test" }, // test last test file
-
   { "keys": ["super+ctrl+x"], "command": "show_test_panel" }, // show test panel
-
 ]
