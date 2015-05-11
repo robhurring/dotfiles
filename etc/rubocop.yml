@@ -142,7 +142,7 @@ Style/BarePercentLiterals:
     - bare_percent
 
 Style/BracesAroundHashParameters:
-  EnforcedStyle: no_braces
+  EnforcedStyle: context_dependent
   SupportedStyles:
     # The `braces` style enforces braces around all method parameters that are
     # hashes.
@@ -387,6 +387,7 @@ Style/PredicateName:
     - is_
     - has_
     - have_
+  Enabled: false
 
 Style/RaiseArgs:
   EnforcedStyle: exploded
@@ -538,19 +539,19 @@ Style/WordArray:
   # The regular expression WordRegex decides what is considered a word.
   WordRegex: !ruby/regexp '/\A[\p{Word}]+\z/'
 
-##################### Metrics ##################################
+# Metrics
 
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or
   # a Float.
-  Max: 15
+  Max: 30
 
 Metrics/BlockNesting:
   Max: 3
 
 Metrics/ClassLength:
   CountComments: false  # count full line comments?
-  Max: 100
+  Max: 150
 
 # Avoid complex methods.
 Metrics/CyclomaticComplexity:
