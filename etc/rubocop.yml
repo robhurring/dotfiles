@@ -251,6 +251,7 @@ Style/FileName:
   # File names listed in AllCops:Include are excluded by default. Add extra
   # excludes here.
   Exclude: []
+  Enabled: false
 
 # Checks use of for or each in multiline loops.
 Style/For:

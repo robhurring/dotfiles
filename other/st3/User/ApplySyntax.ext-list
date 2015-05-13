@@ -1,4 +1,8 @@
 {
+	"HTML (Rails)":
+	[
+		"html.erb"
+	],
 	"PHP":
 	[
 		"inc",
