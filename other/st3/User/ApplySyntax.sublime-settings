@@ -47,6 +47,12 @@
         ]
       },
       {
+        "name": "Babel/JavaScript (Babel)",
+        "rules": [
+          {"file_name": ".*\\.es6$"},
+        ]
+      },
+      {
           "name": "ReactJS/syntax/jsx/tmLanguage/JavaScript (JSX)",
           "rules": [
             {"file_name": ".*\\.jsx$"},
