@@ -21,9 +21,19 @@
 				[
 				]
 			},
-			"jshint":
+			"eslint":
 			{
 				"@disable": false,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				]
+			},
+			"jshint":
+			{
+				"@disable": true,
 				"args":
 				[
 				],
@@ -43,7 +53,7 @@
 			},
 			"jsxhint":
 			{
-				"@disable": false,
+				"@disable": true,
 				"args":
 				[
 				],

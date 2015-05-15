@@ -57,6 +57,12 @@
           "rules": [
             {"file_name": ".*\\.jsx$"},
           ]
-      }
+      },
+      {
+          "name": "Babel/JSON (Babel).tmLanguage",
+          "rules": [
+            {"file_name": ".*\\.es6$"},
+          ]
+      },
     ]
 }
