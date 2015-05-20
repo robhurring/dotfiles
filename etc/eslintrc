@@ -33,11 +33,13 @@
     "mocha": true,       // adds all of the Mocha testing global variables.
     "jasmine": true,     // adds all of the Jasmine testing global variables for version 1.3 and 2.0.
     "jquery": true      // jquery global variables.
+
   },
 
   "globals": {
     // e.g. "angular": true
-    "angular": true
+    "angular": true,
+    "react": true
   },
 
   "plugins": [
@@ -62,6 +64,7 @@
     "wrap-iife": [1, "any"],
     "no-use-before-define": 2,
     "no-undef": 2,
-    "brace-style": [1, "1tbs"]
+    "brace-style": [1, "1tbs"],
+    "no-underscore-dangle": 0
   }
 }

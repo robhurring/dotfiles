@@ -13,7 +13,7 @@
 		{
 			"coffee":
 			{
-				"@disable": false,
+				"@disable": true,
 				"args":
 				[
 				],
