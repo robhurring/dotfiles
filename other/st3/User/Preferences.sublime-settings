@@ -49,7 +49,6 @@
 	"ignored_packages":
 	[
 		"Vintage",
-		"JavaScript",
 		"SassBeautify"
 	],
 	"indent_to_bracket": false,
