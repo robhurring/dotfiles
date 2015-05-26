@@ -3,6 +3,13 @@
 	[
 		"html.erb"
 	],
+	"JSON":
+	[
+		".csslintrc",
+		".jscsrc",
+		".jshintrc",
+		".eslintrc"
+	],
 	"PHP":
 	[
 		"inc",
