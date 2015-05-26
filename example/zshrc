@@ -5,7 +5,7 @@ ZSH_THEME=default
 EDITOR=vim
 set -o vi
 
-plugins=(brew cap gem heroku osx p h x tmux)
+plugins=(osx tmux fzf)
 
 # load our zsh environment
 [[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
@@ -13,8 +13,8 @@ plugins=(brew cap gem heroku osx p h x tmux)
 # ---> Local Config
 
 # Custom matcher for my projects colder
-#PATH_MATCHERS+=("~/Projects")
-#PATH_REPLACER+=("%B%F{yellow}projects%b")
+PATH_MATCHERS+=("~/Projects")
+PATH_REPLACER+=("%B%F{yellow}projects%b")
 
 # Custom prompt color
 THEME_PROMPT_COLOR="yellow"
@@ -22,50 +22,56 @@ THEME_PROMPT_COLOR="yellow"
 # Add user and host before the path
 THEME_PATH_BEFORE="%n@%m "
 
-# Used in the `finddir` command
-export FINDDIR_SEARCH_PATHS="~/Projects:~/XCode"
-
 # ---> Some common aliases
-#alias less='less -R'
-#alias -g ls="ls $LS_OPTIONS"
-#alias cdd='cd ~/Desktop'
-#alias c='cd /usr/local/Cellar'
-#alias bc='bundle console'
-#alias fm=foreman
-#alias fms="foreman start"
-#alias bower='noglob bower'
-#alias rake='noglob rake'
-#alias c='cd /usr/local/Cellar'
-#alias grep='pcregrep --color=auto'
+# alias less='less -R'
+# alias -g ls="ls $LS_OPTIONS"
+# alias cdd='cd ~/Desktop'
+# alias bc='bundle console'
+# alias c='cd /usr/local/Cellar'
+# alias grep='pcregrep --color=auto'
+
+# Development
+# alias e=subl
+# alias cdg="cd $GOPATH/src/github.com/robhurring"
+# alias rsa='auto-bundle-exec rspec -fd'
+# alias rs='rsa --fail-fast'
+# alias rake="auto-bundle-exec rake"
+# alias guard="auto-bundle-exec guard"
+# alias pry="auto-bundle-exec pry"
 
 # Tmux (use with tmux plugin)
-#alias tml="tmux list-sessions"
-#alias tma=tmux-attach-or-new
-#alias tms=tmux-force-switch
-#alias tmd="tmux detach"
-#alias tmx="tmux kill-session -t"
+# alias tml="tmux list-sessions"
+# alias tma=tmux-attach-or-new
+# alias tms=tmux-force-switch
+# alias tmd="tmux detach"
+# alias tmx="tmux kill-session -t"
 
 # Tig
-#alias ts='tig status'
-#alias tb='tig blame'
-#alias ta='tig --all'
-#alias ts='tig status'
-#alias tg='tig grep'
-#function tl(){
-  #$(git log --all --decorate --format='commit %h %an: %s' $* | tig)
-#}
+# alias ts='tig status'
+# alias tb='tig blame'
+# alias ta='tig --all'
+# alias ts='tig status'
+# alias tg='tig grep'
+# function tl(){
+#   $(git log --all --decorate --format='commit %h %an: %s' $* | tig)
+# }
 
 # ---> FZF (requires fzf plugin)
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # export FUZZY_SEARCH_PATHS="~/Projects:~/XCode:~/Sites/apps:~/Sites/gems:~/Sites"
-alias cds=fuzzy-cds
-alias co=fuzzy-co
-alias eb=fuzzy-bundle-open
-alias ef=fuzzy-edit
-alias cdf=fuzzy-cd
-alias fkill=fuzzy-kill
+# alias cds=fuzzy-cds
+# alias co=fuzzy-co
+# alias eb=fuzzy-bundle-open
+# alias ef=fuzzy-edit
+# alias cdf=fuzzy-cd
+# alias fkill=fuzzy-kill
+
+# ---> Golang
+# export GOPATH=$HOME/Go
+# export GOBIN=$GOPATH/bin
+# export PATH="$PATH:$GOBIN"
 
 # ---> Misc
 
@@ -88,3 +94,5 @@ alias fkill=fuzzy-kill
 #   DBUSER=${DBUSER:-postgres}
 #   pg_restore --verbose --clean --no-acl --no-owner -h $DBHOST -U $DBUSER -d $@
 # }
+
+# export PATH="$PATH:$HOME/.rvm/bin"
