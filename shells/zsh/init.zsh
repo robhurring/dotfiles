@@ -30,6 +30,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt AUTO_PARAM_SLASH
 setopt AUTO_MENU
+setopt NULL_GLOB
 
 bindkey '^r'   history-beginning-search-backward
 bindkey '^t'   history-beginning-search-forward
