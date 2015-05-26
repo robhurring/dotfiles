@@ -12,7 +12,7 @@ EOS)
 cd "$dir"
 }
 
-# FZF: git checkout
+# # FZF: git checkout
 fuzzy-co() {
   local query=$1
   local flags
@@ -31,7 +31,7 @@ fuzzy-co() {
     puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
 EOS)
 
-  if [[ $branch ]]; then
+  if [[ $branch != "" ]]; then
     [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
     git checkout $branch
   fi
@@ -43,7 +43,7 @@ fuzzy-bundle-open() {
 
   if [[ -f Gemfile ]]; then
     gem=$(bundle show|grep -v "^Gems"|sed -e 's/([^()]*)//g'|sed -e 's/[ *]*//g'|fzf -1 --query=$1)
-    [[ $gem ]] && $EDITOR bundle open $gem
+    [[ $gem != "" ]] && $EDITOR bundle open $gem
   fi
 }
 
@@ -53,23 +53,54 @@ fuzzy-bundle-show() {
 
   if [[ -f Gemfile ]]; then
     gem=$(bundle show|grep -v "^Gems"|sed -e 's/([^()]*)//g'|sed -e 's/[ *]*//g'|fzf -1 --query=$1)
-    [[ $gem ]] && bundle show $gem
+    [[ $gem != "" ]] && bundle show $gem
   fi
 }
 
 # FZF: edit file
 fuzzy-edit() {
   local file=$(fzf --query="$1" --select-1 --exit-0)
-  [[ $file ]] && $EDITOR "$file"
+  [[ $file != "" ]] && $EDITOR "$file"
 }
 
 # FZF: cd
 fuzzy-cd() {
   local dir=$(find \. -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m --query=$1)
-  [[ $dir ]] && cd "$dir"
+  [[ $dir != "" ]] && cd "$dir"
 }
 
 # FZF: fuzzy kill process
 fuzzy-kill() {
   ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
+}
+
+fuzzy-search-ls() {
+  for dir in ${(s,:,)FUZZY_SEARCH_PATHS}; do  # split by ':'
+    print -l ${~dir}/*                        # force $dir to expand glob
+  done
+}
+
+fuzzy-search-do() {
+  local query
+  local cmd
+  local dir
+
+  if [[ $# -gt 1 ]]; then
+    query=$1
+    cmd=${@:2}
+  else
+    cmd=$1
+  fi
+
+  dir=$(fuzzy-search-by-name $query)
+  [[ $dir != "" ]] && eval "$cmd $dir"
+}
+
+fuzzy-search-by-name() {
+  local name=$(fuzzy-search-ls | xargs basename | fzf -1 --reverse --query=$1)
+  echo $(fuzzy-search-path $name)
+}
+
+fuzzy-search-path() {
+  fuzzy-search-ls | grep "\/$1$"
 }
