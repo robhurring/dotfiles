@@ -1,6 +1,5 @@
 {
   // http://eslint.org/docs/rules/
-
   "ecmaFeatures": {
     "arrowFunctions": true,                    // enable arrow functions
     "binaryLiterals": true,                    // enable binary literals
@@ -47,16 +46,16 @@
   ],
 
   "rules": {
-    "comma-dangle": "never",
-    "camelcase": "never",
+    "comma-dangle": 0,
+    "camelcase": 0,
     "eol-last": 1,
     "use-isnan": 1,
     "eqeqeq": [1, "smart"],
     "dot-location": [2, "property"],
     "no-multiple-empty-lines": [1, {"max": 2}],
     "no-trailing-spaces": 1,
-    "quotes": "avoid-escape",
-    "strict": "function",
+    "quotes": [2, "single", "avoid-escape"],
+    "strict": [2, "function"],
     "no-extra-strict": 0,
     "complexity": [2, 5],
     "max-depth": [2, 3],
