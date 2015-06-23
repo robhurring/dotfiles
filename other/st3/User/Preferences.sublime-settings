@@ -19,7 +19,7 @@
 	"caret_extra_top": 1,
 	"caret_extra_width": 2,
 	"caret_style": "solid",
-	"color_scheme": "Packages/User/Twilight (SL).tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/Twilight (SL).tmTheme",
 	"create_window_at_startup": false,
 	"draw_minimap_border": false,
 	"file_exclude_patterns":
@@ -48,8 +48,9 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"SassBeautify",
 		"Vintage",
-		"SassBeautify"
+		"JavaScript"
 	],
 	"indent_to_bracket": false,
 	"quick_panel_small": true,
@@ -64,7 +65,7 @@
 	"soda_folder_icons": false,
 	"tab_size": 2,
 	"tabs_small": true,
-	"theme": "Flatgrammer.sublime-theme",
+	"theme": "Material-Theme.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true,

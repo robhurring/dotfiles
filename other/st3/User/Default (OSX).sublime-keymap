@@ -1,4 +1,7 @@
 [
+  // Fkeys
+  { "keys": ["f10"], "command": "reindent"},
+
   // default override
   { "keys": ["super+shift+a"], "command": "expand_selection", "args": {"to": "brackets"} },
   { "keys": ["super+alt+p"], "command": "prompt_select_workspace" },
@@ -97,18 +100,18 @@
 
   // rubytest
   { "keys": ["super+ctrl+r"], "command": "run_single_ruby_test",
-    "context": [ { "key": "selector", "operator": "equal",
-                   "operand": "source.ruby, source.rspec, text.gherkin.feature"
-               } ]
+  "context": [ { "key": "selector", "operator": "equal",
+  "operand": "source.ruby, source.rspec, text.gherkin.feature"
+  } ]
   }, // single test
 
 
   { "keys": ["super+ctrl+t"], "command": "run_all_ruby_test",
-      "context": [ { "key": "selector", "operator": "equal",
-         "operand": "source.ruby, source.rspec, text.gherkin.feature"
-                } ]
+  "context": [ { "key": "selector", "operator": "equal",
+  "operand": "source.ruby, source.rspec, text.gherkin.feature"
+  } ]
   }, // test file
 
   { "keys": ["super+ctrl+e"], "command": "run_last_ruby_test" }, // test last test file
   { "keys": ["super+ctrl+x"], "command": "show_test_panel" }, // show test panel
-]
+  ]
