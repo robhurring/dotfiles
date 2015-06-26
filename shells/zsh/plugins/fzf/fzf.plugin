@@ -4,6 +4,9 @@
 # Paths to search for `fuzzy-cds` command.
 export FUZZY_SEARCH_PATHS="~/Sites:~/Sites/apps:~/Sites/gems:~/Projects:~/XCode"
 
+# FZF default settings
+export FZF_DEFAULT_OPTS="--ansi --reverse --inline-info --extended"
+
 # FZF: cd to `FUZZY_SEARCH_PATHS`
 fuzzy-cds() {
 local dir=$(cat << EOS | ruby | fzf -1 -e -0 --query=$1
