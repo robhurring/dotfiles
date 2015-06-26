@@ -15,30 +15,30 @@ EOS)
 cd "$dir"
 }
 
-# # FZF: git checkout
-fuzzy-co() {
-  local query=$1
-  local flags
+# FZF: git checkout
+# fuzzy-co() {
+#   local query=$1
+#   local flags
 
-  if [[ $1 =~ ^\- ]]; then
-    flags=${@:1:-1}
-    query=${@[-1]}
-  fi
+#   if [[ $1 =~ ^\- ]]; then
+#     flags=${@:1:-1}
+#     query=${@[-1]}
+#   fi
 
-  if [[ $query =~ /^- ]]; then
-    flags="$flags $query"
-    query=""
-  fi
+#   if [[ $query =~ /^- ]]; then
+#     flags="$flags $query"
+#     query=""
+#   fi
 
-  local branch=$(cat << EOS | ruby | fzf -1 -i $flags --query=$query
-    puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
-EOS)
+#   local branch=$(cat << EOS | ruby | fzf -1 -i $flags --query=$query
+#     puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
+# EOS)
 
-  if [[ $branch != "" ]]; then
-    [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
-    git checkout $branch
-  fi
-}
+#   if [[ $branch != "" ]]; then
+#     [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
+#     git checkout $branch
+#   fi
+# }
 
 # FZF: edit gem
 fuzzy-bundle-open() {
@@ -58,18 +58,6 @@ fuzzy-bundle-show() {
     gem=$(bundle show|grep -v "^Gems"|sed -e 's/([^()]*)//g'|sed -e 's/[ *]*//g'|fzf -1 --query=$1)
     [[ $gem != "" ]] && bundle show $gem
   fi
-}
-
-# FZF: edit file
-fuzzy-edit() {
-  local file=$(fzf --query="$1" --select-1 --exit-0)
-  [[ $file != "" ]] && $EDITOR "$file"
-}
-
-# FZF: cd
-fuzzy-cd() {
-  local dir=$(find \. -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m --query=$1)
-  [[ $dir != "" ]] && cd "$dir"
 }
 
 # FZF: fuzzy kill process
@@ -106,4 +94,91 @@ fuzzy-search-by-name() {
 
 fuzzy-search-path() {
   fuzzy-search-ls | grep "\/$1$"
+}
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+fuzzy-edit() {
+  local file
+  file=$(fzf-tmux --query="$1" --select-1 --exit-0)
+  [ -n "$file" ] && ${EDITOR:-vim} "$file"
+}
+
+# fd - cd to selected directory
+fuzzy-cd() {
+  DIR=`find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf-tmux` \
+    && cd "$DIR"
+}
+
+# cdf - cd into the directory of the selected file
+fuzzy-cd-file() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# fbr - checkout git branch (including remote branches)
+fuzzy-br() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# fco - checkout git branch/tag
+fuzzy-co() {
+  local tags branches target
+  tags=$(
+    git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+  branches=$(
+    git branch --all | grep -v HEAD             |
+    sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+    sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$tags"; echo "$branches") |
+    fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return
+  git checkout $(echo "$target" | awk '{print $2}')
+}
+
+# fcoc - checkout git commit
+fuzzy-co-commit() {
+  local commits commit
+  commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf --tac +s +m -e) &&
+  git checkout $(echo "$commit" | sed "s/ .*//")
+}
+
+# fshow - git commit browser (enter for show, ctrl-d for diff, backtick ` toggles sort)
+fuzzy-show() {
+  local out shas sha q k
+  while out=$(
+      git log --graph --color=always \
+          --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+      fzf --ansi --multi --no-sort --reverse --query="$q" \
+          --print-query --expect=ctrl-o,ctrl-d --toggle-sort=\`); do
+    q=$(head -1 <<< "$out")
+    k=$(head -2 <<< "$out" | tail -1)
+    shas=$(sed '1,2d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
+    [ -z "$shas" ] && continue
+    if [ "$k" = 'ctrl-d' ]; then
+      git diff --color=always $shas | less -R
+    elif [ "$k" = 'ctrl-o' ]; then
+      git checkout $shas
+    else
+      for sha in $shas; do
+        git show --color=always $sha | less -R
+      done
+    fi
+  done
+}
+
+# fcs - get git commit sha
+# example usage: git rebase -i `fcs`
+fuzzy-sha() {
+  local commits commit
+  commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
+  echo -n $(echo "$commit" | sed "s/ .*//")
 }
