@@ -16,29 +16,29 @@ cd "$dir"
 }
 
 # FZF: git checkout
-# fuzzy-co() {
-#   local query=$1
-#   local flags
+fuzzy-co() {
+  local query=$1
+  local flags
 
-#   if [[ $1 =~ ^\- ]]; then
-#     flags=${@:1:-1}
-#     query=${@[-1]}
-#   fi
+  if [[ $1 =~ ^\- ]]; then
+    flags=${@:1:-1}
+    query=${@[-1]}
+  fi
 
-#   if [[ $query =~ /^- ]]; then
-#     flags="$flags $query"
-#     query=""
-#   fi
+  if [[ $query =~ /^- ]]; then
+    flags="$flags $query"
+    query=""
+  fi
 
-#   local branch=$(cat << EOS | ruby | fzf -1 -i $flags --query=$query
-#     puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
-# EOS)
+  local branch=$(cat << EOS | ruby | fzf -1 -i $flags --query=$query
+    puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
+EOS)
 
-#   if [[ $branch != "" ]]; then
-#     [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
-#     git checkout $branch
-#   fi
-# }
+  if [[ $branch != "" ]]; then
+    [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
+    git checkout $branch
+  fi
+}
 
 # FZF: edit gem
 fuzzy-bundle-open() {
@@ -128,7 +128,7 @@ fuzzy-br() {
 }
 
 # fco - checkout git branch/tag
-fuzzy-co() {
+fuzzy-checkout() {
   local tags branches target
   tags=$(
     git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
