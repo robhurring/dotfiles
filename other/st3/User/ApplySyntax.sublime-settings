@@ -36,7 +36,7 @@
       },
       {
         "name": "ShellScript/Shell-Unix-Generic",
-        "extensions": ["bash", "sh", "zsh"],
+        "extensions": ["bash", "sh", "zsh", "plugin"],
         "rules": [
           {"file_name": ".*\\.bash.*$"},
           {"file_name": ".*\\.tigrc.*$"},
