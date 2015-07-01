@@ -22,7 +22,6 @@ function prompt_rvm {
   echo $rbv
 }
 
-
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=""
 PATH_MATCHERS=("$HOME")
@@ -60,7 +59,7 @@ _git_repo_path() {
 
 _in_git_repo() {
   local repo_path=$(_git_repo_path)
-  [[ -d $repo_path ]] && [[ $repo_path != "~" ]] && [[ $repo_path != "$HOME/.git" ]]
+  [[ -d $repo_path ]] && [[ $repo_path != "." ]] && [[ $repo_path != "~" ]] && [[ $repo_path != "$HOME/.git" ]]
 }
 
 _git_current_branch() {
