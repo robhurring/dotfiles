@@ -3,12 +3,6 @@
 	[
 		"html.erb"
 	],
-	"JSON":
-	[
-		".csslintrc",
-		".jscsrc",
-		".jshintrc"
-	],
 	"PHP":
 	[
 		"inc",
@@ -38,6 +32,7 @@
 	"Shell-Unix-Generic":
 	[
 		"bash",
+		"plugin",
 		"sh",
 		"zsh"
 	],
