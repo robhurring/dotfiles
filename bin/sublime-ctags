@@ -4,8 +4,9 @@ set -e
 
 # ctags doesn't handle negative look behinds so instead this script
 # strips false positives out of a tags file.
-LOG=~/Desktop/ctags-log.txt
-# LOG=/dev/null
+
+# logging, if needed
+LOG=/dev/null
 
 # clear log
 echo "[tagging] `pwd`" >$LOG
