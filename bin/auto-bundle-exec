@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+cmd=$1
+binfile="./bin/$cmd"
+
+if [[ -f $binfile ]]; then
+  $binfile ${@:2}
+else
+  if [[ -f ./Gemfile ]]; then
+    bundle exec $*
+  else
+    $*
+  fi
+fi
