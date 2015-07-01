@@ -1,5 +1,54 @@
 #! /usr/bin/env bash
-ctags $@
+# See: http://raygrasso.com/posts/2015/04/using-ctags-on-modern-javascript.html
+set -e
+
+# ctags doesn't handle negative look behinds so instead this script
+# strips false positives out of a tags file.
+LOG=~/Desktop/ctags-log.txt
+# LOG=/dev/null
+
+# clear log
+echo "[tagging] `pwd`" >$LOG
+echo "[cmd] ctags $@"
+
+# code tagging
+ctags "$@" 2>>$LOG
+
+# tag gemfile if present
 if [[ -f Gemfile ]]; then
-  ctags $@ -a $(bundle show --paths)
+  # load rvm if present
+  if [[ (-f ".ruby-gemset") || (-f ".ruby-version") || (-f ".rvmrc") ]]; then
+    source "$rvm_path/scripts/rvm"
+    rvm use . >> $LOG
+  fi
+  echo "[tagging] bundle" >> $LOG
+
+  bundle_paths=$(bundle show --paths 2>>$LOG)
+  echo "[cmd] ctags $@ -a $bundle_paths"
+  ctags $@ -a $bundle_paths 2>>$LOG
+else
+  echo "[skipping] bundle" >> $LOG
 fi
+
+FILE="tags"
+
+while [[ $# > 1 ]]
+do
+key="$1"
+
+case $key in
+    -f)
+    FILE="$2"
+    shift
+    ;;
+esac
+shift
+done
+
+# Filter out false matches from class method regex
+echo "[filter:$FILE] false matches - class methods" >> $LOG
+sed -i '' -E '/^(if|switch|function|module\.exports|it|describe)    .+language:js$/d' $FILE
+
+# Filter out false matches from object definition regex
+echo "[filter:$FILE] false matches - object definitions" >> $LOG
+sed -i '' -E '/var[     ]+[a-zA-Z0-9_$]+[   ]+=[    ]+require\(.+language:js$/d' $FILE

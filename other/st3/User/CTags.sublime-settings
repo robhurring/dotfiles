@@ -29,6 +29,9 @@
     "opts" : [
         "--exclude=coverage",
         "--exclude=.git",
+        "--exclude=log",
+        "--exclude=db",
+        "--tag-relative=yes",
         "--fields=+KSn"
     ],
 
