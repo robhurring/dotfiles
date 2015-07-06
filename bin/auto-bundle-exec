@@ -2,13 +2,19 @@
 
 cmd=$1
 binfile="./bin/$cmd"
+showcmd=${showcmd:-"0"}
+
+run() {
+  [[ "$showcmd" == "1" ]] && >&2 echo $1
+  eval $1
+}
 
 if [[ -f $binfile ]]; then
-  $binfile ${@:2}
+  run "$binfile ${@:2}"
 else
   if [[ -f ./Gemfile ]]; then
-    bundle exec $*
+    run "bundle exec $*"
   else
-    $*
+    run "$*"
   fi
 fi
