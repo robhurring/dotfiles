@@ -132,7 +132,8 @@ fuzzy-br() {
 
 # fco - checkout git branch/tag
 fuzzy-checkout() {
-  local tags branches target
+  local tags branches target query
+  query=$1
   tags=$(
     git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
   branches=$(
@@ -140,8 +141,8 @@ fuzzy-checkout() {
     sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
     sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
   target=$(
-    (echo "$tags"; echo "$branches") |
-    $FZF_COMMAND -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return
+    (echo "$branches"; echo "$tags") |
+    $FZF_COMMAND --no-hscroll --ansi +m -d "\t" -n 2 -1 --query=$query) || return
   git checkout $(echo "$target" | awk '{print $2}')
 }
 
