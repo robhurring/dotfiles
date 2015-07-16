@@ -2,11 +2,12 @@
 # See: http://raygrasso.com/posts/2015/04/using-ctags-on-modern-javascript.html
 set -e
 
-# ctags doesn't handle negative look behinds so instead this script
-# strips false positives out of a tags file.
-
 # logging, if needed
-LOG=/dev/null
+# LOG=/dev/null
+LOG=/tmp/ctags-debug.txt
+
+# set to "1" to filter the tags
+FILTER_TAGS=${FILTER_TAGS:1}
 
 # clear log
 echo "[tagging] `pwd`" >$LOG
@@ -46,10 +47,14 @@ esac
 shift
 done
 
-# Filter out false matches from class method regex
-echo "[filter:$FILE] false matches - class methods" >> $LOG
-sed -i '' -E '/^(if|switch|function|module\.exports|it|describe)    .+language:js$/d' $FILE
+# ctags doesn't handle negative look behinds so instead this script
+# strips false positives out of a tags file.
+if [[ $FILTER_TAGS -eq 1 ]]; then
+  # Filter out false matches from class method regex
+  echo "[filter:$FILE] false matches - class methods" >> $LOG
+  sed -i '' -E '/^(if|switch|function|module\.exports|it|describe)    .+language:js$/d' $FILE
 
-# Filter out false matches from object definition regex
-echo "[filter:$FILE] false matches - object definitions" >> $LOG
-sed -i '' -E '/var[     ]+[a-zA-Z0-9_$]+[   ]+=[    ]+require\(.+language:js$/d' $FILE
+  # Filter out false matches from object definition regex
+  echo "[filter:$FILE] false matches - object definitions" >> $LOG
+  sed -i '' -E '/var[     ]+[a-zA-Z0-9_$]+[   ]+=[    ]+require\(.+language:js$/d' $FILE
+fi
