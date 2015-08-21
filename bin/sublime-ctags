@@ -7,7 +7,7 @@ set -e
 LOG=/tmp/ctags-debug.txt
 
 # set to "1" to filter the tags
-FILTER_TAGS=${FILTER_TAGS:1}
+FILTER_TAGS=${FILTER_TAGS:0}
 
 # clear log
 echo "[tagging] `pwd`" >$LOG

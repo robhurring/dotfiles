@@ -32,6 +32,7 @@
         "name": "Ruby/Ruby",
         "rules": [
           {"file_name": ".*\\.irbrc.*$"},
+          {"first_line": "^#\\!(?:.+)env ruby"}
         ]
       },
       {
@@ -43,7 +44,7 @@
           {"file_name": ".*\\.powrc.*$"},
           {"file_name": ".*\\.z(shrc|shenv|profile|login|logout).*$"},
           {"file_name": ".*\\.(bash|sh|zsh)$"},
-          {"first_line": "^#\\!(?:.+)env"}
+          {"first_line": "^#\\!(?:.+)env$"}
         ]
       },
       {

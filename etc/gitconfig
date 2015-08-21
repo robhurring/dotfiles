@@ -98,3 +98,5 @@
   insteadOf = "git://github.com/"
 [url "git@gist.github.com:"]
   insteadOf = "gist:"
+[mailmap]
+	file = ~/.mailmap

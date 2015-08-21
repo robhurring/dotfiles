@@ -1,0 +1,35 @@
+<snippet>
+  <content>
+<![CDATA[
+describe ${1:MyAction} do
+  let(:interactor) { described_class.new(params) }
+  let(:context) { interactor.context }
+
+  context '${2:when action succeeds}' do
+    let(:params) do
+      $3
+    end
+
+    it 'is successful' do
+      interactor.run
+      expect(context).to be_success
+    end
+  end
+
+  context '${4:when action fails}' do
+    let(:params) do
+      $5
+    end
+
+    it 'is a failure' do
+      interactor.run
+      expect(context).to be_failure
+    end
+  end
+end
+
+]]></content>
+  <tabTrigger>ispec</tabTrigger>
+  <scope>source.ruby</scope>
+  <description>Interactor rspec stub</description>
+</snippet>
