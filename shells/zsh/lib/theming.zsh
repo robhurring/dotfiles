@@ -1,3 +1,7 @@
+DOT="$(cd "$(dirname "$0")"; pwd)"
+
+source "$DOT/gitlib.sh"
+
 export LS_OPTIONS='--color=auto'
 export CLICOLOR='Yes'
 export LSCOLORS='exgxFxdxCxdxgxhbadexex'
@@ -53,25 +57,6 @@ job_prompt_info() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && print -n "${THEME_JOB_BEFORE}${THEME_JOB_ICON}${THEME_JOB_AFTER}"
 }
 
-_git_repo_path() {
-  git rev-parse --git-dir 2>/dev/null
-}
-
-_in_git_repo() {
-  local repo_path=$(_git_repo_path)
-  [[ -d $repo_path ]] && [[ $repo_path != "." ]] && [[ $repo_path != "~" ]] && [[ $repo_path != "$HOME/.git" ]]
-}
-
-_git_current_branch() {
-  if _in_git_repo; then
-    git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
-  fi
-}
-
-_git_head_commit() {
-  git rev-parse --short HEAD 2>/dev/null
-}
-
 THEME_GIT_BEFORE_BRANCH=""
 THEME_GIT_AFTER_BRANCH=""
 git_branch() {
@@ -85,6 +70,33 @@ git_sha() {
 # _git_head_commit
   local sha=$(_git_head_commit)
   [[ -n $sha ]] && print -n "${THEME_GIT_BEFORE_SHA}${sha}${THEME_GIT_AFTER_SHA}"
+}
+
+THEME_GIT_COMMIT_DIFF_BEFORE=""
+THEME_GIT_COMMIT_DIFF_AFTER=""
+THEME_GIT_COMMIT_DIFF_AHEAD="%F{green}"
+THEME_GIT_COMMIT_DIFF_BEHIND="%F{red}"
+THEME_GIT_COMMIT_DIFF_DIVERGED="%F{yellow}"
+THEME_GIT_BEHIND_REMOTE="↓"
+THEME_GIT_AHEAD_REMOTE="↑"
+THEME_GIT_DIVERGED_REMOTE="⇵"
+git_commits_diff() {
+  local local_commits
+
+  if remote_branch="$(_git_remote_branch_name)"; then
+    local_ahead="$(_git_commits_ahead_of_remote "$remote_branch")"
+    local_behind="$(_git_commits_behind_of_remote "$remote_branch")"
+
+    if [[ "$local_behind" -gt "0" && "$local_ahead" -gt "0" ]]; then
+      local_commits="${THEME_GIT_COMMIT_DIFF_DIVERGED}${local_behind}${THEME_GIT_DIVERGED_REMOTE}$local_ahead%f"
+    elif [[ "$local_behind" -gt "0" ]]; then
+      local_commits="${THEME_GIT_COMMIT_DIFF_BEHIND}${local_behind}${THEME_GIT_BEHIND_REMOTE}%f"
+    elif [[ "$local_ahead" -gt "0" ]]; then
+      local_commits="${THEME_GIT_COMMIT_DIFF_AHEAD}${local_ahead}${THEME_GIT_AHEAD_REMOTE}%f"
+    fi
+  fi
+
+  [[ -n $local_commits ]] && print -n "${THEME_GIT_COMMIT_DIFF_BEFORE}${local_commits}${THEME_GIT_COMMIT_DIFF_AFTER}"
 }
 
 THEME_GIT_DIRTY_BEFORE=""
@@ -148,7 +160,8 @@ git_prompt_info () {
     sha=$(git_sha)
     flags=$(git_flags)
     icon=$(git_icon)
-    prompt="${branch}${flags}${sha}${icon}"
+    commits_diff=$(git_commits_diff)
+    prompt="${branch}${flags}${sha}${commits_diff}${icon}"
   fi
 
   [[ -n $prompt ]] && print -n "${THEME_GIT_BEFORE}${prompt}${THEME_GIT_AFTER}"

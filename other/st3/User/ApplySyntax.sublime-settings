@@ -16,6 +16,10 @@
         ]
       },
       {
+        "name": "Clojure/Clojure",
+        "extensions": ["clj", "cljs"]
+      },
+      {
           // This rule could be incorporated into the next one, but I prefer to be more explicit rather than less
           "name": "Rails/Ruby Haml",
           "rules": [

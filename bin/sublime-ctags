@@ -4,6 +4,7 @@ set -e
 
 # logging, if needed
 # LOG=/dev/null
+CTAGS=/usr/local/bin/ctags
 LOG=/tmp/ctags-debug.txt
 
 # set to "1" to filter the tags
@@ -14,7 +15,7 @@ echo "[tagging] `pwd`" >$LOG
 echo "[cmd] ctags $@" >>$LOG
 
 # code tagging
-ctags "$@" 2>>$LOG
+$CTAGS "$@" 2>>$LOG
 
 # tag gemfile if present
 if [[ -f Gemfile ]]; then
@@ -27,7 +28,7 @@ if [[ -f Gemfile ]]; then
 
   bundle_paths=$(bundle show --paths 2>>$LOG)
   echo "[cmd] ctags $@ -a $bundle_paths">>$LOG
-  ctags $@ -a $bundle_paths 2>>$LOG
+  $CTAGS $@ -a $bundle_paths 2>>$LOG
 else
   echo "[skipping] bundle" >> $LOG
 fi

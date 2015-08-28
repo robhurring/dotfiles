@@ -1,4 +1,9 @@
 {
+	"Clojure":
+	[
+		"clj",
+		"cljs"
+	],
 	"HTML (Rails)":
 	[
 		"html.erb"
