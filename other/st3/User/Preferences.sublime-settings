@@ -43,14 +43,17 @@
 		"coverage"
 	],
 	"folder_no_icon": true,
-	"font_face": "Monaco",
-	"font_size": 13.0,
+	"font_face": "Hack",
+	"font_options":
+	[
+	],
+	"font_size": 14.0,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"SassBeautify",
 		"Vintage",
+		"SassBeautify",
 		"JavaScript"
 	],
 	"indent_to_bracket": false,
