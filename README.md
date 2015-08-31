@@ -19,8 +19,9 @@ clone this repo somewhere `git clone https://github.com/robhurring/dotfiles.git`
 ### ZSH Install
 
 1. cd ~/.dotfiles (or wherever repo lives)
-2. `rake zsh` to link zsh env files
-3. `cp ~/.dotfiles/example/zshrc ~/.zshrc`
+2. `make` to link zsh env files
+3. `make fonts` to install any fonts (optional)
+4. `cp ~/.dotfiles/example/zshrc ~/.zshrc`
   1. modify the example zshrc paths for `DOTFILES`
   2. add any customizations below the init line
 
