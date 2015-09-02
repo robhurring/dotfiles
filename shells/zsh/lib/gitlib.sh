@@ -1,3 +1,32 @@
+GIT_FETCH_DELAY="$((30 * 60))"  # 5 minutes
+GIT_FETCH_TOUCH="last-fetched-at"
+GIT_AUTO_FETCH=1
+
+_git_last_updated_at() {
+  printf '%s' "$(stat -f%m "$(_git_repo_path)/${GIT_FETCH_TOUCH}" 2>/dev/null || printf '%s' "0")"
+}
+
+_git_record_fetched() {
+  touch "$(_git_repo_path)/${GIT_FETCH_TOUCH}"
+}
+
+_git_fetch_if_necessary() {
+  if [[ "$GIT_AUTO_FETCH" != "1" ]]; then
+    return 1
+  fi
+
+  if _in_git_repo; then
+    local now="$(date +%s)"
+    local since="$((${now} - $(_git_last_updated_at)))"
+
+    if ((${since} > ${GIT_FETCH_DELAY})); then
+      git fetch --quiet > /dev/null 2>&1 && _git_record_fetched
+    fi
+  else
+    return 1
+  fi
+}
+
 _git_repo_path() {
   git rev-parse --git-dir 2>/dev/null
 }
@@ -66,6 +95,8 @@ _git_upstream() {
 }
 
 _git_commits_behind_of_remote() {
+  _git_fetch_if_necessary
+
   remote_branch=${1:-"$(_git_upstream)"}
   if [[ -n "$remote_branch" ]]; then
     git rev-list --left-only --count ${remote_branch}...HEAD
@@ -75,6 +106,8 @@ _git_commits_behind_of_remote() {
 }
 
 _git_commits_ahead_of_remote() {
+  _git_fetch_if_necessary
+
   remote_branch=${1:-"$(_git_upstream)"}
   if [[ -n "$remote_branch" ]]; then
     git rev-list --right-only --count ${remote_branch}...HEAD
