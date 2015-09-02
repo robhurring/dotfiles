@@ -24,3 +24,6 @@ DEPENDENCIES
   foreman
   git-smart
   omglog
+
+BUNDLED WITH
+   1.10.3

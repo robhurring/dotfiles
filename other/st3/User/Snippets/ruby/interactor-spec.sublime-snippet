@@ -1,14 +1,16 @@
 <snippet>
   <content>
 <![CDATA[
+require 'rails_helper'
+
 describe ${1:MyAction} do
-  let(:interactor) { described_class.new(params) }
+  let(:interactor) { described_class.new(${3:params}) }
   let(:context) { interactor.context }
 
-  context '${2:when action succeeds}' do
-    let(:params) do
-      $3
-    end
+  context '${4:when action succeeds}' do
+    ${5:let(${6::params}) do
+      $7
+    end}
 
     it 'is successful' do
       interactor.run
@@ -16,10 +18,8 @@ describe ${1:MyAction} do
     end
   end
 
-  context '${4:when action fails}' do
-    let(:params) do
-      $5
-    end
+  context '${8:when action fails}' do
+    $5
 
     it 'is a failure' do
       interactor.run
