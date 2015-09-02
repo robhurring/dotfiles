@@ -1,6 +1,6 @@
 DOT="$(cd "$(dirname "$0")"; pwd)"
 
-source "$DOT/gitlib.sh"
+source "$DOT/libgit.sh"
 
 export LS_OPTIONS='--color=auto'
 export CLICOLOR='Yes'

@@ -27,6 +27,22 @@ _git_fetch_if_necessary() {
   fi
 }
 
+_git_remote_available() {
+  if has_upstream=$(_git_tracking_branch); then
+    return 0
+  else
+    return 1
+  fi
+}
+
+_git_remote_set() {
+  if [[ $(git config remote.origin.url) ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 _git_repo_path() {
   git rev-parse --git-dir 2>/dev/null
 }
@@ -95,22 +111,30 @@ _git_upstream() {
 }
 
 _git_commits_behind_of_remote() {
-  _git_fetch_if_necessary
+  if _git_remote_available; then
+    _git_fetch_if_necessary
 
-  remote_branch=${1:-"$(_git_upstream)"}
-  if [[ -n "$remote_branch" ]]; then
-    git rev-list --left-only --count ${remote_branch}...HEAD
+    remote_branch=${1:-"$(_git_upstream)"}
+    if [[ -n "$remote_branch" ]]; then
+      git rev-list --left-only --count ${remote_branch}...HEAD
+    else
+      printf '%s' "0"
+    fi
   else
     printf '%s' "0"
   fi
 }
 
 _git_commits_ahead_of_remote() {
-  _git_fetch_if_necessary
+  if _git_remote_available; then
+    _git_fetch_if_necessary
 
-  remote_branch=${1:-"$(_git_upstream)"}
-  if [[ -n "$remote_branch" ]]; then
-    git rev-list --right-only --count ${remote_branch}...HEAD
+    remote_branch=${1:-"$(_git_upstream)"}
+    if [[ -n "$remote_branch" ]]; then
+      git rev-list --right-only --count ${remote_branch}...HEAD
+    else
+      printf '%s' "0"
+    fi
   else
     printf '%s' "0"
   fi
