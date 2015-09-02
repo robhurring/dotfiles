@@ -83,9 +83,9 @@ THEME_GIT_DIVERGED_REMOTE="⇵"
 git_commits_diff() {
   local local_commits
 
-  if remote_branch="$(_git_remote_branch_name)"; then
-    local_ahead="$(_git_commits_ahead_of_remote "$remote_branch")"
-    local_behind="$(_git_commits_behind_of_remote "$remote_branch")"
+  if upstream="$(_git_upstream)"; then
+    local_ahead="$(_git_commits_ahead_of_remote "$upstream")"
+    local_behind="$(_git_commits_behind_of_remote "$upstream")"
 
     if [[ "$local_behind" -gt "0" && "$local_ahead" -gt "0" ]]; then
       local_commits="${THEME_GIT_COMMIT_DIFF_DIVERGED}${local_behind}${THEME_GIT_DIVERGED_REMOTE}$local_ahead%f"
