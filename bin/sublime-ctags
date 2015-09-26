@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 # See: http://raygrasso.com/posts/2015/04/using-ctags-on-modern-javascript.html
-set -e
+# set -e
 
 # logging, if needed
 # LOG=/dev/null
@@ -27,8 +27,12 @@ if [[ -f Gemfile ]]; then
   echo "[tagging] bundle" >> $LOG
 
   bundle_paths=$(bundle show --paths 2>>$LOG)
-  echo "[cmd] ctags $@ -a $bundle_paths">>$LOG
-  $CTAGS $@ -a $bundle_paths 2>>$LOG
+  if [[ $? -eq 0 ]]; then
+    echo "[cmd] ctags $@ -a $bundle_paths">>$LOG
+    $CTAGS $@ -a $bundle_paths 2>>$LOG
+  else
+    echo "[FAIL!] ${bundle_paths}" >> $LOG
+  fi
 else
   echo "[skipping] bundle" >> $LOG
 fi

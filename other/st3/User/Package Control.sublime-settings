@@ -3,6 +3,7 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"CoffeeScript"
 	],
 	"installed_packages":
 	[
@@ -77,6 +78,7 @@
 		"Theme - Soda",
 		"Theme - Spacegray",
 		"Toggle Symbol to String",
-		"TomDoc"
+		"TomDoc",
+		"VimL"
 	]
 }
