@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ast (2.1.0)
+    astrolabe (1.3.1)
+      parser (~> 2.2)
     colorize (0.5.8)
     ffi (1.0.11)
     ffi (1.0.11-java)
@@ -8,12 +11,28 @@ GEM
       thor (>= 0.13.6)
     git-smart (0.1.9)
       colorize
+    interactive_editor (0.0.10)
+      spoon (>= 0.0.1)
     omglog (0.0.7)
       rb-fsevent (~> 0.9.0)
       rb-inotify (~> 0.8.8)
+    parser (2.2.2.6)
+      ast (>= 1.1, < 3.0)
+    powerpack (0.1.1)
+    rainbow (2.0.0)
     rb-fsevent (0.9.1)
     rb-inotify (0.8.8)
       ffi (>= 0.5.0)
+    rubocop (0.34.2)
+      astrolabe (~> 1.3)
+      parser (>= 2.2.2.5, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.4)
+    ruby-beautify (0.97.3)
+    ruby-progressbar (1.7.5)
+    spoon (0.0.4)
+      ffi
     thor (0.16.0)
 
 PLATFORMS
@@ -23,7 +42,10 @@ PLATFORMS
 DEPENDENCIES
   foreman
   git-smart
+  interactive_editor
   omglog
+  rubocop
+  ruby-beautify
 
 BUNDLED WITH
-   1.10.3
+   1.10.6
