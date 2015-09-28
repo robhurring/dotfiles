@@ -3337,11 +3337,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>471 350 924 485 0 0 1920 1177 </string>
+	<string>735 491 924 485 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>2893 906 384 129 2560 -240 1050 1658 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>710 486 1210 691 0 0 1920 1177 </string>
+	<string>492 87 1258 1090 0 0 1920 1177 </string>
 	<key>NeverWarnAboutMeta</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -3907,11 +3907,11 @@
 			<key>Semantic History</key>
 			<dict>
 				<key>action</key>
-				<string>editor</string>
+				<string>command</string>
 				<key>editor</key>
 				<string>com.sublimetext.3</string>
 				<key>text</key>
-				<string></string>
+				<string>vim \1:\2</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
