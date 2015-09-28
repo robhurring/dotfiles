@@ -11,7 +11,7 @@ autoload -U colors && colors
 THEME_RVM_BEFORE=""
 THEME_RVM_AFTER=""
 THEME_RVM_PROMPT_OPTIONS=(version gemset)
-THEME_RVM_DEFAULT_RUBY="2.0.0"
+THEME_RVM_DEFAULT_RUBY="2.2.1"
 rvm_prompt_info() {
   [ -z $rvm_path ] && return
   [ -f $rvm_path/bin/rvm-prompt ] || return
