@@ -12,6 +12,9 @@ plugins=(osx tmux fzf)
 
 # ---> Local Config
 
+# Disable for OSX 
+# export LS_OPTIONS=''
+
 # Custom matcher for my projects colder
 PATH_MATCHERS+=("~/Projects")
 PATH_REPLACER+=("%B%F{yellow}projects%b")

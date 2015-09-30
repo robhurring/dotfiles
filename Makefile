@@ -25,7 +25,10 @@ clean:
 .setup:
 	@mkdir -p $HOME/bin
 
-.zsh: $(HOME)/.zsh $(HOME)/.zshrc
+.zsh: $(HOME)/.zsh $(HOME)/.zshrc $(HOME)/.zprofile
+
+$(HOME)/.zprofile:
+	@ln -sf $(HOME)/.zshrc $@
 
 # link ETC files
 $(HOME)/.%: $(CWD)/etc/%

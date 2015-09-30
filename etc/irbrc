@@ -3,6 +3,7 @@ exit if RUBY_ENGINE == 'macruby'
 require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
+require 'interactive_editor'
 require 'pp'
 
 def try_require(*names)
