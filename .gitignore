@@ -11,3 +11,5 @@
 other/st2/User/FileHistory.json
 other/st3/User/GoSublime
 other/st3/User/*.cache
+
+node_modules
