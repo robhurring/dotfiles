@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+OUTPUT=/tmp/vim.profile
+
+vim +":profile start ${OUTPUT}" +":profile func*" +":profile file *"
