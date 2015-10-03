@@ -34,7 +34,10 @@ THEME_PATH_BEFORE="%n@%m "
 # alias grep='pcregrep --color=auto'
 
 # Development
-# alias e=subl
+# alias e=vim
+# alias edf="pushd $DOTFILES && vim && popd"
+# alias ev='pushd ~/.dotvim && vim vimrc && popd'
+# alias erc='vim ~/.zshrc'
 # alias cdg="cd $GOPATH/src/github.com/robhurring"
 # alias rsa='auto-bundle-exec rspec -fd'
 # alias rs='rsa --fail-fast'
