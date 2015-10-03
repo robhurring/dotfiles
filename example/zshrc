@@ -71,6 +71,20 @@ THEME_PATH_BEFORE="%n@%m "
 # alias cdf=fuzzy-cd
 # alias fkill=fuzzy-kill
 
+# function fzf-fuzzy-cds () {
+#   fuzzy-cds $1
+#   zle reset-prompt
+# }
+# zle -N fzf-fuzzy-cds
+# bindkey "^ " fzf-fuzzy-cds
+
+# function fzf-fuzzy-co {
+#   co
+#   zle reset-prompt
+# }
+# zle -N fzf-fuzzy-co
+# bindkey "^b" fzf-fuzzy-co
+
 # ---> Golang
 # export GOPATH=$HOME/Go
 # export GOBIN=$GOPATH/bin
