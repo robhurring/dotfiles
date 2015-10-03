@@ -113,5 +113,5 @@ THEME_PATH_BEFORE="%n@%m "
 # }
 
 # export PATH="$PATH:$HOME/.rvm/bin"
-# export PATH="$DOTFILES/node_modules/.bin:$PATH"
+# export PATH="$PATH:$DOTFILES/node_modules/.bin"
 
