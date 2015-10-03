@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+# Logic for finding which branch is the repo's "default"
+# For most apps this will be "dev" and for most clients this will be "master"
+# If you want to override this you can `export branch=qa02` or something in your env
+
+default=${branch:-}
+branches=($default dev master)
+
+for br in ${branches[@]}; do
+  git branch --all|egrep "^\*?[[:space:]]+${br}$" 2>&1 >/dev/null
+  if [[ $? -eq 0 ]]; then
+    echo $br
+    exit 0
+  fi
+done
+
+exit 1
