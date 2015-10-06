@@ -3,7 +3,7 @@ GIT_FETCH_TOUCH="last-fetched-at"
 GIT_AUTO_FETCH=1
 
 _git_last_updated_at() {
-  printf '%s' "$(stat -f%m "$(_git_repo_path)/${GIT_FETCH_TOUCH}" 2>/dev/null || printf '%s' "0")"
+  printf '%s' "$(stat -f%m "$(_git_repo_path)/${GIT_FETCH_TOUCH}" 2>/dev/null || printf '%s' '0')"
 }
 
 _git_record_fetched() {
@@ -11,7 +11,7 @@ _git_record_fetched() {
 }
 
 _git_fetch_if_necessary() {
-  if [[ "$GIT_AUTO_FETCH" != "1" ]]; then
+  if [ "$GIT_AUTO_FETCH" != "1" ]; then
     return 1
   fi
 
@@ -36,7 +36,7 @@ _git_remote_available() {
 }
 
 _git_remote_set() {
-  if [[ $(git config remote.origin.url) ]]; then
+  if [ $(git config remote.origin.url) ]; then
     return 0
   else
     return 1
@@ -48,7 +48,7 @@ _git_repo_path() {
 }
 
 _in_git_repo() {
-  local repo_path=$(_git_repo_path)
+  local repo_path="$(_git_repo_path)"
   [[ -d $repo_path ]] && [[ $repo_path != "." ]] && [[ $repo_path != "~" ]] && [[ $repo_path != "$HOME/.git" ]]
 }
 
