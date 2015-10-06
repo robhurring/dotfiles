@@ -88,6 +88,17 @@ THEME_PATH_BEFORE="%n@%m "
 # zle -N fzf-fuzzy-co
 # bindkey "^b" fzf-fuzzy-co
 
+# function vs() {
+#   local session
+#
+#   if [ -n $1 ]; then
+#     session=$(ls ~/.vim/sessions|sed -e 's/\.session$//g'|$FZF_COMMAND -1 --query=$1)
+#     [[ $session != "" ]] && vim +"OpenSession ${session}"
+#   else
+#     vim +"OpenSession ${1}"
+#   fi
+# }
+
 # ---> Golang
 # export GOPATH=$HOME/Go
 # export GOBIN=$GOPATH/bin
