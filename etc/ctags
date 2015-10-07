@@ -1,5 +1,5 @@
 --recurse=yes
---tag-relative=no
+--tag-relative=yes
 --fields=+KSn
 
 --exclude=db

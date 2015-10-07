@@ -9,16 +9,52 @@ LOG=/tmp/ctags-debug.txt
 
 # set to "1" to filter the tags
 FILTER_TAGS=${FILTER_TAGS:0}
+TAG_BUNDLE=1
+
+FILE=""
+
+# detect file and strip some custom options out
+for opt in "$@"; do
+  case "$opt" in
+    -f)
+      FILE="$2"
+      ;;
+    --skip-bundle)
+      TAG_BUNDLE=0
+      shift
+      ;;
+    --filter-tags)
+      FILTER_TAGS=1
+      shift
+      ;;
+  esac
+done
+
+ARGS="$@"
+
+# default file if not given
+if [[ "$FILE" == "" ]]; then
+  if [[ -d "./.git" ]]; then
+    FILE=".git/tags"
+  else
+    FILE="tags"
+  fi
+  ARGS="-f $FILE ${ARGS}"
+fi
+
+# root ctag command
+CTAGGER="${CTAGS} ${ARGS}"
 
 # clear log
 echo "[tagging] `pwd`" >$LOG
-echo "[cmd] ctags $@" >>$LOG
+echo "[bundle?] $TAG_BUNDLE" >$LOG
+echo "[cmd] $CTAGGER" >>$LOG
 
 # code tagging
-$CTAGS "$@" 2>>$LOG
+$CTAGGER 2>>$LOG
 
-# tag gemfile if present
-if [[ -f Gemfile ]]; then
+# optionally tag bundle
+if [[ (-f Gemfile) && $TAG_BUNDLE -eq 1 ]]; then
   # load rvm if present
   if [[ (-f ".ruby-gemset") || (-f ".ruby-version") || (-f ".rvmrc") ]]; then
     source "$rvm_path/scripts/rvm"
@@ -28,29 +64,16 @@ if [[ -f Gemfile ]]; then
 
   bundle_paths=$(bundle show --paths 2>>$LOG)
   if [[ $? -eq 0 ]]; then
-    echo "[cmd] ctags $@ -a $bundle_paths">>$LOG
-    $CTAGS $@ -a $bundle_paths 2>>$LOG
+    BUNDLETAGGER="${CTAGGER} -a ${bundle_paths}"
+    echo "[cmd] ${BUNDLETAGGER}">>$LOG
+    # $CTAGS $ARGS -a $bundle_paths 2>>$LOG
+    $BUNDLETAGGER 2>> $LOG
   else
     echo "[FAIL!] ${bundle_paths}" >> $LOG
   fi
 else
   echo "[skipping] bundle" >> $LOG
 fi
-
-FILE="tags"
-
-while [[ $# > 1 ]]
-do
-key="$1"
-
-case $key in
-    -f)
-    FILE="$2"
-    shift
-    ;;
-esac
-shift
-done
 
 # ctags doesn't handle negative look behinds so instead this script
 # strips false positives out of a tags file.
@@ -63,3 +86,4 @@ if [[ $FILTER_TAGS -eq 1 ]]; then
   echo "[filter:$FILE] false matches - object definitions" >> $LOG
   sed -i '' -E '/var[     ]+[a-zA-Z0-9_$]+[   ]+=[    ]+require\(.+language:js$/d' $FILE
 fi
+
