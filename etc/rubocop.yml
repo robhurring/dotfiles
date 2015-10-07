@@ -262,6 +262,7 @@ Style/For:
 
 # Enforce the method used for string formatting.
 Style/FormatString:
+  Enabled: false
   EnforcedStyle: format
   SupportedStyles:
     - format
