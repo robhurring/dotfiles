@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 colorize() {
   printf "\033[${1}m${2}\033[0m\n" "${@:3}"
@@ -43,7 +43,7 @@ dot_git() {
   if in_current_dir && [[ -n "$dot_git" ]]; then
     # cache dot_git to save calls to rev-parse
     printf '%s' $dot_git
-  elif [ -d .git ]; then
+  elif [[ -d .git ]]; then
     dot_git=".git"
     printf '%s' $dot_git
   else
@@ -61,7 +61,7 @@ is_repo() {
 }
 
 git_root() {
-  if [ -d .git ]; then
+  if [[ -d .git ]]; then
     printf '%s' "$(pwd)"
   else
     printf '%s' "$(git rev-parse --show-toplevel 2>/dev/null)"
@@ -85,11 +85,12 @@ commit_short_sha() {
 }
 
 tracking_remote() {
-  if branch_name=$(branch_name); then
+  local branch_name="$(branch_name)";
+  if [[ -n "$branch_name" ]]; then
     local config_key="branch.${branch_name}.remote"
-    local remote=$(git config ${config_key} 2>/dev/null)
+    local remote="$(git config ${config_key} 2>/dev/null)"
 
-    if [[ $remote ]]; then
+    if [[ -n "$remote" ]]; then
       printf '%s' $remote
       return 0
     else
