@@ -1,6 +1,6 @@
 --recurse=yes
 --tag-relative=yes
---fields=+KSn
+--fields=+KSln
 
 --exclude=db
 --exclude=coverage
@@ -8,6 +8,10 @@
 --exclude=.hg
 --exclude=log
 --exclude=tmp
+--exclude=*.S
+--exclude=*.so
+--exclude=*.o
+--exclude=*.pyc
 
 --languages=-javascript,sql
 

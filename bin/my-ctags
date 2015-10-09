@@ -13,6 +13,8 @@ TAG_BUNDLE=1
 
 FILE=""
 
+echo "[ARGS] $@" >> $LOG
+
 # detect file and strip some custom options out
 for opt in "$@"; do
   case "$opt" in
