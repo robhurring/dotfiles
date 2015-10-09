@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 colorize() {
   printf "\033[${1}m${2}\033[0m\n" "${@:3}"
@@ -20,9 +20,13 @@ note() {
   colorize "33" "$@"
 }
 
+cwd="$(pwd)"
+dot_git=""
+
 in_current_dir() {
   local wd="$(pwd)"
-  if [[ "$wd" == $cwd ]]; then
+
+  if [ "$wd" = "$cwd" ]; then
     cwd="$wd"
     return 0
   else
@@ -34,16 +38,16 @@ in_current_dir() {
 debug_print() {
   local debug=$1
   local message=$2
-  if [[ $debug == "debug" ]]; then
+  if [ $debug = "debug" ]; then
     echo $message
   fi
 }
 
 dot_git() {
-  if in_current_dir && [[ -n "$dot_git" ]]; then
+  if in_current_dir && [ "$dot_git" ]; then
     # cache dot_git to save calls to rev-parse
     printf '%s' $dot_git
-  elif [[ -d .git ]]; then
+  elif [ -d .git ]; then
     dot_git=".git"
     printf '%s' $dot_git
   else
@@ -53,7 +57,7 @@ dot_git() {
 }
 
 is_repo() {
-  if [[ -n "$(dot_git)" ]]; then
+  if [ "$(dot_git)" ]; then
     return 0
   else
     return 1
@@ -61,7 +65,7 @@ is_repo() {
 }
 
 git_root() {
-  if [[ -d .git ]]; then
+  if [ -d .git ]; then
     printf '%s' "$(pwd)"
   else
     printf '%s' "$(git rev-parse --show-toplevel 2>/dev/null)"
@@ -69,28 +73,30 @@ git_root() {
 }
 
 branch_name() {
-  name="$(git symbolic-ref --short HEAD 2>/dev/null)"
-  retcode="$?"
-  if [[ "$retcode" == "0" ]]; then
-    printf %s "$name"
+  local name="$(git symbolic-ref --short HEAD 2>/dev/null)"
+  local retcode="$?"
+
+  if [ "$retcode" = "0" ]; then
+    printf "%s" "$name"
   else
     return 1
   fi
 }
 
 commit_short_sha() {
-  if is_repo; then
+  if [ is_repo ]; then
     printf '%s' "$(git rev-parse --short HEAD 2>/dev/null)"
   fi
 }
 
 tracking_remote() {
-  local branch_name="$(branch_name)";
-  if [[ -n "$branch_name" ]]; then
+  local branch_name="$(branch_name)"
+
+  if [ "$branch_name" ]; then
     local config_key="branch.${branch_name}.remote"
     local remote="$(git config ${config_key} 2>/dev/null)"
 
-    if [[ -n "$remote" ]]; then
+    if [ "$remote" ]; then
       printf '%s' $remote
       return 0
     else
@@ -104,9 +110,10 @@ tracking_remote() {
 tracking_branch() {
   local localRef="$(tracking_remote)\/$(branch_name)$"
 
-  if [[ -n "$localRef" ]]; then
+  if [ "$localRef" ]; then
     local remoteBranch="$(git for-each-ref --format='%(upstream:short)' refs/heads $localRef 2>/dev/null | grep $localRef)"
-    if [[ -n $remoteBranch ]]; then
+
+    if [ $remoteBranch ]; then
       printf '%s' $remoteBranch
       return 0
     else
@@ -117,7 +124,8 @@ tracking_branch() {
 
 commits_behind_of_remote() {
   remote_branch=${1:-"$(tracking_branch)"}
-  if [[ -n "$remote_branch" ]]; then
+
+  if [ "$remote_branch" ]; then
     git rev-list --left-only --count ${remote_branch}...HEAD
   else
     printf '%s' "0"
@@ -126,7 +134,8 @@ commits_behind_of_remote() {
 
 commits_ahead_of_remote() {
   remote_branch=${1:-"$(tracking_branch)"}
-  if [[ -n "$remote_branch" ]]; then
+
+  if [ "$remote_branch" ]; then
     git rev-list --right-only --count ${remote_branch}...HEAD
   else
     printf '%s' "0"
@@ -139,7 +148,7 @@ is_dirty() {
     return 1
   else
     #in repo, might be dirty
-    if [[ -n "$(git ls-files --exclude-standard --others 2>/dev/null)" ]]; then
+    if [ "$(git ls-files --exclude-standard --others 2>/dev/null)" ]; then
       #untracked files thus dirty
       return 0
     else
@@ -155,7 +164,7 @@ is_dirty() {
       else
         #no commit hash, thus can't use HEAD.
         #As it's inital commit we can just list the files.
-        if [[ -n "$(ls -a -1 "$(git_root)" | grep -Ev '(\.|\.\.|\.git)')" ]]; then
+        if [ "$(ls -a -1 "$(git_root)" | grep -Ev '(\.|\.\.|\.git)')" ]; then
           #files listed and no commit hash, thus changes
           return 0
         else
@@ -175,7 +184,7 @@ run() {
 do_update() {
   local kind=$1
   local upstream=$2
-  local start_sha=$(commit_short_sha)
+  local start_sha="$(commit_short_sha)"
   local stashed=0
   local cmd
 
@@ -184,16 +193,16 @@ do_update() {
     exit 1
   fi
 
-  if [[ "$kind" == "rebase" ]]; then
+  if [ "$kind" = "rebase" ]; then
     run "git rebase --preserve-merges ${upstream}"
-  elif [[ "$kind" == "merge" ]]; then
+  elif [ "$kind" = "merge" ]; then
     run "git merge --ff-only ${upstream}"
   else
     error "Unknown update type '%s'" $kind
     exit 1
   fi
 
-  quiet "HEAD moved from '%s' to '%s'" $start_sha $(commit_short_sha)
+  quiet "HEAD moved from '%s' to '%s'" "$start_sha" "$(commit_short_sha)"
 }
 
 do_fetch() {
@@ -202,43 +211,46 @@ do_fetch() {
 
 do_sync() {
   local remote="origin"
-  local branch=$(branch_name)
+  local branch="$(branch_name)"
   local upstream
 
-  if tracking_remote="$(tracking_remote)"; then
-    remote=$tracking_remote
+  local tracking_remote="$(tracking_remote)"
+  local tracking_branch="$(tracking_branch)"
+
+  if [ "$tracking_remote" ] ; then
+    remote="$tracking_remote"
   else
     quiet "No remote found for '%s' assuming 'origin'" $(branch_name)
   fi
 
-  if tracking_branch="$(tracking_branch)"; then
-    branch=$tracking_branch
-    upstream=$tracking_branch
+  if [ "$tracking_branch" ] ; then
+    branch="$tracking_branch"
+    upstream="$tracking_branch"
   else
-    quiet "No tracking branch configured, assuming '%s'" $(branch_name)
-    upstream="${remote}/${branch}"
+    upstream="$remote/$branch"
+    quiet "No tracking branch configured, assuming '%s'" $upstream
   fi
 
   do_fetch $remote
-  note "Against upstream '%s'" $upstream
+  note "Against upstream '%s'" "$upstream"
 
-  ahead="$(commits_ahead_of_remote "$upstream")"
-  behind="$(commits_behind_of_remote "$upstream")"
+  ahead=$(commits_ahead_of_remote "$upstream")
+  behind=$(commits_behind_of_remote "$upstream")
 
-  if [[ "$behind" -gt "0" && "$ahead" -gt "0" ]]; then
+  if [ "$behind" -gt "0" ] && [ "$ahead" -gt "0" ]; then
     success "Both local and remote branches have moved on. Branch '%s' needs to be rebased onto '%s'" $(branch_name) $upstream
     do_update "rebase" $upstream
-  elif [[ "$behind" -gt "0" ]]; then
+  elif [ "$behind" -gt "0" ]; then
     success "Local branch '%s' has not moved on. Fast-forwarding..." $(branch_name)
     note "There are %d new commits on '%s'." $behind $upstream
     do_update "merge" $upstream
-  elif [[ "$ahead" -gt "0" ]]; then
+  elif [ "$ahead" -gt "0" ]; then
     note "You have %d new commits on '%s'." $ahead $upstream
   else
     success "Already up-to-date"
   fi
 
-  git-cleanup
+  [ "$(command -v git-cleanup)" ] && git-cleanup
 }
 
 do_sync
