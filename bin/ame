@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+APP_NAME="Amethyst"
+
+start() {
+  echo "Starting $APP_NAME"
+  open -a "$APP_NAME"
+}
+
+stop() {
+  echo "Exiting $APP_NAME"
+  osascript -e "tell app \"$APP_NAME\" to quit"
+}
+
+reload() {
+  stop && start
+}
+
+while getopts ":exr" opt; do
+  case $opt in
+    e)
+      nvim ~/.amethyst
+      ;;
+    r)
+      reload
+      ;;
+    x)
+      stop
+      ;;
+  esac
+done
+
+if (($# == 0)); then
+  start
+fi
+

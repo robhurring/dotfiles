@@ -11,6 +11,9 @@ BINFILES=$(BIN:%=$(HOME)/bin/%)
 FONTS=$(shell ls ./other/fonts)
 FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
 
+# casked apps
+APPS=amethyst
+
 all: .setup $(DOTFILES) $(BINFILES) .zsh
 	@echo "All good."
 
@@ -21,6 +24,8 @@ clean:
 	rm -rf $(DOTFILES)
 	rm -rf $(BINFILES)
 	rm -rf ~/.zsh
+
+apps: .brew $(APPS)
 
 .setup:
 	@mkdir -p $HOME/bin
@@ -55,3 +60,13 @@ $(HOME)/.zshrc:
 $(HOME)/.zsh:
 	@echo "zsh:	.zsh"
 	@ln -sf $(CWD)/shells/zsh $@
+
+$(APPS):
+	@echo "Installing $@"
+	brew cask install $@
+
+.brew:
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	brew install caskroom/cask/brew-cask
+
+.PHONY: $(APPS)
