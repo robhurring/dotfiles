@@ -14,23 +14,33 @@ FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
 # casked apps
 APPS=amethyst
 
-all: .setup $(DOTFILES) $(BINFILES) .zsh
+all: .setup $(DOTFILES) $(BINFILES) .zsh .tmux
 	@echo "All good."
-
-fonts: $(FONTFILES)
-	@echo "Fonts installed."
 
 clean:
 	rm -rf $(DOTFILES)
 	rm -rf $(BINFILES)
 	rm -rf ~/.zsh
+	rm -rf ~/.tmux
 
+# only relevant for OSX
+fonts: $(FONTFILES)
+	@echo "Fonts installed."
+
+# only relevant for OSX
 apps: .brew $(APPS)
 
 .setup:
 	@mkdir -p $HOME/bin
 
 .zsh: $(HOME)/.zsh $(HOME)/.zshrc $(HOME)/.zprofile
+
+.tmux: $(HOME)/.tmux
+
+$(HOME)/.tmux:
+	@mkdir -p $(HOME)/.tmux/plugins
+	@git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm
+	@$(HOME)/.tmux/plugins/tpm/bin/install_plugins
 
 $(HOME)/.zprofile:
 	@ln -sf $(HOME)/.zshrc $@
