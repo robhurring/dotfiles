@@ -1,7 +1,8 @@
 { "layouts": [
   "tall",
   "column",
-  "floating"
+  "floating",
+  "widescreen-tall"
 ],
 
 "mod1": [
@@ -176,7 +177,6 @@
     "com.apple.systempreferences",
     "it.bloop.airmail.beta11",
     "am.sunrise.mac",
-    "com.spotify.client",
     "com.apple.finder",
     "com.agilebits.onepassword4"
   ],
