@@ -2,7 +2,6 @@
 DOTFILES=~/.dotfiles
 ZSH=~/.zsh
 ZSH_THEME=default
-EDITOR=vim
 set -o vi
 
 plugins=(osx tmux fzf)
@@ -11,6 +10,8 @@ plugins=(osx tmux fzf)
 [[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
 
 # ---> Local Config
+
+export EDITOR=vim
 
 # Disable for OSX
 # export LS_OPTIONS=''
