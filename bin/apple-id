@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+lookup() {
+  local PATH_OR_NAME=$1
+  osascript -e "id of app \"${PATH_OR_NAME}\""
+}
+
+if [ $# -gt 0 ]; then
+  lookup "$1"
+else
+  echo "Usage: $(basename $0) <APP_NAME_OR_PATH_TO_APP>" >&2
+  exit 1
+fi
+
