@@ -45,7 +45,7 @@ bindkey '^r'   history-beginning-search-backward
 bindkey '^t'   history-beginning-search-forward
 
 # load our config files
-for lib ($ZSH/lib/*); do
+for lib ($ZSH/lib/*.zsh); do
   source $lib
 done
 
