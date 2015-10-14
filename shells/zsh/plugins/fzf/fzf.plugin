@@ -12,9 +12,12 @@ export FZF_COMMAND=fzf
 
 # FZF: cd to `FUZZY_SEARCH_PATHS`
 fuzzy-cds() {
-local dir=$(cat << EOS | ruby | $FZF_COMMAND -1 -e -0 --query=$1
+  local dir=""
+dir=$(
+cat << EOS | ruby | $FZF_COMMAND -1 -e -0 --query=$1
   (ENV["FUZZY_SEARCH_PATHS"]||"").split(":").each{|p| puts Dir["#{File.expand_path(p)}/*"]}
-EOS)
+EOS
+)
 cd "$dir"
 }
 
@@ -35,7 +38,8 @@ fuzzy-co() {
 
   local branch=$(cat << EOS | ruby | $FZF_COMMAND -1 -i $flags --query=$query
     puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
-EOS)
+EOS
+)
 
   if [[ $branch != "" ]]; then
     [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
@@ -157,6 +161,7 @@ fuzzy-co-commit() {
 # fshow - git commit browser (enter for show, ctrl-d for diff, backtick ` toggles sort)
 fuzzy-show() {
   local out shas sha q k
+
   while out=$(
       git log --graph --color=always \
           --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
@@ -172,7 +177,7 @@ fuzzy-show() {
       git checkout $shas
     else
       for sha in $shas; do
-        git show --color=always $sha | less -R
+        $(git show --color=always $sha | less -R)
       done
     fi
   done
@@ -186,3 +191,4 @@ fuzzy-sha() {
   commit=$(echo "$commits" | $FZF_COMMAND --tac +s +m -x) &&
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
+
