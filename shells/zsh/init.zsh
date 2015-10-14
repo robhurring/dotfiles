@@ -78,7 +78,9 @@ for plugin ($plugins); do
 done
 
 # run compinit
-reload_completions
+if [[ $skip_global_compinit != 1 ]]; then
+  reload_completions
+fi
 typeset -U path manpath fpath
 
 if [ -f $ZSH_THEME ]; then
