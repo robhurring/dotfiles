@@ -67,7 +67,7 @@ _git_tracking_remote() {
     local config_key="branch.${branch_name}.remote"
     local remote=$(git config ${config_key} 2>/dev/null)
 
-    if [[ $remote ]]; then
+    if [[ -n "$remote" ]]; then
       printf '%s' $remote
       return 0
     else
