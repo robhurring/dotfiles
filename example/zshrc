@@ -2,6 +2,7 @@
 DOTFILES=~/.dotfiles
 ZSH=~/.zsh
 ZSH_THEME=default
+ZSH_MODE="vi"
 set -o vi
 
 plugins=(osx tmux fzf)

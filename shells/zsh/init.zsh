@@ -1,4 +1,5 @@
-export EDITOR='vim'
+export ZSH_MODE=${ZSH_MODE:-"vi"}
+export EDITOR=${EDITOR:-"vim"}
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/share/man:$MANPATH"
 export TERM="xterm-256color"
@@ -7,10 +8,18 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export REPORTTIME=10
 
-#stty erase \^H
-bindkey -e
+if [[ "$ZSH_MODE" == "vi" ]]; then
+  bindkey -v
+  setopt VI
+else
+  bindkey -e
+fi
 
-# setopt VI
+# set to speed up boot time
+skip_global_compinit=0
+
+# stty erase \^H
+
 setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP
