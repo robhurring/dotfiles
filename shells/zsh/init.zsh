@@ -1,4 +1,5 @@
 export ZSH_MODE=${ZSH_MODE:-"vi"}
+export ZSH_VI_ESC="jk"
 export EDITOR=${EDITOR:-"vim"}
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/share/man:$MANPATH"
@@ -11,7 +12,8 @@ export REPORTTIME=10
 if [[ "$ZSH_MODE" == "vi" ]]; then
   bindkey -v
   setopt VI
-  export KEYTIMEOUT=1
+  export KEYTIMEOUT=40 # WARNING: setting this too low kills the `jk` switch
+  bindkey -M viins 'jk' vi-cmd-mode
 else
   bindkey -e
 fi

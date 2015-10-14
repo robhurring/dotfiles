@@ -29,7 +29,9 @@ THEME_GIT_ICON_REBASE="+rebase"
 
 THEME_VI_BEFORE="%F{magenta}"
 THEME_VI_AFTER="%f"
-THEME_VI_ICON_MODE="☻ "
+THEME_VI_NORMAL_COLOR="red"
+THEME_VI_NORMAL_ICON="[N] "
+THEME_VI_INSERT_ICON=""
 
 THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f "
@@ -47,5 +49,5 @@ THEME_PATH_AFTER=":"
 
 THEME_PROMPT_COLOR="yellow"
 
-export PROMPT=$'%B%{$fg[$THEME_PROMPT_COLOR]%}$(formatted_path)%b '
+export PROMPT=$'%B%{$fg[$(vi_prompt_color)]%}$(formatted_path)%b%{$reset_color%} '
 export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'
