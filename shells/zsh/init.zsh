@@ -11,6 +11,7 @@ export REPORTTIME=10
 if [[ "$ZSH_MODE" == "vi" ]]; then
   bindkey -v
   setopt VI
+  export KEYTIMEOUT=1
 else
   bindkey -e
 fi

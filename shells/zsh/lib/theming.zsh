@@ -170,16 +170,19 @@ git_prompt_info () {
 VI_PROMPT_INFO=""
 THEME_VI_BEFORE=""
 THEME_VI_AFTER=""
-THEME_VI_ICON_MODE=" (VI)"
+THEME_VI_NORMAL_ICON="[NORMAL]"
+THEME_VI_INSERT_ICON=""
+
 vi_prompt_info() {
   print -n "${THEME_VI_BEFORE}${VI_PROMPT_INFO}${THEME_VI_AFTER}"
 }
 
-function zle-keymap-select {
-  VI_PROMPT_INFO="${${KEYMAP/vicmd/$THEME_VI_ICON_MODE}/(main|viins)/}"
+function zle-line-init zle-keymap-select {
+  VI_PROMPT_INFO="${${KEYMAP/vicmd/$THEME_VI_NORMAL_ICON}/(vicmd|main)/$THEME_VI_INSERT_ICON}"
   zle reset-prompt
 }
 
+zle -N zle-line-init
 zle -N zle-keymap-select
 
 #usage: title short_tab_title looooooooooooooooooooooggggggg_windows_title
