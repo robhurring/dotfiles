@@ -16,7 +16,6 @@ alias enc='openssl enc -e -aes-256-cbc -salt -in '
 alias dec='openssl enc -d -aes-256-cbc -in '
 
 # Ruby/Rails
-
 alias ss='auto-bundle-exec rails server'
 alias ssd='auto-bundle-exec rails server --debugger'
 alias sc='auto-bundle-exec rails console'
@@ -29,7 +28,7 @@ alias fms='foreman start'
 alias fws='forewoman start'
 
 function back() {
-  ack "$@" `bundle show --paths`
+  ag "$@" `bundle show --paths`
 }
 
 # Git
