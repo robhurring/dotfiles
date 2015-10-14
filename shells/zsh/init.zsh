@@ -51,8 +51,8 @@ function load_plugin() {
   local plugin_path=$plugin_root/$plugin_name
 
   fpath=($plugin_path $fpath)
-  if [ -f $plugin_path/$plugin_name.plugin ]; then
-    source $plugin_path/$plugin_name.plugin
+  if [ -f $plugin_path/$plugin_name.zsh ]; then
+    source $plugin_path/$plugin_name.zsh
   fi
 }
 
