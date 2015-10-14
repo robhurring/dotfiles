@@ -2,9 +2,8 @@
 # encoding: UTF-8
 
 require 'rubygems'
-gem 'rest-client'
-
-require 'rest_client'
+require 'net/http'
+require 'uri'
 require 'json'
 require 'date'
 require 'ostruct'
@@ -53,10 +52,10 @@ module Weather
     end
 
     def to_s
-      "%{symbol}  %{temp}" % {symbol: formatted_symbol, temp: formatted_temp}
+      '%{symbol}  %{temp}' % {symbol: formatted_symbol, temp: formatted_temp}
     end
 
-  private
+    private
 
     def format_temp(temp)
       "#{temp}#{SYMBOLS[:degrees]}"
@@ -64,9 +63,10 @@ module Weather
   end
 
   extend self
+
   RC_FILE = File.join(ENV['HOME'], '.weatherrc')
-  ENDPOINT = %{http://query.yahooapis.com/v1/public/yql?%{params}}
-  QUERY = %{select item from weather.forecast where location="%{location}"}
+  ENDPOINT = %(http://query.yahooapis.com/v1/public/yql)
+  QUERY = %(select item from weather.forecast where location="%{location}")
 
   def show_usage
     puts DATA.read
@@ -76,15 +76,15 @@ module Weather
   def forecast(location = nil)
     location ||= last_used_location
 
-    params = build_params({
+    params = {
       q: build_location_query(location),
       format: 'json'
-    })
+    }
 
-    response = RestClient.get ENDPOINT % {params: params}
+    response = request ENDPOINT, params
     case response.code
-    when 200
-      json = JSON.parse response.to_s
+    when "200"
+      json = JSON.parse response.body
       forecast = json['query']['results']['channel']['item']
       set_last_location location
       display_forecast forecast
@@ -93,14 +93,21 @@ module Weather
     end
   end
 
-private
+  private
+
+  def request(url, params = {})
+    uri = URI.parse url
+    query = build_params(params)
+    endpoint = URI.join(uri, "?#{query}")
+    Net::HTTP.get_response(endpoint)
+  end
 
   def set_last_location(where)
     File.open(RC_FILE, 'w+'){ |f| f << where }
   end
 
   def last_used_location
-    show_usage unless File.exists?(RC_FILE)
+    show_usage unless File.exist?(RC_FILE)
     File.open(RC_FILE).read
   end
 
@@ -109,7 +116,7 @@ private
     puts forecast['title']
     puts forecast['link']
 
-    puts "\nCurrently:  #{current.to_s}"
+    puts "\nCurrently:  #{current}"
 
     Array(forecast['forecast']).each do |data|
       condition = Condition.new(data)
@@ -120,7 +127,7 @@ private
   end
 
   def build_params(params)
-    params.map{ |k, v| %{#{k}=#{v}} }.join '&'
+    params.map{ |k, v| %(#{k}=#{v}) }.join '&'
   end
 
   def build_location_query(location)
@@ -135,6 +142,3 @@ if ARGV.delete('-h') || ARGV.delete('--help')
 else
   Weather.forecast ARGV[0]
 end
-
-__END__
-Usage: weather zipcode
