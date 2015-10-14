@@ -27,7 +27,7 @@ alias fm='auto-bundle-exec foreman'
 alias fms='foreman start'
 alias fws='forewoman start'
 
-function back() {
+function bag() {
   ag "$@" `bundle show --paths`
 }
 
