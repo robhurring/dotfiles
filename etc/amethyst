@@ -178,7 +178,9 @@
     "it.bloop.airmail.beta11",
     "am.sunrise.mac",
     "com.apple.finder",
-    "com.agilebits.onepassword4"
+    "com.agilebits.onepassword4",
+    "com.cisco.Cisco-AnyConnect-Secure-Mobility-Client",
+    "com.rsa.securid.softwaretoken"
   ],
   "float-small-windows": true
 }
