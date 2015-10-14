@@ -20,7 +20,8 @@ _git_fetch_if_necessary() {
     local since="$((${now} - $(_git_last_updated_at)))"
 
     if ((${since} > ${GIT_FETCH_DELAY})); then
-      git fetch --quiet > /dev/null 2>&1 && _git_record_fetched
+      _git_record_fetched
+      git fetch --quiet > /dev/null 2>&1
     fi
   else
     return 1
