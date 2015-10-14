@@ -2,10 +2,10 @@
 require 'optparse'
 
 class Battery
-  DEFAULT_FORMAT = "P (S: R)"
+  DEFAULT_FORMAT = 'P (S: R)'
 
   def self.status
-    _, percent, status, remaining, _ = %x{pmset -g batt|grep InternalBattery}.split(/\t|;/).map(&:strip)
+    _, percent, status, remaining, = `pmset -g batt|grep InternalBattery`.split(/\t|;/).map(&:strip)
 
     percent.gsub!(/%/, '')
     remaining.gsub!(/[\(\)]/, '')
@@ -17,7 +17,9 @@ class Battery
   attr_reader :percent, :status, :remaining
 
   def initialize(percent, status, remaining)
-    @percent, @status, @remaining = percent, status, remaining
+    @percent = percent
+    @status = status
+    @remaining = remaining
   end
 
   def charging?
@@ -38,9 +40,9 @@ options = {
 }
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: #{$0} [options]"
+  opts.banner = "Usage: #{$PROGRAM_NAME} [options]"
 
-  opts.on("-d", "Only show when discharging") do |d|
+  opts.on('-d', 'Only show when discharging') do |_d|
     options[:discharging] = true
   end
 end.parse!

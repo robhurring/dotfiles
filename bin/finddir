@@ -7,7 +7,6 @@ require 'getoptlong'
 #
 # Usage: finddir PATTERN [PATH, ...]
 
-
 # Set this up in your env to specify where to search
 # export FINDDIR_SEARCH_PATHS="~/Sites:~/Projects[:OTHER_PATHS]"
 
@@ -22,10 +21,10 @@ force = false
 
 opts = GetoptLong.new(
   ['--force', '-f', GetoptLong::NO_ARGUMENT],
-  ['--no-force', '-n', GetoptLong::NO_ARGUMENT],
+  ['--no-force', '-n', GetoptLong::NO_ARGUMENT]
 )
 
-opts.each do |opt, arg|
+opts.each do |opt, _arg|
   case opt
   when '--force'
     force = true
@@ -35,7 +34,7 @@ opts.each do |opt, arg|
 end
 
 if ARGV.count < 1
-  puts "Usage: #{File.basename $0} PATTERN [PATH, ...]"
+  puts "Usage: #{File.basename $PROGRAM_NAME} PATTERN [PATH, ...]"
   exit 1
 end
 

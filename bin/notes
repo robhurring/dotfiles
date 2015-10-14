@@ -22,7 +22,7 @@ module CLI
     clear: "\e[0m"
   }
 
-  def prompt_user_selection(choices = [], banner = nil, &callback)
+  def prompt_user_selection(choices = [], banner = nil, &_callback)
     say banner unless banner.nil?
 
     choices.each.with_index do |match, i|
@@ -42,7 +42,7 @@ module CLI
     end
   end
 
-  def prompt_user(message = ">")
+  def prompt_user(message = '>')
     say message
     STDIN.gets.to_i
   end
@@ -69,7 +69,8 @@ class Notes
     attr_reader :path, :tokens
 
     def initialize(path = '.', tokens = [])
-      @path, @tokens = path, tokens
+      @path = path
+      @tokens = tokens
     end
 
     def search_query
@@ -79,17 +80,20 @@ class Notes
     def scan
       # NOTE: maybe use kMDItemTextContent ?
       cmd = %{mdfind -onlyin #{path} "(#{search_query}) && kMDItemKind != 'Folder'"}
-      %x{#{cmd}}.split("\n")
+      `#{cmd}`.split("\n")
     end
   end
 
   class FileScanner
-    def self.scan(file, patterns = {}); new(file, patterns).scan; end
+    def self.scan(file, patterns = {})
+      new(file, patterns).scan
+    end
 
     attr_reader :file, :patterns
 
     def initialize(file, patterns)
-      @file, @patterns = file, patterns
+      @file = file
+      @patterns = patterns
     end
 
     def scan
@@ -110,9 +114,9 @@ class Notes
       data.flatten
     end
 
-  private
+    private
 
-    def scan_line(line, number = $.)
+    def scan_line(line, number = $INPUT_LINE_NUMBER)
       matches = []
 
       patterns.each do |(key, pattern)|
@@ -136,7 +140,8 @@ class Notes
   attr_reader :path, :options, :patterns
 
   def initialize(path, options = {})
-    @path, @options = path, options
+    @path = path
+    @options = options
     @patterns = options[:patterns]
     @prescan_keywords = Array(@patterns.keys)
     @ignore = Array(options[:ignore])
@@ -154,12 +159,12 @@ class Notes
     end
   end
 
-private
+  private
 
   def output_data(data)
-    all = data.flat_map{ |(file, notes)| notes }
+    all = data.flat_map{ |(_file, notes)| notes }
 
-    by_patterns = Hash.new{ |h,k| h[k] = [] }
+    by_patterns = Hash.new{ |h, k| h[k] = [] }
 
     patterns.keys.each do |key|
       by_patterns[key] = all.select{ |note| note[:type] == key }
@@ -177,7 +182,7 @@ private
           end
         end
         note[:data].gsub! /%/, '%%' # protects us from the CLI.say choking on '%'
-        say "%%{black}%{relative}:%%{clear}%%{green}%{line} %%{white}%{data}%%{clear}" % note
+        say '%%{black}%{relative}:%%{clear}%%{green}%{line} %%{white}%{data}%%{clear}' % note
       end
       puts
     end
@@ -215,7 +220,7 @@ private
     data
   end
 
-  def with_progress_bar(total, &block)
+  def with_progress_bar(total, &_block)
     use_progress_bar = total >= PROGRESS_BAR_THRESHOLD
 
     if use_progress_bar
@@ -241,7 +246,9 @@ private
     @_progress_bar_stub ||= begin
       Class.new do
         def increment; end
+
         def total=(*); end
+
         def finish; end
       end.new
     end
@@ -258,18 +265,18 @@ end
 
 # helper to build the particular type of patterns (must have a <data> capture!)
 def build_pattern(keyword)
-  %r{#{keyword}[\s]*?:?\s*(?<data>.*)$}
+  /#{keyword}[\s]*?:?\s*(?<data>.*)$/
 end
 
 # Parse CLI args
-note_types = ['TODO', 'FIXME', 'NOTE']
+note_types = %w(TODO FIXME NOTE)
 
 options = {
   patterns: {},
   ignore: [
     %r{coverage/index.html},
     %r{.git/},
-    %r{.log},
+    /.log/,
     %r{db/seeds/}
   ],
   filters: []
@@ -277,15 +284,15 @@ options = {
 
 # CLI options
 parser = OptionParser.new do |opts|
-  opts.banner = "Usage: #{File.basename $0} [options] PATH"
-  opts.on("-t TODO,FIXME", Array, "Types of notes to scan for") do |list|
+  opts.banner = "Usage: #{File.basename $PROGRAM_NAME} [options] PATH"
+  opts.on('-t TODO,FIXME', Array, 'Types of notes to scan for') do |list|
     note_types = list
   end
-  opts.on("-i IGNORE", "Ignore files containing this") do |ignore|
-    options[:ignore] << %r{#{ignore}}
+  opts.on('-i IGNORE', 'Ignore files containing this') do |ignore|
+    options[:ignore] << /#{ignore}/
   end
-  opts.on("-f FILTER", "Only show notes from files containing this") do |filter|
-    options[:filters] << %r{#{filter}}
+  opts.on('-f FILTER', 'Only show notes from files containing this') do |filter|
+    options[:filters] << /#{filter}/
   end
 end
 parser.parse!

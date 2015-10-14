@@ -12,7 +12,7 @@ module CLI
     clear: "\e[0m"
   }
 
-  def prompt_user_selection(choices = [], banner = nil, &callback)
+  def prompt_user_selection(choices = [], banner = nil, &_callback)
     say banner unless banner.nil?
 
     choices.each.with_index do |match, i|
@@ -32,7 +32,7 @@ module CLI
     end
   end
 
-  def prompt_user(message = ">")
+  def prompt_user(message = '>')
     say message
     STDIN.gets.to_i
   end
@@ -53,14 +53,14 @@ class FuzzyCheckout
   include CLI
 
   class << self
-    def run(args=ARGV)
+    def run(_args = ARGV)
       options = {
         interactive: false
       }
 
       parser = OptionParser.new do |opts|
-        opts.banner = "Usage: #{File.basename $0} [options]"
-        opts.on("-i", "--interactive", "Run interactively") do |i|
+        opts.banner = "Usage: #{File.basename $PROGRAM_NAME} [options]"
+        opts.on('-i', '--interactive', 'Run interactively') do |i|
           options[:interactive] = i
         end
       end
@@ -102,7 +102,7 @@ class FuzzyCheckout
     end
   end
 
-private
+  private
 
   def checkout_proper_branch(term, matches)
     case matches.size
@@ -126,7 +126,7 @@ private
         if selected_branch
           switch_branch selected_branch
         else
-          say "%{red}Invalid selection%{clear}"
+          say '%{red}Invalid selection%{clear}'
           exit 1
         end
       else
@@ -137,22 +137,22 @@ private
   end
 
   def switch_branch(name)
-    %x{git checkout #{name}}
+    `git checkout #{name}`
   end
 
   def branches
-    @_branches ||= %x{git branch -a}.split.map{ |b| b.split('/').last }.uniq.sort_by{ |b| normalize(b) }
+    @_branches ||= `git branch -a`.split.map{ |b| b.split('/').last }.uniq.sort_by{ |b| normalize(b) }
   end
 
   def branch_times
     @_branch_times ||= begin
-      Hash[%x{git for-each-ref --sort='-authordate:iso8601' --format='%(refname:short)~%(authordate:relative) by %(authorname)' refs/heads}.split("\n").map{ |b| b.split("~") }]
+      Hash[`git for-each-ref --sort='-authordate:iso8601' --format='%(refname:short)~%(authordate:relative) by %(authorname)' refs/heads`.split("\n").map{ |b| b.split('~') }]
     end
   end
 
   # keeps semantic versioning in proper sort order
   def normalize(name)
-    name.to_s.scan(%r/\d+/o).map(&:to_i)
+    name.to_s.scan(/\d+/o).map(&:to_i)
   end
 end
 
