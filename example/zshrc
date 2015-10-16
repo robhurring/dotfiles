@@ -18,11 +18,12 @@ export EDITOR=vim
 # export LS_OPTIONS=''
 
 # Custom matcher for my projects colder
-PATH_MATCHERS+=("~/Projects")
-PATH_REPLACER+=("%B%F{yellow}projects%b")
+PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
+PATH_REPLACER+=("%Bproject:%F{white}\\1%f")
 
 # Custom prompt color
-THEME_PROMPT_COLOR="yellow"
+THEME_PROMPT_COLOR="%B%F{yellow}"
+THEME_VI_PROMPT_COLOR="%b%K{magenta}%F{white}"
 
 # Add user and host before the path
 THEME_PATH_BEFORE="%n@%m "
