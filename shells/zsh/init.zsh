@@ -12,7 +12,7 @@ export REPORTTIME=10
 if [[ "$ZSH_MODE" == "vi" ]]; then
   bindkey -v
   setopt VI
-  export KEYTIMEOUT=40 # WARNING: setting this too low kills the `jk` switch
+  export KEYTIMEOUT=10 # WARNING: setting this too low kills the `jk` switch
   bindkey -M viins 'jk' vi-cmd-mode
 else
   bindkey -e
