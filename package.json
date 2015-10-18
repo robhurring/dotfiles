@@ -6,7 +6,7 @@
     "eslint": "^1.5.1",
     "eslint-plugin-babel": "^2.1.1",
     "eslint-plugin-react": "^3.5.1",
-    "instant-markdown-d": "^0.1.0",
-    "js-beautify": "^1.5.10"
+    "js-beautify": "^1.5.10",
+    "livedown": "^1.0.8"
   }
 }
