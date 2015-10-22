@@ -251,6 +251,7 @@ do_sync() {
   fi
 
   [ "$(command -v git-cleanup)" ] && git-cleanup
+  [ "$(command -v git-stats-importer)" ] && git-stats-importer 2>&1 >/dev/null
 }
 
 do_sync
