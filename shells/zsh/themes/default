@@ -40,14 +40,10 @@ THEME_JOB_ICON="↺"
 THEME_RETURN_BAD_ICON="%F{red}ಠ_ಠ %?%f "
 THEME_RETURN_GOOD_ICON=""
 
-# make ~/Projects/app show up as project:app
-# PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
-# PATH_REPLACER+=("%Bproject:%F{white}\\1")
-
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=":"
 
 THEME_PROMPT_COLOR="%F{yellow}"
 
-export PROMPT=$'%B$(vi_prompt_color)$(formatted_path)%b%f '
+export PROMPT=$'$THEME_PROMPT_COLOR$(formatted_path)%b%f '
 export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'
