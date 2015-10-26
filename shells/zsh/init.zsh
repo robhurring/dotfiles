@@ -1,9 +1,12 @@
-export ZSH_MODE=${ZSH_MODE:-"vi"}
-export ZSH_VI_ESC="jk"
-export EDITOR=${EDITOR:-"vim"}
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/share/man:$MANPATH"
-export TERM="xterm-256color"
+
+# override in ~/.zshrc before init, or whatever
+export ZSH_MODE=${ZSH_MODE:-"vi"}
+export ZSH_VI_ESC=${ZSH_VI_ESC:-"jk"}
+export EDITOR=${EDITOR:-"vim"}
+export TERM=${TERM:-"xterm-256color"}
+
 export HISTFILE=~/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=1000
@@ -12,8 +15,8 @@ export REPORTTIME=10
 if [[ "$ZSH_MODE" == "vi" ]]; then
   bindkey -v
   setopt VI
-  export KEYTIMEOUT=10 # WARNING: setting this too low kills the `jk` switch
-  bindkey -M viins 'jk' vi-cmd-mode
+  export KEYTIMEOUT=10 # WARNING: setting this too low kills the `^[` switch
+  bindkey -M viins "$ZSH_VI_ESC" vi-cmd-mode
 else
   bindkey -e
 fi
@@ -36,13 +39,13 @@ setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt PROMPT_SUBST
 setopt APPEND_HISTORY
-#setopt SHARE_HISTORY
-#setopt INC_APPEND_HISTORY SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt AUTO_PARAM_SLASH
 setopt AUTO_MENU
 setopt NULL_GLOB
+#setopt SHARE_HISTORY
+#setopt INC_APPEND_HISTORY SHARE_HISTORY
 
 bindkey '^r'   history-beginning-search-backward
 bindkey '^t'   history-beginning-search-forward

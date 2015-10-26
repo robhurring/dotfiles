@@ -1,9 +1,10 @@
 # setup our env to point to the dotfiles
-DOTFILES=~/.dotfiles
-ZSH=~/.zsh
-ZSH_THEME=default
-ZSH_MODE="vi"
-set -o vi
+export DOTFILES=~/.dotfiles
+export ZSH=~/.zsh
+export ZSH_THEME=default
+export ZSH_MODE="vi"
+export ZSH_VI_ESC="jk"
+export EDITOR="vim"
 
 plugins=(osx tmux fzf)
 
@@ -11,8 +12,6 @@ plugins=(osx tmux fzf)
 [[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
 
 # ---> Local Config
-
-export EDITOR=vim
 
 # Disable for OSX
 # export LS_OPTIONS=''
