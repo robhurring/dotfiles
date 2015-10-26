@@ -13,7 +13,7 @@ FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
 
 # casked apps
 GUI_APPS=amethyst
-BREW_APPS=ag
+BREW_APPS=ag shellcheck
 
 all: .setup $(DOTFILES) $(BINFILES) .zsh .tmux
 	@echo "All good."
@@ -29,7 +29,7 @@ fonts: $(FONTFILES)
 	@echo "Fonts installed."
 
 # only relevant for OSX
-apps: .brew $(BREW_APPS) $(GUI_APPS)
+apps: .brew $(BREW_APPS) $(GUI_APPS) .thirdparty
 
 .setup:
 	@mkdir -p $HOME/bin
@@ -74,14 +74,17 @@ $(HOME)/.zsh:
 
 $(GUI_APPS):
 	@echo "installing: $@"
-	@brew cask install $@
+	-brew cask install $@
 
 $(BREW_APPS):
 	@echo "installing: $<"
-	@brew install $@
+	-brew upgrade $@
 
 .brew:
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	brew install caskroom/cask/brew-cask
+	@ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	-brew upgrade caskroom/cask/brew-cask
 
-.PHONY: $(GUI_APPS)
+.thirdparty:
+	-pip install vim-vint
+
+.PHONY: $(GUI_APPS) $(BREW_APPS)
