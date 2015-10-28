@@ -50,6 +50,9 @@ setopt NULL_GLOB
 bindkey '^r'   history-beginning-search-backward
 bindkey '^t'   history-beginning-search-forward
 
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
 # load our config files
 for lib ($ZSH/lib/*.zsh); do
   source $lib
