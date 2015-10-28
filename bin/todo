@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+TODO_FILE=~/Dropbox/config/todo.md
+
+edit() {
+  $EDITOR $TODO_FILE
+}
+
+append() {
+  local message=$1
+
+
+  if [[ "${message:0:3}" != "[ ]" ]]; then
+    message="[ ] ${message}"
+  fi
+
+  echo "$message" >> $TODO_FILE
+}
+
+if (($# == 0)); then
+  edit
+else
+  append "$*"
+fi
+
