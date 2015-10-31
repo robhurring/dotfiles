@@ -9,7 +9,7 @@
 	<key>AdvancedFontRendering</key>
 	<false/>
 	<key>AllowClipboardAccess</key>
-	<false/>
+	<true/>
 	<key>AnimateDimming</key>
 	<false/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -20,6 +20,8 @@
 	<integer>1</integer>
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
+	<key>BadgeFont</key>
+	<string>Hack</string>
 	<key>CheckTestRelease</key>
 	<true/>
 	<key>ClosingHotkeySwitchesSpaces</key>
@@ -30,6 +32,19 @@
 	<true/>
 	<key>Control</key>
 	<integer>1</integer>
+	<key>Coprocess MRU</key>
+	<array>
+		<string>echo nvim /Users/rob/.rvm/gems/ruby-2.0.0-p647/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb +</string>
+		<string>echo nvim /Users/rob/experian.yml +</string>
+		<string>vim /Users/rob/twilio.yml</string>
+		<string>nvim /Users/rob/experian.yml</string>
+		<string>nvim /Users/rob/strike_iron.yml</string>
+		<string>echo "HI" /Users/rob/newrelic.yml:</string>
+		<string>echo /Users/rob/everification.yml:</string>
+		<string>vim /Users/rob/smtp.yml +</string>
+		<string>vim /Users/rob/docusign.yml:</string>
+		<string>vim /Users/rob/database.yml:</string>
+	</array>
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopySelection</key>
@@ -5783,6 +5798,8 @@
 	<false/>
 	<key>HideTab</key>
 	<true/>
+	<key>HideTabNumber</key>
+	<false/>
 	<key>HighlightTabLabels</key>
 	<false/>
 	<key>HotKeyBookmark</key>
@@ -5813,17 +5830,19 @@
 	<false/>
 	<key>MinimumContrast</key>
 	<real>0.0</real>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Desktop</string>
+	<string>~/.dotfiles/other/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
-	<key>NSNavPanelExpandedSizeForSaveMode</key>
-	<string>{712, 532}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
+	<false/>
+	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
 	<key>NSTableView Columns KeyBingingTable</key>
 	<array>
@@ -5836,36 +5855,25 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>302</string>
+		<string>322</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
-	<key>NSToolbar Configuration Terminal Toolbar</key>
-	<dict>
-		<key>TB Display Mode</key>
-		<integer>1</integer>
-		<key>TB Icon Size Mode</key>
-		<integer>1</integer>
-		<key>TB Is Shown</key>
-		<integer>0</integer>
-		<key>TB Size Mode</key>
-		<integer>1</integer>
-	</dict>
 	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
 	<dict>
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
-	<key>NSWindow Frame NSColorPanel</key>
-	<string>2106 343 231 329 1920 0 1920 1177 </string>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>1576 131 813 476 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>27 241 924 485 0 0 1440 877 </string>
-	<key>NSWindow Frame SUStatusFrame</key>
-	<string>2893 906 384 129 2560 -240 1050 1658 </string>
+	<string>947 446 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>960 59 954 558 0 0 1920 1177 </string>
+	<string>1270 649 1290 768 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>398 166 570 451 0 0 2560 1417 </string>
 	<key>NeverWarnAboutMeta</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_DA3FC3D6-1068-499C-BEFA-AE1607D47620</key>
@@ -5936,11 +5944,11 @@
 			<key>Ansi 14 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.99463993310928345</real>
+				<real>0.97686588764190674</real>
 				<key>Green Component</key>
 				<real>1</real>
 				<key>Red Component</key>
-				<real>0.60990351438522339</real>
+				<real>0.71730226278305054</real>
 			</dict>
 			<key>Ansi 15 Color</key>
 			<dict>
@@ -5954,11 +5962,11 @@
 			<key>Ansi 2 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.29078727960586548</real>
+				<real>0.41247016191482544</real>
 				<key>Green Component</key>
-				<real>0.73177272081375122</real>
+				<real>0.91209155321121216</real>
 				<key>Red Component</key>
-				<real>0.47229364514350891</real>
+				<real>0.69528472423553467</real>
 			</dict>
 			<key>Ansi 3 Color</key>
 			<dict>
@@ -5981,20 +5989,20 @@
 			<key>Ansi 5 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.89011204242706299</real>
+				<real>1</real>
 				<key>Green Component</key>
-				<real>0.36459016799926758</real>
+				<real>0.4175935685634613</real>
 				<key>Red Component</key>
-				<real>0.65056920051574707</real>
+				<real>0.91076451539993286</real>
 			</dict>
 			<key>Ansi 6 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>1</real>
+				<real>0.96741926670074463</real>
 				<key>Green Component</key>
-				<real>0.99435031414031982</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.42328578233718872</real>
+				<real>0.51017588376998901</real>
 			</dict>
 			<key>Ansi 7 Color</key>
 			<dict>
@@ -6029,17 +6037,34 @@
 			<false/>
 			<key>Background Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.048926766961812973</real>
+				<real>0.025397801771759987</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.048926766961812973</real>
+				<real>0.025593964383006096</real>
 				<key>Red Component</key>
-				<real>0.048926766961812973</real>
+				<real>0.025435980409383774</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
 			<key>Background Image Location</key>
 			<string></string>
+			<key>Badge Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>0.5</real>
+				<key>Blue Component</key>
+				<real>0.0</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.0</real>
+				<key>Red Component</key>
+				<real>1</real>
+			</dict>
 			<key>Blend</key>
 			<real>0.30000001192092896</real>
 			<key>Blink Allowed</key>
@@ -6064,7 +6089,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>150</integer>
+			<integer>160</integer>
 			<key>Command</key>
 			<string>sh</string>
 			<key>Cursor Color</key>
@@ -6075,6 +6100,19 @@
 				<real>0.73333334922790527</real>
 				<key>Red Component</key>
 				<real>0.73333334922790527</real>
+			</dict>
+			<key>Cursor Guide Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>0.25</real>
+				<key>Blue Component</key>
+				<real>1</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.91000000000000003</real>
+				<key>Red Component</key>
+				<real>0.65000000000000002</real>
 			</dict>
 			<key>Cursor Text Color</key>
 			<dict>
@@ -6103,12 +6141,16 @@
 			<false/>
 			<key>Foreground Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.80998730659484863</real>
+				<real>0.85351812839508057</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.85460180044174194</real>
+				<real>0.88314342498779297</real>
 				<key>Red Component</key>
-				<real>0.87252241373062134</real>
+				<real>0.89499938488006592</real>
 			</dict>
 			<key>Guid</key>
 			<string>DA3FC3D6-1068-499C-BEFA-AE1607D47620</string>
@@ -6184,6 +6226,13 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>0x7f</string>
+				</dict>
+				<key>0x7f-0x0</key>
+				<dict>
+					<key>Action</key>
+					<integer>16</integer>
+					<key>Text</key>
+					<string></string>
 				</dict>
 				<key>0xf700-0x220000</key>
 				<dict>
@@ -6382,6 +6431,19 @@
 					<string>[1;5F</string>
 				</dict>
 			</dict>
+			<key>Link Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
+				<key>Blue Component</key>
+				<real>0.67800000000000005</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.27000000000000002</real>
+				<key>Red Component</key>
+				<real>0.023</real>
+			</dict>
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
@@ -6391,7 +6453,7 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Hack 13</string>
+			<string>Hack 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -6407,7 +6469,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>0</integer>
+			<integer>10000</integer>
 			<key>Scrollback With Status Bar</key>
 			<false/>
 			<key>Scrollback in Alternate Screen</key>
@@ -6433,11 +6495,11 @@
 			<key>Semantic History</key>
 			<dict>
 				<key>action</key>
-				<string>command</string>
+				<string>coprocess</string>
 				<key>editor</key>
-				<string>com.sublimetext.3</string>
+				<string>org.vim.MacVim</string>
 				<key>text</key>
-				<string>vim \1:\2</string>
+				<string>echo nvim \1 +\2</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -6540,18 +6602,20 @@
 					<string>\btelnet:([a-z0-9A-Z_]+@)?([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\b</string>
 				</dict>
 			</array>
+			<key>Space</key>
+			<integer>0</integer>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
-			<string>xterm</string>
+			<string>xterm-256color</string>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
-			<true/>
+			<false/>
 			<key>Use Bold Font</key>
 			<false/>
 			<key>Use Bright Bold</key>
@@ -6559,7 +6623,7 @@
 			<key>Use Canonical Parser</key>
 			<false/>
 			<key>Use Italic Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -9097,10 +9161,22 @@
 			<string>/Users/hurrinre</string>
 		</dict>
 	</array>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
+	<key>NoSyncSilenceAnnoyingBellAutomatically</key>
+	<true/>
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>467939699.90821999</real>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>453397662.22609103</real>
+	<real>453303146.237881</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>466435558.049375</real>
+	<real>467901918.80576199</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -9149,27 +9225,27 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/rhurring/.dotfiles/other/iterm2</string>
+	<string>/Users/rob/.dotfiles/other/iterm2</string>
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
-	<false/>
+	<true/>
 	<key>RightCommand</key>
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
-	<key>SUAutomaticallyUpdate</key>
-	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
+	<key>SUFeedAlternateAppNameKey</key>
+	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/nightly.xml</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-10-13T13:25:46Z</date>
+	<date>2015-10-30T12:45:10Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -9224,7 +9300,7 @@
 	<key>Window Arrangements</key>
 	<dict/>
 	<key>WindowNumber</key>
-	<true/>
+	<false/>
 	<key>WindowStyle</key>
 	<integer>0</integer>
 	<key>WordCharacters</key>
@@ -9234,6 +9310,10 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.1.4</string>
+	<string>2.9.20151023-nightly</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
