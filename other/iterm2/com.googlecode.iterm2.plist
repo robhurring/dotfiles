@@ -34,6 +34,13 @@
 	<integer>1</integer>
 	<key>Coprocess MRU</key>
 	<array>
+		<string>echo e /Users/rob/Sites/apps/auto-refi/package.json +</string>
+		<string>echo e /Users/rob/Sites/apps/auto-refi/app +</string>
+		<string>echo e /Users/rob/Desktop +</string>
+		<string>echo e /Users/rob/strike_iron.yml +</string>
+		<string>echo nvim /Users/rob/XCode +</string>
+		<string>echo nvim /Users/rob/baycities.yml +</string>
+		<string>echo nvim /Users/rob/strike_iron.yml +</string>
 		<string>echo nvim /Users/rob/.rvm/gems/ruby-2.0.0-p647/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb +</string>
 		<string>echo nvim /Users/rob/experian.yml +</string>
 		<string>vim /Users/rob/twilio.yml</string>
@@ -5869,9 +5876,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1576 131 813 476 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>947 446 606 456 0 0 2560 1417 </string>
+	<string>947 707 606 456 0 0 2560 1417 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>970 785 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1270 649 1290 768 0 0 2560 1417 </string>
+	<string>1038 79 1522 1338 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>398 166 570 451 0 0 2560 1417 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -6089,9 +6098,11 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>160</integer>
+			<integer>140</integer>
 			<key>Command</key>
 			<string>sh</string>
+			<key>Cursor Boost</key>
+			<real>0.0</real>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -6436,13 +6447,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.67800000000000005</real>
+				<real>0.92468452453613281</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.27000000000000002</real>
+				<real>0.41708576679229736</real>
 				<key>Red Component</key>
-				<real>0.023</real>
+				<real>0.35370030999183655</real>
 			</dict>
 			<key>Log Directory</key>
 			<string></string>
@@ -6499,7 +6510,7 @@
 				<key>editor</key>
 				<string>org.vim.MacVim</string>
 				<key>text</key>
-				<string>echo nvim \1 +\2</string>
+				<string>echo e \1 +\2</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -9236,6 +9247,8 @@
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -9245,7 +9258,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-10-30T12:45:10Z</date>
+	<date>2015-10-31T13:10:50Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -9310,7 +9323,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20151023-nightly</string>
+	<string>2.9.20151031-nightly</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
