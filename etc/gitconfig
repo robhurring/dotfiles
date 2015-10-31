@@ -68,7 +68,7 @@
   error = red bold
 [core]
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  editor = vim
+  editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 [help]
   autocorrect = 1
 [status]
@@ -102,3 +102,7 @@
 	file = ~/.mailmap
 [github]
 	user = robhurring
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
