@@ -5,15 +5,16 @@ Pry.config.theme = 'pry-twilight'
 # Launch Pry with access to the entire Rails stack.
 # If you have Pry in your Gemfile, you can pass: ./script/console --irb=pry instead.
 # If you don't, you can load it through the lines below :)
-rails = File.join(Dir.getwd, 'config/environment.rb')
+# rails = File.join(Dir.getwd, 'config/environment.rb')
 
-if File.exist?(rails) && ENV['SKIP_RAILS'].nil?
-  require rails
-
-  if Rails.version[0..0] == '3'
-    require 'rails/console/app'
-    require 'rails/console/helpers'
-  end
+if Dir['bin/rails', 'script/rails'].first # for rails apps
+  require './config/environment'
+  require 'rails/console/app'
+  require 'rails/console/helpers'
+  extend Rails::ConsoleMethods
+elsif Dir['*.gemspec'].first || Dir['Gemfile'] # for gems or sintra like apps
+  Bundler.require if defined? Bundler
+  Dir['./lib/*.rb'].each { |file| require file }
 end
 
 if defined?(::PryDebugger)
@@ -22,7 +23,7 @@ if defined?(::PryDebugger)
   Pry.commands.alias_command 'n', 'next'
   Pry.commands.alias_command 'f', 'finish'
 
-  Pry::Commands.command /^$/, 'repeat last command' do
+  Pry::Commands.command(/^$/, 'repeat last command') do
     _pry_.run_command Pry.history.to_a.last
   end
 end
