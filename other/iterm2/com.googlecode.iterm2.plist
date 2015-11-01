@@ -34,6 +34,8 @@
 	<integer>1</integer>
 	<key>Coprocess MRU</key>
 	<array>
+		<string>echo e /Users/rob/Sites/apps/auto-refi/spec/actions/update_lead_spec.rb +125</string>
+		<string>echo e /Users/rob/Sites/apps/auto-refi/spec/actions/update_lead_spec.rb +120</string>
 		<string>echo e /Users/rob/Sites/apps/auto-refi/package.json +</string>
 		<string>echo e /Users/rob/Sites/apps/auto-refi/app +</string>
 		<string>echo e /Users/rob/Desktop +</string>
@@ -5785,6 +5787,10 @@
 	<false/>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
+	<key>DisableWindowSizeSnap</key>
+	<false/>
+	<key>DoubleClickPerformsSmartSelection</key>
+	<true/>
 	<key>EnableGrowl</key>
 	<false/>
 	<key>EnableRendezvous</key>
@@ -5842,7 +5848,7 @@
 	<key>NSNavLastRootDirectory</key>
 	<string>~/.dotfiles/other/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{712, 448}</string>
+	<string>{712, 459}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -5876,11 +5882,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1576 131 813 476 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>947 707 606 456 0 0 2560 1417 </string>
+	<string>947 765 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 785 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1038 79 1522 1338 0 0 2560 1417 </string>
+	<string>1493 479 1026 863 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>398 166 570 451 0 0 2560 1417 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -6074,6 +6080,8 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Text</key>
+			<string></string>
 			<key>Blend</key>
 			<real>0.30000001192092896</real>
 			<key>Blink Allowed</key>
@@ -6083,7 +6091,7 @@
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
-			<real>2</real>
+			<real>30</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -6624,7 +6632,34 @@
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Triggers</key>
-			<array/>
+			<array>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>\d+ failures</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{YnBsaXN0MDDUAQIDBAUGCAlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKEHVSRudWxsXxAPTlNLZXllZEFyY2hpdmVy0goLDA1XTlNXaGl0ZVxOU0NvbG9yU3BhY2VCMQAQAwgRGiMtMjc5P1FWXmtuAAAAAAAAAQEAAAAAAAAADgAAAAAAAAAAAAAAAAAAAHA=,YnBsaXN0MDDUAQIDBAUGCAlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKEHVSRudWxsXxAPTlNLZXllZEFyY2hpdmVy0goLDA1VTlNSR0JcTlNDb2xvclNwYWNlRjEgMCAwABABCBEaIy0yNzk/UVZcaXAAAAAAAAABAQAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAcg==}</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>\(FAILED - \d\)</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>GrowlTrigger</string>
+					<key>parameter</key>
+					<string>\0</string>
+					<key>regex</key>
+					<string>\d+ failures</string>
+				</dict>
+			</array>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -6635,6 +6670,8 @@
 			<false/>
 			<key>Use Italic Font</key>
 			<true/>
+			<key>Use Non-ASCII Font</key>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -9271,6 +9308,8 @@
 	<true/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.10000000149011612</real>
+	<key>SuppressMultilinePasteWarningWhenNotAtShellPrompt</key>
+	<true/>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -9281,24 +9320,28 @@
 	<false/>
 	<key>TmuxDashboardLimit</key>
 	<integer>10</integer>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Captured Output</string>
+	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
-	<false/>
+	<true/>
 	<key>URLHandlersByGuid</key>
 	<dict>
 		<key>news</key>
 		<string>E7EDCCA2-5D21-47A5-A362-E3D7C97DA896</string>
 		<key>nntp</key>
-		<string>E7EDCCA2-5D21-47A5-A362-E3D7C97DA896</string>
+		<string>DA3FC3D6-1068-499C-BEFA-AE1607D47620</string>
 		<key>ssh</key>
-		<string>E7EDCCA2-5D21-47A5-A362-E3D7C97DA896</string>
+		<string>DA3FC3D6-1068-499C-BEFA-AE1607D47620</string>
 		<key>telnet</key>
-		<string>E7EDCCA2-5D21-47A5-A362-E3D7C97DA896</string>
+		<string>DA3FC3D6-1068-499C-BEFA-AE1607D47620</string>
 		<key>wais</key>
 		<string>E7EDCCA2-5D21-47A5-A362-E3D7C97DA896</string>
 		<key>whois</key>
-		<string>E7EDCCA2-5D21-47A5-A362-E3D7C97DA896</string>
+		<string>DA3FC3D6-1068-499C-BEFA-AE1607D47620</string>
 		<key>x-man-page</key>
-		<string>E7EDCCA2-5D21-47A5-A362-E3D7C97DA896</string>
+		<string>DA3FC3D6-1068-499C-BEFA-AE1607D47620</string>
 	</dict>
 	<key>UseBorder</key>
 	<false/>
