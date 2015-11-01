@@ -64,6 +64,11 @@ THEME_PATH_BEFORE="%n@%m "
 #   $(git log --all --decorate --format='commit %h %an: %s' $* | tig)
 # }
 
+# ---> Neovim
+
+# export NVIM_TUI_ENABLE_TRUE_COLOR=1
+# export NVIM_LISTEN_ADDRESS=/tmp/neovim.sock
+
 # ---> FZF (requires fzf plugin)
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
