@@ -43,8 +43,7 @@
   ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
   this = !git init && git add . && git commit -m \"initial commit\"
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
-[apply]
-  whitespace = warn
+  tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ --output=${1} HEAD; }; f"
 [color]
   ui = auto
 [color "branch"]
@@ -90,7 +89,7 @@
 [web]
   browser = ch
 [merge]
-	tool = opendiff
+  tool = opendiff
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [url "git@github.com:"]
@@ -99,10 +98,10 @@
 [url "git@gist.github.com:"]
   insteadOf = "gist:"
 [mailmap]
-	file = ~/.mailmap
+  file = ~/.mailmap
 [github]
-	user = robhurring
+  user = robhurring
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
