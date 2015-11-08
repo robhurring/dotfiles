@@ -67,7 +67,7 @@
   error = red bold
 [core]
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
+  editor = "nvim"
 [help]
   autocorrect = 1
 [status]
