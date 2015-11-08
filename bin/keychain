@@ -1,0 +1,49 @@
+#!/usr/bin/env sh
+
+usage() {
+  echo "Usage: $(basename $0) [FLAGS] <LABEL>"
+  echo "Flags:"
+  echo "  -a    Print account name"
+  echo "  -p    Print password"
+  echo
+  exit 1
+}
+
+account() {
+  local label=$1
+  security find-generic-password -l ${label}|grep acct|perl -e '<STDIN> =~ /=\"([^\"]+)\"/ && print $1'
+}
+
+password() {
+  local label=$1
+  security find-generic-password -w -l ${label}
+}
+
+while getopts ":ap" opt; do
+  case $opt in
+    a)
+      ACCOUNT=1
+      ;;
+    p)
+      PASSWORD=1
+      ;;
+    \?|h|*)
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if (($# == 0)); then
+  usage
+fi
+
+if [[ $ACCOUNT ]]; then
+  account "$1"
+  [[ "$PASSWORD" ]] && echo -n ":"
+fi
+
+if [[ $PASSWORD ]]; then
+  password "$1"
+fi
+
