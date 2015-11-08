@@ -1,0 +1,18 @@
+# NOTE: This requires an entry in your OSX keychain labeled: "mutt@<HOSTNAME>"
+#       The `$my_user` and `$my_pass` will be pulled from this keychain entry.
+set my_user          = "`security find-generic-password -l mutt@$(hostname)|grep acct|perl -e '<STDIN> =~ /=\"([^\"]+)\"/ && print $1'`"
+set my_pass          = "`security find-generic-password -w -l mutt@$(hostname)`"
+
+set from             = $my_user
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+
+set imap_user        = $my_user
+set imap_pass        = $my_pass
+set ssl_force_tls    = yes
+set ssl_starttls     = no
+
+set folder           = "imaps://imap.gmail.com:993"
+set spoolfile        = "imaps://imap.gmail.com:993/INBOX"
+set postponed        = "imaps://imap.gmail.com/[Gmail]/Drafts"
+
