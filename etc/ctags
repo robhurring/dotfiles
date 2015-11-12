@@ -1,6 +1,7 @@
 --recurse=yes
 --tag-relative=yes
 --fields=+KSln
+--extra=+g
 
 --exclude=db
 --exclude=coverage
