@@ -1,3 +1,10 @@
+PROFILE_STARTUP=false
+if [[ "$PROFILE_STARTUP" == true ]]; then
+  PS4=$'%D{%M%S%.} %N:%i> '
+  exec 3>&2 2>/tmp/zsh.$$.profile
+  setopt xtrace prompt_subst
+fi
+
 # setup our env to point to the dotfiles
 export DOTFILES=~/.dotfiles
 export ZSH=~/.zsh
@@ -6,12 +13,15 @@ export ZSH_MODE="vi"
 export ZSH_VI_ESC="jk"
 export EDITOR="vim"
 
-plugins=(osx tmux fzf)
+plugins=(osx tmux fzf git)
 
 # load our zsh environment
 [[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
 
 # ---> Local Config
+
+# Customize RVM default version
+# export THEME_RVM_DEFAULT_RUBY="2.2.3"
 
 # Disable for OSX
 # export LS_OPTIONS=''
@@ -37,10 +47,10 @@ THEME_PATH_BEFORE="%n@%m "
 
 # Development
 # alias e=vim
-# alias edf="pushd $DOTFILES && vim && popd"
-# alias ev='pushd ~/.dotvim && vim vimrc && popd'
-# alias erc='vim ~/.zshrc'
-# alias cdg="cd $GOPATH/src/github.com/robhurring"
+# alias edf="pushd $DOTFILES && e && popd"
+# alias ev='pushd ~/.dotvim && e vimrc && popd'
+# alias erc='e ~/.zshrc'
+# alias cdg="cd $GOPATH/src/github.com/$(git config github.user)"
 # alias rsa='auto-bundle-exec rspec -fd'
 # alias rs='rsa --fail-fast'
 # alias rake="auto-bundle-exec rake"
@@ -71,7 +81,7 @@ THEME_PATH_BEFORE="%n@%m "
 
 # ---> FZF (requires fzf plugin)
 
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+# [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # export FUZZY_SEARCH_PATHS="~/Projects:~/XCode:~/Sites/apps:~/Sites/gems:~/Sites"
 # alias cds=fuzzy-cds
@@ -81,21 +91,21 @@ THEME_PATH_BEFORE="%n@%m "
 # alias cdf=fuzzy-cd
 # alias fkill=fuzzy-kill
 
-# function fzf-fuzzy-cds () {
+# function fzf-fuzzy-cds() {
 #   fuzzy-cds $1
 #   zle reset-prompt
 # }
 # zle -N fzf-fuzzy-cds
 # bindkey "^ " fzf-fuzzy-cds
 
-# function fzf-fuzzy-co {
+# function fzf-fuzzy-co() {
 #   co
 #   zle reset-prompt
 # }
 # zle -N fzf-fuzzy-co
 # bindkey "^b" fzf-fuzzy-co
 
-# function vs() {
+# function vs(){
 #   local session
 #
 #   if [ -n $1 ]; then
@@ -111,28 +121,12 @@ THEME_PATH_BEFORE="%n@%m "
 # export GOBIN=$GOPATH/bin
 # export PATH="$PATH:$GOBIN"
 
-# ---> Misc
-
-# # Search bundle paths for something
-# function back() {
-#   ack "$@" `bundle show --paths`
-# }
-
-# # Dump pg database
-# # Usage: dbdump DBNAME > DUMPFILE
-# function dbdump() {
-#   DBUSER=${DBUSER:-postgres} # default to postgres
-#   pg_dump -Fc --no-acl --no-owner -h localhost -U $DBUSER $@
-# }
-
-# # Restore pg database
-# # Usage: dbrestore DBNAME < DUMPFILE
-# function dbrestore() {
-#   DBHOST=${DBHOST:-localhost}
-#   DBUSER=${DBUSER:-postgres}
-#   pg_restore --verbose --clean --no-acl --no-owner -h $DBHOST -U $DBUSER -d $@
-# }
+# ---> Paths
 
 # export PATH="$PATH:$HOME/.rvm/bin"
 # export PATH="$PATH:$DOTFILES/node_modules/.bin"
 
+if [[ "$PROFILE_STARTUP" == true ]]; then
+  unsetopt xtrace
+  exec 2>&3 3>&-
+fi
