@@ -5882,11 +5882,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1576 131 813 476 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>947 765 606 456 0 0 2560 1417 </string>
+	<string>947 939 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 785 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1493 479 1026 863 0 0 2560 1417 </string>
+	<string>1286 79 1274 1338 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>398 166 570 451 0 0 2560 1417 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -6639,7 +6639,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\d+ failures</string>
+					<string>[1-9]\d* failures</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -6649,15 +6649,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\(FAILED - \d\)</string>
-				</dict>
-				<dict>
-					<key>action</key>
-					<string>GrowlTrigger</string>
-					<key>parameter</key>
-					<string>\0</string>
-					<key>regex</key>
-					<string>\d+ failures</string>
+					<string>\(FAILED - [1-9]\d*\)</string>
 				</dict>
 			</array>
 			<key>Unlimited Scrollback</key>
@@ -9217,6 +9209,8 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncSilenceAnnoyingBellAutomatically</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -9295,7 +9289,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-10-31T13:10:50Z</date>
+	<date>2015-11-12T12:49:49Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -9366,7 +9360,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20151031-nightly</string>
+	<string>2.9.20151110-nightly</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
