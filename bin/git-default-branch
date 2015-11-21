@@ -5,7 +5,7 @@
 # If you want to override this you can `export branch=qa02` or something in your env
 
 default=${branch:-}
-branches=($default dev master)
+branches=($default dev master offshore/dev)
 
 for br in ${branches[@]}; do
   git branch --all|egrep "^\*?[[:space:]]+${br}$" 2>&1 >/dev/null
