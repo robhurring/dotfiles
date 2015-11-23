@@ -28,6 +28,8 @@ GEM
     spoon (0.0.4)
       ffi
     thor (0.16.0)
+    thyme (0.0.15)
+      ruby-progressbar (~> 1.0)
 
 PLATFORMS
   java
@@ -40,6 +42,7 @@ DEPENDENCIES
   ripper-tags
   rubocop
   ruby-beautify
+  thyme
 
 BUNDLED WITH
    1.10.6
