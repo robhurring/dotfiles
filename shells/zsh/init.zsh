@@ -22,7 +22,7 @@ else
 fi
 
 # set to speed up boot time
-skip_global_compinit=0
+skip_global_compinit=1
 
 # stty erase \^H
 
