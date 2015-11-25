@@ -5880,13 +5880,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1576 131 813 476 0 0 2560 1417 </string>
+	<string>1417 241 813 342 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>947 939 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 785 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1286 79 1274 1338 0 0 2560 1417 </string>
+	<string>1027 98 1434 1319 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>398 166 570 451 0 0 2560 1417 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -6472,7 +6472,7 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Hack 14</string>
+			<string>KnackNerdFontCompleteMono 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -6663,7 +6663,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -9289,7 +9289,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-11-12T12:49:49Z</date>
+	<date>2015-11-21T04:34:36Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -9360,7 +9360,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20151110-nightly</string>
+	<string>2.9.20151117-nightly</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
