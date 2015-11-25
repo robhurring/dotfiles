@@ -81,8 +81,7 @@ $(BREW_APPS):
 	-brew upgrade $@
 
 .gems:
-	@rvm @global do gem install bundler
-	@rvm @global do bundle
+	@rvm @global do bundle check || bundle install
 
 .brew:
 	@ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
