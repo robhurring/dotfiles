@@ -15,7 +15,7 @@ FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
 GUI_APPS=amethyst
 BREW_APPS=ag shellcheck
 
-all: .setup $(DOTFILES) $(BINFILES) .zsh .tmux .gems
+all: .setup $(DOTFILES) $(BINFILES) .zsh .tmux .gems .npm
 	@echo "All good."
 
 clean:
@@ -82,6 +82,9 @@ $(BREW_APPS):
 
 .gems:
 	@rvm @global do bundle check || bundle install
+
+.npm:
+	@npm install
 
 .brew:
 	@ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
