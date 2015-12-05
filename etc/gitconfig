@@ -44,6 +44,7 @@
   this = !git init && git add . && git commit -m \"initial commit\"
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
   tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ --output=${1} HEAD; }; f"
+  link-jira = commit --allow-empty -m
 [color]
   ui = auto
 [color "branch"]
