@@ -6003,12 +6003,16 @@
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
-				<key>Blue Component</key>
+				<key>Alpha Component</key>
 				<real>1</real>
+				<key>Blue Component</key>
+				<real>0.94352388381958008</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.4175935685634613</real>
+				<real>0.494864821434021</real>
 				<key>Red Component</key>
-				<real>0.91076451539993286</real>
+				<real>0.87543696165084839</real>
 			</dict>
 			<key>Ansi 6 Color</key>
 			<dict>
@@ -9291,7 +9295,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-11-21T04:34:36Z</date>
+	<date>2015-12-09T14:29:19Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
