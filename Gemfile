@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rubocop'
+gem 'reek'
 gem 'powder'
 gem 'interactive_editor'
 gem 'ruby-beautify'
