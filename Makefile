@@ -15,7 +15,7 @@ FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
 GUI_APPS=amethyst
 BREW_APPS=ag shellcheck
 
-all: .setup $(DOTFILES) $(BINFILES) .zsh .tmux .gems .npm
+all: .setup $(DOTFILES) $(BINFILES) .zsh .iterm .tmux .gems .npm
 	@echo "All good."
 
 clean:
@@ -37,6 +37,10 @@ apps: .brew $(BREW_APPS) $(GUI_APPS) .thirdparty
 .zsh: $(HOME)/.zsh $(HOME)/.zshrc $(HOME)/.zprofile
 
 .tmux: $(HOME)/.tmux
+
+.iterm:
+	tic $(CWD)/other/iterm2/xterm-256color-italic.terminfo
+	tic $(CWD)/other/iterm2/screen-256color-italic.terminfo
 
 $(HOME)/.tmux:
 	@mkdir -p $(HOME)/.tmux/plugins
