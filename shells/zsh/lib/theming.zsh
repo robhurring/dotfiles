@@ -3,6 +3,7 @@ DOT="$(cd "$(dirname "$0")"; pwd)"
 source "$DOT/libgit.sh"
 
 export LS_OPTIONS='--color=auto'
+export GREP_OPTIONS='--color=always'
 export CLICOLOR='Yes'
 export LSCOLORS='exgxFxdxCxdxgxhbadexex'
 
