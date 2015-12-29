@@ -1,0 +1,66 @@
+#!/usr/bin/env sh
+
+GIT_LOCAL_ROOT=${GIT_LOCAL_ROOT:-"~/Dropbox/Git"}
+PWD=$(pwd)
+REMOTE_NAME="local"
+
+colorize() {
+  printf "\033[${1}m${2}\033[0m\n" "${@:3}"
+}
+
+error() {
+  colorize "1;31" "$@"
+}
+
+success() {
+  colorize "1;32" "$@"
+}
+
+run() {
+  local cmd="$*"
+  colorize "1;30" "$ \e[0;37m%s" "$cmd"
+  eval "$cmd"
+}
+
+check_git_dir() {
+  if [ ! -d "$PWD/.git" ]; then
+    error "fatal: Not a git repository (or any of the parent directories): .git"
+    exit 1
+  fi
+}
+
+init() {
+  local name=${1:-${PWD##*/}}
+  local path="${GIT_LOCAL_ROOT}/${name}"
+
+  run "git init --bare ${path}"
+  add_remote "$name" "$path"
+}
+
+add_remote() {
+  local name="$1"
+  local url="$2"
+
+  run "git remote add ${REMOTE_NAME} ${url}"
+}
+
+usage() {
+  echo "Usage: $(basename "$0") [COMMAND]"
+  echo
+  echo "  init [<name>]       - Initialize repo"
+  echo
+  exit 1
+}
+
+# main
+
+check_git_dir
+case "$1" in
+  init)
+    shift
+    init "$@"
+    ;;
+  -h|--help|*)
+    usage
+    ;;
+esac
