@@ -47,9 +47,11 @@ setopt NULL_GLOB
 #setopt SHARE_HISTORY
 #setopt INC_APPEND_HISTORY SHARE_HISTORY
 
+# key-bindings
 bindkey '^r'   history-beginning-search-backward
 bindkey '^t'   history-beginning-search-forward
 
+# zsh magic
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
