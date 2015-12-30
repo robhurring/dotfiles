@@ -192,3 +192,16 @@ fuzzy-sha() {
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
 
+fuzzy-tmux-session() {
+  local choice name
+
+  if [[ -n "$TMUX" ]]; then
+    choice=$(tmux list-sessions|fzf -1 --query="$1")
+
+    if [ -n "$choice" ]; then
+      name=$(echo "$choice"|cut -d':' -f1)
+      tmux-force-switch "$name"
+    fi
+  fi
+}
+

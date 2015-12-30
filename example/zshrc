@@ -105,6 +105,13 @@ THEME_PATH_BEFORE="%n@%m "
 # zle -N fzf-fuzzy-co
 # bindkey "^b" fzf-fuzzy-co
 
+# function fzf-fuzzy-tmux() {
+#   fuzzy-tmux-session "$1"
+#   zle reset-prompt
+# }
+# zle -N fzf-fuzzy-tmux
+# bindkey "^o" fzf-fuzzy-tmux
+
 # function vs(){
 #   local session
 #
