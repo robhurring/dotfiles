@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-GIT_LOCAL_ROOT=${GIT_LOCAL_ROOT:-"~/Dropbox/Git"}
+GIT_LOCAL_ROOT=${GIT_LOCAL_ROOT:-"$HOME/Dropbox/Git"}
 PWD=$(pwd)
 REMOTE_NAME="local"
 
@@ -34,12 +34,35 @@ init() {
   local path="${GIT_LOCAL_ROOT}/${name}"
 
   run "git init --bare ${path}"
-  add_remote "$name" "$path"
+  add_local_remote "$path"
 }
 
-add_remote() {
+clone() {
   local name="$1"
-  local url="$2"
+  local path="${GIT_LOCAL_ROOT}/${name}"
+  shift
+
+  if [ -z "$name" ]; then
+    usage
+  fi
+
+  if [ ! -d "$path" ]; then
+    error "fatal: No such project exists '${path}'"
+    exit 2
+  fi
+
+  run "git clone ${path} $*"
+}
+
+list() {
+  local path="${GIT_LOCAL_ROOT}"
+  for repo in $(ls "$path"); do
+    printf "* %s\n" "$repo"
+  done
+}
+
+add_local_remote() {
+  local url="$1"
 
   run "git remote add ${REMOTE_NAME} ${url}"
 }
@@ -49,16 +72,26 @@ usage() {
   echo
   echo "  init [<name>]       - Initialize repo"
   echo
+  echo "  clone [<args>]      - Clone repo"
+  echo
   exit 1
 }
 
 # main
 
-check_git_dir
 case "$1" in
   init)
     shift
+    check_git_dir
     init "$@"
+    ;;
+  clone)
+    shift
+    clone "$@"
+    ;;
+  ls)
+    shift
+    list
     ;;
   -h|--help|*)
     usage
