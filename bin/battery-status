@@ -5,11 +5,11 @@ class Battery
   DEFAULT_FORMAT = 'P (S: R)'
 
   def self.status
-    _, percent, status, remaining, = `pmset -g batt|grep InternalBattery`.split(/\t|;/).map(&:strip)
+    _, percent, status, remaining, present = `pmset -g batt|grep InternalBattery`.split(/\t|;/).map(&:strip)
 
     percent.gsub!(/%/, '')
     remaining.gsub!(/[\(\)]/, '')
-    remaining.gsub!(/\s*remaining/, '')
+    remaining.gsub!(/\s*remaining.*/, '')
 
     new(percent, status, remaining)
   end
