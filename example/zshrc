@@ -1,5 +1,5 @@
-PROFILE_STARTUP=false
-if [[ "$PROFILE_STARTUP" == true ]]; then
+PROFILE_STARTUP=${PROFILE_STARTUP:-"0"}
+if [[ "$PROFILE_STARTUP" == "1" ]]; then
   PS4=$'%D{%M%S%.} %N:%i> '
   exec 3>&2 2>/tmp/zsh.$$.profile
   setopt xtrace prompt_subst
@@ -28,7 +28,7 @@ plugins=(osx tmux fzf git)
 
 # Custom matcher for my projects colder
 PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
-PATH_REPLACER+=("%Bproject:%F{white}\\1%f")
+PATH_REPLACER+=("%F{yellow}projects%B%F{black} ❭ %F{white}\\1%b%f")
 
 # Custom prompt color
 THEME_PROMPT_COLOR="%B%F{yellow}"
@@ -36,6 +36,7 @@ THEME_VI_PROMPT_COLOR="%b%K{magenta}%F{white}"
 
 # Add user and host before the path
 THEME_PATH_BEFORE="%n@%m "
+THEME_RVM_DEFAULT_RUBY="2.2.1"
 
 # ---> Some common aliases
 # alias less='less -R'
@@ -133,7 +134,7 @@ THEME_PATH_BEFORE="%n@%m "
 # export PATH="$PATH:$HOME/.rvm/bin"
 # export PATH="$PATH:$DOTFILES/node_modules/.bin"
 
-if [[ "$PROFILE_STARTUP" == true ]]; then
+if [[ "$PROFILE_STARTUP" == "1" ]]; then
   unsetopt xtrace
   exec 2>&3 3>&-
 fi
