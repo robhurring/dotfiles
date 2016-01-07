@@ -15,8 +15,13 @@ FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
 GUI_APPS=amethyst
 BREW_APPS=ag shellcheck
 
-all: .setup $(DOTFILES) $(BINFILES) .zsh .iterm .tmux .gems .npm
+# Link etc & bin
+all: .setup $(DOTFILES) $(BINFILES)
 	@echo "All good."
+
+# Install all deps
+install: all .zsh .iterm .tmux .gems .npm
+	@echo "Done!"
 
 clean:
 	rm -rf $(DOTFILES)
