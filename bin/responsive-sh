@@ -1,0 +1,51 @@
+#!/usr/bin/env sh
+
+COLS="$(tput cols)"
+LG=${RESPONSIVE_LG:-80}
+MD=${RESPONSIVE_MD:-65}
+SM=${RESPONSIVE_SM:-50}
+GRID=
+
+# Usage: do_eval "ls -alh"
+do_eval() {
+  local fn="$1"
+  eval "$fn"
+}
+
+# Output debug information
+debug() {
+  echo "COLS=${COLS} GRID=${GRID}"
+}
+
+# Usage: main <FN_LG> [FN_MD] [FN_SM] [FN_XS]
+#
+#   Run a command based off the terminal width
+#
+#   Args:
+#     FN_LG     - The function to run when terminal is 'large'
+#     FN_MD     - The function to run when terminal is 'medium' (Default: FN_LG)
+#     FN_SM     - The function to run when terminal is 'small' (Default: FN_MD)
+#     FN_XS     - The function to run when terminal is 'x-small' (Default: FN_SM)
+#
+main() {
+  local fn_lg="$1"
+  local fn_md="${2:-$1}"
+  local fn_sm="${3:-${2:-$1}}"
+  local fn_xs="${4:-${3:-${2:-$1}}}"
+
+  if [ "$COLS" -ge $LG ]; then
+    GRID="lg"
+    do_eval "$fn_lg"
+  elif [ "$COLS" -ge $MD ]; then
+    GRID="md"
+    do_eval "$fn_md"
+  elif [ "$COLS" -ge $SM ]; then
+    GRID="sm"
+    do_eval "$fn_sm"
+  else
+    GRID="xs"
+    do_eval "$fn_xs"
+  fi
+}
+
+main "$1" "$2" "$3" "$4"

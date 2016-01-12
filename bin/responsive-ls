@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+LS_LG="ls -alh"
+LS_SM="ls -ah"
+
+responsive-sh "$LS_LG" "$LS_LG" "$LS_SM"
