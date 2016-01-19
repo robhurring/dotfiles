@@ -6,4 +6,4 @@ set :break_color, 'blue'
 set :default_color, 'green'
 
 set :tmux, true
-set :tmux_theme, '#[fg=%s]⦿ %s |#[default] '
+set :tmux_theme, '#[fg=red]#[fg=%s] %s |#[default] '

@@ -1,6 +1,17 @@
 #!/usr/bin/env sh
 
-LS_LG="ls -alh"
-LS_SM="ls -ah"
+export CLICOLOR_FORCE=1 # force `ls` to colorize
 
-responsive-sh "$LS_LG" "$LS_LG" "$LS_SM"
+# default
+LS_LG="ls -alh"
+
+# perms, owner, filesize, filename
+LS_MD="ls -alh|awk '{print \$1,\$3,\$4,\$5,\$9}'"
+
+# perms, filesize, filename
+LS_SM="ls -alh|awk '{print \$1,\$5,\$9};'"
+
+# minimal `ls`
+LS_XS="ls -ah"
+
+responsive-sh "$LS_LG" "$LS_MD" "$LS_SM" "$LS_XS"

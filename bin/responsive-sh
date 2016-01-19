@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 COLS="$(tput cols)"
-LG=${RESPONSIVE_LG:-80}
-MD=${RESPONSIVE_MD:-65}
-SM=${RESPONSIVE_SM:-50}
+LG=${RESPONSIVE_LG:-70}
+MD=${RESPONSIVE_MD:-55}
+SM=${RESPONSIVE_SM:-35}
 GRID=
 
 # Usage: do_eval "ls -alh"
