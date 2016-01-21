@@ -3,20 +3,98 @@ exit if RUBY_ENGINE == 'macruby'
 require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
-require 'interactive_editor'
 require 'pp'
 
-def try_require(*names)
-  names.each do |name|
-    begin
-      require name.to_s
-    rescue LoadError
-      # don't care
+# Bootstrap some global gempaths from RVM and include some helpers if available
+module IRB::Bootstrap
+  module_function
+
+  def included(_base)
+    setup!
+  end
+
+  def gempath
+    (ENV['_ORIGINAL_GEM_PATH'] || ENV['GEM_PATH'] || `gem env path`.chop)
+      .split(':')
+      .grep(/ruby.*@global/)
+      .first
+  rescue
+    nil
+  end
+
+  def try_require(*names)
+    names.each do |name|
+      begin
+        require name.to_s
+      rescue LoadError
+        warn "[loaderror]: #{name}"
+      end
+    end
+  end
+
+  def setup!
+    irb_gemset = gempath
+    return unless irb_gemset
+
+    Dir["#{irb_gemset}/gems/*"].each do |path|
+      $LOAD_PATH << "#{path}/lib"
     end
   end
 end
 
-try_require :awesome_print, :commands
+module IRB::GemHelpers
+  module_function
+
+  GEMS = [
+    'awesome_print',
+    'interactive_editor',
+    'rails-env-switcher',
+    'rspec-console',
+    'cucumber-console',
+  ]
+
+  def included(_base)
+    setup!
+  end
+
+  def setup!
+    try_require *GEMS
+    after_setup
+  end
+
+  def after_setup
+    if defined?(::Rails)
+      Rails.application.config.cache_classes = false
+    end
+  end
+end
+
+module IRB::Rails
+  def sql(query)
+    ActiveRecord::Base.connection.select_all(query)
+  end
+
+  def silence(&block)
+    hide_log
+    block.call
+  ensure
+    show_log
+  end
+
+  def change_log(stream)
+    ActiveRecord::Base.logger = Logger.new(stream)
+    ActiveRecord::Base.clear_active_connections!
+  end
+
+  def show_log
+    change_log(STDOUT)
+  end
+
+  def hide_log
+    change_log(nil)
+  end
+end
+
 
 IRB.conf.merge!({
   :USE_READLINE => true,
@@ -26,6 +104,13 @@ IRB.conf.merge!({
   :PROMPT_MODE => :SIMPLE
 })
 
+# ---> Bootstrap
+
+include IRB::Bootstrap
+include IRB::GemHelpers
+include IRB::Rails if defined?(::Rails)
+
+# global Object helpers
 class Object
   def ivg name
     instance_variable_get name
@@ -41,6 +126,7 @@ class Object
   end
 end
 
+# write all output from block to file
 def save(filename = '/Desktop/irb-session.txt', &block)
   path = File.join ENV['HOME'], filename
   File.open(path, 'w+') do |f|
@@ -59,45 +145,17 @@ def paste
   `pbpaste`.chomp
 end
 
-alias x exit
+if defined?(::RSpecConsole) && !defined?(rspec)
+  def rspec(file = '.', opts = '--format=doc')
+    RSpecConsole.run(file, opts)
+  end
 
-# Rails Specific Helpers
-
-module Rails
-  module IRBHelpers
-    def sql(query)
-      ActiveRecord::Base.connection.select_all(query)
-    end
-
-    def silence(&block)
-      hide_log
-      block.call
-    ensure
-      show_log
-    end
-
-    def change_log(stream)
-      ActiveRecord::Base.logger = Logger.new(stream)
-      ActiveRecord::Base.clear_active_connections!
-    end
-
-    def show_log
-      change_log(STDOUT)
-    end
-
-    def hide_log
-      change_log(nil)
-    end
+  def cucumber(file = '.', opts = '--format=pretty')
+    CucumberConsole.run(opts, file)
   end
 end
 
-include Rails::IRBHelpers if defined?(Rails)
-
-unless defined?(y)
-  try_require 'syck'
-end
-
-# Machine specific helpers
+# ---> Machine specific helpers
 localrc = File.expand_path('.localirbrc', ENV['HOME'])
 if File.exists?(localrc)
   load localrc.to_s
