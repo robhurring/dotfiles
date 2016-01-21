@@ -38,7 +38,7 @@ THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f "
 THEME_JOB_ICON="↺"
 
-THEME_RETURN_BAD_ICON="%F{red}𝖷 %?%f "
+THEME_RETURN_BAD_ICON="%F{red}ಠ_ಠ %?%f "
 THEME_RETURN_GOOD_ICON=""
 
 THEME_PATH_BEFORE=""
@@ -48,3 +48,4 @@ THEME_PROMPT_COLOR="%F{yellow}"
 
 export PROMPT=$'$THEME_PROMPT_COLOR$(formatted_path)%b%f '
 export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'
+
