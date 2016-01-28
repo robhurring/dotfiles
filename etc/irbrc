@@ -47,10 +47,7 @@ module IRB::GemHelpers
 
   GEMS = [
     'awesome_print',
-    'interactive_editor',
-    'rails-env-switcher',
-    'rspec-console',
-    'cucumber-console',
+    'interactive_editor'
   ]
 
   def included(_base)

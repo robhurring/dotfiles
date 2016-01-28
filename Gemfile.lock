@@ -8,6 +8,7 @@ GEM
     ast (2.1.0)
     astrolabe (1.3.1)
       parser (~> 2.2)
+    awesome_print (1.6.1)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -59,8 +60,7 @@ GEM
       ffi
     thor (0.16.0)
     thread_safe (0.3.5)
-    thyme (0.0.15)
-      ruby-progressbar (~> 1.0)
+    thread_safe (0.3.5-java)
     unparser (0.2.4)
       abstract_type (~> 0.0.7)
       adamantium (~> 0.2.0)
@@ -80,6 +80,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   gem-ripper-tags
   interactive_editor
   powder
@@ -87,7 +88,6 @@ DEPENDENCIES
   ripper-tags
   rubocop
   ruby-beautify
-  thyme
 
 BUNDLED WITH
    1.10.6
