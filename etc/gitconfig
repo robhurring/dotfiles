@@ -9,7 +9,7 @@
   co = checkout
   ls = ls-files
   gr = grep -n
-  mt = mergetool
+  resolve = mergetool
   sm = submodule
   brt = branch-time
   who = shortlog -sne --no-merges
@@ -94,9 +94,11 @@
 [web]
   browser = ch
 [merge]
-  tool = opendiff
+  tool = editor
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
+[mergetool "editor"]
+  cmd = e +GDiff $MERGED
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com/"
