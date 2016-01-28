@@ -8,7 +8,6 @@
 --exclude=.hg
 --exclude=log
 --exclude=tmp
---exclude=node_modules
 --exclude=bower_cache
 --exclude=doc
 --exclude=tmp
