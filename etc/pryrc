@@ -1,5 +1,4 @@
 Pry.config.should_load_plugins = false
-# Pry.plugins['doc'].activate!
 Pry.config.theme = 'pry-twilight'
 
 # Launch Pry with access to the entire Rails stack.
@@ -22,8 +21,8 @@ if defined?(::PryDebugger)
   Pry.commands.alias_command 's', 'step'
   Pry.commands.alias_command 'n', 'next'
   Pry.commands.alias_command 'f', 'finish'
+end
 
-  Pry::Commands.command(/^$/, 'repeat last command') do
-    _pry_.run_command Pry.history.to_a.last
-  end
+Pry::Commands.command(/^$/, 'repeat last command') do
+  _pry_.run_command Pry.history.to_a.last
 end
