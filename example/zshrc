@@ -31,12 +31,12 @@ PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
 PATH_REPLACER+=("%F{yellow}projects%B%F{black} ❭ %F{white}\\1%b%f")
 
 # Custom prompt color
-THEME_PROMPT_COLOR="%B%F{yellow}"
-THEME_VI_PROMPT_COLOR="%b%K{magenta}%F{white}"
+export THEME_PROMPT_COLOR="%B%F{yellow}"
+export THEME_VI_PROMPT_COLOR="%b%K{magenta}%F{white}"
 
 # Add user and host before the path
-THEME_PATH_BEFORE="%n@%m "
-THEME_RVM_DEFAULT_RUBY="2.2.1"
+export THEME_PATH_BEFORE="%n@%m "
+export THEME_RVM_DEFAULT_RUBY="2.2.1"
 
 # ---> Some common aliases
 # alias less='less -R'
