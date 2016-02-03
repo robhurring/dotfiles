@@ -32,6 +32,12 @@ THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=""
 PATH_MATCHERS=("$HOME")
 PATH_REPLACER=("~")
+
+shortpath() {
+  # see: util.zsh
+  print -n "${THEME_PATH_BEFORE}$(shortenpath $(pwd))${THEME_PATH_AFTER}"
+}
+
 formatted_path() {
   local fmt_path="$(pwd)"
   local matcher
@@ -44,6 +50,11 @@ formatted_path() {
   done
 
   print -n "${THEME_PATH_BEFORE}${fmt_path}${THEME_PATH_AFTER}"
+}
+
+THEME_RETURN_BAD_PROMPT_COLOR="%F{red}"
+return_prompt_color() {
+  [[ "$?" == "0" ]] || print -n "${THEME_RETURN_BAD_PROMPT_COLOR}"
 }
 
 THEME_RETURN_BAD_ICON="%F{red}%?%f"
