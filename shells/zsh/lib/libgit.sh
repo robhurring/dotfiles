@@ -1,6 +1,6 @@
-GIT_FETCH_DELAY="$((30 * 60))"  # 5 minutes
-GIT_FETCH_TOUCH="last-fetched-at"
-GIT_AUTO_FETCH=1
+export GIT_FETCH_DELAY="$((30 * 60))"  # 5 minutes
+export GIT_FETCH_TOUCH="last-fetched-at"
+export GIT_AUTO_FETCH=1
 
 _git_last_updated_at() {
   printf '%s' "$(stat -f%m "$(_git_repo_path)/${GIT_FETCH_TOUCH}" 2>/dev/null || printf '%s' '0')"

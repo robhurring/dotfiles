@@ -54,7 +54,7 @@ return_prompt_info() {
 
 THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f"
-THEME_JOB_ICON="⚙"
+THEME_JOB_ICON="[bg]"
 job_prompt_info() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && print -n "${THEME_JOB_BEFORE}${THEME_JOB_ICON}${THEME_JOB_AFTER}"
 }
@@ -106,7 +106,7 @@ THEME_GIT_DIRTY_AFTER=""
 THEME_GIT_ICON_DIRTY="✗"
 THEME_GIT_CLEAN_BEFORE=""
 THEME_GIT_CLEAN_AFTER=""
-THEME_GIT_ICIN_CLEAN="✓"
+THEME_GIT_ICON_CLEAN="✓"
 git_icon() {
   local icon;
   local icon_before;

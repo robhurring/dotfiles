@@ -20,6 +20,9 @@ plugins=(osx tmux fzf git)
 
 # ---> Local Config
 
+# don't autofetch for git rprompt status
+# export GIT_AUTO_FETCH=0
+
 # Customize RVM default version
 # export THEME_RVM_DEFAULT_RUBY="2.2.3"
 
