@@ -13,8 +13,8 @@ push_path(){
 }
 
 # vim-like shortenpath() function
-# http://stackoverflow.com/questions/25945993/how-to-get-a-vim-tab-like-short-path-in-bash-script
+# modified from http://stackoverflow.com/questions/25945993/how-to-get-a-vim-tab-like-short-path-in-bash-script
 shortenpath() {
-  print -n "${1}" | sed -e "s|${HOME}|~|" -e 's:\([^\.]\)[^/]*/:\1/:g'
+  print -n "${1}" | sed -e "s|${HOME}|~|" -e 's:\(/*\)\([^\.]\)[^/]*/:\1\2/:g'
 }
 
