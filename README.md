@@ -1,6 +1,6 @@
 # My Dotfiles.
 
-This is a compilation of my env scripts and config along with pieces from other people which I thought were awesome.
+This is a compilation of my env scripts and config along with pieces from other people which I thought were awesome. It may have limited use in bash as well, though I haven't tried in a long time.
 
 Heres how it looks when using ZSH:
 
@@ -34,6 +34,8 @@ clone this repo somewhere `git clone https://github.com/robhurring/dotfiles.git`
 This has been moved to [https://github.com/robhurring/dotvim](https://github.com/robhurring/dotvim) to keep it separate.
 
 ### Some ZSH Screenshots
+
+Theres a few "themes" as well. Set the `export ZSH_THEME=default` in your `~/.zshrc` to one of the [themes](shells/zsh/themes), or customize your own by setting an absolute path.
 
 ###### Error Status
 ![zsh screenshot](.images/errorstatus.png)
