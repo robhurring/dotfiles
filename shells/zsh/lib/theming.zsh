@@ -10,23 +10,25 @@ autoload -U colors && colors
 
 THEME_PROMPT_COLOR="%B%F{yellow}"
 
+# ---> RVM
+
 THEME_RVM_BEFORE=""
 THEME_RVM_AFTER=""
 THEME_RVM_PROMPT_OPTIONS=(version gemset)
 THEME_RVM_DEFAULT_RUBY="2.2.1"
+
 rvm_prompt_info() {
   [ -z $rvm_path ] && return
   [ -f $rvm_path/bin/rvm-prompt ] || return
+
   local rvm_info=$($rvm_path/bin/rvm-prompt ${THEME_RVM_PROMPT_OPTIONS}|sed "s/$THEME_RVM_DEFAULT_RUBY//" 2>/dev/null)
-  print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
+
+  if [ -n "$rvm_info" ]; then
+    print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
+  fi
 }
 
-function prompt_rvm {
-  rbv=`rvm-prompt`
-  rbv=${rbv#ruby-}
-  [[ $rbv == *"@"* ]] || rbv="${rbv}@default"
-  echo $rbv
-}
+# ---> Path formatting
 
 THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=""
@@ -57,12 +59,14 @@ formatted_path() {
 }
 
 THEME_RETURN_BAD_PROMPT_COLOR="%F{red}"
+
 return_prompt_color() {
   [[ "$?" == "0" ]] || print -n "${THEME_RETURN_BAD_PROMPT_COLOR}"
 }
 
 THEME_RETURN_BAD_ICON="%F{red}%?%f"
 THEME_RETURN_GOOD_ICON=""
+
 return_prompt_info() {
   print -n "%(?.${THEME_RETURN_GOOD_ICON}.${THEME_RETURN_BAD_ICON})"
 }
@@ -70,12 +74,16 @@ return_prompt_info() {
 THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f"
 THEME_JOB_ICON="[bg]"
+
 job_prompt_info() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && print -n "${THEME_JOB_BEFORE}${THEME_JOB_ICON}${THEME_JOB_AFTER}"
 }
 
+# ---> GIT
+
 THEME_GIT_BEFORE_BRANCH=""
 THEME_GIT_AFTER_BRANCH=""
+
 git_branch() {
   local branch=$(_git_current_branch)
   [[ -n $branch ]] && print -n "${THEME_GIT_BEFORE_BRANCH}${branch}${THEME_GIT_AFTER_BRANCH}"
@@ -83,6 +91,7 @@ git_branch() {
 
 THEME_GIT_BEFORE_SHA=""
 THEME_GIT_AFTER_SHA=""
+
 git_sha() {
 # _git_head_commit
   local sha=$(_git_head_commit)
@@ -97,6 +106,7 @@ THEME_GIT_COMMIT_DIFF_DIVERGED="%F{yellow}"
 THEME_GIT_BEHIND_REMOTE="↓"
 THEME_GIT_AHEAD_REMOTE="↑"
 THEME_GIT_DIVERGED_REMOTE="⇵"
+
 git_commits_diff() {
   local local_commits
 
@@ -122,6 +132,7 @@ THEME_GIT_ICON_DIRTY="✗"
 THEME_GIT_CLEAN_BEFORE=""
 THEME_GIT_CLEAN_AFTER=""
 THEME_GIT_ICON_CLEAN="✓"
+
 git_icon() {
   local icon;
   local icon_before;
@@ -144,6 +155,7 @@ THEME_GIT_FLAGS_AFTER=""
 THEME_GIT_ICON_BISECT="+bisect"
 THEME_GIT_ICON_MERGE="+merge"
 THEME_GIT_ICON_REBASE="+rebase"
+
 git_flags() {
   local flags;
   local repo_path=$(_git_repo_path)
@@ -165,6 +177,7 @@ git_flags() {
 
 THEME_GIT_BEFORE=""
 THEME_GIT_AFTER=""
+
 git_prompt_info () {
   local icon;
   local branch;
@@ -183,6 +196,8 @@ git_prompt_info () {
 
   [[ -n $prompt ]] && print -n "${THEME_GIT_BEFORE}${prompt}${THEME_GIT_AFTER}"
 }
+
+# ---> VI
 
 VI_PROMPT_INFO=""
 THEME_VI_BEFORE=""
@@ -207,6 +222,8 @@ function zle-line-init zle-keymap-select {
 
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+# ---> Title
 
 #usage: title short_tab_title looooooooooooooooooooooggggggg_windows_title
 #http://www.faqs.org/docs/Linux-mini/Xterm-Title.html#ss3.1
