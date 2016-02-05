@@ -4,11 +4,7 @@ This is a compilation of my env scripts and config along with pieces from other 
 
 Heres how it looks when using ZSH:
 
-![zsh screenshot](https://raw.github.com/robhurring/dotfiles/master/.images/zsh-screenshot.png)
-
-And heres how it looks when using BASH: (outdated so may not be the same)
-
-![bash screenshot](https://raw.github.com/robhurring/dotfiles/master/.images/bash-screenshot.png)
+![nifty short paths](.images/shortpath.png)
 
 ## Install
 
@@ -37,15 +33,16 @@ clone this repo somewhere `git clone https://github.com/robhurring/dotfiles.git`
 
 This has been moved to [https://github.com/robhurring/dotvim](https://github.com/robhurring/dotvim) to keep it separate.
 
-## Customizing ZSH
+### Some ZSH Screenshots
 
-See `~/.zsh/themes/default` for how to configure this theme
+###### Error Status
+![zsh screenshot](.images/errorstatus.png)
 
-![colors!](https://raw.github.com/robhurring/dotfiles/master/.images/zsh-colors.png)
+###### Git Stauts
+![zsh screenshot](.images/gitstatus.png)
 
-And when using git + rvm
-
-![colors!](https://raw.github.com/robhurring/dotfiles/master/.images/zsh-rvm-status.png)
+###### Background Jobs
+![zsh screenshot](.images/bg.png)
 
 ## Customizing Bash
 
