@@ -47,5 +47,8 @@ THEME_PATH_AFTER=": "
 THEME_PROMPT_COLOR="%F{yellow}"
 THEME_RETURN_BAD_PROMPT_COLOR="%F{red}"
 
-export PROMPT=$'${THEME_PROMPT_COLOR}$(return_prompt_color)$(shortpath)%b%f'
+# Accepts all regular prompt substitutions, use `%s` for shortened path
+THEME_PROMPT="%s"
+
+export PROMPT=$'${THEME_PROMPT_COLOR}$(return_prompt_color)$(shortpath "${THEME_PROMPT}")%b%f'
 export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'

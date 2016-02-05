@@ -34,8 +34,12 @@ PATH_MATCHERS=("$HOME")
 PATH_REPLACER=("~")
 
 shortpath() {
+  # accepts all regular PROMPT substitutions and adds `%s` as a shortened path
+  local prompt="${1:-%s}"
+
   # see: util.zsh
-  print -n "${THEME_PATH_BEFORE}$(shortenpath $(pwd))${THEME_PATH_AFTER}"
+  local shortpath=$(shortenpath "$(pwd)")
+  print -n "${THEME_PATH_BEFORE}${prompt/%%s/$shortpath}${THEME_PATH_AFTER}"
 }
 
 formatted_path() {

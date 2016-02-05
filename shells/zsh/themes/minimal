@@ -14,8 +14,8 @@ THEME_PATH_BEFORE=""
 THEME_PATH_AFTER=": "
 
 THEME_PROMPT_COLOR="%F{yellow}"
-THEME_PROMPT="%~"
+THEME_PROMPT="%n@%m %s"
 
-export PROMPT=$'${THEME_PROMPT_COLOR}${THEME_PATH_BEFORE}${THEME_PROMPT}${THEME_PATH_AFTER}%b%f'
+export PROMPT=$'${THEME_PROMPT_COLOR}$(shortpath "${THEME_PROMPT}")%b%f'
 export RPROMPT=$'$(git_branch)$(git_sha)$(git_flags)'
 
