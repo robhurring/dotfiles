@@ -124,21 +124,37 @@ tracking_branch() {
   fi
 }
 
-commits_behind_of_remote() {
-  remote_branch=${1:-"$(tracking_branch)"}
+remote_available() {
+  if has_upstream=$(tracking_branch); then
+    return 0
+  else
+    return 1
+  fi
+}
 
-  if [ "$remote_branch" ]; then
-    git rev-list --left-only --count ${remote_branch}...HEAD
+commits_behind_of_remote() {
+  if remote_available; then
+    remote_branch=${1:-"$(tracking_branch)"}
+
+    if [ "$remote_branch" ]; then
+      git rev-list --left-only --count ${remote_branch}...HEAD
+    else
+      printf '%s' "0"
+    fi
   else
     printf '%s' "0"
   fi
 }
 
 commits_ahead_of_remote() {
-  remote_branch=${1:-"$(tracking_branch)"}
+  if remote_available; then
+    remote_branch=${1:-"$(tracking_branch)"}
 
-  if [ "$remote_branch" ]; then
-    git rev-list --right-only --count ${remote_branch}...HEAD
+    if [ "$remote_branch" ]; then
+      git rev-list --right-only --count ${remote_branch}...HEAD
+    else
+      printf '%s' "0"
+    fi
   else
     printf '%s' "0"
   fi
