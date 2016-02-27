@@ -1,6 +1,0 @@
-<snippet>
-  <content><![CDATA[vcr: {cassette_name: "${1:actions}/#{described_class}/${2:valid}"}]]></content>
-  <tabTrigger>vcrc</tabTrigger>
-  <scope>source.ruby</scope>
-  <description>VCR</description>
-</snippet>

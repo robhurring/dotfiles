@@ -1,9 +1,0 @@
-{
-	"extensions":
-	[
-		"plugin",
-		"bash",
-		"zsh",
-		"sh"
-	]
-}
