@@ -146,7 +146,7 @@ fuzzy-checkout() {
     sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
   target=$(
     (echo "$branches"; echo "$tags") |
-    $FZF_COMMAND --no-hscroll --ansi +m -d "\t" -n 2 -1 --query=$query) || return
+    $FZF_COMMAND --ansi -1 --query=$query) || return
   git checkout $(echo "$target" | awk '{print $2}')
 }
 
