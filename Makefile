@@ -13,7 +13,7 @@ FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
 
 # casked apps
 GUI_APPS=amethyst
-BREW_APPS=ag shellcheck
+BREW_APPS=ag shellcheck universal-ctags hub git
 
 # Link etc & bin
 all: .setup $(DOTFILES) $(BINFILES)
@@ -97,6 +97,7 @@ $(BREW_APPS):
 
 .brew:
 	@ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	-brew tap universal-ctags/universal-ctags
 	-brew upgrade caskroom/cask/brew-cask
 
 .thirdparty:
