@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-default_branch=$(git default-branch)
+default_branch=${BRANCH:-"$(git default-branch)"}
 to_prune=$(git branch --merged $default_branch | grep -v "\*\|master\|dev\|offshore\/dev\|$default_branch")
 
 function show_help {
