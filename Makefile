@@ -23,6 +23,10 @@ all: .setup $(DOTFILES) $(BINFILES)
 install: all .zsh .iterm .tmux .gems .npm
 	@echo "Done!"
 
+update:
+	-git pull
+	$(MAKE) all
+
 clean:
 	rm -rf $(DOTFILES)
 	rm -rf $(BINFILES)

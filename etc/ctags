@@ -2,6 +2,8 @@
 --tag-relative=yes
 --fields=+KSln
 
+--languages=-javascript,-sql,-json,-css,-yml
+
 --exclude=db
 --exclude=coverage
 --exclude=.git
@@ -11,8 +13,6 @@
 --exclude=bower_cache
 --exclude=doc
 --exclude=tmp
---exclude=*.sql
---exclude=*.yml
 --exclude=*.log
 --exclude=*.S
 --exclude=*.so
