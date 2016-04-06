@@ -2,7 +2,7 @@
 --tag-relative=yes
 --fields=+KSln
 
---languages=-javascript,-sql,-json,-css,-yml
+--languages=-javascript,-sql,-json,-css
 
 --exclude=db
 --exclude=coverage
