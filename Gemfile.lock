@@ -1,7 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    CoffeeTags (0.6.0)
     abstract_type (0.0.7)
     adamantium (0.2.0)
       ice_nine (~> 0.11.0)
@@ -81,7 +80,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  CoffeeTags
   awesome_print
   gem-ripper-tags
   interactive_editor

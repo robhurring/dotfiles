@@ -8,37 +8,20 @@ DOTFILES=$(ETC:%=$(HOME)/.%)
 BIN=$(shell ls ./bin)
 BINFILES=$(BIN:%=$(HOME)/bin/%)
 
-FONTS=$(shell ls ./other/fonts)
-FONTFILES=$(FONTS:%=$(HOME)/Library/Fonts/%)
-
-# casked apps
-GUI_APPS=amethyst
-BREW_APPS=ag shellcheck universal-ctags hub git
+BREW_APPS=ag universal-ctags git
 
 # Link etc & bin
-all: .setup $(DOTFILES) $(BINFILES)
+all: .setup $(DOTFILES) $(BINFILES) .zsh
 	@echo "All good."
 
-# Install all deps
-install: all .zsh .iterm .tmux .gems .npm
+mac: all extra
 	@echo "Done!"
+
+extra: .brew $(BREW_APPS) .iterm .tmux .gems .npm
 
 update:
 	-git pull
 	$(MAKE) all
-
-clean:
-	rm -rf $(DOTFILES)
-	rm -rf $(BINFILES)
-	rm -rf ~/.zsh
-	rm -rf ~/.tmux
-
-# only relevant for OSX
-fonts: $(FONTFILES)
-	@echo "Fonts installed."
-
-# only relevant for OSX
-apps: .brew $(BREW_APPS) $(GUI_APPS) .thirdparty
 
 .setup:
 	@mkdir -p $HOME/bin
@@ -46,10 +29,6 @@ apps: .brew $(BREW_APPS) $(GUI_APPS) .thirdparty
 .zsh: $(HOME)/.zsh $(HOME)/.zshrc $(HOME)/.zprofile
 
 .tmux: $(HOME)/.tmux
-
-.iterm:
-	tic $(CWD)/other/iterm2/xterm-256color-italic.terminfo
-	tic $(CWD)/other/iterm2/screen-256color-italic.terminfo
 
 $(HOME)/.tmux:
 	@mkdir -p $(HOME)/.tmux/plugins
@@ -67,11 +46,6 @@ $(HOME)/.%: $(CWD)/etc/%
 # link bin files
 $(HOME)/bin/%: $(CWD)/bin/%
 	@echo "bin:		$< -> $@"
-	@ln -sf $< $@
-
-# font files
-$(HOME)/Library/Fonts/%: $(CWD)/other/fonts/%
-	@echo "font:		$< -> $@"
 	@ln -sf $< $@
 
 # zshrc example
@@ -94,6 +68,7 @@ $(BREW_APPS):
 	-brew upgrade $@
 
 .gems:
+	@rvm @global do gem install bundler
 	@rvm @global do bundle check || bundle install
 
 .npm:
@@ -102,9 +77,9 @@ $(BREW_APPS):
 .brew:
 	@ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	-brew tap universal-ctags/universal-ctags
-	-brew upgrade caskroom/cask/brew-cask
 
-.thirdparty:
-	-pip install vim-vint
+.iterm:
+	tic $(CWD)/other/iterm2/xterm-256color-italic.terminfo
+	tic $(CWD)/other/iterm2/screen-256color-italic.terminfo
 
-.PHONY: $(GUI_APPS) $(BREW_APPS)
+.PHONY: $(BREW_APPS)
