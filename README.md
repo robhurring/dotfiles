@@ -52,3 +52,11 @@ Theres a few "themes" as well. Set the `export ZSH_THEME=default` in your `~/.zs
 
 Edit ~/.bashrc before the init line to set the colors. You can also edit the PS1 color by editing the function `__before_ps1()`
 and changing `PROMPT_COLOR="\e[33;1m"` to any color you want. There is also an `ERROR_COLOR` too which is red by default.
+
+## Truecolor
+
+Refer to [TrueColor gist](https://gist.github.com/XVilka/8346728).
+
+1. For tmux, [check this pull-request comments](https://gist.github.com/zchee/9f6f2ca17acf49e04088#gistcomment-1575548)
+1. For iTerm, use nightly's
+1. For vim, compile with `+termguicolors`. Not currently working within tmux
