@@ -169,7 +169,6 @@ bind refs n !@git branch "%(prompt Enter branch name: )"
 
 bind pager @ :/^@@     # Jump to next (c)hunk
 
-bind generic E @subl -w %(file)
 bind generic ? view-help
 bind generic h scroll-left
 bind generic l scroll-right
