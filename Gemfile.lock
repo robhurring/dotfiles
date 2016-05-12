@@ -55,7 +55,11 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-beautify (0.97.3)
+    ruby-lint (2.1.0)
+      parser (~> 2.2)
+      slop (~> 3.4, >= 3.4.7)
     ruby-progressbar (1.7.5)
+    slop (3.6.0)
     spoon (0.0.4)
       ffi
     thor (0.16.0)
@@ -88,6 +92,7 @@ DEPENDENCIES
   ripper-tags
   rubocop
   ruby-beautify
+  ruby-lint
 
 BUNDLED WITH
    1.11.2

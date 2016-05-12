@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rubocop'
 gem 'reek'
+gem 'ruby-lint'
 gem 'powder'
 gem 'interactive_editor'
 gem 'ruby-beautify'
