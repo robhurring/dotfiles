@@ -1,54 +1,55 @@
 [alias]
-  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-  what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
-  st = status
-  ci = commit
-  cia = commit -a
-  cp = cherry-pick
-  br = branch
-  co = checkout
-  ls = ls-files
-  gr = grep -n
-  resolve = mergetool
-  sm = submodule
-  brt = branch-time
-  who = shortlog -sne --no-merges
-  rb = rebase -p
-  fa = fetch --all
-  up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase -p ${1:-origin}/$(git current-branch)' -
-  reset-all = !sh -c 'git add --all && git reset --hard'
-  current-branch = rev-parse --abbrev-ref HEAD
-  push-set = !"git push --set-upstream origin $(git current-branch)"
-  l = log --graph --decorate --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-  ll = log --numstat --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-  lg = log -p
-# git merges ..dev
-  merges = log --merges --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-# git commits ..dev
-  commits = log --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-  unstage = reset HEAD
-  staged = diff --cached
-  unstaged = diff
-  track = checkout -t
+  add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
   assume   = update-index --assume-unchanged
-  unassume = update-index --no-assume-unchanged
-  unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
   assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
   assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
-  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
-  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
-  edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
-  add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
-  serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
-  last-tag = describe --abbrev=0
+  br = branch
+  brt = branch-time
   changelog ="!git l $(git last-tag)..HEAD"
+  ci = commit
+  cia = commit -a
   cl ="!echo \"\\033[36m\\nChanges since: $(git last-tag)\\n\\033[0m\"; git changelog"
-  ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
-  this = !git init && git add . && git commit -m \"initial commit\"
-  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
-  tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ HEAD; }; f"
+  co = checkout
+  # Usage: git commits ..dev
+  commits = log --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
+  cp = cherry-pick
+  current-branch = rev-parse --abbrev-ref HEAD
+  edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
   empty = commit --allow-empty -m
+  fa = fetch --all
+  gr = grep -n
+  ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+  l = log --graph --decorate --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
+  last-tag = describe --abbrev=0
+  lg = log -p
+  ll = log --numstat --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
+  ls = ls-files
+  # Usage: git merges ..dev
+  merges = log --merges --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
+  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+  push-set = !"git push --set-upstream origin $(git current-branch)"
+  rb = rebase -p
+  reset-all = !sh -c 'git add --all && git reset --hard'
+  resolve = mergetool
+  search = "log --all  --pretty=oneline -S"
+  serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+  sm = submodule
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+  st = status
+  staged = diff --cached
+  tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ HEAD; }; f"
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+  this = !git init && git add . && git commit -m \"initial commit\"
+  track = checkout -t
+  unassume = update-index --no-assume-unchanged
+  unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+  unstage = reset HEAD
+  unstaged = diff
+  up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase -p ${1:-origin}/$(git current-branch)' -
+  what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+  who = shortlog -sne --no-merges
 [color]
   ui = auto
 [color "branch"]
@@ -71,15 +72,14 @@
   help = yellow
   error = red bold
 [core]
-  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  whitespace = space-before-tab,tabwidth=2,trailing-space
   editor = "nvim"
 [help]
   autocorrect = 1
 [status]
   submodule = 1
 [push]
-  # Only push branches that have been set up to track a remote branch.
-  default = current
+  default = simple
 [user]
   name = robhurring
   email = robhurring@gmail.com
@@ -112,3 +112,10 @@
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
+[rerere]
+  enabled = true
+[rebase]
+  stat = true
+[branch]
+  autosetuprebase = always
+  autosetupmerge = always
