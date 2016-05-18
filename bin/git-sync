@@ -113,7 +113,7 @@ tracking_branch() {
   local localRef="$(tracking_remote)\/$(branch_name)$"
 
   if [ "$localRef" ]; then
-    local remoteBranch="$(git for-each-ref --format='%(upstream:short)' refs/heads $localRef 2>/dev/null | grep $localRef)"
+    local remoteBranch="$(git for-each-ref --format='%(upstream:short)' refs/heads ${localRef} 2>/dev/null | grep ${localRef})"
 
     if [ $remoteBranch ]; then
       printf '%s' $remoteBranch
@@ -280,7 +280,7 @@ do_sync() {
     success "Already up-to-date"
   fi
 
-  [ "$(command -v git-cleanup)" ] && git-cleanup
+  # [ "$(command -v git-cleanup)" ] && git-cleanup
   [ "$(command -v git-stats-importer)" ] && git-stats-importer 2>&1 >/dev/null
 }
 
