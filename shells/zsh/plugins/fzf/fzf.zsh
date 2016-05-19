@@ -15,9 +15,10 @@ fuzzy-cds() {
   local dir=""
 dir=$(
 cat << EOS | ruby | $FZF_COMMAND -1 -e -0 --query=$1
-  (ENV["FUZZY_SEARCH_PATHS"]||"").split(":").each{|p| puts Dir["#{File.expand_path(p)}/*"]}
+(ENV["FUZZY_SEARCH_PATHS"]||"").split(":").each{|p| puts Dir["#{File.expand_path(p)}/*"].map{ |d| d.gsub(%r{#{ENV['HOME']}}, '~') } }
 EOS
 )
+dir="${dir/#\~/$HOME}"
 cd "$dir"
 }
 
