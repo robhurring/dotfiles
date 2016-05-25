@@ -13,7 +13,7 @@ export ZSH_MODE="vi"
 export ZSH_VI_ESC="jk"
 export EDITOR="vim"
 
-plugins=(osx tmux fzf git)
+plugins=(osx tmux fzf git z)
 
 # load our zsh environment
 [[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
@@ -30,8 +30,8 @@ plugins=(osx tmux fzf git)
 # export LS_OPTIONS=''
 
 # Custom matcher for my projects colder
-PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
-PATH_REPLACER+=("%F{yellow}projects%B%F{black} ❭ %F{white}\\1%b%f")
+# PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
+# PATH_REPLACER+=("%F{yellow}projects%B%F{black} ❭ %F{white}\\1%b%f")
 
 # Custom prompt color
 export THEME_PROMPT_COLOR="%B%F{yellow}"
