@@ -1,2 +1,0 @@
-#compdef s
-_files -W ~/Sites -/
