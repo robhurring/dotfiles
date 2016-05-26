@@ -198,11 +198,7 @@ fuzzy-tmux-session() {
   choice=$(tmux list-sessions|fzf -1 --query="$1")
   if [ -n "$choice" ]; then
     name=$(echo "$choice"|cut -d':' -f1)
-    if [ -n "$TMUX" ]; then
-      tmux-force-switch "$name"
-    else
-      tmux-attach-or-new "$name"
-    fi
+    tmux-go "${name}"
   fi
 }
 

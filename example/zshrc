@@ -63,8 +63,7 @@ export THEME_RVM_DEFAULT_RUBY="2.2.1"
 
 # Tmux (use with tmux plugin)
 # alias tml="tmux list-sessions"
-# alias tma=tmux-attach-or-new
-# alias tms=tmux-force-switch
+# alias tma=tmux-go
 # alias tmd="tmux detach"
 # alias tmx="tmux kill-session -t"
 
