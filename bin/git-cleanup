@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 default_branch=${BRANCH:-"$(git default-branch)"}
-to_prune=$(git branch --merged $default_branch | grep -v "\*\|master\|dev\|offshore\/dev\|$default_branch")
+to_prune=$(git branch --merged $default_branch | grep -v "\*\|master\|develop\|$default_branch")
 
 function show_help {
   echo Usage: $(basename $0)
