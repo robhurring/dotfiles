@@ -3,3 +3,6 @@
 /.hg/
 *.log
 *.svg
+*.png
+*.gif
+*.jpg
