@@ -21,15 +21,8 @@ alias ssd='auto-bundle-exec rails server --debugger'
 alias sc='auto-bundle-exec rails console'
 alias sdb='auto-bundle-exec rails dbconsole'
 alias gen='auto-bundle-exec rails generate'
-
 alias bc='bundle console'
-alias fm='auto-bundle-exec foreman'
-alias fms='foreman start'
-alias fws='forewoman start'
-
-function bag() {
-  ag "$@" `bundle show --paths`
-}
+alias bfind="_x(){ag \"\$@\" \`bundle show --paths\`};_x"
 
 # Git
 alias g='git'

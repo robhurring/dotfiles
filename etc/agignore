@@ -1,8 +1,8 @@
-/.git/
-/.svn/
-/.hg/
+.git/
+.svn/
+.hg/
 *.log
 *.svg
 *.png
-*.gif
+*.git
 *.jpg
