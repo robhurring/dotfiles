@@ -12,14 +12,14 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export REPORTTIME=10
 
-if [[ "$ZSH_MODE" == "vi" ]]; then
-  bindkey -v
-  setopt VI
-  export KEYTIMEOUT=10 # WARNING: setting this too low kills the `^[` switch
-  bindkey -M viins "$ZSH_VI_ESC" vi-cmd-mode
-else
-  bindkey -e
-fi
+# if [[ "$ZSH_MODE" == "vi" ]]; then
+#   bindkey -v
+#   setopt VI
+#   export KEYTIMEOUT=10 # WARNING: setting this too low kills the `^[` switch
+#   bindkey -M viins "$ZSH_VI_ESC" vi-cmd-mode
+# else
+#   bindkey -e
+# fi
 
 # set to speed up boot time
 skip_global_compinit=${skip_global_compinit:-0}
@@ -50,6 +50,11 @@ setopt NULL_GLOB
 # key-bindings
 bindkey '^r'   history-beginning-search-backward
 bindkey '^t'   history-beginning-search-forward
+
+# edit command in editor
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
 
 # zsh magic
 autoload -U url-quote-magic
