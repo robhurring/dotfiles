@@ -99,7 +99,7 @@
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [mergetool "editor"]
-  cmd = e +GDiff $MERGED
+  cmd = nvim +Gvdiff $MERGED
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com/"
