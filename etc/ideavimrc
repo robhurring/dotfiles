@@ -1,0 +1,72 @@
+let mapleader=" "
+
+filetype plugin indent on
+set ignorecase smartcase
+set relativenumber
+set number
+set hlsearch
+set scrolloff=3
+set showmode
+set mps+=<:>
+
+" esc
+inoremap jk <Esc>`^
+
+" splits
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
+" Moving blocks of text in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Copy until the end of the line
+noremap Y y$
+
+" remove trailing whitespace
+nmap <F1> :%s/\s\+$<CR>
+
+" ---> IDEA mappings
+nnoremap cow :action EditorToggleUseSoftWraps<cr>
+nnoremap col :action EditorToggleShowWhitespaces<cr>
+
+nnoremap / :action Find<CR>
+nnoremap g/ /
+nnoremap n :action FindNext<CR>
+nnoremap N :action FindPrevious<CR>
+nnoremap U :action $Redo<CR>
+nnoremap ; :action AceJumpAction<CR>
+nnoremap <C-Space> :action GotoFile<CR>
+
+" file navigation
+nnoremap <leader>o :action GotoClass<CR>
+nnoremap <leader>O :action GotoFile<CR>
+nnoremap <leader>d :action CloseContent<CR>
+nnoremap <leader>j :action RecentFiles<CR>
+nnoremap <leader>k :action FileStructurePopup<CR>
+nnoremap <leader>h :action QuickJavaDoc<CR>
+
+" code navigation
+nnoremap <C-]> :action GotoImplementation<cr>
+nnoremap <C-[> :action GotoSuperMethod<cr>
+nnoremap <leader>u :action FindUsages<cr>
+nnoremap <leader>gt :action GotoTest<cr>
+" nnoremap <leader>k :action HighlightUsagesInFile<cr>
+nnoremap ,r :action RunClass<cr>
+nnoremap ,R :action Run<cr>
+nnoremap ,d :action DebugClass<cr>
+nnoremap ,D :action Debug<cr>
+nnoremap ,c :action CheckStyleCurrentFileAction<cr>
+
+" unimpaired mappings
+nnoremap [<space> O<esc>j
+nnoremap ]<space> o<esc>k
+nnoremap [q :action PreviousOccurence<cr>
+nnoremap ]q :action NextOccurence<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
