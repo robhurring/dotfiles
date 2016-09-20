@@ -7,6 +7,7 @@ set number
 set hlsearch
 set scrolloff=3
 set showmode
+set surround
 set mps+=<:>
 
 " esc
@@ -29,15 +30,17 @@ noremap Y y$
 nmap <F1> :%s/\s\+$<CR>
 
 " ---> IDEA mappings
-nnoremap cow :action EditorToggleUseSoftWraps<cr>
-nnoremap col :action EditorToggleShowWhitespaces<cr>
+nnoremap cow :action EditorToggleUseSoftWraps<CR>
+nnoremap col :action EditorToggleShowWhitespaces<CR>
+nnoremap cor :set relativenumber!<CR>
+nnoremap con :set number!<CR>
 
 nnoremap / :action Find<CR>
 nnoremap g/ /
 nnoremap n :action FindNext<CR>
 nnoremap N :action FindPrevious<CR>
 nnoremap U :action $Redo<CR>
-nnoremap ; :action AceJumpAction<CR>
+"nnoremap ; :action AceJumpAction<CR>
 nnoremap <C-Space> :action GotoFile<CR>
 
 " file navigation
