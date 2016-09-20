@@ -27,7 +27,7 @@ vnoremap > >gv
 noremap Y y$
 
 " remove trailing whitespace
-nmap <F1> :%s/\s\+$<CR>
+" nmap <F1> :%s/\s\+$<CR>
 
 " ---> IDEA mappings
 nnoremap cow :action EditorToggleUseSoftWraps<CR>
@@ -35,8 +35,7 @@ nnoremap col :action EditorToggleShowWhitespaces<CR>
 nnoremap cor :set relativenumber!<CR>
 nnoremap con :set number!<CR>
 
-nnoremap / :action Find<CR>
-nnoremap g/ /
+nnoremap g/ :action Find<CR>
 nnoremap n :action FindNext<CR>
 nnoremap N :action FindPrevious<CR>
 nnoremap U :action $Redo<CR>
