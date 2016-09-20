@@ -1,14 +1,20 @@
 let mapleader=" "
 
 filetype plugin indent on
-set ignorecase smartcase
-set relativenumber
-set number
+
+set clipboard+=unnamed
 set hlsearch
+set ignorecase
+set incsearch
+set mps+=<:>
+set number
+set relativenumber
 set scrolloff=3
 set showmode
+set smartcase
 set surround
-set mps+=<:>
+set viminfo='100,/100,h,\"500,:100
+set wrapscan
 
 " esc
 inoremap jk <Esc>`^
@@ -19,32 +25,25 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
-" Moving blocks of text in visual mode
 vnoremap < <gv
 vnoremap > >gv
 
-" Copy until the end of the line
+" closing
+nnoremap <C-q> :q<CR>
+
+" copy/paste
 noremap Y y$
 
-" remove trailing whitespace
-" nmap <F1> :%s/\s\+$<CR>
-
-" ---> IDEA mappings
-nnoremap cow :action EditorToggleUseSoftWraps<CR>
-nnoremap col :action EditorToggleShowWhitespaces<CR>
-nnoremap cor :set relativenumber!<CR>
-nnoremap con :set number!<CR>
-
+" search
+nnoremap <leader>/ :noh<CR>
 nnoremap g/ :action Find<CR>
-nnoremap n :action FindNext<CR>
-nnoremap N :action FindPrevious<CR>
-nnoremap U :action $Redo<CR>
+" nnoremap n :action FindNext<CR>
+" nnoremap N :action FindPrevious<CR>
 "nnoremap ; :action AceJumpAction<CR>
-nnoremap <C-Space> :action GotoFile<CR>
 
 " file navigation
+nnoremap <C-Space> :action GotoFile<CR>
 nnoremap <leader>o :action GotoClass<CR>
-nnoremap <leader>O :action GotoFile<CR>
 nnoremap <leader>d :action CloseContent<CR>
 nnoremap <leader>j :action RecentFiles<CR>
 nnoremap <leader>k :action FileStructurePopup<CR>
@@ -71,4 +70,13 @@ nnoremap [m :action MethodUp<cr>
 nnoremap ]m :action MethodDown<cr>
 nnoremap [c :action VcsShowPrevChangeMarker<cr>
 nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+nnoremap cow :action EditorToggleUseSoftWraps<CR>
+nnoremap col :action EditorToggleShowWhitespaces<CR>
+nnoremap cor :set relativenumber!<CR>
+nnoremap con :set number!<CR>
+
+" inoremap <C-X>= :normal action InsertRubyInjection<CR>
+inoremap <C-X>= #{}<Esc>i
+" inoremap <C-X>= ${}<Esc>i
 
