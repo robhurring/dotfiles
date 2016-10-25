@@ -29,7 +29,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " closing
-nnoremap <C-q> :q<CR>
+nnoremap <C-q> :action CloseContent<CR>
 
 " copy/paste
 noremap Y y$
@@ -39,27 +39,33 @@ nnoremap <leader>/ :noh<CR>
 nnoremap g/ :action Find<CR>
 " nnoremap n :action FindNext<CR>
 " nnoremap N :action FindPrevious<CR>
-"nnoremap ; :action AceJumpAction<CR>
+" nnoremap ; :action AceJumpAction<CR>
 
 " file navigation
-nnoremap <C-Space> :action GotoFile<CR>
+" nnoremap <C-Space> :action GotoFile<CR>
 nnoremap <leader>o :action GotoClass<CR>
-nnoremap <leader>d :action CloseContent<CR>
 nnoremap <leader>j :action RecentFiles<CR>
 nnoremap <leader>k :action FileStructurePopup<CR>
 nnoremap <leader>h :action QuickJavaDoc<CR>
+nnoremap <Tab> :action ShowIntentionActions<CR>
 
-" code navigation
+" coding / building
 nnoremap <C-]> :action GotoImplementation<cr>
 nnoremap <C-[> :action GotoSuperMethod<cr>
+nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action FindUsages<cr>
 nnoremap <leader>gt :action GotoTest<cr>
-" nnoremap <leader>k :action HighlightUsagesInFile<cr>
+nnoremap <leader>r :action ChooseRunConfiguration<CR>
 nnoremap ,r :action RunClass<cr>
-nnoremap ,R :action Run<cr>
 nnoremap ,d :action DebugClass<cr>
+nnoremap ,R :action Run<cr>
 nnoremap ,D :action Debug<cr>
 nnoremap ,c :action CheckStyleCurrentFileAction<cr>
+" nnoremap <leader>k :action HighlightUsagesInFile<cr>
+
+noremap <C-Down> :action MoveStatementDown<CR>
+noremap <C-Up> :action MoveStatementUp<CR>
+nnoremap <C-/> :action CommentByLineComment<CR>
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j
@@ -68,15 +74,18 @@ nnoremap [q :action PreviousOccurence<cr>
 nnoremap ]q :action NextOccurence<cr>
 nnoremap [m :action MethodUp<cr>
 nnoremap ]m :action MethodDown<cr>
-nnoremap [c :action VcsShowPrevChangeMarker<cr>
 nnoremap ]c :action VcsShowNextChangeMarker<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]q :action GotoNextError<CR>
+nnoremap [q :action GotoPreviousError<CR>
 
+nnoremap coh :action HideAllWindows<CR>
 nnoremap cow :action EditorToggleUseSoftWraps<CR>
 nnoremap col :action EditorToggleShowWhitespaces<CR>
 nnoremap cor :set relativenumber!<CR>
 nnoremap con :set number!<CR>
 
 " inoremap <C-X>= :normal action InsertRubyInjection<CR>
-inoremap <C-X>= #{}<Esc>i
-" inoremap <C-X>= ${}<Esc>i
+" inoremap <C-X>= #{}<Esc>i
+inoremap <C-X>= ${}<Esc>i
 
