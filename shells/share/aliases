@@ -1,8 +1,8 @@
 # Navigation
 alias ls='ls -h'
-alias ll='ls -lah'
+alias ll='ls -lahF'
 alias la='ls -ah'
-alias l='ls -lh'
+alias l='ls -lhF'
 alias ..='cd ..'
 alias cd-='cd -'
 alias cd--='cd ~ && cd -'
