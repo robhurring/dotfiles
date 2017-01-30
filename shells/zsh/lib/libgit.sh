@@ -1,6 +1,40 @@
-export GIT_FETCH_DELAY="$((30 * 60))"  # 5 minutes
+# How long between auto-fetching
+export GIT_FETCH_DELAY="$((60 * 60))"  # 1 hour
+
+# Auto-fetch update marker file
 export GIT_FETCH_TOUCH="last-fetched-at"
+
+# Set this to `0` to disable auto-fetching globally.
 export GIT_AUTO_FETCH=1
+
+# Touch `.git/$GIT_NO_AUTO_FETCH_FILE` to disable auto-fetching for individual repos
+export GIT_NO_AUTO_FETCH_FILE="no-auto-fetch"
+
+disable_git_auto_fetch() {
+  local nofetch_marker="$(_git_repo_path)/${GIT_NO_AUTO_FETCH_FILE}"
+
+  if [ _in_git_repo ]; then
+    if [ -f ${nofetch_marker} ]; then
+      echo "[OK] Repo was already ignoring auto-fetching."
+    else
+      touch ${nofetch_marker}
+      echo "[OK] Auto-fetch disabled for repo."
+    fi
+  fi
+}
+
+enable_git_auto_fetch() {
+  local nofetch_marker="$(_git_repo_path)/${GIT_NO_AUTO_FETCH_FILE}"
+
+  if [ _in_git_repo ]; then
+    if [ -f ${nofetch_marker} ]; then
+      rm ${nofetch_marker}
+      echo "[OK] Auto-fetch enabled for repo."
+    else
+      echo "[OK] Repo was already auto-fetching."
+    fi
+  fi
+}
 
 _git_last_updated_at() {
   printf '%s' "$(stat -f%m "$(_git_repo_path)/${GIT_FETCH_TOUCH}" 2>/dev/null || printf '%s' '0')"
@@ -11,11 +45,17 @@ _git_record_fetched() {
 }
 
 _git_fetch_if_necessary() {
+  # Disable auto-fetch globally
   if [ "$GIT_AUTO_FETCH" != "1" ]; then
     return 1
   fi
 
   if _in_git_repo; then
+    # Disable auto-fetch on a repo-by-repo basis
+    if [ -f "$(_git_repo_path)/${GIT_NO_AUTO_FETCH_FILE}" ]; then
+      return 1
+    fi
+
     local now="$(date +%s)"
     local since="$((${now} - $(_git_last_updated_at)))"
 
