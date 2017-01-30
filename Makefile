@@ -81,5 +81,6 @@ $(BREW_APPS):
 .iterm:
 	tic $(CWD)/other/iterm2/xterm-256color-italic.terminfo
 	tic $(CWD)/other/iterm2/screen-256color-italic.terminfo
+	tic $(CWD)/other/iterm2/screen-256color.terminfo
 
 .PHONY: $(BREW_APPS)
