@@ -1,5 +1,6 @@
 # How long between auto-fetching
 export GIT_FETCH_DELAY="$((60 * 60))"  # 1 hour
+export GIT_AUTO_FETCH_DELAY_FILE="auto-fetch-delay"
 
 # Auto-fetch update marker file
 export GIT_FETCH_TOUCH="last-fetched-at"
@@ -36,6 +37,24 @@ enable_git_auto_fetch() {
   fi
 }
 
+set_git_auto_fetch_delay() {
+  local newdelay="$1"
+  echo "${newdelay}" > "$(_git_repo_path)/${GIT_AUTO_FETCH_DELAY_FILE}"
+  echo "[OK] Set auto-fetch delay to ${newdelay}"
+}
+
+_git_auto_fetch_delay() {
+  local fetchdelayfile="$(_git_repo_path)/${GIT_AUTO_FETCH_DELAY_FILE}"
+
+  if [ _in_git_repo ]; then
+    if [ -f "${fetchdelayfile}" ]; then
+      print $(cat "${fetchdelayfile}")
+    else
+      print $GIT_FETCH_DELAY
+    fi
+  fi
+}
+
 _git_last_updated_at() {
   printf '%s' "$(stat -f%m "$(_git_repo_path)/${GIT_FETCH_TOUCH}" 2>/dev/null || printf '%s' '0')"
 }
@@ -58,8 +77,9 @@ _git_fetch_if_necessary() {
 
     local now="$(date +%s)"
     local since="$((${now} - $(_git_last_updated_at)))"
+    local delay="$(_git_auto_fetch_delay)"
 
-    if ((${since} > ${GIT_FETCH_DELAY})); then
+    if ((${since} > ${delay})); then
       _git_record_fetched
       git fetch --quiet > /dev/null 2>&1
     fi
