@@ -1,5 +1,5 @@
 # How long between auto-fetching
-export GIT_FETCH_DELAY="$((60 * 60))"  # 1 hour
+export GIT_FETCH_DELAY="$((24 * 60 * 60))"  # 1 day
 export GIT_AUTO_FETCH_DELAY_FILE="auto-fetch-delay"
 
 # Auto-fetch update marker file
