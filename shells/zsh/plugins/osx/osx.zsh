@@ -15,10 +15,6 @@ function im() {
   open im://$1
 }
 
-function dash() {
-  open dash://$1
-}
-
 # iterm/terminal functions
 
 function tab() {
