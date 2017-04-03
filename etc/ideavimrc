@@ -1,7 +1,6 @@
 let mapleader=" "
 
-filetype plugin indent on
-
+" options
 set clipboard+=unnamed
 set hlsearch
 set ignorecase
@@ -11,8 +10,11 @@ set number
 set relativenumber
 set scrolloff=3
 set showmode
+set sidescroll=1
+set sidescrolloff=3
 set smartcase
 set surround
+set undolevels=100
 set viminfo='100,/100,h,\"500,:100
 set wrapscan
 
@@ -37,6 +39,10 @@ nnoremap <C-q> :action CloseContent<CR>
 
 " copy/paste
 noremap Y y$
+
+" misc
+nnoremap J mzJ`z
+nnoremap ,, :b#<CR>
 
 " search
 nnoremap <leader>/ :noh<CR>
