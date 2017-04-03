@@ -7,6 +7,11 @@ export CLICOLOR='Yes'
 export LSCOLORS='exgxFxdxCxdxgxhbadexex'
 
 autoload -U colors && colors
+autoload -Uz vcs_info
+
+precmd() {
+  vcs_info
+}
 
 THEME_PROMPT_COLOR="%B%F{yellow}"
 
