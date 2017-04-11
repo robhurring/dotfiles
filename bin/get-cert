@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+# support
+# usage
+
+main() {
+  local host="$1"
+  local port="${2:-443}"
+
+  printf "Getting cert for '${host}:${port}'\n"
+  printf "(Hit any key to continue)\n"
+  read
+
+  openssl s_client -showcerts -connect ${host}:${port} </dev/null 2>/dev/null | openssl x509 -outform PEM
+}
+
+main "$*"
