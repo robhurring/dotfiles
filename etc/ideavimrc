@@ -65,6 +65,7 @@ nnoremap <Tab> :action ShowIntentionActions<CR>
 " coding / building
 nnoremap <C-]> :action GotoImplementation<cr>
 nnoremap <C-[> :action GotoSuperMethod<cr>
+nnoremap <C-i> :action QuickImplementations<cr>
 nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action FindUsages<cr>
 nnoremap <leader>gt :action GotoTest<cr>
