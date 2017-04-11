@@ -51,6 +51,9 @@ nnoremap g/ :action Find<CR>
 " nnoremap N :action FindPrevious<CR>
 " nnoremap ; :action AceJumpAction<CR>
 
+" formatting
+nnoremap <leader>= :action ReformatCode<CR>
+
 " file navigation
 " nnoremap <C-Space> :action GotoFile<CR>
 nnoremap <leader>o :action GotoClass<CR>
@@ -94,6 +97,7 @@ nnoremap cow :action EditorToggleUseSoftWraps<CR>
 nnoremap col :action EditorToggleShowWhitespaces<CR>
 nnoremap cor :set relativenumber!<CR>
 nnoremap con :set number!<CR>
+nnoremap cos :action ActivateStructureToolWindow<CR>
 
 " inoremap <C-X>= :normal action InsertRubyInjection<CR>
 " inoremap <C-X>= #{}<Esc>i
