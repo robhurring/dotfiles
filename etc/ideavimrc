@@ -41,7 +41,8 @@ nnoremap <C-q> :action CloseContent<CR>
 noremap Y y$
 
 " misc
-nnoremap J mzJ`z
+"nnoremap J mzJ`z
+nnoremap J :action EditorJoinLines<CR>
 nnoremap ,, :b#<CR>
 nnoremap U :action $Redo<CR>
 nnoremap * *``
@@ -56,6 +57,8 @@ nnoremap g/ :action Find<CR>
 
 " formatting
 nnoremap <leader>= :action ReformatCode<CR>
+nnoremap <leader>c :action CodeCleanup<CR>
+nnoremap <leader>i :action CodeInspection.OnEditor<CR>
 
 " file navigation
 nnoremap <C-Space> :action SearchEverywhere<CR>
@@ -70,9 +73,8 @@ nnoremap <C-[> :action GotoSuperMethod<cr>
 nnoremap <C-i> :action QuickImplementations<cr>
 nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>k :action FileStructurePopup<CR>
-" nnoremap <leader>u :action FindUsages<cr>
-nnoremap <leader>r :action ChooseRunConfiguration<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
+nnoremap R :action Refactorings.QuickListPopupAction<CR>
 
 " run / build / test
 nnoremap ,r :action RunClass<cr>
@@ -84,6 +86,8 @@ nnoremap ,c :action CheckStyleCurrentFileAction<cr>
 noremap <C-Down> :action MoveStatementDown<CR>
 noremap <C-Up> :action MoveStatementUp<CR>
 nnoremap <C-/> :action CommentByLineComment<CR>
+noremap <C-Right> :action NextTab<CR>
+noremap <C-Left> :action PreviousTab<CR>
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j
@@ -103,10 +107,11 @@ nnoremap cow :action EditorToggleUseSoftWraps<CR>
 nnoremap col :action EditorToggleShowWhitespaces<CR>
 nnoremap cor :set relativenumber!<CR>
 nnoremap con :set number!<CR>
+nnoremap ,s :action ChangeColorScheme<CR>
 
 " common panes
 nnoremap <leader>as :action ActivateStructureToolWindow<CR>
-nnoremap <leader>af :action ActivateProjectToolWindow<CR>
+noremap <leader>af :action ActivateProjectToolWindow<CR>
 
 " inoremap <C-X>= :normal action InsertRubyInjection<CR>
 " inoremap <C-X>= #{}<Esc>i
