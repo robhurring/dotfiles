@@ -64,7 +64,7 @@ nnoremap <leader>i :action CodeInspection.OnEditor<CR>
 nnoremap <C-Space> :action SearchEverywhere<CR>
 nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
-nnoremap <leader>gt :action GotoTest<cr>
+nnoremap <leader>gt :action GotoTest<CR>
 
 " editing / info
 nnoremap <Tab> :action ShowIntentionActions<CR>
@@ -77,11 +77,12 @@ nnoremap <leader>u :action HighlightUsagesInFile<cr>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
 
 " run / build / test
-nnoremap ,r :action RunClass<cr>
-nnoremap ,d :action DebugClass<cr>
-nnoremap ,R :action Run<cr>
-nnoremap ,D :action Debug<cr>
-nnoremap ,c :action CheckStyleCurrentFileAction<cr>
+nnoremap <leader>r :action ChooseRunConfiguration<CR>
+nnoremap ,r :action RunClass<CR>
+nnoremap ,d :action DebugClass<CR>
+nnoremap ,R :action Run<CR>
+nnoremap ,D :action Debug<CR>
+nnoremap ,c :action CheckStyleCurrentFileAction<CR>
 
 noremap <C-Down> :action MoveStatementDown<CR>
 noremap <C-Up> :action MoveStatementUp<CR>
