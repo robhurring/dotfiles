@@ -83,7 +83,6 @@
 [user]
   name = robhurring
   email = robhurring@gmail.com
-	signingkey = 5C33DE2A
 [credential]
   helper = osxkeychain
 [instaweb]

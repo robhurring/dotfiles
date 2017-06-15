@@ -8,8 +8,6 @@ DOTFILES=$(ETC:%=$(HOME)/.%)
 BIN=$(shell ls ./bin)
 BINFILES=$(BIN:%=$(HOME)/bin/%)
 
-BREW_APPS=ag universal-ctags git
-
 # Link etc & bin
 all: .setup $(DOTFILES) $(BINFILES) .zsh
 	@echo "All good."
@@ -17,7 +15,7 @@ all: .setup $(DOTFILES) $(BINFILES) .zsh
 mac: all extra
 	@echo "Done!"
 
-extra: .brew $(BREW_APPS) .iterm .tmux .gems .npm
+extra: .brew .iterm .tmux .gems .npm
 
 update:
 	-git pull
@@ -59,14 +57,6 @@ $(HOME)/.zsh:
 	@echo "zsh:	.zsh"
 	@ln -sf $(CWD)/shells/zsh $@
 
-$(GUI_APPS):
-	@echo "installing: $@"
-	-brew cask install $@
-
-$(BREW_APPS):
-	@echo "installing: $<"
-	-brew upgrade $@
-
 .gems:
 	@rvm @global do gem install bundler
 	@rvm @global do bundle check || bundle install
@@ -75,12 +65,12 @@ $(BREW_APPS):
 	@npm install
 
 .brew:
-	@ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	-brew tap universal-ctags/universal-ctags
+	@type brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	@brew bundle check || brew bundle
 
 .iterm:
 	tic $(CWD)/other/iterm2/xterm-256color-italic.terminfo
 	tic $(CWD)/other/iterm2/screen-256color-italic.terminfo
 	tic $(CWD)/other/iterm2/screen-256color.terminfo
 
-.PHONY: $(BREW_APPS)
+.PHONY: all mac extra .setup .zsh .tmux .brew .npm .gems .iterm
