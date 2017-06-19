@@ -2,11 +2,21 @@
 
 # Logic for finding which branch is the repo's "default"
 # For most apps this will be "dev" and for most clients this will be "master"
-# If you want to override this you can `export branch=qa02` or something in your env
+# If you want to override this you can `BRANCH=qa02 git default-branch` or something in your env
 
-default=${branch:-}
-branches=($default develop master)
+# This can also be overridden by setting `git config --add gitops.default-branch <BRANCH>`
 
+override=${BRANCH:-}
+configkey="gitops.default-branch"
+
+configsetting=$(git config --get ${configkey})
+if [ -n "${configsetting}" ]; then
+  branches=($override $configsetting master)
+else
+  branches=($override develop dev master)
+fi
+
+# scan backwards
 for br in ${branches[@]}; do
   git branch --all|egrep "^\*?[[:space:]]+${br}$" 2>&1 >/dev/null
   if [[ $? -eq 0 ]]; then
