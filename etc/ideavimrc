@@ -59,6 +59,8 @@ nnoremap g/ :action Find<CR>
 nnoremap <leader>= :action ReformatCode<CR>
 nnoremap <leader>c :action CodeCleanup<CR>
 nnoremap <leader>i :action CodeInspection.OnEditor<CR>
+nnoremap <leader>f :action FindBugs.CurrentFileAction<CR>
+nnoremap <leader>F :action FindBugs.AnalyseScope<CR>
 
 " file navigation
 nnoremap <C-Space> :action SearchEverywhere<CR>
@@ -76,13 +78,14 @@ nnoremap <leader>k :action FileStructurePopup<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
 
-" run / build / test
+" run / build / test / debug
 nnoremap <leader>r :action ChooseRunConfiguration<CR>
 nnoremap ,r :action RunClass<CR>
 nnoremap ,d :action DebugClass<CR>
 nnoremap ,R :action Run<CR>
 nnoremap ,D :action Debug<CR>
 nnoremap ,c :action CheckStyleCurrentFileAction<CR>
+nnoremap <leader>d :action ToggleLineBreakpoint<CR>
 
 noremap <C-Down> :action MoveStatementDown<CR>
 noremap <C-Up> :action MoveStatementUp<CR>
