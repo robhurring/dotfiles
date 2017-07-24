@@ -43,7 +43,6 @@ noremap Y y$
 " misc
 "nnoremap J mzJ`z
 nnoremap J :action EditorJoinLines<CR>
-nnoremap ,, :b#<CR>
 nnoremap U :action $Redo<CR>
 nnoremap * *``
 nnoremap <leader>xs :source ~/.ideavimrc<CR>
@@ -53,7 +52,6 @@ nnoremap <leader>/ :noh<CR>
 nnoremap g/ :action Find<CR>
 " nnoremap n :action FindNext<CR>
 " nnoremap N :action FindPrevious<CR>
-" nnoremap ; :action AceJumpAction<CR>
 
 " formatting
 nnoremap <leader>= :action ReformatCode<CR>
@@ -66,7 +64,10 @@ nnoremap <leader>F :action FindBugs.AnalyseScope<CR>
 nnoremap <C-Space> :action SearchEverywhere<CR>
 nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
-nnoremap <leader>gt :action GotoTest<CR>
+nnoremap ,, :action GotoRelated<CR>
+
+" vcs
+nnoremap ,ga :action Annotate<CR>
 
 " editing / info
 nnoremap <Tab> :action ShowIntentionActions<CR>
@@ -80,18 +81,18 @@ nnoremap R :action Refactorings.QuickListPopupAction<CR>
 
 " run / build / test / debug
 nnoremap <leader>r :action ChooseRunConfiguration<CR>
+nnoremap <leader>d :action ToggleLineBreakpoint<CR>
 nnoremap ,r :action RunClass<CR>
 nnoremap ,d :action DebugClass<CR>
 nnoremap ,R :action Run<CR>
 nnoremap ,D :action Debug<CR>
 nnoremap ,c :action CheckStyleCurrentFileAction<CR>
-nnoremap <leader>d :action ToggleLineBreakpoint<CR>
 
-noremap <C-Down> :action MoveStatementDown<CR>
-noremap <C-Up> :action MoveStatementUp<CR>
+nnoremap <C-Down> :action MoveStatementDown<CR>
+nnoremap <C-Up> :action MoveStatementUp<CR>
 nnoremap <C-/> :action CommentByLineComment<CR>
-noremap <C-Right> :action NextTab<CR>
-noremap <C-Left> :action PreviousTab<CR>
+nnoremap <C-Right> :action NextTab<CR>
+nnoremap <C-Left> :action PreviousTab<CR>
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j
