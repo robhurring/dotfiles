@@ -79,8 +79,8 @@ nnoremap <leader>k :action FileStructurePopup<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
 
-" run / build / test / debug
-nnoremap <leader>r :action ChooseRunConfiguration<CR>
+" run / build / test
+nnoremap <C-r> :action ChooseRunConfiguration<CR>
 nnoremap <leader>d :action ToggleLineBreakpoint<CR>
 nnoremap ,r :action RunClass<CR>
 nnoremap ,d :action DebugClass<CR>
