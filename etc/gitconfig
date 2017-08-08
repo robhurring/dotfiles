@@ -116,6 +116,3 @@
   enabled = true
 [rebase]
   stat = true
-[branch]
-  autosetuprebase = always
-  autosetupmerge = always
