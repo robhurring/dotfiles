@@ -65,6 +65,7 @@ nnoremap <C-Space> :action SearchEverywhere<CR>
 nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
 nnoremap ,, :action GotoRelated<CR>
+nnoremap <C-l> :action FileStructurePopup<CR>
 
 " vcs
 nnoremap ,ga :action Annotate<CR>
