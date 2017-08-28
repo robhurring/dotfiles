@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+
+source "/Users/rhurring/.dotfiles/shells/zsh/lib/libgit.sh"
+
+colorize() {
+  printf "\033[${1}m${2}\033[0m\n" "${@:3}"
+}
+
+error() {
+  colorize "1;31" "$@"
+}
+
+success() {
+  colorize "1;32" "$@"
+}
+
+run() {
+  local cmd="$*"
+  colorize "1;30" "$ \e[0;37m%s" "$cmd"
+  eval "$cmd"
+}
+
+usage() {
+cat << EOU
+Usage: $(basename $0) <COMMAND> [ARGS]
+Commands:
+  on            Enable git autofetch
+  off           Disable git autofetch
+  set <SECS>    Autofetch after <SECS> age
+EOU
+echo
+exit 1
+}
+
+if [ $# = 0 ]; then
+  usage;
+fi
+
+while [ $# -gt 0 ]; do
+  arg=$1;
+
+  case $arg in
+    "off" | "disable")
+      disable_git_auto_fetch
+      break ;;
+
+    "on" | "enable")
+      enable_git_auto_fetch
+      break ;;
+
+    "set")
+      set_git_auto_fetch_delay $2
+      break ;;
+
+    "help" | * )
+      usage;
+      break ;;
+  esac
+done
+
