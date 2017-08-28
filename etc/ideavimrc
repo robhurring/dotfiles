@@ -64,6 +64,7 @@ nnoremap <leader>F :action FindBugs.AnalyseScope<CR>
 nnoremap <C-Space> :action SearchEverywhere<CR>
 nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
+nnoremap <C-l> :action FileStructurePopup<CR>
 nnoremap ,, :action GotoRelated<CR>
 nnoremap <C-l> :action FileStructurePopup<CR>
 
@@ -76,7 +77,6 @@ nnoremap <C-]> :action GotoImplementation<cr>
 nnoremap <C-[> :action GotoSuperMethod<cr>
 nnoremap <C-i> :action QuickImplementations<cr>
 nnoremap <C-S-]> :action FindUsages<CR>
-nnoremap <leader>k :action FileStructurePopup<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
 
