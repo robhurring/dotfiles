@@ -1,6 +1,5 @@
 { "layouts": [
   "tall",
-  "column",
   "floating",
   "widescreen-tall"
 ],
@@ -98,11 +97,11 @@
   },
   "increase-main": {
     "mod": "mod1",
-    "key": "."
+    "key": "="
   },
   "decrease-main": {
     "mod": "mod1",
-    "key": ","
+    "key": "-"
   },
   "focus-ccw": {
     "mod": "mod1",
@@ -175,8 +174,6 @@
 
   "floating": [
     "com.apple.systempreferences",
-    "it.bloop.airmail.beta11",
-    "am.sunrise.mac",
     "com.apple.finder",
     "com.agilebits.onepassword4",
     "com.cisco.Cisco-AnyConnect-Secure-Mobility-Client",
