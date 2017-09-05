@@ -17,7 +17,7 @@ brew 'htop'
 brew 'httpie'
 brew 'hub'
 brew 'macvim', args: ['with-lua', 'with-luajit']
-brew 'neovim/neovim/neovim'
+brew 'neovim'
 brew 'pinentry-mac'
 brew 'python'
 brew 'python3'
