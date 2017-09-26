@@ -122,4 +122,4 @@ inoremap <C-X>= ${}<Esc>i
 
 " tool windows
 nnoremap ,wv :action ActivateVersionControlToolWindow<CR>
-nnoremap ,wb :action ActivateFindBugs-IDEAToolWindow<CR>
+nnoremap ,wf :action ActivateFindBugs-IDEAToolWindow<CR>
