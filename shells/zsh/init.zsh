@@ -12,6 +12,7 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export REPORTTIME=10
 
+# use vi-mode plugin now
 # if [[ "$ZSH_MODE" == "vi" ]]; then
 #   bindkey -v
 #   setopt VI
@@ -48,8 +49,11 @@ setopt NULL_GLOB
 #setopt INC_APPEND_HISTORY SHARE_HISTORY
 
 # key-bindings
-bindkey '^r'   history-beginning-search-backward
-bindkey '^t'   history-beginning-search-forward
+bindkey '^r' history-beginning-search-backward
+bindkey '^t' history-beginning-search-forward
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
 
 # edit command in editor
 autoload -z edit-command-line
