@@ -24,6 +24,7 @@ vnoremap @ :normal! @
 
 " esc
 inoremap jk <Esc>`^
+inoremap <C-c> <Esc>
 
 " splits
 nnoremap <C-j> <C-w>j
@@ -49,7 +50,7 @@ nnoremap <leader>xs :source ~/.ideavimrc<CR>
 
 " search
 nnoremap <leader>/ :noh<CR>
-nnoremap g/ :action Find<CR>
+nnoremap g/ :action FindInPath<CR>
 " nnoremap n :action FindNext<CR>
 " nnoremap N :action FindPrevious<CR>
 
@@ -66,7 +67,6 @@ nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
 nnoremap <C-l> :action FileStructurePopup<CR>
 nnoremap ,, :action GotoRelated<CR>
-nnoremap <C-l> :action FileStructurePopup<CR>
 
 " vcs
 nnoremap ,ga :action Annotate<CR>
@@ -82,11 +82,10 @@ nnoremap R :action Refactorings.QuickListPopupAction<CR>
 
 " run / build / test
 nnoremap <C-r> :action ChooseRunConfiguration<CR>
-nnoremap <leader>d :action ToggleLineBreakpoint<CR>
-nnoremap ,r :action RunClass<CR>
-nnoremap ,d :action DebugClass<CR>
-nnoremap ,R :action Run<CR>
-nnoremap ,D :action Debug<CR>
+nnoremap ,rr :action RunClass<CR>
+nnoremap ,rd :action DebugClass<CR>
+nnoremap ,rR :action Run<CR>
+nnoremap ,rD :action Debug<CR>
 nnoremap ,c :action CheckStyleCurrentFileAction<CR>
 
 nnoremap <C-Down> :action MoveStatementDown<CR>
@@ -113,13 +112,14 @@ nnoremap cow :action EditorToggleUseSoftWraps<CR>
 nnoremap col :action EditorToggleShowWhitespaces<CR>
 nnoremap cor :set relativenumber!<CR>
 nnoremap con :set number!<CR>
-nnoremap ,s :action ChangeColorScheme<CR>
-
-" common panes
-nnoremap <leader>as :action ActivateStructureToolWindow<CR>
-noremap <leader>af :action ActivateProjectToolWindow<CR>
+nnoremap cod :action ToggleLineBreakpoint<CR>
+nnoremap cos :action EditorToggleShowWhitespaces<CR>
+nnoremap coc :action ChangeColorScheme<CR>
 
 " inoremap <C-X>= :normal action InsertRubyInjection<CR>
 " inoremap <C-X>= #{}<Esc>i
 inoremap <C-X>= ${}<Esc>i
 
+" tool windows
+nnoremap ,wv :action ActivateVersionControlToolWindow<CR>
+nnoremap ,wb :action ActivateFindBugs-IDEAToolWindow<CR>
