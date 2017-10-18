@@ -121,5 +121,5 @@ nnoremap coc :action ChangeColorScheme<CR>
 inoremap <C-X>= ${}<Esc>i
 
 " tool windows
-nnoremap ,wv :action ActivateVersionControlToolWindow<CR>
-nnoremap ,wf :action ActivateFindBugs-IDEAToolWindow<CR>
+nnoremap ,vv :action ActivateVersionControlToolWindow<CR>
+nnoremap ,vf :action ActivateFindBugs-IDEAToolWindow<CR>
