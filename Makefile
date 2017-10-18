@@ -5,11 +5,14 @@ CWD=$(shell pwd)
 ETC=$(shell ls ./etc)
 DOTFILES=$(ETC:%=$(HOME)/.%)
 
+CONFIG=$(shell ls ./config)
+XDGFILES=$(CONFIG:%=$(HOME)/.config/%)
+
 BIN=$(shell ls ./bin)
 BINFILES=$(BIN:%=$(HOME)/bin/%)
 
 # Link etc & bin
-all: .setup $(DOTFILES) $(BINFILES) .zsh
+all: .setup $(DOTFILES) $(XDGFILES) $(BINFILES) .zsh
 	@echo "All good."
 
 mac: all extra
@@ -38,6 +41,11 @@ $(HOME)/.zprofile:
 
 # link ETC files
 $(HOME)/.%: $(CWD)/etc/%
+	@echo "linking:	$< -> $@"
+	@ln -sf $< $@
+
+# link XDG_CONFIG files
+$(HOME)/.config/%: $(CWD)/config/%
 	@echo "linking:	$< -> $@"
 	@ln -sf $< $@
 
