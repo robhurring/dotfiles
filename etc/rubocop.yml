@@ -1,5 +1,5 @@
 Rails:
-  Enabled: true
+  Enabled: false
 
 # Commonly used screens these days easily fit more than 80 characters.
 Metrics/LineLength:
@@ -26,6 +26,9 @@ Style/SpaceAroundEqualsInParameterDefault:
 Style/StringLiterals:
   EnforcedStyle: single_quotes
 
+Style/IndentArray:
+  EnforcedStyle: consistent
+
 # We do not need to support Ruby 1.9, so this is good to use.
 Style/SymbolArray:
   Enabled: true
@@ -46,6 +49,10 @@ Style/PreferredHashMethods:
 # String#% is by far the least verbose and only object oriented variant.
 Style/FormatString:
   EnforcedStyle: percent
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+  Enabled: false
 
 Style/CollectionMethods:
   Enabled: true
