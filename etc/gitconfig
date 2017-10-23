@@ -82,8 +82,9 @@
 [push]
   default = simple
 [user]
-  name = robhurring
-  email = robhurring@gmail.com
+	name = robhurring
+	email = robhurring@gmail.com
+  signingkey=5C33DE2A
 [credential]
   helper = osxkeychain
 [instaweb]
@@ -95,11 +96,11 @@
 [web]
   browser = ch
 [merge]
-  tool = editor
+	tool = editor
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [mergetool "editor"]
-  cmd = nvim +Gvdiff $MERGED
+	cmd = nvim +Gvdiff $MERGED
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com/"
@@ -110,10 +111,13 @@
 [github]
   user = robhurring
 [filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
   required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 [rerere]
   enabled = true
 [rebase]
   stat = true
+[commit]
+	gpgsign = true
