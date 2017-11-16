@@ -86,9 +86,22 @@ function load_plugin() {
 }
 
 function reload_completions() {
-  autoload -U compinit
-  compinit -i
+  autoload -Uz compinit
+
+  # only dump once a day, otherwise check
+  if [[ $(date +'%j') > $(date -r "${HOME}/.zcompdump" +'%j') ]]; then
+    compinit -i
+    compdump
+  else
+    compinit -C
+  fi
 }
+
+# run compinit
+if [[ $skip_global_compinit != 1 ]]; then
+  reload_completions
+fi
+typeset -U path manpath fpath
 
 # load all plugins to $fpath
 fpath=(/usr/local/share/zsh/site-functions $fpath)
@@ -96,12 +109,6 @@ fpath=($ZSH/functions $fpath)
 for plugin ($plugins); do
   load_plugin $plugin $ZSH/plugins
 done
-
-# run compinit
-if [[ $skip_global_compinit != 1 ]]; then
-  reload_completions
-fi
-typeset -U path manpath fpath
 
 if [ -f $ZSH_THEME ]; then
   source $ZSH_THEME
