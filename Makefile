@@ -12,7 +12,7 @@ BIN=$(shell ls ./bin)
 BINFILES=$(BIN:%=$(HOME)/bin/%)
 
 # Link etc & bin
-all: .setup $(DOTFILES) $(XDGFILES)$(BINFILES) .zsh
+all: .setup $(DOTFILES) $(XDGFILES) $(BINFILES) .zsh
 	@echo "All good."
 
 mac: all extra
