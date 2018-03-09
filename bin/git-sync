@@ -195,12 +195,13 @@ is_dirty() {
 
 run() {
   local cmd="$*"
-  colorize "1;30" "$ \e[0;37m%s" "$cmd"
+  colorize "0;37" "\e[7m%s" "$cmd"
   eval $cmd
 }
 
 do_stash() {
   if is_dirty; then
+    echo
     run "git stash"
     stashed=1
   fi
@@ -208,8 +209,15 @@ do_stash() {
 
 do_unstash() {
   if [ $stashed -eq 1 ]; then
+    echo
     run "git stash pop"
   fi
+}
+
+print_log() {
+  local upstream="$1"
+  echo
+  run "git log --graph --no-decorate --oneline HEAD..${upstream}"
 }
 
 do_update() {
@@ -221,10 +229,13 @@ do_update() {
 
   do_stash
 
+  print_log "${upstream}"
+
+  echo
   if [ "$kind" = "rebase" ]; then
     run "git rebase --preserve-merges ${upstream}"
   elif [ "$kind" = "merge" ]; then
-    run "git merge --ff-only ${upstream}"
+    run "git merge --stat --ff-only ${upstream}"
   else
     error "Unknown update type '%s'" $kind
     exit 1
@@ -232,6 +243,7 @@ do_update() {
 
   do_unstash
 
+  echo
   quiet "HEAD moved from '%s' to '%s'" "$start_sha" "$(commit_short_sha)"
 }
 
