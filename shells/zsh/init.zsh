@@ -45,8 +45,8 @@ setopt HIST_REDUCE_BLANKS
 setopt AUTO_PARAM_SLASH
 setopt AUTO_MENU
 setopt NULL_GLOB
-#setopt SHARE_HISTORY
-#setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY SHARE_HISTORY
 
 # key-bindings
 bindkey '^r' history-beginning-search-backward

@@ -68,6 +68,7 @@ nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
 nnoremap <C-l> :action FileStructurePopup<CR>
 nnoremap ,, :action GotoRelated<CR>
+nnoremap <BS> <C-^><CR>
 
 " vcs
 nnoremap ,ga :action Annotate<CR>
