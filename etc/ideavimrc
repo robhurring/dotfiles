@@ -62,11 +62,14 @@ nnoremap <leader>f :action FindBugs.CurrentFileAction<CR>
 nnoremap <leader>F :action FindBugs.AnalyseScope<CR>
 nnoremap <leader>s :action SonarLint.AnalyzeCurrentEditorFilePopup<CR>
 
+" project navigation
+nnoremap ,o :action ManageRecentProjects<CR>
+
 " file navigation
 nnoremap <C-Space> :action SearchEverywhere<CR>
 nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
-nnoremap <C-l> :action FileStructurePopup<CR>
+nnoremap <C-s> :action FileStructurePopup<CR>
 nnoremap ,, :action GotoRelated<CR>
 nnoremap <BS> <C-^><CR>
 

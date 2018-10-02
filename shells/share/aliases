@@ -9,9 +9,8 @@ alias cd--='cd ~ && cd -'
 alias cdd='cd ~/Desktop'
 
 # Misc Helpers
-alias fname="find -name"
+alias fname='find -name'
 alias psg='ps ax | grep '
-alias tf='tail -f'
 alias enc='openssl enc -e -aes-256-cbc -salt -in '
 alias dec='openssl enc -d -aes-256-cbc -in '
 
@@ -31,6 +30,7 @@ alias gaa='git add -A'
 alias gau='git add -u'
 alias gs='git status -sb'
 alias gc='git commit'
+alias g-='git checkout -'
 alias gca='git commit -a'
 alias gcam='git commit --amend'
 alias gl='git l'
