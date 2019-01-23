@@ -15,24 +15,6 @@ precmd() {
 
 THEME_PROMPT_COLOR="%B%F{yellow}"
 
-# ---> RVM
-
-THEME_RVM_BEFORE=""
-THEME_RVM_AFTER=""
-THEME_RVM_PROMPT_OPTIONS=(version gemset)
-THEME_RVM_DEFAULT_RUBY="2.2.1"
-
-rvm_prompt_info() {
-  [ -z $rvm_path ] && return
-  [ -f $rvm_path/bin/rvm-prompt ] || return
-
-  local rvm_info=$($rvm_path/bin/rvm-prompt ${THEME_RVM_PROMPT_OPTIONS}|sed "s/$THEME_RVM_DEFAULT_RUBY//" 2>/dev/null)
-
-  if [ -n "$rvm_info" ]; then
-    print -n "${THEME_RVM_BEFORE}${rvm_info}${THEME_RVM_AFTER}"
-  fi
-}
-
 # ---> Path formatting
 
 THEME_PATH_BEFORE=""

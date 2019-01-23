@@ -51,4 +51,4 @@ export THEME_RETURN_BAD_PROMPT_COLOR="%F{red}"
 export THEME_PROMPT="%s"
 
 export PROMPT=$'${THEME_PROMPT_COLOR}$(return_prompt_color)$(shortpath "${THEME_PROMPT}")%b%f'
-export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'
+export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(git_prompt_info)'

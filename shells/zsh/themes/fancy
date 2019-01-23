@@ -47,5 +47,5 @@ THEME_PATH_AFTER=":"
 THEME_PROMPT_COLOR="%F{yellow}"
 
 export PROMPT=$'$THEME_PROMPT_COLOR$(formatted_path)%b%f '
-export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(rvm_prompt_info)$(git_prompt_info)'
+export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(git_prompt_info)'
 
