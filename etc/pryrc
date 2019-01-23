@@ -16,7 +16,7 @@ elsif Dir['*.gemspec'].first || Dir['Gemfile'] # for gems or sintra like apps
   Dir['./lib/*.rb'].each { |file| require file }
 end
 
-if defined?(::PryDebugger)
+if defined?(PryByebug)
   Pry.commands.alias_command 'c', 'continue'
   Pry.commands.alias_command 's', 'step'
   Pry.commands.alias_command 'n', 'next'
