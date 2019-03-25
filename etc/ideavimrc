@@ -13,10 +13,13 @@ set showmode
 set sidescroll=1
 set sidescrolloff=3
 set smartcase
-set surround
 set undolevels=100
 set viminfo='10,/10,h,\"10,:10
 set wrapscan
+
+" emulated support
+set surround
+set multiple-cursors
 
 " repeating
 vnoremap . :normal .<CR>
