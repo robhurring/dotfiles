@@ -15,6 +15,7 @@
   commits = log --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   cp = cherry-pick
   current-branch = rev-parse --abbrev-ref HEAD
+  ds = diff --stat
   edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
   empty = commit --allow-empty -m
   fa = fetch --all
