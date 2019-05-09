@@ -87,6 +87,8 @@ nnoremap <C-i> :action QuickImplementations<cr>
 nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
+nnoremap ,t :action ActivateTerminalToolWindow<CR>
+nnoremap <space><space> :action FileStructurePopup<CR>
 
 " run / build / test
 nnoremap <C-r> :action ChooseRunConfiguration<CR>
