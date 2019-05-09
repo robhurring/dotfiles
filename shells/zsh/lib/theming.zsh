@@ -80,7 +80,6 @@ THEME_GIT_BEFORE_SHA=""
 THEME_GIT_AFTER_SHA=""
 
 git_sha() {
-# _git_head_commit
   local sha=$(_git_head_commit)
   [[ -n $sha ]] && print -n "${THEME_GIT_BEFORE_SHA}${sha}${THEME_GIT_AFTER_SHA}"
 }

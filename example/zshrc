@@ -12,8 +12,9 @@ export ZSH_THEME=default
 export ZSH_MODE="vi"
 export ZSH_VI_ESC="jk"
 export EDITOR="vim"
+export SHELL=/usr/local/bin/zsh
 
-plugins=(osx tmux fzf git z)
+plugins=(tmux fzf git fasd vi-mode docker)
 
 # load our zsh environment
 [[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
@@ -23,15 +24,8 @@ plugins=(osx tmux fzf git z)
 # don't autofetch for git rprompt status
 # export GIT_AUTO_FETCH=0
 
-# Customize RVM default version
-# export THEME_RVM_DEFAULT_RUBY="2.2.3"
-
 # Disable for OSX
 # export LS_OPTIONS=''
-
-# Custom matcher for my projects colder
-# PATH_MATCHERS+=("~/Projects/\([^\/]*\)")
-# PATH_REPLACER+=("%F{yellow}projects%B%F{black} ❭ %F{white}\\1%b%f")
 
 # Custom prompt color
 export THEME_PROMPT_COLOR="%B%F{yellow}"
@@ -39,7 +33,6 @@ export THEME_VI_PROMPT_COLOR="%b%K{magenta}%F{white}"
 
 # Add user and host before the path
 export THEME_PATH_BEFORE="%n@%m "
-export THEME_RVM_DEFAULT_RUBY="2.2.1"
 
 # ---> Some common aliases
 # alias less='less -R'
@@ -50,10 +43,10 @@ export THEME_RVM_DEFAULT_RUBY="2.2.1"
 # alias grep='pcregrep --color=auto'
 
 # Development
-# alias e=vim
+alias e=vim
+# alias erc='e ~/.zshrc'
 # alias edf="pushd $DOTFILES && e && popd"
 # alias ev='pushd ~/.dotvim && e vimrc && popd'
-# alias erc='e ~/.zshrc'
 # alias cdg="cd $GOPATH/src/github.com/$(git config github.user)"
 # alias rsa='auto-bundle-exec rspec -fd'
 # alias rs='rsa --fail-fast'
@@ -77,6 +70,12 @@ export THEME_RVM_DEFAULT_RUBY="2.2.1"
 #   $(git log --all --decorate --format='commit %h %an: %s' $* | tig)
 # }
 
+# Fasd
+# alias j=z
+# alias el='fasd -ft -e $EDITOR -b viminfo'
+# alias ef='fasd -ft -e $EDITOR'
+# bindkey '^X^D' fasd-complete-d
+
 # ---> Neovim
 
 # export NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -84,9 +83,7 @@ export THEME_RVM_DEFAULT_RUBY="2.2.1"
 
 # ---> FZF (requires fzf plugin)
 
-# [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-
-# export FUZZY_SEARCH_PATHS="~/Projects:~/XCode:~/Sites/apps:~/Sites/gems:~/Sites"
+# export FUZZY_SEARCH_PATHS="~/Projects"
 # alias cds=fuzzy-cds
 # alias co=fuzzy-co
 # alias eb=fuzzy-bundle-open
@@ -127,14 +124,15 @@ export THEME_RVM_DEFAULT_RUBY="2.2.1"
 # }
 
 # ---> Golang
+
 # export GOPATH=$HOME/Go
 # export GOBIN=$GOPATH/bin
 # export PATH="$PATH:$GOBIN"
 
 # ---> Paths
 
-# export PATH="$PATH:$HOME/.rvm/bin"
 # export PATH="$PATH:$DOTFILES/node_modules/.bin"
+[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
 
 if [[ "$PROFILE_STARTUP" == "1" ]]; then
   unsetopt xtrace

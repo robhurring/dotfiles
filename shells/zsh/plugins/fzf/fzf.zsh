@@ -1,8 +1,10 @@
 # Requires: FZF
 # Download: https://github.com/junegunn/fzf
 
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+
 # Paths to search for `fuzzy-cds` command.
-export FUZZY_SEARCH_PATHS="~/Sites:~/Sites/apps:~/Sites/gems:~/Projects:~/XCode"
+export FUZZY_SEARCH_PATHS="~/Projects"
 
 # FZF default settings
 export FZF_DEFAULT_OPTS="--ansi --reverse --inline-info --extended"

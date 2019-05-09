@@ -12,16 +12,6 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export REPORTTIME=10
 
-# use vi-mode plugin now
-# if [[ "$ZSH_MODE" == "vi" ]]; then
-#   bindkey -v
-#   setopt VI
-#   export KEYTIMEOUT=10 # WARNING: setting this too low kills the `^[` switch
-#   bindkey -M viins "$ZSH_VI_ESC" vi-cmd-mode
-# else
-#   bindkey -e
-# fi
-
 # set to speed up boot time
 skip_global_compinit=${skip_global_compinit:-0}
 

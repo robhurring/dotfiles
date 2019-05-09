@@ -18,7 +18,7 @@ all: .setup $(DOTFILES) $(XDGFILES) $(BINFILES) .zsh
 mac: all extra
 	@echo "Done!"
 
-extra: .brew .iterm .tmux .gems .npm
+extra: .tmux .fzf .brew
 
 kitty: $(HOME)/Library/Preferences/kitty/kitty.conf
 
@@ -36,6 +36,12 @@ update:
 .zsh: $(HOME)/.zsh $(HOME)/.zshrc $(HOME)/.zprofile
 
 .tmux: $(HOME)/.tmux
+
+.fzf: $(HOME)/.fzf
+
+$(HOME)/.fzf:
+	@git clone https://github.com/junegunn/fzf.git $(HOME)/.fzf
+	@$(HOME)/.fzf/install
 
 $(HOME)/.tmux:
 	@mkdir -p $(HOME)/.tmux/plugins
@@ -70,13 +76,6 @@ $(HOME)/.zshrc:
 $(HOME)/.zsh:
 	@echo "zsh:	.zsh"
 	@ln -sf $(CWD)/shells/zsh $@
-
-.gems:
-	@rvm @global do gem install bundler
-	@rvm @global do bundle check || bundle install
-
-.npm:
-	@npm install
 
 .brew:
 	@type brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
