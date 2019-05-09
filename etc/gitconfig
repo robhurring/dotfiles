@@ -123,3 +123,5 @@
   stat = true
 [commit]
 	gpgsign = true
+[sync]
+  cleanup = true

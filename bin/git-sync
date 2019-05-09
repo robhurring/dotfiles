@@ -292,8 +292,11 @@ do_sync() {
     success "Already up-to-date"
   fi
 
-  # [ "$(command -v git-cleanup)" ] && git-cleanup
-  [ "$(command -v git-stats-importer)" ] && git-stats-importer 2>&1 >/dev/null
+  local cleanup="$(git config sync.cleanup 2>/dev/null)"
+  if [ "$cleanup" == "true" ] && [ "$(command -v git-cleanup)" ]; then
+    note "Cleaning merged branches"
+    git-cleanup
+  fi
 }
 
 do_sync
