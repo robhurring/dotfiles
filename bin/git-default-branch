@@ -9,11 +9,16 @@
 override=${BRANCH:-}
 configkey="gitops.default-branch"
 
-configsetting=$(git config --get ${configkey})
+if [ "$1" != "" ]; then
+  echo "---> setting default branch to $1"
+  exec git config $configkey $1
+fi
+
+configsetting="$(git config --get ${configkey})"
 if [ -n "${configsetting}" ]; then
   branches=($override $configsetting master)
 else
-  branches=($override develop dev master)
+  branches=($override master)
 fi
 
 # scan backwards
