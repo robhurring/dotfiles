@@ -1,7 +1,7 @@
 [alias]
   add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
-  amend = "commit --amend -C HEAD"
+  amend = "commit --amend --no-edit"
   assume   = update-index --assume-unchanged
   assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
   assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
