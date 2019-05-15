@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+optimize() {
+  imgp \
+    --optimize \
+    --eraseexif \
+    --overwrite \
+    $1
+}
+
+optimize $@
+
