@@ -11,8 +11,8 @@ alias cdd='cd ~/Desktop'
 # Misc Helpers
 alias fname='find -name'
 alias psg='ps ax | grep '
-alias enc='openssl enc -e -aes-256-cbc -salt -in '
-alias dec='openssl enc -d -aes-256-cbc -in '
+alias enc='openssl enc -e -aes-256-ecb -salt '
+alias dec='openssl enc -d -aes-256-ecb '
 
 # Ruby/Rails
 alias ss='auto-bundle-exec rails server'
