@@ -1,1 +1,0 @@
-pmset -g batt|grep Battery|grep discharging>/dev/null

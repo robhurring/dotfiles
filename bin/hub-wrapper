@@ -4,9 +4,7 @@ main() {
   # Use the local `hub.token` if present, otherwise fall back to `GITHUB_TOKEN`
   REPO_TOKEN=$(git config hub.token)
   GITHUB_TOKEN=${REPO_TOKEN:=$GITHUB_TOKEN}
-
-  hub $*
+  hub $@
 }
 
-main $*
-
+main $@

@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 
-# support
-# usage
-
 main() {
   local host="$1"
   local port="${2:-443}"
