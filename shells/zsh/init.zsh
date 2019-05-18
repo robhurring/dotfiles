@@ -6,6 +6,7 @@ export ZSH_MODE=${ZSH_MODE:-"vi"}
 export ZSH_VI_ESC=${ZSH_VI_ESC:-"jk"}
 export EDITOR=${EDITOR:-"vim"}
 export TERM=${TERM:-"xterm-256color"}
+export ZSH_THEME="default"
 
 export HISTFILE=~/.zsh_history
 export HISTSIZE=1000
@@ -105,3 +106,4 @@ if [ -f $ZSH_THEME ]; then
 else
   source $ZSH/themes/$ZSH_THEME
 fi
+

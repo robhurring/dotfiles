@@ -1,3 +1,7 @@
+if (( ! $+commands[tmux] )); then
+  return 1
+fi
+
 # tmux-go: create, attach or switch to the given session
 #
 # Example:
@@ -38,3 +42,10 @@ tmux-go(){
   fi
 }
 
+if `zstyle -t ':my:module:tmux' auto-start`; then
+  tmux start-server
+
+  if [ -z "$TMUX" ]; then
+    tmux attach-session -d
+  fi
+fi

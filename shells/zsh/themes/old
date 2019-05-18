@@ -14,10 +14,10 @@ THEME_GIT_AFTER_SHA="%b"
 
 THEME_GIT_DIRTY_BEFORE=" %F{red}"
 THEME_GIT_DIRTY_AFTER="%f"
-THEME_GIT_ICON_DIRTY="✽"
+THEME_GIT_ICON_DIRTY=""
 THEME_GIT_CLEAN_BEFORE=" %F{green}"
 THEME_GIT_CLEAN_AFTER="%f"
-THEME_GIT_ICON_CLEAN="✽"
+THEME_GIT_ICON_CLEAN=""
 
 THEME_GIT_COMMIT_DIFF_BEFORE=" "
 THEME_GIT_COMMIT_DIFF_AFTER="%f"
@@ -28,24 +28,27 @@ THEME_GIT_ICON_BISECT="+bisect"
 THEME_GIT_ICON_MERGE="+merge"
 THEME_GIT_ICON_REBASE="+rebase"
 
-THEME_VI_BEFORE="%F{magenta}"
+THEME_VI_BEFORE="%b%F{magenta}"
 THEME_VI_AFTER="%f"
 THEME_VI_PROMPT_COLOR="%b%K{magenta}%F{white}"
-THEME_VI_NORMAL_ICON="[N] "
+THEME_VI_NORMAL_ICON="<n> "
 THEME_VI_INSERT_ICON=""
 
 THEME_JOB_BEFORE="%F{yellow}"
 THEME_JOB_AFTER="%f "
 THEME_JOB_ICON="↺"
 
-THEME_RETURN_BAD_ICON="%F{red}𝖷 %?%f "
+THEME_RETURN_BAD_ICON="%F{red}%?%f "
 THEME_RETURN_GOOD_ICON=""
 
-THEME_PATH_BEFORE=""
-THEME_PATH_AFTER=":"
+export THEME_PATH_BEFORE=""
+export THEME_PATH_AFTER=": "
 
-THEME_PROMPT_COLOR="%F{yellow}"
+export THEME_PROMPT_COLOR="%F{yellow}"
+export THEME_RETURN_BAD_PROMPT_COLOR="%F{red}"
 
-export PROMPT=$'$THEME_PROMPT_COLOR$(formatted_path)%b%f '
+# Accepts all regular prompt substitutions, use `%s` for shortened path
+export THEME_PROMPT="%s"
+
+export PROMPT=$'${THEME_PROMPT_COLOR}$(return_prompt_color)$(shortpath "${THEME_PROMPT}")%b%f'
 export RPROMPT=$'$(vi_prompt_info)$(return_prompt_info)$(job_prompt_info)$(git_prompt_info)'
-

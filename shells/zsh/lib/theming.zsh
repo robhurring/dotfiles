@@ -11,200 +11,71 @@ autoload -Uz vcs_info
 
 precmd() {
   vcs_info
+  prompt_info
 }
 
-THEME_PROMPT_COLOR="%B%F{yellow}"
+# Show remote ref name and number of commits ahead-of or behind
++vi-git-remote-st() {
+  local ahead behind remote
+  local -a gitstatus
 
-# ---> Path formatting
+  # Are we on a remote-tracking branch?
+  remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+      --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
-THEME_PATH_BEFORE=""
-THEME_PATH_AFTER=""
-PATH_MATCHERS=("$HOME")
-PATH_REPLACER=("~")
+  if [[ -n ${remote} ]] ; then
+    # for git prior to 1.7
+    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | sed -e 's/^[[:space:]]*//')
+    (( $ahead )) && gitstatus+=( "%F{green}+${ahead}%f" )
 
-shortpath() {
-  # accepts all regular PROMPT substitutions and adds `%s` as a shortened path
-  local prompt="${1:-%s}"
+    # for git prior to 1.7
+    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | sed -e 's/^[[:space:]]*//')
+    (( $behind )) && gitstatus+=( "%F{red}-${behind}%f" )
 
-  # see: util.zsh
-  local shortpath=$(shortenpath "$(pwd)")
-  print -n "${THEME_PATH_BEFORE}${prompt/%%s/$shortpath}${THEME_PATH_AFTER}"
+    hook_com[misc]="${(j:/:)gitstatus}"
+  fi
 }
 
-formatted_path() {
-  local fmt_path="$(pwd)"
-  local matcher
-  local replace
+# theme prompt info
+prompt_info(){
+  local -i i j
+  local -a PROMPT_formats
+  local currentfmt nonzero
 
-  for (( i = 1; i <= $#PATH_MATCHERS; i++ )) do
-    matcher=$PATH_MATCHERS[$i]
-    replace=$PATH_REPLACER[$i]
-    fmt_path=$(print -n $fmt_path|sed -e "s!${matcher}!${replace}!")
+  # unset old vars
+  [[ -n ${(Mk)parameters:#prompt_info_msg_<->_} ]] && unset ${parameters[(I)prompt_info_msg_<->_]}
+  prompt_info_formats_0_="%d "
+
+  zstyle -a ':my:prompt' formats PROMPT_formats
+
+  # perform expansions and prompt messages
+  (( ${#PROMPT_formats} - 1 < 0 )) && return 0
+  for i in {0..$(( ${#PROMPT_formats} - 1 ))} ; do
+    (( j = i + 1 ))
+    typeset -g prompt_info_msg_${i}_="$(PROMPT_subst $PROMPT_formats[$j])"
   done
-
-  print -n "${THEME_PATH_BEFORE}${fmt_path}${THEME_PATH_AFTER}"
 }
 
-THEME_RETURN_BAD_PROMPT_COLOR="%F{red}"
+PROMPT_subst() {
+  local fmt="$1"
 
-return_prompt_color() {
-  [[ "$?" == "0" ]] || print -n "${THEME_RETURN_BAD_PROMPT_COLOR}"
-}
-
-THEME_RETURN_BAD_ICON="%F{red}%?%f"
-THEME_RETURN_GOOD_ICON=""
-
-return_prompt_info() {
-  print -n "%(?.${THEME_RETURN_GOOD_ICON}.${THEME_RETURN_BAD_ICON})"
-}
-
-THEME_JOB_BEFORE="%F{yellow}"
-THEME_JOB_AFTER="%f"
-THEME_JOB_ICON="[bg]"
-
-job_prompt_info() {
-  [[ $(jobs -l | wc -l) -gt 0 ]] && print -n "${THEME_JOB_BEFORE}${THEME_JOB_ICON}${THEME_JOB_AFTER}"
-}
-
-# ---> GIT
-
-THEME_GIT_BEFORE_BRANCH=""
-THEME_GIT_AFTER_BRANCH=""
-
-git_branch() {
-  local branch=$(_git_current_branch)
-  [[ -n $branch ]] && print -n "${THEME_GIT_BEFORE_BRANCH}${branch}${THEME_GIT_AFTER_BRANCH}"
-}
-
-THEME_GIT_BEFORE_SHA=""
-THEME_GIT_AFTER_SHA=""
-
-git_sha() {
-  local sha=$(_git_head_commit)
-  [[ -n $sha ]] && print -n "${THEME_GIT_BEFORE_SHA}${sha}${THEME_GIT_AFTER_SHA}"
-}
-
-THEME_GIT_COMMIT_DIFF_BEFORE=""
-THEME_GIT_COMMIT_DIFF_AFTER=""
-THEME_GIT_COMMIT_DIFF_AHEAD="%F{green}"
-THEME_GIT_COMMIT_DIFF_BEHIND="%F{red}"
-THEME_GIT_COMMIT_DIFF_DIVERGED="%F{yellow}"
-THEME_GIT_BEHIND_REMOTE="↓"
-THEME_GIT_AHEAD_REMOTE="↑"
-THEME_GIT_DIVERGED_REMOTE="⇵"
-
-git_commits_diff() {
-  local local_commits
-
-  if upstream="$(_git_upstream)"; then
-    local_ahead="$(_git_commits_ahead_of_remote "$upstream")"
-    local_behind="$(_git_commits_behind_of_remote "$upstream")"
-
-    if [[ "$local_behind" -gt "0" && "$local_ahead" -gt "0" ]]; then
-      local_commits="${THEME_GIT_COMMIT_DIFF_DIVERGED}${local_behind}${THEME_GIT_DIVERGED_REMOTE}$local_ahead%f"
-    elif [[ "$local_behind" -gt "0" ]]; then
-      local_commits="${THEME_GIT_COMMIT_DIFF_BEHIND}${local_behind}${THEME_GIT_BEHIND_REMOTE}%f"
-    elif [[ "$local_ahead" -gt "0" ]]; then
-      local_commits="${THEME_GIT_COMMIT_DIFF_AHEAD}${local_ahead}${THEME_GIT_AHEAD_REMOTE}%f"
-    fi
+  # sub out `%d` for shortened path
+  if `zstyle -t ':my:prompt' shorten-path`; then
+    local shortpath=$(shortenpath "$(pwd)")
+    fmt="${fmt/\%d/$shortpath}"
   fi
 
-  [[ -n $local_commits ]] && print -n "${THEME_GIT_COMMIT_DIFF_BEFORE}${local_commits}${THEME_GIT_COMMIT_DIFF_AFTER}"
+  fmt="${fmt/\%v/$PROMPT_vistatus}"
+
+  print -n $fmt
 }
 
-THEME_GIT_DIRTY_BEFORE=""
-THEME_GIT_DIRTY_AFTER=""
-THEME_GIT_ICON_DIRTY="✗"
-THEME_GIT_CLEAN_BEFORE=""
-THEME_GIT_CLEAN_AFTER=""
-THEME_GIT_ICON_CLEAN="✓"
+# --> Defaults
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*:*' get-revision true
+zstyle ':vcs_info:git*:*' check-for-changes true
+zstyle ':vcs_info:git*:*' check-for-staged-changes true
+zstyle ':vcs_info:git*+set-message:*' hooks git-remote-st
 
-git_icon() {
-  local icon;
-  local icon_before;
-  local icon_after;
-
-  if [[ -n $(git ls-files -m) ]]; then
-    icon_before=$THEME_GIT_DIRTY_BEFORE
-    icon_after=$THEME_GIT_DIRTY_AFTER
-    icon=$THEME_GIT_ICON_DIRTY
-  else
-    icon_before=$THEME_GIT_CLEAN_BEFORE
-    icon_after=$THEME_GIT_CLEAN_AFTER
-    icon=$THEME_GIT_ICIN_CLEAN
-  fi
-  [[ -n $icon ]] && print -n "${icon_before}${icon}${icon_after}"
-}
-
-THEME_GIT_FLAGS_BEFORE=""
-THEME_GIT_FLAGS_AFTER=""
-THEME_GIT_ICON_BISECT="+bisect"
-THEME_GIT_ICON_MERGE="+merge"
-THEME_GIT_ICON_REBASE="+rebase"
-
-git_flags() {
-  local flags;
-  local repo_path=$(_git_repo_path)
-
-  if [[ -f $repo_path/BISECT_LOG ]]; then
-    flags=$THEME_GIT_ICON_BISECT
-  elif [[ -f $repo_path/MERGE_HEAD ]]; then
-    flags=$THEME_GIT_ICON_MERGE
-  elif [[ -f $repo_path/rebase ]] ||
-       [[ -f $repo_path/rebase-apply ]] ||
-       [[ -f $repo_path/rebase-merge ]] ||
-       [[ -f .dotest ]];
-  then
-    flags=$THEME_GIT_ICON_REBASE
-  fi
-
-  [[ -n $flags ]] && print -n "${THEME_GIT_FLAGS_BEFORE}${flags}${THEME_GIT_FLAGS_AFTER}"
-}
-
-THEME_GIT_BEFORE=""
-THEME_GIT_AFTER=""
-
-git_prompt_info () {
-  local icon;
-  local branch;
-  local sha;
-  local flags;
-  local prompt;
-
-  if _in_git_repo; then
-    branch=$(git_branch)
-    sha=$(git_sha)
-    flags=$(git_flags)
-    icon=$(git_icon)
-    commits_diff=$(git_commits_diff)
-    prompt="${branch}${flags}${sha}${commits_diff}${icon}"
-  fi
-
-  [[ -n $prompt ]] && print -n "${THEME_GIT_BEFORE}${prompt}${THEME_GIT_AFTER}"
-}
-
-# ---> VI
-
-VI_PROMPT_INFO=""
-THEME_VI_BEFORE=""
-THEME_VI_AFTER=""
-THEME_VI_PROMPT_COLOR="$THEME_PROMPT_COLOR"
-THEME_VI_NORMAL_ICON="[NORMAL]"
-THEME_VI_INSERT_ICON=""
-
-vi_prompt_info() {
-  print -n "${THEME_VI_BEFORE}${${KEYMAP/vicmd/$THEME_VI_NORMAL_ICON}/(main|viins)/}${THEME_VI_AFTER}"
-}
-
-vi_prompt_color() {
-  print -n "${VI_PROMPT_COLOR}"
-}
-
-function zle-keymap-select {
-  zle reset-prompt
-  zle -R
-}
-
-zle -N zle-keymap-select
-
-autoload -U add-zsh-hook
