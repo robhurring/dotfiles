@@ -5,7 +5,7 @@ if [[ "$PROFILE_STARTUP" == "1" ]]; then
   setopt xtrace prompt_subst
 fi
 
-# setup our env to point to the dotfiles
+# ---> Init
 export DOTFILES=~/.dotfiles
 export ZSH=~/.zsh
 export ZSH_THEME=default
@@ -14,36 +14,23 @@ export ZSH_VI_ESC="jk"
 export EDITOR="vim"
 export SHELL=/usr/local/bin/zsh
 
-plugins=(tmux fzf git fasd vi-mode docker)
+plugins=(tmux fzf git fasd vi-mode docker terraform tig)
 
-# load our zsh environment
+# ---> Load Env
 [[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
 
 # ---> Local Config
+zstyle ':my:module:tmux' auto-start true
 
-# don't autofetch for git rprompt status
-# export GIT_AUTO_FETCH=0
-
-# Disable for OSX
-# export LS_OPTIONS=''
-
-# Custom prompt color
-export THEME_PROMPT_COLOR="%B%F{yellow}"
-export THEME_VI_PROMPT_COLOR="%b%K{magenta}%F{white}"
-
-# Add user and host before the path
-export THEME_PATH_BEFORE="%n@%m "
-
-# ---> Some common aliases
-# alias less='less -R'
-# alias -g ls="ls $LS_OPTIONS"
-# alias cdd='cd ~/Desktop'
-# alias bc='bundle console'
-# alias c='cd /usr/local/Cellar'
-# alias grep='pcregrep --color=auto'
-
-# Development
-alias e=vim
+# ---> Aliases
+alias e=$EDITOR
+alias gsn=git-sync
+alias less='less -R'
+alias -g ls="ls $LS_OPTIONS"
+alias cdd='cd ~/Desktop'
+alias bc='bundle console'
+alias c='cd /usr/local/Cellar'
+alias grep='pcregrep --color=auto'
 # alias erc='e ~/.zshrc'
 # alias edf="pushd $DOTFILES && e && popd"
 # alias ev='pushd ~/.dotvim && e vimrc && popd'
@@ -54,35 +41,11 @@ alias e=vim
 # alias guard="auto-bundle-exec guard"
 # alias pry="auto-bundle-exec pry"
 
-# Tmux (use with tmux plugin)
-# alias tml="tmux list-sessions"
-# alias tma=tmux-go
-# alias tmd="tmux detach"
-# alias tmx="tmux kill-session -t"
-
-# Tig
-# alias ts='tig status'
-# alias tb='tig blame'
-# alias ta='tig --all'
-# alias ts='tig status'
-# alias tg='tig grep'
-# function tl(){
-#   $(git log --all --decorate --format='commit %h %an: %s' $* | tig)
-# }
-
-# Fasd
-# alias j=z
-# alias el='fasd -ft -e $EDITOR -b viminfo'
-# alias ef='fasd -ft -e $EDITOR'
-# bindkey '^X^D' fasd-complete-d
-
 # ---> Neovim
-
-# export NVIM_TUI_ENABLE_TRUE_COLOR=1
-# export NVIM_LISTEN_ADDRESS=/tmp/neovim.sock
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export NVIM_LISTEN_ADDRESS=/tmp/neovim.sock
 
 # ---> FZF (requires fzf plugin)
-
 # export FUZZY_SEARCH_PATHS="~/Projects"
 # alias cds=fuzzy-cds
 # alias co=fuzzy-co
@@ -96,10 +59,10 @@ alias e=vim
 #   zle reset-prompt
 # }
 # zle -N fzf-fuzzy-cds
-# bindkey "^ " fzf-fuzzy-cds
+# bindkey "^ " fzf
 
 # function fzf-fuzzy-co() {
-#   co
+#   fuzzy-co
 #   zle reset-prompt
 # }
 # zle -N fzf-fuzzy-co
@@ -124,15 +87,9 @@ alias e=vim
 # }
 
 # ---> Golang
-
 # export GOPATH=$HOME/Go
 # export GOBIN=$GOPATH/bin
 # export PATH="$PATH:$GOBIN"
-
-# ---> Paths
-
-# export PATH="$PATH:$DOTFILES/node_modules/.bin"
-[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
 
 if [[ "$PROFILE_STARTUP" == "1" ]]; then
   unsetopt xtrace

@@ -7,6 +7,7 @@ alias ..='cd ..'
 alias cd-='cd -'
 alias cd--='cd ~ && cd -'
 alias cdd='cd ~/Desktop'
+alias cdo='cd ~/Downloads'
 
 # Misc Helpers
 alias fname='find -name'

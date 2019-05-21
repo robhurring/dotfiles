@@ -20,3 +20,7 @@ if [ "$FASD_ALIASES" -eq "1" ]; then
   bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 fi
 
+alias j=z
+alias el='fasd -ft -e $EDITOR -b viminfo'
+alias ef='fasd -ft -e $EDITOR'
+bindkey '^X^D' fasd-complete-d

@@ -49,3 +49,8 @@ if `zstyle -t ':my:module:tmux' auto-start`; then
     tmux attach-session -d
   fi
 fi
+
+alias tml="tmux list-sessions"
+alias tma=tmux-go
+alias tmd="tmux detach"
+alias tmx="tmux kill-session -t"

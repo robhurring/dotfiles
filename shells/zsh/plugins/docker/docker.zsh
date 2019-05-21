@@ -4,16 +4,7 @@ alias dc=docker-compose
 alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias drmae='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 alias drmv='docker volume rm $(docker volume ls -qf "dangling=true")'
+alias drmf="docker rm --force \$(docker ps -aq)"
 
 alias dsh='_x(){ docker run --rm -it "$1" /bin/bash }; _x'
 alias dcsh='_x(){ docker-compose run "$1" /bin/bash }; _x'
-
-alias d=docker
-alias dsh='_x(){ docker run --rm -i -t "$1" --entrypoint /bin/bash };_x'
-alias dcsh='_x(){ docker-compose run "$1" --entrypoint /bin/bash };_x'
-alias dc='docker-compose'
-alias de='desk-env'
-alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-alias drmae='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
-alias drmv='docker volume rm $(docker volume ls -qf "dangling=true")'
-alias drmf="docker rm --force \$(docker ps -aq)"
