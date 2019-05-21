@@ -1,14 +1,9 @@
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-export MANPATH="/usr/local/share/man:$MANPATH"
-
 # override in ~/.zshrc before init, or whatever
 export ZSH_MODE=${ZSH_MODE:-"vi"}
 export ZSH_VI_ESC=${ZSH_VI_ESC:-"jk"}
-export EDITOR=${EDITOR:-"vim"}
-export TERM=${TERM:-"xterm-256color"}
-export ZSH_THEME="default"
+export ZSH_THEME=${ZSH_THEME:-"default"}
 
-export HISTFILE=~/.zsh_history
+export HISTFILE=$XDG_CACHE_HOME/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=1000
 export REPORTTIME=10
@@ -18,26 +13,26 @@ skip_global_compinit=${skip_global_compinit:-0}
 
 # stty erase \^H
 
+setopt APPEND_HISTORY
+setopt AUTO_MENU
+setopt AUTO_PARAM_SLASH
+setopt AUTO_PUSHD
+setopt COMPLETE_IN_WORD
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+setopt IGNORE_EOF
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt LOCAL_OPTIONS
+setopt LOCAL_TRAPS
 setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP
-setopt LOCAL_OPTIONS
-setopt LOCAL_TRAPS
-setopt HIST_VERIFY
-setopt EXTENDED_HISTORY
-setopt COMPLETE_IN_WORD
-setopt IGNORE_EOF
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-setopt PROMPT_SUBST
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt AUTO_PARAM_SLASH
-setopt AUTO_MENU
 setopt NULL_GLOB
+setopt PROMPT_SUBST
+setopt PUSHD_IGNORE_DUPS
 setopt SHARE_HISTORY
-setopt INC_APPEND_HISTORY SHARE_HISTORY
 
 # key-bindings
 bindkey '^r' history-beginning-search-backward
@@ -56,16 +51,16 @@ autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
 # load our config files
-for lib ($ZSH/lib/*.zsh); do
+for lib ($ZHOME/lib/*.zsh); do
   source $lib
 done
 
 # load our shared config
-for lib ($DOTFILES/shells/share/*); do
+for lib ($ZHOME/share/*); do
   source $lib
 done
 
-function load_plugin() {
+load_plugin() {
   local plugin_name=$1
   local plugin_root=$2
   local plugin_path=$plugin_root/$plugin_name
@@ -76,7 +71,7 @@ function load_plugin() {
   fi
 }
 
-function reload_completions() {
+reload_completions() {
   autoload -Uz compinit
 
   # only dump once a day, otherwise check
@@ -96,14 +91,14 @@ typeset -U path manpath fpath
 
 # load all plugins to $fpath
 fpath=(/usr/local/share/zsh/site-functions $fpath)
-fpath=($ZSH/functions $fpath)
+fpath=($ZHOME/functions $fpath)
 for plugin ($plugins); do
-  load_plugin $plugin $ZSH/plugins
+  load_plugin $plugin $ZHOME/plugins
 done
 
 if [ -f $ZSH_THEME ]; then
   source $ZSH_THEME
 else
-  source $ZSH/themes/$ZSH_THEME
+  source $ZHOME/themes/$ZSH_THEME
 fi
 

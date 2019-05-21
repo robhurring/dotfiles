@@ -1,0 +1,23 @@
+# vim:ft=zsh
+
+# ---> system
+
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export ZHOME=${XDG_CONFIG_HOME}/zsh
+
+[[ -f $ZHOME/zshenv ]] && source $ZHOME/zshenv
+
+# ---> local
+
+# export EDITOR=nvim
+
+# nvim
+# export NVIM_TUI_ENABLE_TRUE_COLOR=1
+# export NVIM_LISTEN_ADDRESS=/tmp/neovim.sock
+
+# go
+# export GOPATH=$HOME/Go
+# export GOBIN=$GOPATH/bin
+# export PATH="$PATH:$GOBIN"

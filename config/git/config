@@ -1,3 +1,5 @@
+# vim:ft=gitconfig
+
 [alias]
   add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
@@ -82,8 +84,12 @@
   autocorrect = 1
 [status]
   submodule = 1
+  short = true
+  branch = true
+  showStash = true
+  showUntrackedFiles = all
 [push]
-  default = simple
+  default = upstream
 [user]
 	name = robhurring
 	email = robhurring@gmail.com
@@ -122,7 +128,12 @@
   enabled = true
 [rebase]
   stat = true
+  autostash = true
+  abbreviateCommands = true
 [commit]
 	gpgsign = true
 [sync]
   cleanup = true
+[pull]
+	ff = only
+

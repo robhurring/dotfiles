@@ -6,18 +6,14 @@ if [[ "$PROFILE_STARTUP" == "1" ]]; then
 fi
 
 # ---> Init
-export DOTFILES=~/.dotfiles
-export ZSH=~/.zsh
-export ZSH_THEME=default
+export ZSH_THEME="default"
 export ZSH_MODE="vi"
 export ZSH_VI_ESC="jk"
-export EDITOR="vim"
-export SHELL=/usr/local/bin/zsh
 
 plugins=(tmux fzf git fasd vi-mode docker terraform tig)
 
 # ---> Load Env
-[[ -f ~/.zsh/init.zsh ]] && . ~/.zsh/init.zsh
+[[ -f $ZHOME/zshrc ]] && source $ZHOME/zshrc
 
 # ---> Local Config
 zstyle ':my:module:tmux' auto-start true
@@ -26,12 +22,11 @@ zstyle ':my:module:tmux' auto-start true
 alias e=$EDITOR
 alias gsn=git-sync
 alias less='less -R'
-alias -g ls="ls $LS_OPTIONS"
 alias cdd='cd ~/Desktop'
 alias bc='bundle console'
 alias c='cd /usr/local/Cellar'
 alias grep='pcregrep --color=auto'
-# alias erc='e ~/.zshrc'
+alias erc='e ~/.zshrc'
 # alias edf="pushd $DOTFILES && e && popd"
 # alias ev='pushd ~/.dotvim && e vimrc && popd'
 # alias cdg="cd $GOPATH/src/github.com/$(git config github.user)"
@@ -41,17 +36,10 @@ alias grep='pcregrep --color=auto'
 # alias guard="auto-bundle-exec guard"
 # alias pry="auto-bundle-exec pry"
 
-# ---> Neovim
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export NVIM_LISTEN_ADDRESS=/tmp/neovim.sock
-
 # ---> FZF (requires fzf plugin)
-# export FUZZY_SEARCH_PATHS="~/Projects"
-# alias cds=fuzzy-cds
 # alias co=fuzzy-co
 # alias eb=fuzzy-bundle-open
 # alias ef=fuzzy-edit
-# alias cdf=fuzzy-cd
 # alias fkill=fuzzy-kill
 
 # function fzf-fuzzy-cds() {
@@ -86,12 +74,8 @@ export NVIM_LISTEN_ADDRESS=/tmp/neovim.sock
 #   fi
 # }
 
-# ---> Golang
-# export GOPATH=$HOME/Go
-# export GOBIN=$GOPATH/bin
-# export PATH="$PATH:$GOBIN"
-
 if [[ "$PROFILE_STARTUP" == "1" ]]; then
   unsetopt xtrace
   exec 2>&3 3>&-
 fi
+

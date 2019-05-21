@@ -1,11 +1,12 @@
+# load up FZF if it exists
+[[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
+
 if (( ! $+commands[fzf] )); then
   return 1
 fi
 
 # Requires: FZF
 # Download: https://github.com/junegunn/fzf
-
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # Paths to search for `fuzzy-cds` command.
 export FUZZY_SEARCH_PATHS="~/Projects"

@@ -2,23 +2,32 @@
 # without the ruby dependency. For the full experience use the rake tasks
 CWD=$(shell pwd)
 
+# Dotfiles
 ETC=$(shell ls ./etc)
 DOTFILES=$(ETC:%=$(HOME)/.%)
 
-CONFIG=$(shell ls ./config)
-XDGFILES=$(CONFIG:%=$(HOME)/.config/%)
+# XDG
+XDG_CONFIG_HOME:=$(HOME)/.config
+XDG_CACHE_HOME:=$(HOME)/.cache
+XDG_DATA_HOME:=$(HOME)/.local/share
 
+CONFIG=$(shell ls ./config)
+XDGFILES=$(CONFIG:%=$(XDG_CONFIG_HOME)/%)
+
+# Binfiles
 BIN=$(shell ls ./bin)
 BINFILES=$(BIN:%=$(HOME)/bin/%)
 
+ZHOME:=$(XDG_CONFIG_HOME)/zsh
+
 # Link etc & bin
-all: .setup $(DOTFILES) $(XDGFILES) $(BINFILES) .zsh
+all: .setup $(DOTFILES) $(XDGFILES) $(BINFILES) zsh
 	@echo "All good."
 
-mac: all extra
+mac: all .extra .kitty
 	@echo "Done!"
 
-extra: .tmux .fzf .brew
+.extra: .brew .tmux .fzf
 
 kitty: $(HOME)/Library/Preferences/kitty/kitty.conf
 
@@ -31,13 +40,16 @@ update:
 	$(MAKE) all
 
 .setup:
-	@mkdir -p $HOME/bin
+	@mkdir -p $(HOME)/bin
+	@mkdir -p $(XDG_CONFIG_HOME)
+	@mkdir -p $(XDG_CACHE_HOME)
+	@mkdir -p $(XDG_DATA_HOME)
 
-.zsh: $(HOME)/.zsh $(HOME)/.zshrc $(HOME)/.zprofile
+zsh: $(HOME)/.zshenv $(HOME)/.zshrc $(HOME)/.zprofile
 
-.tmux: $(HOME)/.tmux
+tmux: $(HOME)/.tmux
 
-.fzf: $(HOME)/.fzf
+fzf: $(HOME)/.fzf
 
 $(HOME)/.fzf:
 	@git clone https://github.com/junegunn/fzf.git $(HOME)/.fzf
@@ -48,8 +60,20 @@ $(HOME)/.tmux:
 	@git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm
 	@$(HOME)/.tmux/plugins/tpm/bin/install_plugins
 
+$(HOME)/.zshrc:
+	@echo "zsh:	.zshrc"
+	@if [ -e $@ ]; then mv $@ $@.old; fi
+	@cp -i $(ZHOME)/templates/zshrc $@
+
 $(HOME)/.zprofile:
-	@ln -sf $(HOME)/.zshrc $@
+	@echo "zsh:	.zprofile"
+	@if [ -e $@ ]; then mv $@ $@.old; fi
+	@cp -i $(ZHOME)/templates/zprofile $@
+
+$(HOME)/.zshenv:
+	@echo "zsh:	.zshenv"
+	@if [ -e $@ ]; then mv $@ $@.old; fi
+	@cp -i $(ZHOME)/templates/zshenv $@
 
 # link ETC files
 $(HOME)/.%: $(CWD)/etc/%
@@ -66,24 +90,13 @@ $(HOME)/bin/%: $(CWD)/bin/%
 	@echo "bin:		$< -> $@"
 	@ln -sf $< $@
 
-# zshrc example
-$(HOME)/.zshrc:
-	@echo "zsh:	.zshrc"
-	@if [ -e $@ ]; then mv $@ $@.old; fi
-	@cp -i $(CWD)/example/zshrc $@
-
-# link our zsh shell files
-$(HOME)/.zsh:
-	@echo "zsh:	.zsh"
-	@ln -sf $(CWD)/shells/zsh $@
-
-.brew:
+brew:
 	@type brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	@brew bundle check || brew bundle
 
-.iterm:
+iterm:
 	tic $(CWD)/other/iterm2/xterm-256color-italic.terminfo
 	tic $(CWD)/other/iterm2/screen-256color-italic.terminfo
 	tic $(CWD)/other/iterm2/screen-256color.terminfo
 
-.PHONY: all mac extra .setup .zsh .tmux .brew .npm .gems .iterm
+.PHONY: all mac extra .setup zsh tmux brew iterm

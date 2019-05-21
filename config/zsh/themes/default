@@ -1,5 +1,5 @@
 # vim:ft=zsh
-#
+
 zstyle ':vcs_info:git*' formats "%m %F{white}%b%c %B%F{black}%5.7i%%b%%f"
 zstyle ':vcs_info:git*' actionformats "%F{white}%b (%a) %B%F{black}%5.7i%%b%%f"
 zstyle ':vcs_info:git*' patch-format "%F{green}%n%f/%F{red}%c%f/%F{white}%a%f"
