@@ -1,3 +1,7 @@
+if (( ! $+commands[docker] )); then
+  return 1
+fi
+
 alias d=docker
 alias dc=docker-compose
 

@@ -1,3 +1,7 @@
+if (( ! $+commands[fzf] )); then
+  return 1
+fi
+
 # Requires: FZF
 # Download: https://github.com/junegunn/fzf
 

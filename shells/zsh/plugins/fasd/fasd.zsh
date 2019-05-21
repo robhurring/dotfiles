@@ -1,3 +1,7 @@
+if (( ! $+commands[fasd] )); then
+  return 1
+fi
+
 export _FASD_DATA="$HOME/.config/fasd"
 export _FASD_VIMINFO="$HOME/.vim/viminfo"
 export FASD_ALIASES=${_FASD_ALIASES:-"1"}
