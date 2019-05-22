@@ -47,3 +47,9 @@ alias grbm='git rebase -i master'
 alias grh='git reset --hard'
 alias gs='git status -sb'
 alias brt='git branch-time'
+
+# Pass
+alias p=pass
+alias psh='pass show'
+alias padd='pass add -e'
+alias ped='pass edit'
