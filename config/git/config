@@ -1,8 +1,6 @@
 # vim:ft=gitconfig
 
 [alias]
-  add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
-  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
   amend = "commit --amend --no-edit"
   assume   = update-index --assume-unchanged
   assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
@@ -32,11 +30,12 @@
   # Usage: git merges ..dev
   merges = log --merges --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
-  push-set = !"git push --set-upstream origin $(git current-branch)"
-  rb = rebase -p
   reset-all = !sh -c 'git add --all && git reset --hard'
+
   resolve = mergetool
+  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
   search = "log --all  --pretty=oneline -S"
   serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   sm = submodule
@@ -44,7 +43,6 @@
   st = status
   staged = diff --cached
   tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ HEAD; }; f"
-  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
   this = !git init && git add . && git commit -m \"initial commit\"
   track = checkout -t
   unamend = git reset --soft HEAD@{1}
