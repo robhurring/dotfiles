@@ -18,6 +18,10 @@ precmd() {
 +vi-git-remote-st() {
   local ahead behind remote
   local -a gitstatus
+  local aheadstr behindstr
+
+  zstyle ':vcs_info:git*:*' statusaheadstr 'aheadstr'
+  zstyle ':vcs_info:git*:*' statusbehindstr 'behindstr'
 
   # Are we on a remote-tracking branch?
   remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
@@ -27,7 +31,7 @@ precmd() {
     # for git prior to 1.7
     # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
     ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | sed -e 's/^[[:space:]]*//')
-    (( $ahead )) && gitstatus+=( "%F{green}+${ahead}%f" )
+    (( $ahead )) && gitstatus+=("${aheadstr/\%n/$ahead}")
 
     # for git prior to 1.7
     # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)

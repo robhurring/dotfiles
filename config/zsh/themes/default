@@ -6,6 +6,9 @@ zstyle ':vcs_info:git*' patch-format "%F{green}%n%f/%F{red}%c%f/%F{white}%a%f"
 zstyle ':vcs_info:git*:*' stagedstr "%F{yellow}*"
 zstyle ':vcs_info:git*:*' unstagedstr "%F{green}+"
 
+zstyle ':vcs_info:git*:*' statusaheadstr "%F{green}+%n%f"
+zstyle ':vcs_info:git*:*' statusbehindstr "%F{red}-%n%f"
+
 zstyle ':my:prompt' shorten-path true
 zstyle ':my:prompt' formats "%F{yellow}%d:%f " "%(?,,%F{red}%?%f)%1(j, %F{yellow}%j%f,)"
 
