@@ -8,6 +8,8 @@ alias cd-='cd -'
 alias cd--='cd ~ && cd -'
 alias cdd='cd ~/Desktop'
 alias cdo='cd ~/Downloads'
+alias e=$EDITOR
+alias ew='_x(){ $EDITOR $(which $1)}; _x $@'
 
 # Misc Helpers
 alias fname='find -name'

@@ -15,6 +15,5 @@ if [ "$FASD_ALIASES" -eq "1" ]; then
 fi
 
 alias j='fasd_cd -d' # posix-alias
-alias el='fasd -ft -e $EDITOR -b viminfo'
-alias ef='fasd -ft -e $EDITOR'
+alias je='fasd -ft -e $EDITOR'
 bindkey '^X^D' fasd-complete-d
