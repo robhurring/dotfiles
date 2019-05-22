@@ -33,7 +33,7 @@ kitty: $(HOME)/Library/Preferences/kitty/kitty.conf
 
 $(HOME)/Library/Preferences/kitty/kitty.conf:
 	mkdir -p $(dir $@)
-	ln -sfv $(CWD)/other/kitty.conf $@
+	ln -sfv $(XDG_CONFIG_HOME)/kitty/kitty.conf $@
 
 update:
 	-git pull
@@ -95,8 +95,8 @@ brew:
 	@brew bundle check || brew bundle
 
 iterm:
-	tic $(CWD)/other/iterm2/xterm-256color-italic.terminfo
-	tic $(CWD)/other/iterm2/screen-256color-italic.terminfo
-	tic $(CWD)/other/iterm2/screen-256color.terminfo
+	tic $(XDG_CONFIG_HOME)/iterm2/xterm-256color-italic.terminfo
+	tic $(XDG_CONFIG_HOME)/iterm2/screen-256color-italic.terminfo
+	tic $(XDG_CONFIG_HOME)/iterm2/screen-256color.terminfo
 
 .PHONY: all mac extra .setup zsh tmux brew iterm
