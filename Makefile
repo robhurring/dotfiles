@@ -24,10 +24,8 @@ ZHOME:=$(XDG_CONFIG_HOME)/zsh
 all: .setup $(DOTFILES) $(XDGFILES) $(BINFILES) zsh
 	@echo "All good."
 
-mac: all .extra .kitty
+mac: all kitty tmux fzf brew
 	@echo "Done!"
-
-.extra: .brew .tmux .fzf
 
 kitty: $(HOME)/Library/Preferences/kitty/kitty.conf
 
