@@ -79,7 +79,7 @@
 [core]
   whitespace = space-before-tab,tabwidth=2,trailing-space
   editor = "nvim"
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
 [help]
   autocorrect = 1
 [status]
@@ -91,8 +91,8 @@
 [push]
   default = upstream
 [user]
-	name = robhurring
-	email = robhurring@gmail.com
+  name = robhurring
+  email = robhurring@gmail.com
   signingkey=5C33DE2A
 [credential]
   helper = osxkeychain
@@ -105,11 +105,11 @@
 [web]
   browser = ch
 [merge]
-	tool = editor
+  tool = editor
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [mergetool "editor"]
-	cmd = nvim +Gvdiff $MERGED
+  cmd = nvim +Gvdiff $MERGED
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com/"
@@ -121,9 +121,9 @@
   user = robhurring
 [filter "lfs"]
   required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
 [rerere]
   enabled = true
 [rebase]
@@ -131,9 +131,9 @@
   autostash = true
   abbreviateCommands = true
 [commit]
-	gpgsign = true
+  gpgsign = true
 [sync]
   cleanup = true
 [pull]
-	ff = only
+  ff = only
 
