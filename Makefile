@@ -39,9 +39,10 @@ update:
 
 .setup:
 	@mkdir -p $(HOME)/bin
-	@mkdir -p $(XDG_CONFIG_HOME)
-	@mkdir -p $(XDG_CACHE_HOME)
-	@mkdir -p $(XDG_DATA_HOME)
+	@mkdir -p $(XDG_CONFIG_HOME) && chmod 740 $(XDG_CONFIG_HOME)
+	@mkdir -p $(XDG_CACHE_HOME) && chmod 740 $(XDG_CACHE_HOME)
+	@mkdir -p $(XDG_DATA_HOME) && chmod 740 $(XDG_DATA_HOME)
+
 
 zsh: $(HOME)/.zshenv $(HOME)/.zshrc $(HOME)/.zprofile
 
@@ -72,6 +73,7 @@ $(HOME)/.zshenv:
 	@echo "zsh:	.zshenv"
 	@if [ -e $@ ]; then mv $@ $@.old; fi
 	@cp -i $(ZHOME)/templates/zshenv $@
+	@chmod 640 $@
 
 # link ETC files
 $(HOME)/.%: $(CWD)/etc/%
@@ -97,4 +99,4 @@ iterm:
 	tic $(XDG_CONFIG_HOME)/iterm2/screen-256color-italic.terminfo
 	tic $(XDG_CONFIG_HOME)/iterm2/screen-256color.terminfo
 
-.PHONY: all mac extra .setup zsh tmux brew iterm
+.PHONY: all mac extra .setup zsh tmux brew iterm kitty
