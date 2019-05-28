@@ -15,19 +15,8 @@ clone this repo somewhere `git clone https://github.com/robhurring/dotfiles.git`
 ### ZSH Install
 
 1. cd ~/.dotfiles (or wherever repo lives)
-2. `make install` to bootstrap all necessary dependencies.
-3. `make fonts` to install any fonts (optional)
-4. `cp ~/.dotfiles/example/zshrc ~/.zshrc`
-  1. modify the example zshrc paths for `DOTFILES`
-  2. add any customizations below the init line
-
-### Bash Install
-
-1. cd ~/.dotfiles (or wherever repo lives)
-2. `rake bash` to link zsh env files
-3. `cp ~/.dotfiles/example/bashrc ~/.bashrc`
-  1. modify the example bashrc paths for `DOTFILES`
-  2. add any customizations below the init line
+1. `make install` to bootstrap all necessary dependencies.
+1. `make mac` to bootstrap macos.
 
 ### vim Install
 
@@ -36,22 +25,6 @@ This has been moved to [https://github.com/robhurring/dotvim](https://github.com
 ### Some ZSH Screenshots
 
 Theres a few "themes" as well. Set the `export ZSH_THEME=default` in your `~/.zshrc` to one of the [themes](shells/zsh/themes), or customize your own by setting an absolute path.
-
-###### Error Status
-![zsh screenshot](.images/errorstatus.png)
-
-###### Git Stauts
-![zsh screenshot](.images/gitstatus.png)
-
-###### Background Jobs
-![zsh screenshot](.images/bg.png)
-
-## Customizing Bash
-
-**Note: This is old and I have no idea if this will even work well anymore**
-
-Edit ~/.bashrc before the init line to set the colors. You can also edit the PS1 color by editing the function `__before_ps1()`
-and changing `PROMPT_COLOR="\e[33;1m"` to any color you want. There is also an `ERROR_COLOR` too which is red by default.
 
 ## Truecolor
 

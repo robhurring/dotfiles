@@ -55,3 +55,9 @@ alias p=pass
 alias psh='pass show'
 alias padd='pass add -e'
 alias ped='pass edit'
+
+# XDG
+alias cdconfig='cd $XDG_CONFIG_HOME'
+alias cddata='cd $XDG_DATA_HOME'
+alias cdcache='cd $XDG_CACHE_HOME'
+

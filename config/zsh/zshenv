@@ -1,7 +1,7 @@
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export MANPATH="$XDG_DATA_HOME/man:/usr/local/share/man:$MANPATH"
 
-export EDITOR=${EDITOR:-"vim"}
-export TERM=${TERM:-"xterm-256color"}
-export SHELL=${SHELL:-"/usr/local/bin/zsh"}
+: ${EDITOR:="vim"}
+: ${TERM:="xterm-256color"}
+: ${SHELL:="/usr/local/bin/zsh"}
 

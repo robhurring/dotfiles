@@ -1,5 +1,3 @@
-# Makefile for servers which only installs the minimum dotfiles for comfort
-# without the ruby dependency. For the full experience use the rake tasks
 CWD=$(shell pwd)
 
 # Dotfiles
@@ -43,7 +41,6 @@ update:
 	@mkdir -p $(XDG_CACHE_HOME) && chmod 740 $(XDG_CACHE_HOME)
 	@mkdir -p $(XDG_DATA_HOME) && chmod 740 $(XDG_DATA_HOME)
 
-
 zsh: $(HOME)/.zshenv $(HOME)/.zshrc $(HOME)/.zprofile
 
 tmux: $(HOME)/.tmux
@@ -61,17 +58,16 @@ $(HOME)/.tmux:
 
 $(HOME)/.zshrc:
 	@echo "zsh:	.zshrc"
-	@if [ -e $@ ]; then mv $@ $@.old; fi
 	@cp -i $(ZHOME)/templates/zshrc $@
+	@chmod 640 $@
 
 $(HOME)/.zprofile:
 	@echo "zsh:	.zprofile"
-	@if [ -e $@ ]; then mv $@ $@.old; fi
 	@cp -i $(ZHOME)/templates/zprofile $@
+	@chmod 640 $@
 
 $(HOME)/.zshenv:
 	@echo "zsh:	.zshenv"
-	@if [ -e $@ ]; then mv $@ $@.old; fi
 	@cp -i $(ZHOME)/templates/zshenv $@
 	@chmod 640 $@
 
