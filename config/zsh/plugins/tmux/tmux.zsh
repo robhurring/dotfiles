@@ -14,10 +14,10 @@ fi
 #   -> when "ohai" doesn't exist and in current session, create & switch
 #   -> when "ohai" doesn't exist and in no session, attach
 #
-tmux-go(){
+tmux-attach(){
   local name="${1:-default}"
 
-  tmux has-session -t "${name}" > /dev/null
+  tmux has-session -t "${name}" 2> /dev/null
   if [ $? != 0 ]; then
     if [ -n "$TMUX" ]; then # in-tmux
       echo "---> Creating & switching session: ${name}"
@@ -46,11 +46,11 @@ if `zstyle -t ':my:module:tmux' auto-start`; then
   tmux start-server
 
   if [ -z "$TMUX" ]; then
-    tmux attach-session -d
+    tmux-attach
   fi
 fi
 
 alias tml="tmux list-sessions"
-alias tma=tmux-go
+alias tma=tmux-attach
 alias tmd="tmux detach"
 alias tmx="tmux kill-session -t"

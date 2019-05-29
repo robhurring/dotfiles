@@ -1,16 +1,17 @@
 # From OMZ
 # CREDIT: https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/vi-mode
 
-export ZSH_VI_ESC=${ZSH_VI_ESC:-"jk"}
-export KEYTIMEOUT=5 # WARNING: setting this too low kills the `^[` switch
+: ${ZSH_VI_ESC:="jk"}
+: ${KEYTIMEOUT:=5} # WARNING: setting this too low kills the `^[` switch
 
 bindkey -M viins "$ZSH_VI_ESC" vi-cmd-mode
 
 # Updates editor information when the keymap changes.
-# function zle-keymap-select() {
-#   zle reset-prompt
-#   zle -R
-# }
+function zle-keymap-select() {
+  zstyle ':my:prompt:' vi-mode true
+  zle reset-prompt
+  zle -R
+}
 
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
