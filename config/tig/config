@@ -178,7 +178,10 @@ bind generic K move-page-up
 bind generic <C-j> move-page-down
 bind generic <C-k> move-page-up
 bind generic y !@sh -c "echo %(commit) | pbcopy"
-bind generic O @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+
+bind generic e edit # Open in editor
+bind generic o !sh -c "git show %(commit) | nvim"
+bind generic O @sh -c "open \"https://$(git remote show origin -n|grep Fetch|perl -ne '/.*git@(.+?)(.git)?$/ && print $1'|tr : \/)/commit/%(commit)\""
 
 # Option manipulation
 # bind generic  o options     # Open the options menu
@@ -204,7 +207,6 @@ bind generic O @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/]
 # bind generic  % :toggle file-filter
 
 # Misc
-bind generic  e edit      # Open in editor
 # bind generic  : prompt      # Open the prompt
 # bind generic  <C-L> screen-redraw   # Redraw the screen
 # bind generic  z stop-loading    # Stop all loading views
