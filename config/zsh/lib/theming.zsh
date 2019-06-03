@@ -72,10 +72,26 @@ PROMPT_subst() {
     fmt="${fmt/\%d/$shortpath}"
   fi
 
-  fmt="${fmt/\%v/$PROMPT_vistatus}"
-
-  print -n $fmt
+  print -n "$fmt"
 }
+
+PROMPT_vistatus() {
+  local cmdformat insformat
+  zstyle -s ':my:prompt:vi' cmdformat cmdformat
+  zstyle -s ':my:prompt:vi' insformat insformat
+
+  case $KEYMAP in
+    vicmd) echo -n "${cmdformat}";;
+    viins|main) echo -n "${insformat}";;
+  esac
+}
+
+function zle-line-init zle-keymap-select {
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # --> Defaults
 zstyle ':vcs_info:*' enable git

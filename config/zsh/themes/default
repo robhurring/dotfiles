@@ -12,6 +12,8 @@ zstyle ':vcs_info:git*:*' statusbehindstr "%F{red}-%n%f"
 
 zstyle ':my:prompt' shorten-path true
 zstyle ':my:prompt' formats "%F{yellow}%d:%f " "%(?,,%F{red}%?%f )%1(j, %F{yellow}%j%f,)"
+zstyle ':my:prompt:vi' cmdformat "%F{magenta}{vicmd}"
+zstyle ':my:prompt:vi' insformat ""
 
-export RPROMPT='${prompt_info_msg_1_}${vcs_info_msg_0_}'
+export RPROMPT='$(PROMPT_vistatus)${prompt_info_msg_1_}${vcs_info_msg_0_}'
 export PROMPT='${prompt_info_msg_0_}'
