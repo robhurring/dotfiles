@@ -11,7 +11,7 @@ zstyle ':vcs_info:git*:*' statusaheadstr "%F{green}+%n%f"
 zstyle ':vcs_info:git*:*' statusbehindstr "%F{red}-%n%f"
 
 zstyle ':my:prompt' shorten-path true
-zstyle ':my:prompt' formats "%F{yellow}%d:%f " "%(?,,%F{red}%?%f )%1(j, %F{yellow}%j%f,)"
+zstyle ':my:prompt' formats "%(?,,%F{red}%?%f )%1(j,%F{blue}%j%f ,)%F{yellow}%d:%f "
 zstyle ':my:prompt:vi' cmdformat "%F{magenta}{vicmd}"
 zstyle ':my:prompt:vi' insformat ""
 
