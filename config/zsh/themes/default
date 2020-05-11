@@ -15,5 +15,6 @@ zstyle ':my:prompt' formats "%F{yellow}%d:%f " "%(?,,%F{red}%?%f )%1(j, %F{yello
 zstyle ':my:prompt:vi' cmdformat "%F{magenta}{vicmd}"
 zstyle ':my:prompt:vi' insformat ""
 
-export RPROMPT='$(PROMPT_vistatus)${prompt_info_msg_1_}${vcs_info_msg_0_}'
-export PROMPT='${prompt_info_msg_0_}'
+export RPS1='$(PROMPT_vistatus)${vcs_info_msg_0_}'
+export PS1='${prompt_info_msg_0_}'
+

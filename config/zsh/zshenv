@@ -1,7 +1,13 @@
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-export MANPATH="$XDG_DATA_HOME/man:/usr/local/share/man:$MANPATH"
-
 : ${EDITOR:="vim"}
 : ${TERM:="xterm-256color"}
 : ${SHELL:="/usr/local/bin/zsh"}
+: ${DISPLAY:=":0"}
+
+: ${XDG_CONFIG_HOME:="-$HOME/.config"}
+: ${XDG_CACHE_HOME:="-$HOME/.cache"}
+: ${XDG_DATA_HOME:="-$HOME/.local/share"}
+: ${ZHOME:="$XDG_CONFIG_HOME/zsh"}
+
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:$PATH"
+export MANPATH="$XDG_DATA_HOME/man:/usr/local/share/man:$MANPATH"
 

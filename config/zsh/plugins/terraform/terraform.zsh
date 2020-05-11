@@ -3,6 +3,6 @@ if (( ! $+commands[terraform] )); then
 fi
 
 alias tf=terraform
-alias tfa='yes yes | terraform apply'
+alias tfa='terraform apply -auto-approve'
 alias tfw="terraform workspace"
 
