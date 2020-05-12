@@ -2,9 +2,9 @@ DOT="$(cd "$(dirname "$0")"; pwd)"
 
 source "$DOT/libgit.sh"
 
-: ${LS_OPTIONS:='--color=auto'}
-: ${CLICOLOR:='Yes'}
-: ${LSCOLORS:='exgxFxdxCxdxgxhbadexex'}
+export LS_OPTIONS='--color=auto'
+export CLICOLOR='Yes'
+export LSCOLORS='exgxFxdxCxdxgxhbadexex'
 
 autoload -U colors && colors
 autoload -Uz vcs_info
