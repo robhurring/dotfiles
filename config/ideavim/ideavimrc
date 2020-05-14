@@ -20,6 +20,13 @@ set wrapscan
 " emulated support
 set surround
 set multiple-cursors
+set commentary
+set ReplaceWithRegister
+set argtextobj
+let g:argtextobj_pairs="[:],(:),<:>"
+
+" IDEA
+set ideastatusicon=gray
 
 " repeating
 vnoremap . :normal .<CR>
@@ -61,8 +68,8 @@ nnoremap g/ :action FindInPath<CR>
 nnoremap <leader>= :action ReformatCode<CR>
 nnoremap <leader>c :action CodeCleanup<CR>
 nnoremap <leader>i :action CodeInspection.OnEditor<CR>
-nnoremap <leader>f :action FindBugs.CurrentFileAction<CR>
-nnoremap <leader>F :action FindBugs.AnalyseScope<CR>
+" nnoremap <leader>f :action FindBugs.CurrentFileAction<CR>
+" nnoremap <leader>F :action FindBugs.AnalyseScope<CR>
 nnoremap <leader>s :action SonarLint.AnalyzeCurrentEditorFilePopup<CR>
 
 " project navigation
@@ -72,7 +79,7 @@ nnoremap ,o :action ManageRecentProjects<CR>
 nnoremap <C-Space> :action SearchEverywhere<CR>
 nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
-nnoremap <C-s> :action FileStructurePopup<CR>
+" nnoremap <space><space> :action FileStructurePopup<CR>
 nnoremap ,, :action GotoRelated<CR>
 nnoremap <BS> <C-^><CR>
 
@@ -88,7 +95,6 @@ nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
 nnoremap ,t :action ActivateTerminalToolWindow<CR>
-nnoremap <space><space> :action FileStructurePopup<CR>
 
 " run / build / test
 nnoremap <C-r> :action ChooseRunConfiguration<CR>
