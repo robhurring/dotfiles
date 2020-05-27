@@ -3,6 +3,9 @@
 : ${SHELL:="/usr/local/bin/zsh"}
 : ${DISPLAY:=":0"}
 
+# NOTE: OSX will clobber your paths in /etc/zprofile & /usr/libexec/path_helper
+#       (see https://unix.stackexchange.com/a/250456)
+#       Run `sudo mv /etc/zprofile /etc/zshenv` to avoid it injecting paths out of order
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:$PATH"
 export MANPATH="$XDG_DATA_HOME/man:/usr/local/share/man:$MANPATH"
 
