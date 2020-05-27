@@ -79,7 +79,7 @@ nnoremap ,o :action ManageRecentProjects<CR>
 nnoremap <C-Space> :action SearchEverywhere<CR>
 nnoremap <leader>o :action GotoClass<CR>
 nnoremap <leader>j :action RecentFiles<CR>
-" nnoremap <space><space> :action FileStructurePopup<CR>
+nnoremap <space><space> :action FileStructurePopup<CR>
 nnoremap ,, :action GotoRelated<CR>
 nnoremap <BS> <C-^><CR>
 
@@ -95,6 +95,7 @@ nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
 nnoremap ,t :action ActivateTerminalToolWindow<CR>
+nnoremap <C-t> :action ActivateTerminalToolWindow<CR>
 
 " run / build / test
 nnoremap <C-r> :action ChooseRunConfiguration<CR>
