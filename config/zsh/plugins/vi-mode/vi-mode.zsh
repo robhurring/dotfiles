@@ -30,4 +30,6 @@ bindkey -M vicmd 'v' edit-command-line
 # allow ctrl-p, ctrl-n for navigate history (standard behaviour)
 bindkey '^P' up-history
 bindkey '^N' down-history
+bindkey '^K' up-history
+bindkey '^J' down-history
 
