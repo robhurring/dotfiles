@@ -19,6 +19,7 @@ set wrapscan
 
 " emulated support
 set surround
+set exchange
 set multiple-cursors
 set commentary
 set ReplaceWithRegister
