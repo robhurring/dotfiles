@@ -43,18 +43,18 @@ update:
 
 zsh: $(HOME)/.zshenv $(HOME)/.zshrc $(HOME)/.zprofile
 
-tmux: $(HOME)/.tmux
+tmux: $(XDG_DATA_HOME)/tmux
 
 fzf: $(HOME)/.fzf
+
+$(XDG_DATA_HOME)/tmux:
+	@mkdir -p $(XDG_DATA_HOME)/tmux/plugins
+	@git clone https://github.com/tmux-plugins/tpm $(XDG_DATA_HOME)/tmux/plugins/tpm
+	@$(XDG_DATA_HOME)/tmux/plugins/tpm/bin/install_plugins
 
 $(HOME)/.fzf:
 	@git clone https://github.com/junegunn/fzf.git $(HOME)/.fzf
 	@$(HOME)/.fzf/install
-
-$(HOME)/.tmux:
-	@mkdir -p $(HOME)/.tmux/plugins
-	@git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm
-	@$(HOME)/.tmux/plugins/tpm/bin/install_plugins
 
 $(HOME)/.zshrc:
 	@echo "zsh:	.zshrc"
