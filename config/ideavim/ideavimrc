@@ -85,7 +85,7 @@ nnoremap ,, :action GotoRelated<CR>
 nnoremap <BS> <C-^><CR>
 
 " vcs
-nnoremap ,ga :action Annotate<CR>
+nnoremap ,gb :action Annotate<CR>
 
 " editing / info
 nnoremap <Tab> :action ShowIntentionActions<CR>

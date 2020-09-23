@@ -12,7 +12,6 @@ alias e=$EDITOR
 alias ew='_x(){ $EDITOR $(which $1)}; _x $@'
 
 # Misc Helpers
-alias fname='find -name'
 alias psg='ps ax | grep '
 alias enc='openssl enc -e -aes-256-ecb -salt '
 alias dec='openssl enc -d -aes-256-ecb '
@@ -27,7 +26,6 @@ alias bc='bundle console'
 alias bfind="_x(){ag \"\$@\" \`bundle show --paths\`};_x"
 
 # Git
-alias g='git'
 alias ga='git add'
 alias gaa='git add -A'
 alias gau='git add -u'
@@ -44,8 +42,8 @@ alias gra!='git reset-all'
 alias grb='git rebase -p'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
-alias grbi='git rebase -i'
-alias grim='git rebase -i master'
+alias gsi='git rebase -i'
+alias gsm='git rebase -i master'
 alias grh='git reset --hard'
 alias gs='git status -sb'
 alias brt='git branch-time'

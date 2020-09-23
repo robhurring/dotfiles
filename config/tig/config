@@ -146,12 +146,12 @@ set mouse-scroll    = 3   # Number of lines to scroll via the mouse
 bind main H @git checkout %(head)
 bind main c @git checkout %(commit)
 bind main C @git checkout %(branch)
-bind main R <git rebase -i %(commit)
-bind main r <git rebase -i "%(prompt Rebase onto: )"
+# bind main R <git rebase -i %(commit)
+# bind main r <git rebase -i "%(prompt Rebase onto: )"
 bind main B !@git checkout -b "%(prompt Enter branch name: )" %(commit)
-bind main D @git branch -D %(branch)
-bind main ! ?<git reset --hard %(commit)
-bind main U <git reset --soft %(commit)
+bind main D !git branch -D %(branch)
+bind main ! ?<git reset --hard %(commit)~
+bind main U <git reset --soft %(commit)~
 
 # bind main > ?git checkout %(commit)
 bind main \ @git checkout origin/HEAD
@@ -165,6 +165,7 @@ bind status c !git commit
 bind status S !?git stash save --keep-index %(prompt)
 bind status a <git commit --amend
 bind status A <git commit --amend --no-edit
+# bind status A <git update-index --assume-unchanged %(file)
 
 bind refs n !@git branch "%(prompt Enter branch name: )"
 

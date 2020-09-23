@@ -5,8 +5,10 @@
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
   amend = "commit --amend --no-edit"
   assume   = update-index --assume-unchanged
-  assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
+  assumeall = "!git diff --name-only | xargs git assume"
   assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+  fassume   = "!git update-index --assume-unchanged $(git diff --name-only|fzf)"
+  funassume = "!git update-index --no-assume-unchanged $(git ls-files -v | grep ^h | cut -c 3-|fzf)"
   br = branch
   brt = branch-time
   changelog ="!git l $(git last-tag)..HEAD"
@@ -52,7 +54,7 @@
   unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
   unstage = reset HEAD
   unstaged = diff
-  up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase -p ${1:-origin}/$(git current-branch)' -
+  up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase --rebase-merges ${1:-origin}/$(git current-branch)' -
   what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   who = shortlog -sne --no-merges
 [color]
@@ -110,7 +112,8 @@
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [mergetool "editor"]
-  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  # cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  cmd = nvim -f -c "Gvdiff" "$MERGED"
 [diff]
   tool = nvimdiff
   guitool = opendiff
