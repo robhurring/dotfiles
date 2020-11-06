@@ -7,7 +7,6 @@ set ignorecase
 set incsearch
 set mps+=<:>
 set number
-" set relativenumber
 set scrolloff=3
 set showmode
 set sidescroll=1
@@ -85,7 +84,8 @@ nnoremap ,, :action GotoRelated<CR>
 nnoremap <BS> <C-^><CR>
 
 " vcs
-nnoremap ,gb :action Annotate<CR>
+nnoremap ,ga :action Annotate<CR>
+nnoremap ,go :action Github.Open.In.Browser<CR>
 
 " editing / info
 nnoremap <Tab> :action ShowIntentionActions<CR>
@@ -108,8 +108,6 @@ nnoremap ,rD :action Debug<CR>
 nnoremap <C-Down> :action MoveStatementDown<CR>
 nnoremap <C-Up> :action MoveStatementUp<CR>
 nnoremap <C-/> :action CommentByLineComment<CR>
-nnoremap <C-Right> :action NextTab<CR>
-nnoremap <C-Left> :action PreviousTab<CR>
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j

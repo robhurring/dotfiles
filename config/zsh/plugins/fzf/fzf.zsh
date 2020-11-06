@@ -12,22 +12,17 @@ fi
 export FUZZY_SEARCH_PATHS="~/Projects"
 
 # FZF default settings
-export FZF_DEFAULT_OPTS="--ansi --reverse --inline-info --extended"
+export FZF_DEFAULT_OPTS="--reverse --inline-info --extended --preview-window right:60%:wrap --height 100%"
 
-# Set the default FZF command
 export FZF_COMMAND=fzf
 
-# FZF: cd to `FUZZY_SEARCH_PATHS`
-fuzzy-cds() {
-  local dir=""
-dir=$(
-cat << EOS | ruby | $FZF_COMMAND -1 -e -0 --query=$1
-(ENV["FUZZY_SEARCH_PATHS"]||"").split(":").each{|p| puts Dir["#{File.expand_path(p)}/*"].map{ |d| d.gsub(%r{#{ENV['HOME']}}, '~') } }
-EOS
-)
-dir="${dir/#\~/$HOME}"
-cd "$dir"
-}
+if ! type "bat" > /dev/null; then
+  export FZF_PREVIEW_OPTS="--preview 'cat {}'"
+else
+  export FZF_PREVIEW_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+fi
+
+export FZF_CTRL_T_OPTS="$FZF_PREVIEW_OPTS"
 
 # FZF: git checkout
 fuzzy-co() {
@@ -44,7 +39,7 @@ fuzzy-co() {
     query=""
   fi
 
-  local branch=$(cat << EOS | ruby | $FZF_COMMAND -1 -i $flags --query=$query
+  local branch=$(cat << EOS | ruby | $FZF_COMMAND -1 -i $flags --query=$query --preview 'git log --pretty=format:"%h (%cr) %aN -- %s" {}'
     puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
 EOS
 )
@@ -80,12 +75,6 @@ fuzzy-kill() {
   ps -ef | sed 1d | $FZF_COMMAND -m | awk '{print $2}' | xargs kill -${1:-9}
 }
 
-fuzzy-search-ls() {
-  for dir in ${(s,:,)FUZZY_SEARCH_PATHS}; do  # split by ':'
-    print -l ${~dir}/*                        # force $dir to expand glob
-  done
-}
-
 fuzzy-search-do() {
   local query
   local cmd
@@ -116,7 +105,7 @@ fuzzy-search-path() {
 #   - Exit if there's no match (--exit-0)
 fuzzy-edit() {
   local file
-  file=$($FZF_COMMAND --query="$1" --select-1 --exit-0)
+  file=$($FZF_COMMAND --preview 'bat --style=numbers --color=always --line-range :500 {}' --query="$1" --select-1 --exit-0)
   [ -n "$file" ] && ${EDITOR:-vim} "$file"
 }
 
@@ -207,5 +196,9 @@ fuzzy-tmux-session() {
     name=$(echo "$choice"|cut -d':' -f1)
     tmux-go "${name}"
   fi
+}
+
+fuzzy-preview() {
+  fzf
 }
 

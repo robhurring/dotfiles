@@ -49,7 +49,6 @@ alias gs='git status -sb'
 alias brt='git branch-time'
 
 # XDG
-alias cdconfig='cd $XDG_CONFIG_HOME'
-alias cddata='cd $XDG_DATA_HOME'
+alias cdc='cd $XDG_CONFIG_HOME'
 alias cdcache='cd $XDG_CACHE_HOME'
 
