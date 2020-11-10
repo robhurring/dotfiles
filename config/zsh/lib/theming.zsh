@@ -9,11 +9,6 @@ export LSCOLORS='exgxFxdxCxdxgxhbadexex'
 autoload -U colors && colors
 autoload -Uz vcs_info
 
-precmd() {
-  vcs_info
-  prompt_info
-}
-
 # Show remote ref name and number of commits ahead-of or behind
 +vi-git-remote-st() {
   local ahead behind remote
@@ -65,13 +60,6 @@ prompt_info(){
 
 PROMPT_subst() {
   local fmt="$1"
-
-  # sub out `%d` for shortened path
-  if `zstyle -t ':my:prompt' shorten-path`; then
-    local shortpath=$(shortenpath "$(pwd)")
-    fmt="${fmt/\%d/$shortpath}"
-  fi
-
   print -n "$fmt"
 }
 
@@ -99,4 +87,13 @@ zstyle ':vcs_info:git*:*' get-revision true
 zstyle ':vcs_info:git*:*' check-for-changes true
 zstyle ':vcs_info:git*:*' check-for-staged-changes true
 zstyle ':vcs_info:git*+set-message:*' hooks git-remote-st
+
+precmd() {
+  vcs_info
+  prompt_info
+  PROMPT_vistatus
+
+  # `%1v` - shortened path (%d)
+  psvar[1]=$(shortenpath $PWD)
+}
 

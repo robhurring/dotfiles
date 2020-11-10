@@ -293,9 +293,9 @@ do_sync() {
   fi
 
   local cleanup="$(git config sync.cleanup 2>/dev/null)"
-  if [ "$cleanup" == "true" ] && [ "$(command -v git-cleanup)" ]; then
+  if [ "$cleanup" == "true" ]; then
     note "Cleaning merged branches"
-    git-cleanup
+    exec git cleanup
   fi
 }
 

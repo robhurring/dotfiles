@@ -1,5 +1,6 @@
 # vim:ft=zsh
 
+# vcs_info docs: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
 zstyle ':vcs_info:git*' formats "%m %F{white}%b%c%u %B%F{black}%5.7i%%b%%f"
 zstyle ':vcs_info:git*' actionformats "%m %B%F{white}%b%c%u (%a) %B%F{black}%5.7i%%b%%f"
 zstyle ':vcs_info:git*' patch-format "%F{green}%n%f/%F{red}%c%f/%F{white}%a%f"
@@ -11,10 +12,12 @@ zstyle ':vcs_info:git*:*' statusaheadstr "%F{green}+%n%f"
 zstyle ':vcs_info:git*:*' statusbehindstr "%F{red}-%n%f"
 
 zstyle ':my:prompt' shorten-path true
-zstyle ':my:prompt' formats "%(?,,%F{red}%?%f )%1(j,%F{blue}%j%f ,)%F{yellow}%d:%f "
+zstyle ':my:prompt' formats "%(?,,%F{red}%?%f )%1(j,%F{blue}%j%f ,)%F{yellow}%1v:%f "
 zstyle ':my:prompt:vi' cmdformat "%F{magenta}{vicmd}"
 zstyle ':my:prompt:vi' insformat ""
 
-export RPS1='$(PROMPT_vistatus)${vcs_info_msg_0_}'
-export PS1='${prompt_info_msg_0_}'
+# NOTE: BLT/corecli does not like `$RPROMPT` or `${}` variables
+export RPS1='$vcs_info_msg_0_'
+export PS1='$prompt_info_msg_0_'
+
 

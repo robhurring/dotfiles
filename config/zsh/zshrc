@@ -4,8 +4,8 @@ export ZSH_VI_ESC=${ZSH_VI_ESC:-"jk"}
 export ZSH_THEME=${ZSH_THEME:-"default"}
 
 export HISTFILE=$XDG_CACHE_HOME/.zsh_history
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=5000
+export SAVEHIST=5000
 export REPORTTIME=10
 
 # set to speed up boot time

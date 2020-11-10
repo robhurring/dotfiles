@@ -2,7 +2,7 @@
 
 [alias]
   add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
-  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ -> \\2/' | sort
   amend = "commit --amend --no-edit"
   assume   = update-index --assume-unchanged
   assumeall = "!git diff --name-only | xargs git assume"
@@ -11,16 +11,19 @@
   funassume = "!git update-index --no-assume-unchanged $(git ls-files -v | grep ^h | cut -c 3-|fzf)"
   br = branch
   brt = branch-time
+  cleanup = "!f() { DEFAULT=$(git default); git branch --merged ${1-$DEFAULT} | grep -v " ${1-$DEFAULT}$" | xargs git branch -d; }; f"
+  cl = "!f() { DEFAULT=$(git default); B=${1-$DEFAULT}; H=${2-HEAD}; echo \"\\033[1;30;48;5;141mCommits between \\033[1;38;5;7m$B..$H\\033[0m\"; git commits $B..$H; }; f"
   changelog ="!git l $(git last-tag)..HEAD"
   ci = commit
   cia = commit -a
-  cl ="!echo \"\\033[36m\\nChanges since: $(git last-tag)\\n\\033[0m\"; git changelog"
   co = checkout
   # Usage: git commits ..dev
   commits = log --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   cp = cherry-pick
   current-branch = rev-parse --abbrev-ref HEAD
+  default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
   ds = diff --stat
+  ec = config --global -e
   edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
   empty = commit --allow-empty -m
   fa = fetch --all
@@ -36,8 +39,8 @@
   new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
   ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
   push-set = !"git push --set-upstream origin $(git current-branch)"
-  rb = rebase -p
   reset-all = !sh -c 'git add --all && git reset --hard'
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
   resolve = mergetool
   search = "log --all  --pretty=oneline -S"
   serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
@@ -48,13 +51,13 @@
   tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ HEAD; }; f"
   theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
   this = !git init && git add . && git commit -m \"initial commit\"
-  track = checkout -t
   unamend = git reset --soft HEAD@{1}
   unassume = update-index --no-assume-unchanged
   unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
   unstage = reset HEAD
   unstaged = diff
   up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase --rebase-merges ${1:-origin}/$(git current-branch)' -
+  undo = reset HEAD~1 --mixed
   what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   who = shortlog -sne --no-merges
 [color]
