@@ -14,8 +14,8 @@ bindkey -M viins "$ZSH_VI_ESC" vi-cmd-mode
 #   Ps = 4  ⇒  steady underline.
 #   Ps = 5  ⇒  blinking bar, xterm.
 #   Ps = 6  ⇒  steady bar, xterm.
-: ${ZSH_VI_NORMAL_CURSOR:=4}
-: ${ZSH_VI_INSERT_CURSOR:=1}
+: ${ZSH_VI_NORMAL_CURSOR:=1}
+: ${ZSH_VI_INSERT_CURSOR:=6}
 
 # Updates editor information when the keymap changes.
 function zle-keymap-select() {

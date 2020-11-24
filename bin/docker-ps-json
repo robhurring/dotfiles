@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+
+main() {
+  exec docker ps --format '{{json .}}'| jq -rs '
+    [
+      .[]|{
+        id:.ID,
+        name:.Names,
+        ports:(.Ports|split(", ")),
+        status:.Status
+      }
+    ]
+  '
+}
+
+main $@

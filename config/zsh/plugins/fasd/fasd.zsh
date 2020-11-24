@@ -16,4 +16,3 @@ fi
 
 alias j='fasd_cd -d' # posix-alias
 alias je='fasd -ft -e $EDITOR'
-bindkey '^X^D' fasd-complete-d

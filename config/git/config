@@ -2,64 +2,66 @@
 
 [alias]
   add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
-  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ -> \\2/' | sort
-  amend = "commit --amend --no-edit"
+  ec = config --global -e
+  edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
+  ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+  sm = submodule
+  st = status
+  staged = diff --cached
+  tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ HEAD; }; f"
+  serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+
+# ===> assume
   assume   = update-index --assume-unchanged
   assumeall = "!git diff --name-only | xargs git assume"
   assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
   fassume   = "!git update-index --assume-unchanged $(git diff --name-only|fzf)"
   funassume = "!git update-index --no-assume-unchanged $(git ls-files -v | grep ^h | cut -c 3-|fzf)"
-  br = branch
-  brt = branch-time
-  cleanup = "!f() { DEFAULT=$(git default); git branch --merged ${1-$DEFAULT} | grep -v " ${1-$DEFAULT}$" | xargs git branch -d; }; f"
-  cl = "!f() { DEFAULT=$(git default); B=${1-$DEFAULT}; H=${2-HEAD}; echo \"\\033[1;30;48;5;141mCommits between \\033[1;38;5;7m$B..$H\\033[0m\"; git commits $B..$H; }; f"
+  unassume = update-index --no-assume-unchanged
+  unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+
+# ===> logs
   changelog ="!git l $(git last-tag)..HEAD"
-  ci = commit
-  cia = commit -a
-  co = checkout
-  # Usage: git commits ..dev
+  cl = "!f() { DEFAULT=$(git default); B=${1-$DEFAULT}; H=${2-HEAD}; echo \"\\033[1;30;48;5;141mCommits between \\033[1;38;5;7m$B..$H\\033[0m\"; git commits $B..$H; }; f"
   commits = log --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-  cp = cherry-pick
-  current-branch = rev-parse --abbrev-ref HEAD
-  default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
-  ds = diff --stat
-  ec = config --global -e
-  edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
-  empty = commit --allow-empty -m
-  fa = fetch --all
-  gr = grep -n
-  ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
   l = log --graph --decorate --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-  last-tag = describe --abbrev=0
   lg = log -p
   ll = log --numstat --graph --pretty=format':%C(bold yellow)%h%C(bold blue)%d%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
   ls = ls-files
-  # Usage: git merges ..dev
   merges = log --merges --pretty=format':%C(bold yellow)%h%Creset %s %C(white) %C(bold white)%an, %C(bold black)%ar%Creset'
-  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
-  push-set = !"git push --set-upstream origin $(git current-branch)"
-  reset-all = !sh -c 'git add --all && git reset --hard'
-  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
-  resolve = mergetool
   search = "log --all  --pretty=oneline -S"
-  serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
-  sm = submodule
-  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-  st = status
-  staged = diff --cached
-  tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ HEAD; }; f"
-  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
-  this = !git init && git add . && git commit -m \"initial commit\"
-  unamend = git reset --soft HEAD@{1}
-  unassume = update-index --no-assume-unchanged
-  unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
-  unstage = reset HEAD
-  unstaged = diff
-  up = !sh -c 'echo "Rebasing on ${1:-origin}\n" git fetch ${1:-origin} && git rebase --rebase-merges ${1:-origin}/$(git current-branch)' -
-  undo = reset HEAD~1 --mixed
   what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   who = shortlog -sne --no-merges
+
+# ===> branches
+  br = branch
+  brt = branch-time
+  cleanup = "!f() { DEFAULT=$(git default); git branch --merged ${1-$DEFAULT} | grep -v " ${1-$DEFAULT}$" | xargs git branch -d; }; f"
+  current-branch = rev-parse --abbrev-ref HEAD
+  default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+
+# ===> commit
+  amend = "commit --amend --no-edit"
+  unamend = git reset --soft HEAD@{1}
+  ci = commit
+  cia = commit -a
+  co = checkout
+  cp = cherry-pick
+  ds = diff --stat
+  empty = commit --allow-empty -m
+  push-set = !"git push --set-upstream origin $(git current-branch)"
+
+# ===> sync
+  fa = fetch --all
+  gr = grep -n
+  last-tag = describe --abbrev=0
+  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+  undo = reset HEAD~1 --mixed
+  reset-all = !sh -c 'git add --all && git reset --hard'
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+# ===> merging
+  resolve = mergetool
 [color]
   ui = auto
 [color "branch"]
@@ -116,7 +118,7 @@
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [mergetool "editor"]
   # cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-  cmd = nvim -f -c "Gvdiff" "$MERGED"
+  cmd = nvim -f -c "Gdiffsplit!" "$MERGED"
 [diff]
   tool = nvimdiff
   guitool = opendiff

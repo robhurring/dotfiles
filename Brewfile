@@ -6,6 +6,7 @@ tap 'homebrew/bundle'
 tap 'jarun/imgp'
 
 brew 'ag'
+brew 'bat'
 brew 'curl'
 brew 'fpp'
 brew 'git'

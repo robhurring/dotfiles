@@ -1,9 +1,8 @@
 # load up FZF if it exists
-[[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
-
 if (( ! $+commands[fzf] )); then
   return 1
 fi
+# [[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
 # Requires: FZF
 # Download: https://github.com/junegunn/fzf
@@ -16,6 +15,7 @@ export FZF_DEFAULT_OPTS="--reverse --inline-info --extended --preview-window rig
 
 export FZF_COMMAND=fzf
 
+# brew install bat
 if ! type "bat" > /dev/null; then
   export FZF_PREVIEW_OPTS="--preview 'cat {}'"
 else

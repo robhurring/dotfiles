@@ -169,6 +169,8 @@ bind status A <git commit --amend --no-edit
 
 bind refs n !@git branch "%(prompt Enter branch name: )"
 
+bind diff b !tig blame %(file)
+
 bind pager @ :/^@@     # Jump to next (c)hunk
 
 bind generic ? view-help
@@ -178,7 +180,7 @@ bind generic J move-page-down
 bind generic K move-page-up
 bind generic <C-j> move-page-down
 bind generic <C-k> move-page-up
-bind generic y !@sh -c "echo %(commit) | pbcopy"
+bind generic Y !@sh -c "echo %(commit) | pbcopy"
 
 bind generic e edit # Open in editor
 bind generic o <sh -c "git show %(commit) | nvim -R"
