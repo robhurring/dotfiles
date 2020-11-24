@@ -15,43 +15,31 @@ bindkey -M viins "$ZSH_VI_ESC" vi-cmd-mode
 #   Ps = 5  ⇒  blinking bar, xterm.
 #   Ps = 6  ⇒  steady bar, xterm.
 : ${ZSH_VI_NORMAL_CURSOR:=1}
-: ${ZSH_VI_INSERT_CURSOR:=6}
+: ${ZSH_VI_INSERT_CURSOR:=5}
 
-# Updates editor information when the keymap changes.
-function zle-keymap-select() {
+# SEE: https://github.com/kovidgoyal/kitty/issues/715#issuecomment-403993100
+function zle-keymap-select zle-line-init zle-line-finish
+{
   zstyle ':my:prompt:' vi-mode true
 
-  # https://unix.stackexchange.com/questions/433273/changing-cursor-style-based-on-mode-in-both-zsh-and-vim
-  # escapes:
-  if [[ ${KEYMAP} == vicmd ]] ||
-    [[ $1 = 'block' ]]; then
-      echo -ne "\e[$ZSH_VI_NORMAL_CURSOR q"
+  case $KEYMAP in
+    vicmd)      print -n "\033[$ZSH_VI_NORMAL_CURSOR q";; # block cursor
+    viins|main) print -n "\033[$ZSH_VI_INSERT_CURSOR q";; # line cursor
+  esac
 
-    elif [[ ${KEYMAP} == main ]] ||
-      [[ ${KEYMAP} == viins ]] ||
-      [[ ${KEYMAP} = '' ]] ||
-      [[ $1 = 'beam' ]]; then
-          echo -ne "\e[$ZSH_VI_INSERT_CURSOR q"
-  fi
   zle reset-prompt
   zle -R
 }
 
-_fix_cursor() {
-  echo -ne "\e[$ZSH_VI_INSERT_CURSOR q"
-}
-precmd_functions+=(_fix_cursor)
-# zle-line-finish() {
-#   _fix_cursor
-# }
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
+zle -N edit-command-line
 
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
   zle && zle -R
 }
-
-zle -N zle-keymap-select
-zle -N edit-command-line
 
 bindkey -v
 
