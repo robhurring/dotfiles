@@ -14,4 +14,4 @@ LS_SM="ls -alh|awk '{print \$1,\$5,\$9};'"
 # minimal `ls`
 LS_XS="ls -ah"
 
-responsive-sh "$LS_LG" "$LS_MD" "$LS_SM" "$LS_XS"
+exec responsive-sh "$LS_LG" "$LS_MD" "$LS_SM" "$LS_XS"
