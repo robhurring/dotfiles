@@ -90,9 +90,4 @@ brew:
 	@type brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	@brew bundle check || brew bundle
 
-iterm:
-	tic $(XDG_CONFIG_HOME)/iterm2/xterm-256color-italic.terminfo
-	tic $(XDG_CONFIG_HOME)/iterm2/screen-256color-italic.terminfo
-	tic $(XDG_CONFIG_HOME)/iterm2/screen-256color.terminfo
-
 .PHONY: all mac extra .setup zsh tmux brew iterm kitty
