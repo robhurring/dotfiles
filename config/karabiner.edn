@@ -1,1 +1,48 @@
-{}
+{
+ ; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md
+ ; https://github.com/search?l=&q=filename%3Akarabiner.edn&type=Code
+
+ :profiles {:Default {:default true
+                      :alone   100   ; default=1000
+                      :held    50    ; default=500
+                      :delay   500   ; default=500 basically it means time after which the key press is count delayed
+                      :sim     100}} ; default=50 keys need to be pressed within this threshold to be considered simultaneous
+
+ :applications {
+                :kitty ["^net\\.kovidgoyal\\.kitty$"]
+                :slack ["^com\\.tinyspeck\\.slackmacgap$"]
+                }
+
+ :simlayers {
+             :f-mode {:key :f}
+             :o-mode {:key :o}
+             :m-mode {:key :semicolon}
+             :w-mode {:key :w}
+             }
+
+ :layers {
+          }
+
+ :templates {
+             :open "open \"%s\""
+             :launch "open -a \"%s\""
+             :type "osascript -e 'tell application \"System Events\" to keystroke \"%s\" as text'"
+             }
+
+ :main [
+        {:des "f-mode Fn"
+         :rules [:f-mode
+                 ]
+         }
+
+        {:des "o-mode: Open"
+         :rules [:o-mode
+                 [:k [:launch "Kitty"]]
+                 [:s [:launch "Slack"]]
+                 [:g [:launch "Google Chrome"]]
+                 [:i [:launch "IntelliJ IDEA"]]
+                 ]
+         }
+
+        ]
+ }
