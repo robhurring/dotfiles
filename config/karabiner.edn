@@ -9,15 +9,14 @@
                       :sim     100}} ; default=50 keys need to be pressed within this threshold to be considered simultaneous
 
  :applications {
-                :kitty ["^net\\.kovidgoyal\\.kitty$"]
+                :terms ["^net\\.kovidgoyal\\.kitty$"]
                 :slack ["^com\\.tinyspeck\\.slackmacgap$"]
                 }
 
  :simlayers {
              :f-mode {:key :f}
              :o-mode {:key :o}
-             :m-mode {:key :semicolon}
-             :w-mode {:key :w}
+             :term-mode {:key :semicolon :condi :terms}
              }
 
  :layers {
@@ -30,6 +29,9 @@
              }
 
  :main [
+        {:des "caps to ctrl modifier"
+         :rules [[:##caps_lock :left_control]]}
+
         {:des "f-mode Fn"
          :rules [:f-mode
                  ]
@@ -43,6 +45,16 @@
                  [:i [:launch "IntelliJ IDEA"]]
                  ]
          }
+
+        {:des "term-mode"
+         :rules [:term-mode
+                 [:s [:!Ta :s]] ; tmux session
+                 [:c [:!Ta :c]]
+                 [:h [:!Ta :p]]
+                 [:l [:!Ta :n]]
+                 [:j [:!Oj]]
+                 [:k [:!Ok]]
+                 ]}
 
         ]
  }
