@@ -1,3 +1,6 @@
+# ---> Profile
+zmodload zsh/zprof
+
 # override in ~/.zshrc before init, or whatever
 export ZSH_MODE=${ZSH_MODE:-"vi"}
 export ZSH_VI_ESC=${ZSH_VI_ESC:-"jk"}
@@ -71,13 +74,16 @@ load_plugin() {
   fi
 }
 
+# See: https://htr3n.github.io/2018/07/faster-zsh/
 reload_completions() {
-  autoload -Uz compinit
+  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+  if [ ! -f $zcompdump ]; then
+    touch $zcompdump
+  fi
 
-  # only dump once a day, otherwise check
-  if [[ $(date +'%j') > $(date -r "${HOME}/.zcompdump" +'%j') ]]; then
-    compinit -i
-    compdump
+  autoload -Uz compinit
+  if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' $zcompdump) ]; then
+    compinit
   else
     compinit -C
   fi

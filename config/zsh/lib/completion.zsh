@@ -31,14 +31,14 @@ unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
 # shell is opened each day.
-autoload -Uz compinit
-_comp_files=(${XDG_CACHE_HOME}/zcompdump(Nm-20))
-if (( $#_comp_files )); then
-  compinit -i -C
-else
-  compinit -i
-fi
-unset _comp_files
+# autoload -Uz compinit
+# _comp_files=(${XDG_CACHE_HOME}/zcompdump(Nm-20))
+# if (( $#_comp_files )); then
+#   compinit -i -C
+# else
+#   compinit -i
+# fi
+# unset _comp_files
 
 #
 # Styles
