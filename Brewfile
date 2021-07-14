@@ -27,6 +27,7 @@ brew 'watch'
 brew 'wget'
 brew 'yqrashawn/goku/goku'
 brew 'zsh'
+brew 'zoxide'
 
 cask '1password'
 cask 'amethyst'

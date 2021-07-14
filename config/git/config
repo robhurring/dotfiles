@@ -49,16 +49,20 @@
   cp = cherry-pick
   ds = diff --stat
   empty = commit --allow-empty -m
-  push-set = !"git push --set-upstream origin $(git current-branch)"
+  push-set = push -u
+  citag = "!f() { TAG=$1 MSG=\"${*:2}\"; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
+  wip = citag wip
+  fix = citag fix
+  wipe = !git citag wipe savepoint && git reset HEAD~1 --hard
 
 # ===> sync
   fa = fetch --all
   gr = grep -n
   last-tag = describe --abbrev=0
   new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-  undo = reset HEAD~1 --mixed
   reset-all = !sh -c 'git add --all && git reset --hard'
-  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+  undo = reset HEAD~1 --mixed
+  up = "!f() { BASE=\"${1:-master}\"; git fetch --all && git rebase $BASE; }; f"
 
 # ===> merging
   resolve = mergetool
@@ -112,20 +116,25 @@
 [web]
   browser = ch
 [merge]
-  tool = editor
-  guitool = opendiff
+  tool = diffmerge
+  guitool = diffmerge
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [mergetool "editor"]
   # cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
   cmd = nvim -f -c "Gdiffsplit!" "$MERGED"
+[mergetool "diffmerge"]
+  cmd = diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+  trustExitCode = true
 [diff]
   tool = nvimdiff
-  guitool = opendiff
+  guitool = diffmerge
 [difftool "nvimdiff"]
   cmd = nvim -d $BASE $LOCAL
 [difftool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -merge $MERGED
+[difftool "diffmerge"]
+  cmd = diffmerge "$LOCAL" "$REMOTE"
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com/"
@@ -152,6 +161,5 @@
   cleanup = true
 [pull]
   ff = only
-
 [gpg]
 	program = gpg

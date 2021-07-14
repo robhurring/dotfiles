@@ -3,7 +3,7 @@ if (( ! $+commands[docker] )); then
 fi
 
 alias d=docker
-alias dc=docker-compose
+alias dc="docker compose"
 
 alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias drmae='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'

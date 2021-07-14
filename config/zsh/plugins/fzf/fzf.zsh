@@ -40,7 +40,7 @@ fuzzy-co() {
   fi
 
   local branch=$(cat << EOS | ruby | $FZF_COMMAND -1 -i $flags --query=$query --preview 'git log --pretty=format:"%h (%cr) %aN -- %s" {}'
-    puts %x{git branch -a}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
+    puts %x{git branch}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
 EOS
 )
 

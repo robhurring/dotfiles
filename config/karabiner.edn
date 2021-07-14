@@ -1,6 +1,8 @@
 {
+ ; gokuw
  ; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md
  ; https://github.com/search?l=&q=filename%3Akarabiner.edn&type=Code
+ ; https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/from/modifiers/
 
  :profiles {:Default {:default true
                       :alone   100   ; default=1000
@@ -14,9 +16,10 @@
                 }
 
  :simlayers {
-             :f-mode {:key :f}
-             :o-mode {:key :o}
              :term-mode {:key :semicolon :condi :terms}
+             :m-mode {:key :m}
+             :e-mode {:key :e}
+             :f-mode {:key :f}
              }
 
  :layers {
@@ -26,22 +29,51 @@
              :open "open \"%s\""
              :launch "open -a \"%s\""
              :type "osascript -e 'tell application \"System Events\" to keystroke \"%s\" as text'"
+             :focus "open \"%s\""
              }
 
  :main [
-        {:des "caps to ctrl modifier"
-         :rules [[:##caps_lock :left_control]]}
-
-        {:des "f-mode Fn"
-         :rules [:f-mode
+        {:des "caps mod"
+         :rules [
+                 [:##caps_lock :left_control]
                  ]
          }
 
-        {:des "o-mode: Open"
-         :rules [:o-mode
+        {:des "hyper-mode"
+         :rules [:hyper-mode
+                 ]
+         }
+
+        {:des "m-mode Mouse"
+         :rules [:m-mode
+                 [:s {:mkey {:y 2000}}]
+                 [:w {:mkey {:y -2000}}]
+                 [:a {:mkey {:x -2000}}]
+                 [:d {:mkey {:x 2000}}]
+                 [:spacebar {:pkey :button1}]
+                 [:q {:pkey :button1}]
+                 [:e {:pkey :button2}]
+                 ]
+         }
+
+        {:des "e-mode: Emmet"
+         :rules [:e-mode
+                 ;; emmet
+                 ; [:spacebar {:key :!CTOup_arrow}] ;; cycle
+                 ; [:f {:key :!SCTOup_arrow}]
+                 ; [:up_arrow {:key :!SCTOup_arrow}]
+                 ; [:h {:key :!CTOleft_arrow}]
+                 ; [:left_arrow {:key :!SCTOleft_arrow}]
+                 ; [:l {:key :!CTOright_arrow}]
+                 ; [:right_arrow {:key :!SCTOright_arrow}]
+                 ]
+         }
+
+        {:des "f-mode: Focus"
+         :rules [:f-mode
                  [:k [:launch "Kitty"]]
                  [:s [:launch "Slack"]]
-                 [:g [:launch "Google Chrome"]]
+                 [:b [:launch "Google Chrome"]]
                  [:i [:launch "IntelliJ IDEA"]]
                  ]
          }
