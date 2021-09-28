@@ -73,7 +73,7 @@
          :rules [:f-mode
                  [:k [:launch "Kitty"]]
                  [:s [:launch "Slack"]]
-                 [:b [:launch "Google Chrome"]]
+                 [:w [:launch "Google Chrome"]]
                  [:i [:launch "IntelliJ IDEA"]]
                  ]
          }

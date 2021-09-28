@@ -90,7 +90,6 @@
 [core]
   whitespace = space-before-tab,tabwidth=2,trailing-space
   editor = "nvim"
-  excludesfile = ~/.gitignore
 [help]
   autocorrect = 1
 [status]

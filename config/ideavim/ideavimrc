@@ -26,6 +26,8 @@ set argtextobj
 let g:argtextobj_pairs="[:],(:),<:>"
 
 " IDEA
+set ideamarks
+set ideajoin
 set ideastatusicon=gray
 
 " repeating
