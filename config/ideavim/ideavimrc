@@ -7,6 +7,7 @@ set ignorecase
 set incsearch
 set mps+=<:>
 set number
+" set relativenumber
 set scrolloff=3
 set showmode
 set sidescroll=1
@@ -20,14 +21,31 @@ set wrapscan
 set surround
 set exchange
 set multiple-cursors
+" change keybinds for multiple-cursors
+" SEE: https://stackoverflow.com/a/65430514
+nnomap <C-n> <Plug>NextWholeOccurrence
+xnomap <C-n> <Plug>NextWholeOccurrence
+nnomap g<C-n> <Plug>NextOccurrence
+xnomap g<C-n> <Plug>NextOccurrence
+nnomap <C-x> <Plug>SkipOccurrence
+xnomap <C-x> <Plug>SkipOccurrence
+nnomap <C-p> <Plug>RemoveOccurrence
+xnomap <C-p> <Plug>RemoveOccurrence
+
 set commentary
 set ReplaceWithRegister
+set highlightedyank
+let g:highlightedyank_highlight_color = "rgba(100, 100, 200, 100)"
+let g:highlightedyank_highlight_duration = "350"
+
 set argtextobj
 let g:argtextobj_pairs="[:],(:),<:>"
 
+set NERDTree
+nnoremap <leader>e :NERDTreeFocus<CR>
+nnoremap <leader>E :NERDTreeFind<CR>
+
 " IDEA
-set ideamarks
-set ideajoin
 set ideastatusicon=gray
 
 " repeating
@@ -39,10 +57,16 @@ inoremap jk <Esc>`^
 inoremap <C-c> <Esc>
 
 " splits
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <A-l> <C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A--> :sp<CR>
+nnoremap <A-\> :vsp<CR>
 
 vnoremap < <gv
 vnoremap > >gv
@@ -68,48 +92,65 @@ nnoremap g/ :action FindInPath<CR>
 
 " formatting
 nnoremap <leader>= :action ReformatCode<CR>
+nnoremap <leader>o :action OptimizeImports<CR>
 nnoremap <leader>c :action CodeCleanup<CR>
 nnoremap <leader>i :action CodeInspection.OnEditor<CR>
-" nnoremap <leader>f :action FindBugs.CurrentFileAction<CR>
-" nnoremap <leader>F :action FindBugs.AnalyseScope<CR>
-nnoremap <leader>s :action SonarLint.AnalyzeCurrentEditorFilePopup<CR>
+nnoremap <leader>s :action SonarLint.AnalyzeFiles<CR>
 
 " project navigation
 nnoremap ,o :action ManageRecentProjects<CR>
 
 " file navigation
 nnoremap <C-Space> :action SearchEverywhere<CR>
-nnoremap <leader>o :action GotoClass<CR>
-nnoremap <leader>j :action RecentFiles<CR>
+"nnoremap <leader>o :action GotoClass<CR>
 nnoremap <space><space> :action FileStructurePopup<CR>
-nnoremap ,, :action GotoRelated<CR>
-nnoremap <BS> <C-^><CR>
+nnoremap <leader>r :action GotoRelated<CR>
+"nnoremap <BS> <C-^><CR>
+nnoremap <silent> ,, :b#<CR>
+nnoremap <C-;> :b#<CR>
 
 " vcs
 nnoremap ,ga :action Annotate<CR>
 nnoremap ,go :action Github.Open.In.Browser<CR>
+vnoremap ,go :action Github.Open.In.Browser<CR>
+nnoremap ,pr :action Github.View.Pull.Request<CR>
+
+" paste
+map gp gr
 
 " editing / info
 nnoremap <Tab> :action ShowIntentionActions<CR>
+nnoremap R :action Refactorings.QuickListPopupAction<CR>
+nnoremap ge :action GotoNextError<CR>
+nnoremap gE :action GotoPreviousError<CR>
+" NOTE: gr is ReplaceWithRegister
+nnoremap gR :action GotoRelated<CR>
+nnoremap gc :action GotoClass<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap gt :action GotoTest<CR>
+nnoremap gU :action FindUsages<CR>
+
+" Remove?
 nnoremap <C-]> :action GotoImplementation<cr>
 nnoremap <C-[> :action GotoSuperMethod<cr>
 nnoremap <C-i> :action QuickImplementations<cr>
 nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
-nnoremap R :action Refactorings.QuickListPopupAction<CR>
-nnoremap ,t :action ActivateTerminalToolWindow<CR>
-nnoremap <C-t> :action ActivateTerminalToolWindow<CR>
+"nnoremap ,t :action ActivateTerminalToolWindow<CR>
 
 " run / build / test
 nnoremap <C-r> :action ChooseRunConfiguration<CR>
 nnoremap ,rr :action RunClass<CR>
 nnoremap ,rd :action DebugClass<CR>
-nnoremap ,rR :action Run<CR>
-nnoremap ,rD :action Debug<CR>
+nnoremap ,rf :action RerunFailedTests<CR>
 
 nnoremap <C-Down> :action MoveStatementDown<CR>
 nnoremap <C-Up> :action MoveStatementUp<CR>
 nnoremap <C-/> :action CommentByLineComment<CR>
+nnoremap <C-Right> :action NextTab<CR>
+nnoremap <C-Left> :action PreviousTab<CR>
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j
@@ -124,14 +165,15 @@ nnoremap ]q :action GotoNextError<CR>
 nnoremap [q :action GotoPreviousError<CR>
 
 " toggles
-nnoremap coh :action HideAllWindows<CR>:action ActivateProjectToolWindow<CR>
-nnoremap cow :action EditorToggleUseSoftWraps<CR>
-nnoremap col :action EditorToggleShowWhitespaces<CR>
-nnoremap cor :set relativenumber!<CR>
-nnoremap con :set number!<CR>
-nnoremap cod :action ToggleLineBreakpoint<CR>
-nnoremap cos :action EditorToggleShowWhitespaces<CR>
 nnoremap coc :action ChangeColorScheme<CR>
+nnoremap cod :action ToggleLineBreakpoint<CR>
+nnoremap coh :action HideAllWindows<CR>
+nnoremap col :action EditorToggleShowWhitespaces<CR>
+nnoremap con :set number!<CR>
+nnoremap cop :action PinActiveTabToggle<CR>
+nnoremap cor :set relativenumber!<CR>
+nnoremap cos :action EditorToggleShowWhitespaces<CR>
+nnoremap cow :action EditorToggleUseSoftWraps<CR>
 
 " tool windows
 nnoremap ,vv :action ActivateVersionControlToolWindow<CR>
@@ -140,5 +182,10 @@ nnoremap ,vs :action ActivateSonarLintToolWindow<CR>
 
 " scoped mappings
 " inoremap <C-X>= :normal action InsertRubyInjection<CR>
-inoremap <C-X>= #{}<Esc>i
+inoremap <C-X>= ${}<Esc>i
 
+" sandbox
+nnoremap <BS> :action Back<CR>
+nnoremap <C-BS> :action Forward<CR>
+nnoremap gb :action Back<CR>
+nnoremap gf :action Forward<CR>
