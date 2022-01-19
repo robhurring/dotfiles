@@ -56,10 +56,14 @@
                  ]
          }
 
-        {:des "e-mode: Emmet"
-         :rules [:e-mode
-                 ;; emmet
-                 ; [:spacebar {:key :!CTOup_arrow}] ;; cycle
+        {:des "space-mode Space"
+         :rules [:space-mode
+                 ; [:m [["moom" 1] [:!Tbackslash :m]] nil {:delayed {:invoked ["moom" 0] :canceled ["moom" 0]}}]
+                 ; [:m [:!Tbackslash] nil {:delayed {
+                 ;                                   :invoked ["moom" 0]
+                 ;                                   :canceled ["moom" 0]
+                 ;                                   }}]
+                 ; [:spacebar [:!Tbackslash] nil {:afterup :m}]
                  ; [:f {:key :!SCTOup_arrow}]
                  ; [:up_arrow {:key :!SCTOup_arrow}]
                  ; [:h {:key :!CTOleft_arrow}]
@@ -75,6 +79,8 @@
                  [:s [:launch "Slack"]]
                  [:w [:launch "Google Chrome"]]
                  [:i [:launch "IntelliJ IDEA"]]
+                 [:m [:launch "Spotify"]]
+                 [:spacebar [:!Tbackslash :spacebar]] ; moom
                  ]
          }
 
@@ -84,6 +90,11 @@
                  [:c [:!Ta :c]]
                  [:h [:!Ta :p]]
                  [:l [:!Ta :n]]
+                 [:1 [:!Ta :1]]
+                 [:2 [:!Ta :2]]
+                 [:3 [:!Ta :3]]
+                 [:4 [:!Ta :4]]
+                 [:5 [:!Ta :5]]
                  [:j [:!Oj]]
                  [:k [:!Ok]]
                  ]}
