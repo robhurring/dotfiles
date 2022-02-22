@@ -135,7 +135,8 @@ nnoremap gU :action FindUsages<CR>
 " Remove?
 nnoremap <C-]> :action GotoImplementation<cr>
 nnoremap <C-[> :action GotoSuperMethod<cr>
-nnoremap <C-i> :action QuickImplementations<cr>
+"nnoremap <C-i> :action QuickImplementations<cr>
+nnoremap <C-p> :action QuickImplementations<cr>
 nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
 "nnoremap ,t :action ActivateTerminalToolWindow<CR>
@@ -162,7 +163,7 @@ nnoremap ]m :action MethodDown<cr>
 nnoremap ]c :action VcsShowNextChangeMarker<cr>
 nnoremap [c :action VcsShowPrevChangeMarker<cr>
 nnoremap ]q :action GotoNextError<CR>
-nnoremap [q :action GotoPreviousError<CR>
+nnoremap [q :action GotoPreviousError<CR>ck)
 
 " toggles
 nnoremap coc :action ChangeColorScheme<CR>
@@ -173,7 +174,7 @@ nnoremap con :set number!<CR>
 nnoremap cop :action PinActiveTabToggle<CR>
 nnoremap cor :set relativenumber!<CR>
 nnoremap cos :action EditorToggleShowWhitespaces<CR>
-nnoremap cow :action EditorToggleUseSoftWraps<CR>
+nnoremap cow :action EditorToggleUseSoftWraps<CR>ck)
 
 " tool windows
 nnoremap ,vv :action ActivateVersionControlToolWindow<CR>
@@ -185,7 +186,10 @@ nnoremap ,vs :action ActivateSonarLintToolWindow<CR>
 inoremap <C-X>= ${}<Esc>i
 
 " sandbox
-nnoremap <BS> :action Back<CR>
-nnoremap <C-BS> :action Forward<CR>
+"nnoremap <C-o> :action Back<CR>
+"nnoremap <C-i> :action Forward<CR>
+
+"nnoremap <BS> :action Back<CR>
+"nnoremap <C-BS> :action Forward<CR>
 nnoremap gb :action Back<CR>
 nnoremap gf :action Forward<CR>

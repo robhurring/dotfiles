@@ -50,7 +50,7 @@
   ds = diff --stat
   empty = commit --allow-empty -m
   pu = push -u
-  citag = "!f() { TAG=$1 MSG=\"${*:2}\"; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
+  citag = "!f() { TAG=$1 MSG=\"${*:2}\"; MSG=${MSG:=`date`}; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
   wip = citag wip
   fix = citag fix
   wipe = !git citag wipe savepoint && git reset HEAD~1 --hard
