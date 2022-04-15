@@ -52,6 +52,10 @@ set ideastatusicon=gray
 vnoremap . :normal .<CR>
 vnoremap @ :normal! @
 
+" updown
+nnoremap <C-k> :action EditorUp<CR>
+nnoremap <C-j> :action EditorDown<CR>
+
 " esc
 inoremap jk <Esc>`^
 inoremap <C-c> <Esc>
@@ -175,6 +179,8 @@ nnoremap cop :action PinActiveTabToggle<CR>
 nnoremap cor :set relativenumber!<CR>
 nnoremap cos :action EditorToggleShowWhitespaces<CR>
 nnoremap cow :action EditorToggleUseSoftWraps<CR>ck)
+nnoremap com :action ToggleBookmark<CR>
+
 
 " tool windows
 nnoremap ,vv :action ActivateVersionControlToolWindow<CR>
