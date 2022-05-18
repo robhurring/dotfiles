@@ -6,7 +6,7 @@ export ZSH_MODE=${ZSH_MODE:-"vi"}
 export ZSH_VI_ESC=${ZSH_VI_ESC:-"jk"}
 export ZSH_THEME=${ZSH_THEME:-"default"}
 
-export HISTFILE=$XDG_CACHE_HOME/.zsh_history
+export HISTFILE=$XDG_CACHE_HOME/zsh_history
 export HISTSIZE=5000
 export SAVEHIST=5000
 export REPORTTIME=10
@@ -16,17 +16,21 @@ skip_global_compinit=${skip_global_compinit:-0}
 
 # stty erase \^H
 
+# see: https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt APPEND_HISTORY
 setopt AUTO_MENU
 setopt AUTO_PARAM_SLASH
 setopt AUTO_PUSHD
 setopt COMPLETE_IN_WORD
 setopt EXTENDED_HISTORY
+setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 setopt IGNORE_EOF
-setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt INC_APPEND_HISTORY
 setopt LOCAL_OPTIONS
 setopt LOCAL_TRAPS
 setopt NO_BG_NICE
