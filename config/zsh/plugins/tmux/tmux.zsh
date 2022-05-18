@@ -50,6 +50,23 @@ if `zstyle -t ':my:module:tmux' auto-start`; then
   fi
 fi
 
+TMUX_AUTO_REFRESH_ENV="${TMUX_AUTO_REFRESH_ENV:-1}"
+
+if [ "$TMUX_AUTO_REFRESH_ENV" -eq "1" ]; then
+  # Keep the shell updated with tmux's "update-environment" vars when re-attaching
+  if [ -n "$TMUX" ]; then
+    function refresh-tmux-env {
+    export $(tmux show-environment | grep "^KITTY")
+    export $(tmux show-environment | grep "^SSH")
+  }
+  else
+    function refresh-tmux-env { }
+  fi
+  function preexec {
+    refresh-tmux-env
+  }
+fi
+
 alias tml="tmux list-sessions"
 alias tma=tmux-attach
 alias tmd="tmux detach"
