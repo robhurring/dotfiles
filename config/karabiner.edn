@@ -80,6 +80,7 @@
                  [:w [:launch "Google Chrome"]]
                  [:i [:launch "IntelliJ IDEA"]]
                  [:m [:launch "Spotify"]]
+                 [:o [:launch "Obsidian"]]
                  [:spacebar [:!Tbackslash :spacebar]] ; moom
                  ]
          }
