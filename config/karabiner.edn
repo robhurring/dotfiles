@@ -81,6 +81,8 @@
                  [:i [:launch "IntelliJ IDEA"]]
                  [:m [:launch "Spotify"]]
                  [:o [:launch "Obsidian"]]
+                 [:a {:key :!CTa}] ; todoist - add
+                 [:l {:key :!CTt}] ; todoist - open
                  [:spacebar [:!Tbackslash :spacebar]] ; moom
                  ]
          }

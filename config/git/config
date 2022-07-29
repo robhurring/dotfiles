@@ -38,7 +38,7 @@
   brt = branch-time
   cleanup = "!f() { DEFAULT=$(git default); git branch --merged ${1-$DEFAULT} | grep -v " ${1-$DEFAULT}$" | xargs git branch -d; }; f"
   current-branch = rev-parse --abbrev-ref HEAD
-  default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+  default = !git remote show origin|grep 'HEAD branch'|awk -F': ' '{print $2}'
 
 # ===> commit
   amend = "commit --amend --no-edit"
@@ -51,7 +51,7 @@
   empty = commit --allow-empty -m
   pu = push -u
   citag = "!f() { TAG=$1 MSG=\"${*:2}\"; MSG=${MSG:=`date`}; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
-  wip = citag squash:wip
+  wip = citag squashme:wip
   fix = citag squash:fix
   wipe = !git citag wipe savepoint && git reset HEAD~1 --hard
 
@@ -157,7 +157,10 @@
 [commit]
   gpgsign = true
 [sync]
+  # run git cleanup after syncing
   cleanup = true
+  # detect file changes and run after syncing
+  update = true
 [pull]
   ff = only
 [gpg]

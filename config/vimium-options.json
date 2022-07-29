@@ -4,7 +4,7 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "unmapAll\n\n# movement\nmap j scrollDown\nmap k scrollUp\nmap gg scrollToTop\nmap G scrollToBottom\nmap d scrollPageDown\nmap u scrollPageUp\nmap f LinkHints.activateMode\nmap <c-d> scrollFullPageDown\nmap <c-u> scrollFullPageUp\n\n# forms\nmap gi focusInput\n\n# marks\nmap m Marks.activateCreateMode\nmap ` Marks.activateGotoMode\n\n# other\nmap yf LinkHints.activateModeToCopyLinkUrl\nmap <c-o> Vomnibar.activate\nmap <c-O> Vomnibar.activateInNewTab\nmap <c-f> Vomnibar.activateTabSelection\nmap <c-b> Vomnibar.activateBookmarks\nmap <c-B> Vomnibar.activateBookmarksInNewTab\n\n# search\nmap / enterFindMode\nmap n performFind\nmap N performBackwardsFind\nmap yy copyCurrentUrl\nmap ]] goNext\nmap [[ goPrevious",
+  "keyMappings": "unmapAll\n\n# movement\nmap gg scrollToTop\nmap G scrollToBottom\nmap <c-d> scrollFullPageDown\nmap <c-u> scrollFullPageUp\nmap yy copyCurrentUrl\nmap ]] goNext\nmap [[ goPrevious\n\n# forms\nmap gi focusInput\n\n# links\nmap f LinkHints.activateMode\nmap yf LinkHints.activateModeToCopyLinkUrl\n\n# search\nmap / enterFindMode\nmap n performFind\nmap N performBackwardsFind",
   "linkHintCharacters": "sadfjklewcmpgh",
   "linkHintNumbers": "0123456789sadfjklewcmpgh",
   "newTabUrl": "pages/blank.html",

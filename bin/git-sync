@@ -139,10 +139,10 @@ commits_behind_of_remote() {
     if [ "$remote_branch" ]; then
       git rev-list --left-only --count ${remote_branch}...HEAD
     else
-      printf '%s' "0"
+      printf '%d' 0
     fi
   else
-    printf '%s' "0"
+    printf '%d' 0
   fi
 }
 
@@ -153,10 +153,10 @@ commits_ahead_of_remote() {
     if [ "$remote_branch" ]; then
       git rev-list --right-only --count ${remote_branch}...HEAD
     else
-      printf '%s' "0"
+      printf '%d' 0
     fi
   else
-    printf '%s' "0"
+    printf '%d' 0
   fi
 }
 
@@ -221,10 +221,9 @@ print_log() {
 }
 
 do_update() {
-  local kind=$1
-  local upstream=$2
+  local kind="$1"
+  local upstream="$2"
   local start_sha="$(commit_short_sha)"
-  local stashed=0
   local cmd
 
   do_stash
@@ -248,13 +247,14 @@ do_update() {
 }
 
 do_fetch() {
-  run "git fetch $1 --quiet"
+  run "git fetch --all --quiet"
 }
 
 do_sync() {
-  local remote="origin"
+  local remote="${1:-origin}"
   local branch="$(branch_name)"
   local upstream
+  local clean=1
 
   local tracking_remote="$(tracking_remote)"
   local tracking_branch="$(tracking_branch)"
@@ -262,10 +262,10 @@ do_sync() {
   if [ "$tracking_remote" ] ; then
     remote="$tracking_remote"
   else
-    quiet "No remote found for '%s' assuming 'origin'" $(branch_name)
+    quiet "No remote found for '%s' using '%s'" $branch "$remote"
   fi
 
-  if [ "$tracking_branch" ] ; then
+  if [ -n "$tracking_branch" ] ; then
     branch="$tracking_branch"
     upstream="$tracking_branch"
   else
@@ -279,24 +279,28 @@ do_sync() {
   ahead=$(commits_ahead_of_remote "$upstream")
   behind=$(commits_behind_of_remote "$upstream")
 
-  if [ "$behind" -gt "0" ] && [ "$ahead" -gt "0" ]; then
-    success "Both local and remote branches have moved on. Branch '%s' needs to be rebased onto '%s'" $(branch_name) $upstream
-    do_update "rebase" $upstream
-  elif [ "$behind" -gt "0" ]; then
-    success "Local branch '%s' has not moved on. Fast-forwarding..." $(branch_name)
-    note "There are %d new commits on '%s'." $behind $upstream
-    do_update "merge" $upstream
-  elif [ "$ahead" -gt "0" ]; then
-    note "You have %d new commits on '%s'." $ahead $upstream
+  if [ $behind -gt 0 ] && [ $ahead -gt 0 ]; then
+    success "Both local and remote branches have moved on. Branch '%s' needs to be rebased onto '%s'" "$(branch_name)" "$upstream"
+    do_update "rebase" "$upstream"
+  elif [ $behind -gt 0 ]; then
+    success "Local branch '%s' has not moved on. Fast-forwarding..." "$(branch_name)"
+    note "There are %d new commits on '%s'." "$behind" "$upstream"
+    do_update "merge" "$upstream"
+  elif [ $ahead -gt 0 ]; then
+    note "You have %d new commits on '%s'." "$ahead" "$branch"
+    clean=0
   else
     success "Already up-to-date"
+    clean=0
   fi
 
-  local cleanup="$(git config sync.cleanup 2>/dev/null)"
-  if [ "$cleanup" == "true" ]; then
-    note "Cleaning merged branches"
-    exec git cleanup
+  if [ $clean -eq 1 ]; then
+    local cleanup="$(git config sync.cleanup 2>/dev/null)"
+    if [ "$cleanup" == "true" ]; then
+      note "Cleaning merged branches"
+      exec git cleanup
+    fi
   fi
 }
 
-do_sync
+do_sync "$@"

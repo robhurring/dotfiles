@@ -27,3 +27,5 @@ map gs` :code
 exmap wi surround https://gus.my.salesforce.com/apex/ADM_WorkLocator?bugorworknumber= #
 map gsw :wi
 
+exmap codeblock surround ``` ```
+map gsc :codeblock

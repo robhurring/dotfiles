@@ -52,13 +52,18 @@ set ideastatusicon=gray
 vnoremap . :normal .<CR>
 vnoremap @ :normal! @
 
-" updown
-nnoremap <C-k> :action EditorUp<CR>
-nnoremap <C-j> :action EditorDown<CR>
-
 " esc
 inoremap jk <Esc>`^
 inoremap <C-c> <Esc>
+
+in
+
+" updown -- remap ^K/^J to up/down and force IDE usage. mapping here doesn't like to work
+nnoremap <C-k> :action EditorUp<CR>
+sethandler <C-k> a:ide
+
+nnoremap <C-j> :action EditorDown<CR>
+sethandler <C-j> a:ide
 
 " splits
 nnoremap <leader>j <C-w>j
@@ -143,7 +148,7 @@ nnoremap <C-[> :action GotoSuperMethod<cr>
 nnoremap <C-p> :action QuickImplementations<cr>
 nnoremap <C-S-]> :action FindUsages<CR>
 nnoremap <leader>u :action HighlightUsagesInFile<cr>
-"nnoremap ,t :action ActivateTerminalToolWindow<CR>
+nnoremap ,t :action ActivateTerminalToolWindow<CR>
 
 " run / build / test
 nnoremap <C-r> :action ChooseRunConfiguration<CR>
