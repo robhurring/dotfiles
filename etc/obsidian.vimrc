@@ -7,8 +7,8 @@ imap jk <Esc>
 nmap j gj
 nmap k gk
 
-nmap $ g$
-nmap ^ g^
+" nmap $ g$
+" nmap ^ g^
 
 unmap <Space>
 nmap <Space>/ :nohl

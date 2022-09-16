@@ -56,14 +56,21 @@
                  ]
          }
 
-        {:des "space-mode Space"
-         :rules [:space-mode
+        {:des "e-mode" ; moom
+         :rules [:e-mode
+                 [:spacebar [:!Tbackslash :spacebar]] ; full
+                 [:f [:!Tbackslash :f]] ; focus
+                 [:l [:!Tbackslash :right_arrow]] ; right
+                 [:h [:!Tbackslash :left_arrow]] ; left
+                 [:m [:!Tbackslash :m]] ; main
+                 [:return_or_enter [:!Tbackslash :return_or_enter]] ; return
+                 [:close_bracket [:!Tbackslash :close_bracket]] ; detail-right
+                 [:open_bracket [:!Tbackslash :open_bracket]] ; detail-left
                  ; [:m [["moom" 1] [:!Tbackslash :m]] nil {:delayed {:invoked ["moom" 0] :canceled ["moom" 0]}}]
                  ; [:m [:!Tbackslash] nil {:delayed {
                  ;                                   :invoked ["moom" 0]
                  ;                                   :canceled ["moom" 0]
                  ;                                   }}]
-                 ; [:spacebar [:!Tbackslash] nil {:afterup :m}]
                  ; [:f {:key :!SCTOup_arrow}]
                  ; [:up_arrow {:key :!SCTOup_arrow}]
                  ; [:h {:key :!CTOleft_arrow}]
@@ -83,7 +90,7 @@
                  [:o [:launch "Obsidian"]]
                  [:a {:key :!CTa}] ; todoist - add
                  [:l {:key :!CTt}] ; todoist - open
-                 [:spacebar [:!Tbackslash :spacebar]] ; moom
+                 ; [:spacebar [:!Tbackslash :spacebar]] ; moom
                  ]
          }
 

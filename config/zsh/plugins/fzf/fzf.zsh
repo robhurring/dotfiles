@@ -2,26 +2,36 @@
 if (( ! $+commands[fzf] )); then
   return 1
 fi
-# [[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
+
+# Init FZF shell completions and keybindings
+[[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
 # Requires: FZF
 # Download: https://github.com/junegunn/fzf
 
-# Paths to search for `fuzzy-cds` command.
-export FUZZY_SEARCH_PATHS="~/Projects"
+# ===> FZF default settings
 
-# FZF default settings
-export FZF_DEFAULT_OPTS="--reverse --inline-info --extended --preview-window right:60%:wrap --height 100%"
-
+export FZF_DEFAULT_OPTS="--reverse --inline-info --extended --preview-window right:60%:wrap --height 100% --bind 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
 export FZF_COMMAND=fzf
 
-# brew install bat
-if ! type "bat" > /dev/null; then
-  export FZF_PREVIEW_OPTS="--preview 'cat {}'"
-else
-  export FZF_PREVIEW_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+# ===> Preview
+
+FILE_PREVIEW_COMMAND="cat {}"
+if type "bat" > /dev/null; then
+  FILE_PREVIEW_COMMAND='bat --style=numbers --color=always --line-range :500 {}'
 fi
 
+DIR_PREVIEW_COMMAND="ls"
+if type "tree" >/dev/null; then
+  DIR_PREVIEW_COMMAND="tree -C {}"
+fi
+
+export FZF_PREVIEW_OPTS="--preview '[[ -d {} ]] && $DIR_PREVIEW_COMMAND || ${FILE_PREVIEW_COMMAND}'"
+
+# ===> Completion Opts
+
+export FZF_COMPLETION_TRIGGER='**'
+export FZF_COMPLETION_OPTS="$FZF_PREVIEW_OPTS"
 export FZF_CTRL_T_OPTS="$FZF_PREVIEW_OPTS"
 
 # FZF: git checkout

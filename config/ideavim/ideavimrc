@@ -158,7 +158,8 @@ nnoremap ,rf :action RerunFailedTests<CR>
 
 nnoremap <C-Down> :action MoveStatementDown<CR>
 nnoremap <C-Up> :action MoveStatementUp<CR>
-nnoremap <C-/> :action CommentByLineComment<CR>
+"nnoremap <C-/> :action CommentByLineComment<CR>
+nmap <C-/> <Plug>CommentaryLine
 nnoremap <C-Right> :action NextTab<CR>
 nnoremap <C-Left> :action PreviousTab<CR>
 

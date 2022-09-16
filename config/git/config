@@ -100,6 +100,7 @@
   showUntrackedFiles = all
 [push]
   default = upstream
+  autoSetupRemote = true
 [user]
   name = robhurring
   email = robhurring@gmail.com

@@ -1,6 +1,8 @@
 if (( ! $+commands[tmux] )); then
+  echo "no"
   return 1
 fi
+
 
 # tmux-go: create, attach or switch to the given session
 #

@@ -93,7 +93,11 @@ precmd() {
   prompt_info
   PROMPT_vistatus
 
+  local segments chars
+  zstyle -s ':my:prompt' shorten-segments segments
+  zstyle -s ':my:prompt' shorten-chars chars
+
   # `%1v` - shortened path (%d)
-  psvar[1]=$(shortenpath $PWD)
+  psvar[1]=$(shortenpath $PWD $segments $chars)
 }
 
