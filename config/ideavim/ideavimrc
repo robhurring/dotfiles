@@ -18,22 +18,30 @@ set viminfo='10,/10,h,\"10,:10
 set wrapscan
 
 " emulated support
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
 set surround
 set exchange
-set multiple-cursors
-" change keybinds for multiple-cursors
-" SEE: https://stackoverflow.com/a/65430514
-nnomap <C-n> <Plug>NextWholeOccurrence
-xnomap <C-n> <Plug>NextWholeOccurrence
-nnomap g<C-n> <Plug>NextOccurrence
-xnomap g<C-n> <Plug>NextOccurrence
-nnomap <C-x> <Plug>SkipOccurrence
-xnomap <C-x> <Plug>SkipOccurrence
-nnomap <C-p> <Plug>RemoveOccurrence
-xnomap <C-p> <Plug>RemoveOccurrence
-
 set commentary
 set ReplaceWithRegister
+
+set vim-paragraph-motion
+set textobj-indent
+set matchit
+
+set multiple-cursors
+" change keybinds for multiple-cursors
+" NOTE: need to change keyboard to unicode hex input!
+" SEE: https://stackoverflow.com/a/65430514
+" g<M-n|p|x> - next, prev, skip
+"nnomap <M-n> <Plug>NextWholeOccurrence
+"xnomap <M-n> <Plug>NextWholeOccurrence
+"nnomap g<C-n> <Plug>NextOccurrence
+"xnomap g<C-n> <Plug>NextOccurrence
+"nnomap <C-x> <Plug>SkipOccurrence
+"xnomap <C-x> <Plug>SkipOccurrence
+"nnomap <C-p> <Plug>RemoveOccurrence
+"xnomap <C-p> <Plug>RemoveOccurrence
+
 set highlightedyank
 let g:highlightedyank_highlight_color = "rgba(100, 100, 200, 100)"
 let g:highlightedyank_highlight_duration = "350"
@@ -55,8 +63,6 @@ vnoremap @ :normal! @
 " esc
 inoremap jk <Esc>`^
 inoremap <C-c> <Esc>
-
-in
 
 " updown -- remap ^K/^J to up/down and force IDE usage. mapping here doesn't like to work
 nnoremap <C-k> :action EditorUp<CR>
