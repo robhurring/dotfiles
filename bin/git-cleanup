@@ -1,0 +1,76 @@
+#!/usr/bin/env sh
+
+# gcl: git-cleanup-remote-and-local-branches
+# credits: https://blog.takanabe.tokyo/en/2020/04/remove-squash-merged-local-git-branches/
+#
+# Cleaning up remote and local branch is delivered as follows:
+# 1. Prune remote branches when they are deleted or merged
+# 2. Remove local branches when their remote branches are removed
+# 3. Remove local branches when a master included squash and merge commits
+
+MASTER_BRANCH="master"
+
+colorize() {
+  printf "\033[${1}m${2}\033[0m\n" "${@:3}"
+}
+
+error() {
+  colorize "1;31" "$@"
+}
+
+success() {
+  colorize "1;32" "$@"
+}
+
+quiet() {
+  colorize "1;30" "$@"
+}
+
+note() {
+  colorize "33" "$@"
+}
+
+run() {
+  local cmd="$*"
+  colorize "0;37" "\e[7m%s" "$cmd"
+  eval $cmd
+}
+
+function git_prune_remote() {
+  run "git fetch --prune"
+}
+
+function git_remove_merged_local_branch() {
+  colorize  "0;34" "cleaning merged branches ($MASTER_BRANCH)"
+  git branch --merged | egrep -v "(^\*|$MASTER_BRANCH)" | xargs -I % git branch -d %
+}
+
+# When we use `Squash and merge` on GitHub,
+# `git branch --merged` cannot detect the squash-merged branches.
+# As a result, git_remove_merged_local_branch() cannot clean up
+# unused local branches. This function detects and removes local branches
+# when remote branches are squash-merged.
+#
+# There is an edge case. If you add suggested commits on GitHub,
+# the contents in local and remote are different. As a result,
+# This clean up function cannot remove local squash-merged branch.
+function git_remove_squash_merged_local_branch() {
+  colorize  "0;34" "cleaning squashed branches ($MASTER_BRANCH)"
+
+  git checkout -q $MASTER_BRANCH &&
+    git for-each-ref refs/heads/ "--format=%(refname:short)" |
+    while read branch; do
+      ancestor=$(git merge-base $MASTER_BRANCH $branch) &&
+        [[ $(git cherry $MASTER_BRANCH $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == "-"* ]] &&
+        git branch -D $branch
+    done
+}
+
+# Clean up remote and local branches
+function gcl() {
+  git_prune_remote
+  git_remove_merged_local_branch
+  git_remove_squash_merged_local_branch
+}
+
+gcl
