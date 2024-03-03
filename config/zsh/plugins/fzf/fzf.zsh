@@ -49,13 +49,9 @@ fuzzy-co() {
     query=""
   fi
 
-  local branch=$(cat << EOS | ruby | $FZF_COMMAND -1 -i $flags --query=$query --preview 'git log --pretty=format:"%h (%cr) %aN -- %s" {}'
-    puts %x{git branch}.split("\n").map{|b|b.strip.gsub(%r{remotes/[^/]+/?|\*\s*|HEAD.*},'')}.reject(&:empty?).uniq.sort_by{|b|b.scan(%r/\\d+/o).map(&:to_i)}
-EOS
-)
+  local branch=$(git branch --format "%(refname:short)" | $FZF_COMMAND -1 -i $flags --query=$query --preview 'git log --pretty=format:"%h (%cr) %aN -- %s" {}' | tr -d '[:space:]')
 
   if [[ $branch != "" ]]; then
-    [[ -f Gemfile.lock ]] && git checkout Gemfile.lock 2>/dev/null
     git checkout $branch
   fi
 }
