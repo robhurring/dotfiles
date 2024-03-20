@@ -87,6 +87,9 @@ zstyle ':vcs_info:git*:*' get-revision true
 zstyle ':vcs_info:git*:*' check-for-changes true
 zstyle ':vcs_info:git*:*' check-for-staged-changes true
 zstyle ':vcs_info:git*+set-message:*' hooks git-remote-st
+# NOTE: to skip large git repos set this in .zshrc
+# SEE: https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Version-Control-Information
+# zstyle ':vcs_info:*' disable-patterns "$HOME/code(|/*)"
 
 precmd() {
   vcs_info

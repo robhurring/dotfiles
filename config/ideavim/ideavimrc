@@ -22,6 +22,7 @@ set wrapscan
 set surround
 set exchange
 set commentary
+set ideamarks
 set ReplaceWithRegister
 
 set vim-paragraph-motion
@@ -65,10 +66,10 @@ inoremap jk <Esc>`^
 inoremap <C-c> <Esc>
 
 " updown -- remap ^K/^J to up/down and force IDE usage. mapping here doesn't like to work
-nnoremap <C-k> :action EditorUp<CR>
+nmap <C-k> <Action>(EditorUp)
 sethandler <C-k> a:ide
 
-nnoremap <C-j> :action EditorDown<CR>
+nmap <C-j> <Action>(EditorDown)
 sethandler <C-j> a:ide
 
 " splits
@@ -87,48 +88,52 @@ vnoremap < <gv
 vnoremap > >gv
 
 " closing
-nnoremap <C-q> :action CloseContent<CR>
+nmap <C-q> <Action>(CloseContent)
 
 " copy/paste
 noremap Y y$
 
 " misc
 "nnoremap J mzJ`z
-nnoremap J :action EditorJoinLines<CR>
-nnoremap U :action $Redo<CR>
+nmap J <Action>(EditorJoinLines)
+nmap U <Action>($Redo)
 nnoremap * *``
 nnoremap <leader>xs :source ~/.ideavimrc<CR>
+nmap ,yp <Action>(CopyContentRootPath)
 
 " search
 nnoremap <leader>/ :noh<CR>
-nnoremap g/ :action FindInPath<CR>
+nmap g/ <Action>(FindInPath)<CR>
 " nnoremap n :action FindNext<CR>
 " nnoremap N :action FindPrevious<CR>
 
 " formatting
-nnoremap <leader>= :action ReformatCode<CR>
-nnoremap <leader>o :action OptimizeImports<CR>
-nnoremap <leader>c :action CodeCleanup<CR>
-nnoremap <leader>i :action CodeInspection.OnEditor<CR>
-nnoremap <leader>s :action SonarLint.AnalyzeFiles<CR>
+nmap <leader>= <Action>(ReformatCode)
+nmap <leader>o <Action>(OptimizeImports)
+nmap <leader>c <Action>(CodeCleanup)
+nmap <leader>i <Action>(CodeInspection.OnEditor)
+nmap <leader>s <Action>(SonarLint.AnalyzeFiles)
 
 " project navigation
-nnoremap ,o :action ManageRecentProjects<CR>
+nmap ,o <Action>(ManageRecentProjects)<CR>
 
 " file navigation
 nnoremap <C-Space> :action SearchEverywhere<CR>
 "nnoremap <leader>o :action GotoClass<CR>
 nnoremap <space><space> :action FileStructurePopup<CR>
-nnoremap <leader>r :action GotoRelated<CR>
+nmap <leader>r <Action>(GotoRelated)<CR>
 "nnoremap <BS> <C-^><CR>
 nnoremap <silent> ,, :b#<CR>
 nnoremap <C-;> :b#<CR>
+nmap <leader>t <Action>(ActivateTODOToolWindow)<CR>
 
 " vcs
-nnoremap ,ga :action Annotate<CR>
-nnoremap ,go :action Github.Open.In.Browser<CR>
-vnoremap ,go :action Github.Open.In.Browser<CR>
-nnoremap ,pr :action Github.View.Pull.Request<CR>
+nmap <leader>g <Action>(Vcs.Operations.Popup)
+nmap ,ga <Action>(Annotate)
+nmap ,gh <Action>(Vcs.ShowHistoryForBlock)
+nmap ,go <Action>(Github.Open.In.Browser)
+vmap ,go <Action>(Github.Open.In.Browser)
+nmap ,pr <Action>(Github.View.Pull.Request)
 
 " paste
 map gp gr
@@ -136,68 +141,69 @@ map gp gr
 " editing / info
 nnoremap <Tab> :action ShowIntentionActions<CR>
 nnoremap R :action Refactorings.QuickListPopupAction<CR>
-nnoremap ge :action GotoNextError<CR>
-nnoremap gE :action GotoPreviousError<CR>
+nnoremap ga :action AIIntentionsActionGroup<CR>
+
+nmap ge <Action>(GotoNextError)
+nmap gE <Action>(GotoPreviousError)
 " NOTE: gr is ReplaceWithRegister
-nnoremap gR :action GotoRelated<CR>
-nnoremap gc :action GotoClass<CR>
-nnoremap gi :action GotoImplementation<CR>
-nnoremap gd :action GotoDeclaration<CR>
-nnoremap gs :action GotoSuperMethod<CR>
-nnoremap gt :action GotoTest<CR>
-nnoremap gU :action FindUsages<CR>
+nmap gR <Action>(GotoRelated)
+"nmap gc <Action>(GotoClass)
+nmap gi <Action>(GotoImplementation)
+nmap gd <Action>(GotoDeclaration)
+nmap gs <Action>(GotoSuperMethod)
+nmap gt <Action>(GotoTest)
+nmap ,u <Action>(FindUsages)
 
 " Remove?
-nnoremap <C-]> :action GotoImplementation<cr>
-nnoremap <C-[> :action GotoSuperMethod<cr>
+nmap <C-]> <Action>(GotoImplementation)
+nmap <C-[> <Action>(GotoSuperMethod)
 "nnoremap <C-i> :action QuickImplementations<cr>
-nnoremap <C-p> :action QuickImplementations<cr>
-nnoremap <C-S-]> :action FindUsages<CR>
-nnoremap <leader>u :action HighlightUsagesInFile<cr>
-nnoremap ,t :action ActivateTerminalToolWindow<CR>
+nmap <C-p> <Action>(QuickImplementations)
+nmap <C-S-]> <Action>(FindUsages)
+nmap <leader>u <Action>(HighlightUsagesInFile)
+nmap ,t <Action>(ActivateTerminalToolWindow)
 
 " run / build / test
-nnoremap <C-r> :action ChooseRunConfiguration<CR>
-nnoremap ,rr :action RunClass<CR>
-nnoremap ,rd :action DebugClass<CR>
-nnoremap ,rf :action RerunFailedTests<CR>
+nmap <C-r> <Action>(ChooseRunConfiguration)
+nmap ,rr <Action>(RunClass)
+nmap ,rd <Action>(DebugClass)
+nmap ,rf <Action>(RerunFailedTests)
 
-nnoremap <C-Down> :action MoveStatementDown<CR>
-nnoremap <C-Up> :action MoveStatementUp<CR>
-"nnoremap <C-/> :action CommentByLineComment<CR>
+nnoremap <C-Down> :action MoveStatementDown
+nnoremap <C-Up> :action MoveStatementUp
+"nmap <C-/> <Action>(CommentByLineComment)
 nmap <C-/> <Plug>CommentaryLine
-nnoremap <C-Right> :action NextTab<CR>
-nnoremap <C-Left> :action PreviousTab<CR>
+nmap <C-Right> <Action>(NextTab)
+nmap <C-Left> <Action>(PreviousTab)
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j
 nnoremap ]<space> o<esc>k
-nnoremap [q :action PreviousOccurence<cr>
-nnoremap ]q :action NextOccurence<cr>
-nnoremap [m :action MethodUp<cr>
-nnoremap ]m :action MethodDown<cr>
-nnoremap ]c :action VcsShowNextChangeMarker<cr>
-nnoremap [c :action VcsShowPrevChangeMarker<cr>
-nnoremap ]q :action GotoNextError<CR>
-nnoremap [q :action GotoPreviousError<CR>ck)
+nmap [q <Action>(PreviousOccurence)
+<Action>(]q )<Action>(NextOccurence)
+nmap [m <Action>(MethodUp)
+nmap ]m <Action>(MethodDown)
+nmap ]c <Action>(VcsShowNextChangeMarker)
+nmap [c <Action>(VcsShowPrevChangeMarker)
+nmap ]q <Action>(GotoNextError)
+nmap [q <Action>(GotoPreviousError)
 
 " toggles
-nnoremap coc :action ChangeColorScheme<CR>
-nnoremap cod :action ToggleLineBreakpoint<CR>
-nnoremap coh :action HideAllWindows<CR>
-nnoremap col :action EditorToggleShowWhitespaces<CR>
 nnoremap con :set number!<CR>
-nnoremap cop :action PinActiveTabToggle<CR>
 nnoremap cor :set relativenumber!<CR>
-nnoremap cos :action EditorToggleShowWhitespaces<CR>
-nnoremap cow :action EditorToggleUseSoftWraps<CR>ck)
-nnoremap com :action ToggleBookmark<CR>
-
+nmap coc <Action>(ChangeColorScheme)
+nmap cod <Action>(ToggleLineBreakpoint)
+nmap coh <Action>(HideAllWindows)
+nmap col <Action>(EditorToggleShowWhitespaces)
+nmap cop <Action>(PinActiveTabToggle)
+nmap cos <Action>(EditorToggleShowWhitespaces)
+nmap cow <Action>(EditorToggleUseSoftWraps)
+nmap com <Action>(ToggleBookmark)
 
 " tool windows
-nnoremap ,vv :action ActivateVersionControlToolWindow<CR>
-nnoremap ,vf :action ActivateFindBugs-IDEAToolWindow<CR>
-nnoremap ,vs :action ActivateSonarLintToolWindow<CR>
+nmap ,vv <Action>(ActivateVersionControlToolWindow)
+nmap ,vf <Action>(ActivateFindBugs-IDEAToolWindow)
+nmap ,vs <Action>(ActivateSonarLintToolWindow)
 
 " scoped mappings
 " inoremap <C-X>= :normal action InsertRubyInjection<CR>
@@ -209,5 +215,5 @@ inoremap <C-X>= ${}<Esc>i
 
 "nnoremap <BS> :action Back<CR>
 "nnoremap <C-BS> :action Forward<CR>
-nnoremap gb :action Back<CR>
-nnoremap gf :action Forward<CR>
+nmap gb <Action>(Back)<CR>
+nmap gf <Action>(Forward)<CR>

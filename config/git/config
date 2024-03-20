@@ -40,6 +40,10 @@
   current-branch = rev-parse --abbrev-ref HEAD
   default = !git remote show origin|grep 'HEAD branch'|awk -F': ' '{print $2}'
 
+  # creating formatted branches
+  brtag = "!f() { FORMAT=\"$1\" TICKET=\"$2\" MSG=\"${*:3}\"; BRANCH=$(printf \"$FORMAT\" \"$TICKET\" \"${MSG// /-}\"); git checkout -b ${BRANCH%/}; }; f"
+  brcp = !git current-branch|pbcopy
+
 # ===> commit
   amend = "commit --amend --no-edit"
   unamend = git reset --soft HEAD@{1}
@@ -50,10 +54,19 @@
   ds = diff --stat
   empty = commit --allow-empty -m
   pu = push -u
-  citag = "!f() { TAG=$1 MSG=\"${*:2}\"; MSG=${MSG:=`date`}; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
-  wip = citag squashme:wip
-  fix = citag squash:fix
-  wipe = !git citag wipe savepoint && git reset HEAD~1 --hard
+  citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; git commit -qm \"$OUT\"; }; f"
+  ; citag = "!f() { TAG=$1 MSG=\"${*:2}\"; MSG=${MSG:=`date`}; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
+
+  wip = citag 'wip: %s'
+  fix = citag 'fix: %s'
+  feat = citag 'feat: %s'
+  chore = citag 'chore: %s'
+  doc = citag 'doc: %s'
+  test = citag 'test: %s'
+  refactor = citag 'refactor: %s'
+
+  wipe = !git citag 'wipe savepoint' && git reset HEAD~1 --hard
+  unchange = checkout master --
 
 # ===> sync
   fa = fetch --all
@@ -62,7 +75,7 @@
   new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
   reset-all = !sh -c 'git add --all && git reset --hard'
   undo = reset HEAD~1 --mixed
-  up = "!f() { BASE=\"${1:-master}\"; git fetch --all && git rebase $BASE; }; f"
+  up = "!f() { BASE=\"${1:-master}\"; git pull --rebase origin $BASE; }; f"
 
 # ===> merging
   resolve = mergetool
@@ -168,3 +181,6 @@
 	program = gpg
 [init]
 	defaultBranch = master
+[include]
+  path = ~/.gitconfig.local
+

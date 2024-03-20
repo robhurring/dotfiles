@@ -1,6 +1,8 @@
 # vim:ft=zsh
 
 # vcs_info docs: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
+zstyle ':vcs_info:*' enable git
+
 zstyle ':vcs_info:git*' formats "%m %F{white}%b%c%u %B%F{black}%5.7i%%b%%f"
 zstyle ':vcs_info:git*' actionformats "%m %B%F{white}%b%c%u (%a) %B%F{black}%5.7i%%b%%f"
 zstyle ':vcs_info:git*' patch-format "%F{green}%n%f/%F{red}%c%f/%F{white}%a%f"
