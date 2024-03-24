@@ -4,11 +4,11 @@ if (( ! $+commands[tmux] )); then
 fi
 
 
-# tmux-go: create, attach or switch to the given session
+# tmux-attach: create, attach or switch to the given session
 #
 # Example:
 #
-#   tmux-go "ohai"
+#   tmux-attach "ohai"
 #
 #   -> when "ohai" exists and in current session, switch
 #   -> when "ohai" exists and in no session, attach
