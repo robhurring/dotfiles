@@ -196,7 +196,7 @@ nmap cod <Action>(ToggleLineBreakpoint)
 nmap coh <Action>(HideAllWindows)
 nmap col <Action>(EditorToggleShowWhitespaces)
 nmap cop <Action>(PinActiveTabToggle)
-nmap cos <Action>(EditorToggleShowWhitespaces)
+nmap cos <Action>(EditorGutterToggleGlobalStickyLines)
 nmap cow <Action>(EditorToggleUseSoftWraps)
 nmap com <Action>(ToggleBookmark)
 
