@@ -131,8 +131,13 @@ nmap <leader>t <Action>(ActivateTODOToolWindow)<CR>
 nmap <leader>g <Action>(Vcs.Operations.Popup)
 nmap ,ga <Action>(Annotate)
 nmap ,gh <Action>(Vcs.ShowHistoryForBlock)
-nmap ,go <Action>(Github.Open.In.Browser)
-vmap ,go <Action>(Github.Open.In.Browser)
+vmap ,gh <Action>(Vcs.ShowHistoryForBlock)
+nmap ,go <Action>(uk.co.ben_gibson.git.link.ui.actions.gutter.BrowserAction)
+vmap ,go <Action>(uk.co.ben_gibson.git.link.ui.actions.gutter.BrowserAction)
+nmap ,gc <Action>(uk.co.ben_gibson.git.link.ui.actions.gutter.CopyAction)
+vmap ,gc <Action>(uk.co.ben_gibson.git.link.ui.actions.gutter.CopyAction)
+nmap ,gm <Action>(uk.co.ben_gibson.git.link.ui.actions.gutter.MarkdownAction)
+vmap ,gm <Action>(uk.co.ben_gibson.git.link.ui.actions.gutter.MarkdownAction)
 nmap ,pr <Action>(Github.View.Pull.Request)
 
 " paste
@@ -199,6 +204,7 @@ nmap cop <Action>(PinActiveTabToggle)
 nmap cos <Action>(EditorGutterToggleGlobalStickyLines)
 nmap cow <Action>(EditorToggleUseSoftWraps)
 nmap com <Action>(ToggleBookmark)
+nmap cog <Action>(Github.Pull.Request.Review.In.Editor.Toggle)
 
 " tool windows
 nmap ,vv <Action>(ActivateVersionControlToolWindow)
