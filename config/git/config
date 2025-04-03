@@ -41,7 +41,8 @@
   default = !git remote show origin|grep 'HEAD branch'|awk -F': ' '{print $2}'
 
   # creating formatted branches
-  brtag = "!f() { FORMAT=\"$1\" TICKET=\"$2\" MSG=\"${*:3}\"; BRANCH=$(printf \"$FORMAT\" \"$TICKET\" \"${MSG// /-}\"); git checkout -b ${BRANCH%/}; }; f"
+  brtag = "!f() { BRANCH=`git brname $*`; git checkout -b ${BRANCH%/}; }; f"
+  brname = "!f() { FORMAT=\"$1\" TICKET=\"$2\" MSG=\"${*:3}\"; printf $FORMAT $TICKET ${MSG// /-}; }; f"
   brcp = !git current-branch|pbcopy
 
 # ===> commit
@@ -55,7 +56,8 @@
   empty = commit --allow-empty -m
   pu = push -u
   citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; git commit -qm \"$OUT\"; }; f"
-  ; citag = "!f() { TAG=$1 MSG=\"${*:2}\"; MSG=${MSG:=`date`}; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
+  ; citag debug
+  ; citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; }; f"
 
   wip = citag 'wip: %s'
   fix = citag 'fix: %s'
@@ -129,25 +131,33 @@
 [web]
   browser = ch
 [merge]
-  tool = diffmerge
-  guitool = diffmerge
+  tool = nvimk
+  guitool = idea
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
-[mergetool "editor"]
+[mergetool "nvim"]
   # cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
   cmd = nvim -f -c "Gdiffsplit!" "$MERGED"
 [mergetool "diffmerge"]
   cmd = diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"
   trustExitCode = true
+[mergetool "idea"]
+  cmd = idea merge $(cd $(dirname \"$LOCAL\") && pwd)/$(basename \"$LOCAL\") $(cd $(dirname \"$REMOTE\") && pwd)/$(basename \"$REMOTE\") $(cd $(dirname \"$BASE\") && pwd)/$(basename \"$BASE\") $(cd $(dirname \"$MERGED\") && pwd)/$(basename \"$MERGED\")
+  trustExitCode = true
 [diff]
   tool = nvimdiff
-  guitool = diffmerge
+  guitool = idea
+[difftool]
+  prompt = false
 [difftool "nvimdiff"]
   cmd = nvim -d $BASE $LOCAL
 [difftool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -merge $MERGED
 [difftool "diffmerge"]
   cmd = diffmerge "$LOCAL" "$REMOTE"
+[difftool "idea"]
+  ; cmd = idea diff $(cd $(dirname \"$LOCAL\") && pwd)/$(basename \"$LOCAL\") $(cd $(dirname \"$REMOTE\") && pwd)/$(basename \"$REMOTE\")
+  cmd = idea diff \"$LOCAL\" \"$REMOTE\"
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com/"
@@ -184,3 +194,5 @@
 [include]
   path = ~/.gitconfig.local
 
+[trace2]
+	maxFiles = 800

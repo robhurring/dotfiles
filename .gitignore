@@ -1,16 +1,6 @@
-.DS_Store
-*.pyc
-*.orig
-.netrwhist
-
-# ignore package control stuff
-
-*.last-run
-*.cache
-*.*-ca-bundle
-other/st2/User/FileHistory.json
-other/st3/User/GoSublime
-other/st3/User/*.cache
-config/tmux/local.conf
-
-node_modules
+event-log-metadata
+jdbc-drivers
+ssl
+port
+port.lock
+updatedBrokenPlugins.db
