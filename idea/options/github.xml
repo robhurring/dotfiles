@@ -1,0 +1,10 @@
+<application>
+  <component name="GithubAccounts">
+    <account name="rhurring" id="33ef8981-c8f5-4f47-8bcd-a8eb1bc0dd08">
+      <server useHttp="false" host="gitcore.soma.salesforce.com" />
+    </account>
+    <account name="rhurring" id="21873030-e48f-4eb3-9327-a538c84f502c">
+      <server useHttp="false" host="git.soma.salesforce.com" />
+    </account>
+  </component>
+</application>

@@ -1,0 +1,16 @@
+<filetype binary="false" description="SAQL (syntax highlighting only)" name="SAQL">
+  <highlighting>
+    <options>
+      <option name="LINE_COMMENT" value="--" />
+      <option name="HAS_BRACES" value="true" />
+      <option name="HAS_BRACKETS" value="true" />
+      <option name="HAS_PARENS" value="true" />
+      <option name="HAS_STRING_ESCAPES" value="true" />
+    </options>
+    <keywords keywords="Additive;Multiplicative;None;as;asc;by;case;cogroup;dateCols;desc;else;end;false;fill;filter;first;foreach;generate;group;ignoreLast;in;is;last;length;limit;load;matches;model;not;null;offset;order;over;partition;predictionInterval;seasonality;then;timeseries;true;union;when;with;within" ignore_case="false" />
+    <keywords2 keywords="abs;acos;ascii;asin;atan;average;avg;ceil;chr;coalesce;cos;count;date;date_diff;date_to_epoch;date_to_string;day_in_month;day_in_quarter;day_in_week;day_in_year;daysBetween;degrees;ends_with;exp;first;floor;grouping;index_of;last;len;log;lower;ltrim;max;median;min;mv_to_string;now;number_to_string;percentile_cont;percentile_disc;pi;power;radians;rank;regr_intercept;regr_r2;regr_slope;replace;rollup;round;rtrim;sign;sin;sqrt;starts_with;stddev;stddevp;string_to_number;substr;sum;tan;toDate;toString;trim;trunc;unique;upper;var;varp" />
+    <keywords3 keywords="!=;%;*;+;,;-;.;..;/;::;&lt;;&lt;=;&lt;&gt;;=;==;&gt;;&gt;=">
+      <keyword name=";" />
+    </keywords3>
+  </highlighting>
+</filetype>

@@ -1,0 +1,17 @@
+<filetype binary="false" description="DataWeave script (syntax highlighting only)" name="DataWeave">
+  <highlighting>
+    <options>
+      <option name="LINE_COMMENT" value="//" />
+      <option name="COMMENT_START" value="/*" />
+      <option name="COMMENT_END" value="*/" />
+      <option name="HAS_BRACES" value="true" />
+      <option name="HAS_BRACKETS" value="true" />
+      <option name="HAS_PARENS" value="true" />
+      <option name="HAS_STRING_ESCAPES" value="true" />
+    </options>
+    <keywords keywords="%dw;Any;Array;Boolean;Date;Number;Object;String;and;annotation;as;async;at;case;data;default;do;else;enum;false;for;from;fun;if;import;input;is;match;matches;not;ns;null;or;output;private;separator;throw;true;type;unless;update;using;var;yield" ignore_case="false" />
+    <keywords2 keywords="app;application/apex;application/csv;application/java;application/json;application/xlsx;application/xml;attributes;authentication;cause;childErrors;clusterId;correlationId;credentials;dataType;description;detailedDescription;encoding;env;error;errorMessage;errorType;failingComponent;fileSeparator;flow;home;host;ip;javaVendor;javaVersion;locale;message;mule;name;nodeId;osArch;osName;osVersion;payload;principal;properties;registry;server;standalone;systemProperties;timeZone;tmpDir;userDir;userHome;userName;vars;version;workDir" />
+    <keywords3 keywords="!;!=;#;$;%;&amp;;*;+;,;-;---;-&gt;;-};.;/;:;::;&lt;;&lt;&lt;;&lt;=;=;==;&gt;;&gt;=;&gt;&gt;;?;@;@.;^;_;{-;{-|;{|;|;|-};|};~;~=" />
+    <keywords4 keywords="filter;map;reduce" />
+  </highlighting>
+</filetype>

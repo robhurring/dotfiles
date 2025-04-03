@@ -1,0 +1,11 @@
+<application>
+  <component name="DependencyUISettings">
+    <option name="SCOPE_TYPE" value="file" />
+  </component>
+  <component name="UISettings">
+    <option name="HIDE_TABS_IF_NEED" value="false" />
+    <option name="LEFT_HORIZONTAL_SPLIT" value="true" />
+    <option name="MARK_MODIFIED_TABS_WITH_ASTERISK" value="true" />
+    <option name="UI_DENSITY" value="COMPACT" />
+  </component>
+</application>

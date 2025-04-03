@@ -1,0 +1,209 @@
+{
+    "plugins": {
+        "Builder Generator": {
+            "enabled": false,
+            "dependencies": [
+                "com.intellij.modules.java"
+            ]
+        },
+        "GrepConsole": {
+            "dependencies": [
+                "com.intellij.modules.lang"
+            ]
+        },
+        "IdeaVIM": {
+            "dependencies": [
+                "com.intellij.modules.platform"
+            ]
+        },
+        "InnerBuilder": {
+            "category": "UI",
+            "dependencies": [
+                "com.intellij.modules.lang",
+                "com.intellij.modules.java",
+                "com.intellij.modules.vcs"
+            ]
+        },
+        "MavenRunHelper": {
+            "dependencies": [
+                "org.jetbrains.idea.maven",
+                "com.intellij.modules.java"
+            ]
+        },
+        "PlantUML integration": {
+            "dependencies": [
+                "com.intellij.modules.platform"
+            ]
+        },
+        "com.andrey4623.rainbowcsv": {
+            "dependencies": [
+                "com.intellij.modules.lang"
+            ]
+        },
+        "com.burkett.builderberg": {
+            "category": "UI"
+        },
+        "com.dmarcotte.handlebars": {
+            "dependencies": [
+                "com.intellij.modules.lang"
+            ]
+        },
+        "com.dubreuia": {
+            "enabled": false
+        },
+        "com.google.idea.bazel.ijwb": {},
+        "com.intellij.bigdatatools": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "com.intellij.bigdatatools.core",
+                "com.intellij.bigdatatools.binary.files",
+                "com.intellij.bigdatatools.rfs",
+                "com.intellij.bigdatatools.metastore.core",
+                "com.intellij.bigdatatools.spark",
+                "com.intellij.bigdatatools.zeppelin",
+                "com.intellij.bigdatatools.flink",
+                "com.intellij.bigdatatools.kafka"
+            ]
+        },
+        "com.intellij.bigdatatools.binary.files": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "com.intellij.bigdatatools.core"
+            ]
+        },
+        "com.intellij.bigdatatools.core": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "intellij.charts",
+                "intellij.grid.impl"
+            ]
+        },
+        "com.intellij.bigdatatools.flink": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "com.intellij.bigdatatools.core",
+                "com.intellij.bigdatatools.binary.files",
+                "com.intellij.bigdatatools.rfs",
+                "com.intellij.bigdatatools.metastore.core"
+            ]
+        },
+        "com.intellij.bigdatatools.kafka": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "com.intellij.bigdatatools.core"
+            ]
+        },
+        "com.intellij.bigdatatools.metastore.core": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "com.intellij.bigdatatools.core",
+                "com.intellij.bigdatatools.binary.files",
+                "com.intellij.bigdatatools.rfs"
+            ]
+        },
+        "com.intellij.bigdatatools.rfs": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "com.intellij.bigdatatools.core",
+                "com.intellij.bigdatatools.binary.files"
+            ]
+        },
+        "com.intellij.bigdatatools.spark": {},
+        "com.intellij.bigdatatools.zeppelin": {
+            "dependencies": [
+                "com.intellij.modules.ultimate",
+                "com.intellij.bigdatatools.core",
+                "com.intellij.bigdatatools.binary.files",
+                "com.intellij.bigdatatools.rfs",
+                "com.intellij.bigdatatools.metastore.core",
+                "com.intellij.bigdatatools.spark"
+            ]
+        },
+        "com.intellij.ml.llm": {},
+        "com.salesforce.cdb": {
+            "dependencies": [
+                "com.intellij.modules.lang",
+                "com.intellij.java",
+                "intellij.indexing.shared.core"
+            ]
+        },
+        "com.salesforce.codegenie": {
+            "enabled": false,
+            "dependencies": [
+                "com.intellij.modules.platform",
+                "com.intellij.modules.lang"
+            ]
+        },
+        "com.salesforce.powerclick": {
+            "enabled": false,
+            "dependencies": [
+                "com.intellij.modules.lang",
+                "com.intellij.modules.java",
+                "com.intellij.modules.vcs",
+                "Git4Idea"
+            ]
+        },
+        "com.sourcegraph.jetbrains": {
+            "enabled": false,
+            "dependencies": [
+                "com.intellij.modules.platform"
+            ]
+        },
+        "cucumber-java": {
+            "dependencies": [
+                "gherkin",
+                "JUnit",
+                "com.intellij.modules.java"
+            ]
+        },
+        "gherkin": {
+            "dependencies": [
+                "com.intellij.modules.xml",
+                "org.intellij.intelliLang"
+            ]
+        },
+        "google-java-format": {
+            "dependencies": [
+                "com.intellij.modules.java",
+                "com.intellij.modules.lang",
+                "com.intellij.modules.platform"
+            ]
+        },
+        "io.nimbly.tzatziki": {
+            "enabled": false,
+            "dependencies": [
+                "com.intellij.modules.platform",
+                "com.intellij.modules.lang",
+                "com.intellij.modules.xml",
+                "org.intellij.intelliLang",
+                "com.intellij.properties",
+                "gherkin"
+            ]
+        },
+        "izhangzhihao.rainbow.brackets": {
+            "dependencies": [
+                "com.intellij.modules.lang",
+                "com.intellij.modules.xml"
+            ]
+        },
+        "name.kropp.intellij.makefile": {
+            "dependencies": [
+                "com.intellij.modules.lang"
+            ]
+        },
+        "org.mule.tooling.intellij.dataweave.v2": {
+            "dependencies": [
+                "com.intellij.properties",
+                "org.jetbrains.idea.maven",
+                "com.intellij.modules.java",
+                "org.jetbrains.plugins.yaml"
+            ]
+        },
+        "uk.co.ben-gibson.remote.repository.mapper": {
+            "dependencies": [
+                "com.intellij.modules.platform",
+                "Git4Idea"
+            ]
+        }
+    }
+}

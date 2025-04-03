@@ -1,0 +1,15 @@
+<filetype binary="false" description="JavaScript files (improved syntax highlighting)" name="IlluminatedCloudJavaScript">
+  <highlighting>
+    <options>
+      <option name="LINE_COMMENT" value="//" />
+      <option name="COMMENT_START" value="/*" />
+      <option name="COMMENT_END" value="*/" />
+      <option name="HAS_BRACES" value="true" />
+      <option name="HAS_BRACKETS" value="true" />
+      <option name="HAS_PARENS" value="true" />
+      <option name="HAS_STRING_ESCAPES" value="true" />
+    </options>
+    <keywords keywords="arguments;await;break;case;catch;class;const;continue;debugger;default;delete;do;else;enum;eval;export;extends;false;finally;for;from;function;if;implements;import;in;instanceof;interface;let;new;null;package;private;protected;public;return;static;super;switch;this;throw;true;try;typeof;var;void;while;with;yield" ignore_case="false" />
+    <keywords4 keywords="@api;@track;@wire" />
+  </highlighting>
+</filetype>

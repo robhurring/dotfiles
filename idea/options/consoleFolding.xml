@@ -1,0 +1,9 @@
+<application>
+  <component name="ConsoleFoldingSettings">
+    <option name="addedPositive">
+      <list>
+        <option value="kafka-producer-network-thread | producer-1" />
+      </list>
+    </option>
+  </component>
+</application>

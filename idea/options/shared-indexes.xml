@@ -1,0 +1,11 @@
+<application>
+  <component name="download-consent" pauseIndexing="true">
+    <option name="consentItems">
+      <item download="ALLOWED" kind="mvn" url="https://index-cdn.jetbrains.com/v2/mvn" />
+      <item download="ALLOWED" kind="jdk" url="https://index-cdn.jetbrains.com/v2/jdk" />
+      <item download="ALLOWED" kind="project" url="https://nexus.soma.salesforce.com/nexus/content/sites/intellij/indexes/project/core__main" />
+      <item download="ALLOWED" kind="project" url="https://nexus.soma.salesforce.com/nexus/repository/intellij/indexes/project/core__main" />
+      <item download="ALLOWED" kind="project" url="https://nexus-proxy.repo.local.sfdc.net/nexus/repository/intellij/indexes/project/core__main" />
+    </option>
+  </component>
+</application>

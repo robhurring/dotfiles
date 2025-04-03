@@ -1,0 +1,10 @@
+<application>
+  <component name="ShowUsagesSettings">
+    <option name="GROUP_BY_FILE_STRUCTURE" value="true" />
+  </component>
+  <component name="UsageViewSettings">
+    <option name="IS_EXPANDED" value="true" />
+    <option name="GROUP_BY_SCOPE" value="true" />
+    <option name="PREVIEW_USAGES_SPLITTER_PROPORTIONS" value="0.47675103" />
+  </component>
+</application>
