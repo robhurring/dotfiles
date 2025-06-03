@@ -1,0 +1,64 @@
+{
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "vscode-neovim.compositeKeys": {
+        "jk": {
+            "command": "vscode-neovim.escape"
+        }
+    },
+    "vscode-neovim.neovimExecutablePaths.linux": "/opt/homebrew/bin/nvim",
+    "vscode-neovim.neovimExecutablePaths.win32": "",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+    "cody.commandCodeLenses": true,
+    "cody.telemetry.level": "off",
+    "cody.autocomplete.formatOnAccept": true,
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "editor.fontFamily": "Hasklig",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "editor.occurrencesHighlight": false,
+    "editor.selectionHighlight": true,
+    "terminal.external.osxExec": "Kitty.app",
+    "security.workspace.trust.enabled": false,
+    "workbench.colorTheme": "Darcula",
+    "vim.enableNeovim": true,
+    "vim.neovimUseConfigFile": false,
+    "vim.highlightedyank.enable": true,
+    "vim.incsearch": true,
+    "vim.easymotion": false,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.leader": "<space>",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j", "k"
+            ],
+            "after": ["<esc>"]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["K"],
+            "commands": ["lineBreakInsert"]
+        },
+        {
+            "before": ["<leader>", "/"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["<leader>", "="],
+            "commands": ["editor.actions.formatDocument"],
+            "silent": true
+        },
+        {
+            "before": ["*"],
+            "after": ["*", "`", "`"]
+        }
+    ],
+    "vim.commandLineModeKeyBindings": [
+    
+    ]
+}
