@@ -1,0 +1,271 @@
+#!/usr/bin/env bash
+
+# Wrapper script for todoist CLI
+# Supports subcommands: sync, list, add, and passes through all other commands
+
+# Configuration
+CACHE_DIR="$HOME/.cache/today"
+SYNC_TIME_FILE="$CACHE_DIR/sync.time"
+SYNC_INTERVAL=3600  # 1 hour in seconds
+
+# Check if todoist is available on PATH
+if ! command -v todoist &> /dev/null; then
+    echo "Error: 'todoist' command not found in PATH" >&2
+    echo "Please install the todoist CLI tool first." >&2
+    exit 1
+fi
+
+# Function to perform sync and update timestamp
+do_sync() {
+    echo "Syncing with Todoist..." >&2
+    if todoist sync; then
+        # Create cache directory if it doesn't exist
+        mkdir -p "$CACHE_DIR"
+        # Update timestamp file
+        date +%s > "$SYNC_TIME_FILE"
+    else
+        echo "Sync failed." >&2
+        exit 1
+    fi
+}
+
+# Function to check if sync is needed based on timestamp
+should_sync() {
+    # If timestamp file doesn't exist, we should sync
+    if [ ! -f "$SYNC_TIME_FILE" ]; then
+        return 0
+    fi
+    
+    # Get last sync time and current time
+    last_sync=$(cat "$SYNC_TIME_FILE" 2>/dev/null || echo 0)
+    current_time=$(date +%s)
+    time_diff=$((current_time - last_sync))
+    
+    # Check if more than an hour has passed
+    [ $time_diff -ge $SYNC_INTERVAL ]
+}
+
+# Function to show filtered list (overdue, P1, or due today)
+do_list() {
+    # Get today's date in the format todoist uses (YYYY-MM-DD)
+    today=$(date +%Y-%m-%d)
+    
+    # Sync before getting tasks
+    if should_sync; then
+        do_sync
+    fi
+    
+    echo "=== Today's Priority Tasks ===" >&2
+    echo "" >&2
+    
+    # Show overdue tasks
+    echo "📅 Overdue:" >&2
+    todoist list --filter "overdue" 2>/dev/null || echo "  (none)" >&2
+    echo "" >&2
+    
+    # Show P1 priority tasks
+    echo "🔥 Priority 1:" >&2
+    todoist list --filter "p1" 2>/dev/null || echo "  (none)" >&2
+    echo "" >&2
+    
+    # Show tasks due today
+    echo "📋 Due Today:" >&2
+    todoist list --filter "due: $today" 2>/dev/null || echo "  (none)" >&2
+}
+
+# Function to count tasks in each category
+do_count() {
+    # Get today's date in the format todoist uses (YYYY-MM-DD)
+    today=$(date +%Y-%m-%d)
+    
+    # Sync before getting tasks
+    if should_sync; then
+        do_sync
+    fi
+    
+    # Count overdue tasks
+    overdue_count=$(todoist list --filter "overdue" 2>/dev/null | wc -l | tr -d ' ')
+    
+    # Count P1 priority tasks
+    p1_count=$(todoist list --filter "p1" 2>/dev/null | wc -l | tr -d ' ')
+    
+    # Count tasks due today
+    today_count=$(todoist list --filter "due: $today" 2>/dev/null | wc -l | tr -d ' ')
+    
+    # Check if -a flag is provided for total count
+    if [ "$2" = "-a" ]; then
+        total_count=$((overdue_count + p1_count + today_count))
+        echo "$total_count"
+    else
+        echo "$overdue_count:$p1_count:$today_count"
+    fi
+}
+
+# Function to add tasks using todoist quick add
+do_add() {
+    # Remove the "add" command from arguments
+    shift
+    
+    # Check if any task content was provided
+    if [ $# -eq 0 ]; then
+        echo "Error: No task content provided" >&2
+        echo "Usage: $0 add <task description>" >&2
+        echo "Example: $0 add \"Buy groceries today p1\"" >&2
+        exit 1
+    fi
+    
+    # Use todoist quick-add with all remaining arguments
+    # Quick add supports natural language like "today", "tomorrow", "p1", etc.
+    if todoist quick "$*"; then
+        echo "Task added successfully" >&2
+    else
+        echo "Failed to add task" >&2
+        exit 1
+    fi
+}
+
+# Function to complete tasks using FZF selection
+do_complete() {
+    # Check if fzf is available
+    if ! command -v fzf &> /dev/null; then
+        echo "Error: 'fzf' command not found in PATH" >&2
+        echo "Please install fzf to use the complete command." >&2
+        echo "You can install it with: brew install fzf" >&2
+        exit 1
+    fi
+    
+    # Sync before getting tasks
+    if should_sync; then
+        do_sync
+    fi
+    
+    echo "Loading tasks..." >&2
+    
+    # Get all tasks in CSV format, skip header, and format for FZF
+    # Format: <ID: Priority> <DueDate> <Project> <Content>
+    formatted_tasks=$(todoist --csv list 2>/dev/null | \
+        sed 's/\x1b\[[0-9;]*m//g' | \
+        tail -n +2 | \
+        awk -F',' '{
+            # Extract fields (handling potential commas in content)
+            id = $1
+            priority = $2
+            due_date = $3
+            project = $4
+            # Content is everything from field 6 onwards (field 5 is labels)
+            content = ""
+            for(i=6; i<=NF; i++) {
+                if(i > 6) content = content ","
+                content = content $i
+            }
+            # Format: <ID: Priority> [DueDate] Project Content
+            if (due_date != "") {
+                printf "<%s: %s> [%s] %s %s\n", id, priority, due_date, project, content
+            } else {
+                printf "<%s: %s> %s %s\n", id, priority, project, content
+            }
+        }')
+    
+    # Let user select tasks with fzf
+    selected_tasks=$(echo "$formatted_tasks" | \
+        fzf --prompt="Select tasks to complete (TAB for multiple): " \
+            --height=40% \
+            --border \
+            --preview-window=hidden \
+            --multi)
+    
+    # Check if user selected any tasks (didn't cancel)
+    if [ -z "$selected_tasks" ]; then
+        echo "No tasks selected" >&2
+        exit 0
+    fi
+    
+    # Process each selected task
+    echo "$selected_tasks" | while IFS= read -r selected_task; do
+        # Extract the ID from the formatted line: <ID: Priority> ...
+        task_id=$(echo "$selected_task" | sed 's/^<\([^:]*\):.*$/\1/')
+        
+        # Validate that we got a task ID
+        if [ -z "$task_id" ]; then
+            echo "Error: Could not extract task ID from selection" >&2
+            continue
+        fi
+        
+        echo "Completing task: $selected_task" >&2
+        
+        # Complete the task using todoist close
+        if todoist close "$task_id"; then
+            echo "Task completed successfully!" >&2
+        else
+            echo "Failed to complete task" >&2
+        fi
+    done
+}
+
+# Function to show usage
+show_usage() {
+    echo "Usage: $0 <command> [options]"
+    echo ""
+    echo "Common commands:"
+    echo "  sync [-f]            Sync with Todoist servers (cached for 1 hour, use -f to force)"
+    echo "  list                 List tasks (default command)"
+    echo "  count [-a]           Count tasks by category (overdue:p1:today) or total with -a"
+    echo "  add <task>           Add a new task using quick add (supports natural language)"
+    echo "  complete             Complete a task using FZF selection"
+    echo ""
+    echo "Add command examples:"
+    echo "  add \"Buy groceries today p1\"     - High priority task due today"
+    echo "  add \"Meeting tomorrow 2pm\"       - Task with specific time"
+    echo "  add \"Project review #work\"       - Task with project label"
+    echo ""
+    echo "Options:"
+    echo "  -h                   Show this help message"
+    echo ""
+    echo "All other arguments are passed through to the todoist CLI."
+    echo "Run 'todoist --help' for full command reference."
+}
+
+# Check for help flag
+if [ "$1" = "-h" ]; then
+    show_usage
+    exit 0
+fi
+
+# Default to "list" command if no arguments provided
+if [ $# -eq 0 ]; then
+    set -- "list"
+fi
+
+# Handle sync command specially
+if [ "$1" = "sync" ]; then
+    force_sync=false
+    
+    # Check for force flag
+    if [ "$2" = "-f" ]; then
+        force_sync=true
+    fi
+    
+    # Determine if we should sync
+    if [ "$force_sync" = true ]; then
+        do_sync
+    elif should_sync; then
+        do_sync
+    else
+        last_sync=$(cat "$SYNC_TIME_FILE")
+        last_sync_readable=$(date -r "$last_sync" 2>/dev/null || echo "unknown")
+        echo "Already synced recently (last sync: $last_sync_readable)." >&2
+        echo "Use 'sync -f' to force a sync." >&2
+    fi
+elif [ "$1" = "list" ]; then
+    do_list
+elif [ "$1" = "count" ]; then
+    do_count "$@"
+elif [ "$1" = "add" ]; then
+    do_add "$@"
+elif [ "$1" = "complete" ]; then
+    do_complete
+else
+    # Pass all other commands directly to todoist
+    exec todoist "$@"
+fi
+
