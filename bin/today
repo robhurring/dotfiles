@@ -202,6 +202,102 @@ do_complete() {
     done
 }
 
+# Function to modify tasks using FZF selection
+do_modify() {
+    # Check if fzf is available
+    if ! command -v fzf &> /dev/null; then
+        echo "Error: 'fzf' command not found in PATH" >&2
+        echo "Please install fzf to use the modify command." >&2
+        echo "You can install it with: brew install fzf" >&2
+        exit 1
+    fi
+    
+    # Remove the "mod" command from arguments to get modify parameters
+    shift
+    
+    # Check if any modify parameters were provided
+    if [ $# -eq 0 ]; then
+        echo "Error: No modify parameters provided" >&2
+        echo "Usage: $0 modify <modify-options>" >&2
+        echo "Example: $0 modify --due tomorrow --priority 2" >&2
+        exit 1
+    fi
+    
+    # Store the modify arguments
+    modify_args="$*"
+    
+    # Sync before getting tasks
+    if should_sync; then
+        do_sync
+    fi
+    
+    echo "Loading tasks..." >&2
+    
+    # Get all tasks in CSV format, skip header, and format for FZF
+    # Format: <ID: Priority> [DueDate] Project Content
+    formatted_tasks=$(todoist --csv list 2>/dev/null | \
+        sed 's/\x1b\[[0-9;]*m//g' | \
+        tail -n +2 | \
+        awk -F',' '{
+            # Extract fields (handling potential commas in content)
+            id = $1
+            priority = $2
+            due_date = $3
+            project = $4
+            # Content is everything from field 6 onwards (field 5 is labels)
+            content = ""
+            for(i=6; i<=NF; i++) {
+                if(i > 6) content = content ","
+                content = content $i
+            }
+            # Format: <ID: Priority> [DueDate] Project Content
+            if (due_date != "") {
+                printf "<%s: %s> [%s] %s %s\n", id, priority, due_date, project, content
+            } else {
+                printf "<%s: %s> %s %s\n", id, priority, project, content
+            }
+        }')
+    
+    # Let user select tasks with fzf
+    selected_tasks=$(echo "$formatted_tasks" | \
+        fzf --prompt="Select tasks to modify (TAB for multiple): " \
+            --height=40% \
+            --border \
+            --preview-window=hidden \
+            --multi)
+    
+    # Check if user selected any tasks (didn't cancel)
+    if [ -z "$selected_tasks" ]; then
+        echo "No tasks selected" >&2
+        exit 0
+    fi
+    
+    echo "Modify parameters: $modify_args" >&2
+    echo "" >&2
+    
+    # Process each selected task
+    echo "$selected_tasks" | while IFS= read -r selected_task; do
+        # Extract the ID from the formatted line: <ID: Priority> ...
+        task_id=$(echo "$selected_task" | sed 's/^<\([^:]*\):.*$/\1/')
+        
+        # Validate that we got a task ID
+        if [ -z "$task_id" ]; then
+            echo "Error: Could not extract task ID from selection" >&2
+            continue
+        fi
+        
+        echo "Modifying task: $selected_task" >&2
+        
+        # Modify the task using todoist modify with the provided arguments
+        if todoist modify "$task_id" $modify_args; then
+            echo "Task modified successfully!" >&2
+        else
+            echo "Failed to modify task" >&2
+        fi
+        echo "" >&2
+    done
+}
+
 # Function to show usage
 show_usage() {
     echo "Usage: $0 <command> [options]"
@@ -212,6 +308,7 @@ show_usage() {
     echo "  count [-a]           Count tasks by category (overdue:p1:today) or total with -a"
     echo "  add <task>           Add a new task using quick add (supports natural language)"
     echo "  complete             Complete a task using FZF selection"
+    echo "  modify <modify-options> Modify a task using FZF selection"
     echo ""
     echo "Add command examples:"
     echo "  add \"Buy groceries today p1\"     - High priority task due today"
@@ -264,6 +361,8 @@ elif [ "$1" = "add" ]; then
     do_add "$@"
 elif [ "$1" = "complete" ]; then
     do_complete
+elif [ "$1" = "modify" ]; then
+    do_modify "$@"
 else
     # Pass all other commands directly to todoist
     exec todoist "$@"
