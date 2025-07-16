@@ -8,7 +8,7 @@
 # 2. Remove local branches when their remote branches are removed
 # 3. Remove local branches when a master included squash and merge commits
 
-MASTER_BRANCH="master"
+MASTER_BRANCH=$(git default)
 
 colorize() {
   printf "\033[${1}m${2}\033[0m\n" "${@:3}"
