@@ -145,10 +145,11 @@
   cmd = idea merge $(cd $(dirname \"$LOCAL\") && pwd)/$(basename \"$LOCAL\") $(cd $(dirname \"$REMOTE\") && pwd)/$(basename \"$REMOTE\") $(cd $(dirname \"$BASE\") && pwd)/$(basename \"$BASE\") $(cd $(dirname \"$MERGED\") && pwd)/$(basename \"$MERGED\")
   trustExitCode = true
 [diff]
-  tool = nvimdiff
-  guitool = idea
+  tool = kitty
+  guitool = kitty.gui
 [difftool]
   prompt = false
+  trustExitCode = true
 [difftool "nvimdiff"]
   cmd = nvim -d $BASE $LOCAL
 [difftool "opendiff"]
@@ -158,6 +159,10 @@
 [difftool "idea"]
   ; cmd = idea diff $(cd $(dirname \"$LOCAL\") && pwd)/$(basename \"$LOCAL\") $(cd $(dirname \"$REMOTE\") && pwd)/$(basename \"$REMOTE\")
   cmd = idea diff \"$LOCAL\" \"$REMOTE\"
+[difftool "kitty"]
+    cmd = kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitten diff $LOCAL $REMOTE
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com/"
