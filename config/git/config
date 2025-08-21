@@ -58,6 +58,7 @@
   citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; git commit -qm \"$OUT\"; }; f"
   ; citag debug
   ; citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; }; f"
+  ; citag = "!f() { TAG=$1 MSG=\"${*:2}\"; MSG=${MSG:=`date`}; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
 
   wip = citag 'wip: %s'
   fix = citag 'fix: %s'
@@ -117,8 +118,8 @@
   default = upstream
   autoSetupRemote = true
 [user]
-  name = robhurring
-  email = robhurring@gmail.com
+	name = Rob Hurring
+	email = rhurring@salesforce.com
   signingkey=5C33DE2A
 [credential]
   helper = osxkeychain
@@ -131,8 +132,8 @@
 [web]
   browser = ch
 [merge]
-  tool = nvimk
-  guitool = idea
+  tool = intellij
+  guitool = intellij
 [mergetool "opendiff"]
   cmd = opendiff $LOCAL $REMOTE -ancestor $BASE -merge $MERGED
 [mergetool "nvim"]
@@ -144,6 +145,11 @@
 [mergetool "idea"]
   cmd = idea merge $(cd $(dirname \"$LOCAL\") && pwd)/$(basename \"$LOCAL\") $(cd $(dirname \"$REMOTE\") && pwd)/$(basename \"$REMOTE\") $(cd $(dirname \"$BASE\") && pwd)/$(basename \"$BASE\") $(cd $(dirname \"$MERGED\") && pwd)/$(basename \"$MERGED\")
   trustExitCode = true
+[difftool "intellij"]
+  cmd = idea diff $LOCAL $REMOTE --wait
+[mergetool "intellij"]
+  cmd = idea merge $LOCAL $REMOTE $BASE $MERGED --wait
+  trustExitCode = false
 [diff]
   tool = kitty
   guitool = kitty.gui
@@ -198,6 +204,5 @@
 	defaultBranch = master
 [include]
   path = ~/.gitconfig.local
-
 [trace2]
 	maxFiles = 800

@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# Configuration
+DOCS_DIR="$HOME/docs"
+
+# Function to create a new markdown document
+create_doc() {
+    # Check if filename is provided
+    if [ -z "$1" ]; then
+        echo "Error: Please provide a filename"
+        echo "Usage: docs new <filename>"
+        exit 1
+    fi
+
+    # Ensure docs directory exists
+    if [ ! -d "$DOCS_DIR" ]; then
+        echo "Creating docs directory at $DOCS_DIR"
+        mkdir -p "$DOCS_DIR"
+    fi
+
+    # Convert filename to filesystem safe format
+    safe_filename=$(echo "$1" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd '[:alnum:]-_')
+    
+    # Add .md extension if not present
+    if [[ ! "$safe_filename" =~ \.md$ ]]; then
+        safe_filename="${safe_filename}.md"
+    fi
+
+    # Create the markdown file with basic structure in the docs directory
+    cat > "$DOCS_DIR/$safe_filename" << EOF
+# ${1}
+
+## Overview
+
+## Details
+
+## References
+EOF
+
+    echo "Created new document: $DOCS_DIR/$safe_filename"
+}
+
+# Function to open Cursor at the docs directory
+open_docs() {
+    # Create docs directory if it doesn't exist
+    if [ ! -d "$DOCS_DIR" ]; then
+        echo "Creating docs directory at $DOCS_DIR"
+        mkdir -p "$DOCS_DIR"
+    fi
+
+    # Open Cursor at the docs directory
+    echo "Opening Cursor at $DOCS_DIR"
+    open -a "Cursor" "$DOCS_DIR"
+}
+
+# Main command handling
+case "$1" in
+    "new")
+        create_doc "$2"
+        ;;
+    "open")
+        open_docs
+        ;;
+    *)
+        echo "Usage: docs <command>"
+        echo ""
+        echo "Commands:"
+        echo "  new <filename>    Create a new markdown document"
+        echo "  open             Open Cursor at the docs directory"
+        exit 1
+        ;;
+esac
