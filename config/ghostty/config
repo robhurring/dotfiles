@@ -1,0 +1,18 @@
+# config docs: https://ghostty.org/docs/config/reference
+
+font-family = Hasklig
+font-size = 15.0
+
+theme = nordfox
+
+# urls
+# link = true
+link-url = true
+
+# closing
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+# mac settings
+macos-titlebar-proxy-icon = hidden
+macos-icon = blueprint

@@ -116,6 +116,7 @@ nmap <leader>s <Action>(SonarLint.AnalyzeFiles)
 
 " project navigation
 nmap ,o <Action>(ManageRecentProjects)<CR>
+"nmap ,t <Action>(ReopenClosedTab)<CR>
 
 " file navigation
 nnoremap <C-Space> :action SearchEverywhere<CR>
@@ -216,7 +217,7 @@ nmap ,co <Action>(com.anthropic.code.plugin.actions.OpenClaudeInTerminalAction)
 " tool windows
 nmap ,vv <Action>(ActivateVersionControlToolWindow)
 nmap ,vf <Action>(ActivateFindBugs-IDEAToolWindow)
-nmap ,vs <Action>(ActivateSonarLintToolWindow)
+nmap ,vs <Action>(ActivateStructureToolWindow)
 
 " scoped mappings
 " inoremap <C-X>= :normal action InsertRubyInjection<CR>

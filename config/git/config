@@ -68,9 +68,11 @@
   doc = citag 'doc: %s'
   test = citag 'test: %s'
   refactor = citag 'refactor: %s'
+  re = refactor
 
   wipe = !git citag 'wipe savepoint' && git reset HEAD~1 --hard
   unchange = checkout master --
+  recommit = "!f() { if [ -f .git/COMMIT_EDITMSG ]; then git commit -m \"$(cat .git/COMMIT_EDITMSG)\"; else echo 'No COMMIT_EDITMSG file found'; fi; }; f"
 
 # ===> sync
   fa = fetch --all
@@ -107,6 +109,7 @@
 [core]
   whitespace = space-before-tab,tabwidth=2,trailing-space
   editor = "nvim"
+  ; hooksPath = ~/.config/git/hooks
 [help]
   autocorrect = 1
 [status]

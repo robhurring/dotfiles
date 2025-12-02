@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+#
+# Check for dependency file changes and run appropriate update commands
+# Usage: git-update-deps [old-ref] [new-ref]
+#
+# Without arguments, it compares the currently checked-out branch with its upstream branch.
+# With arguments, it compares between the specified refs.
+
+set -e
+
+# Get the refs to compare
+if [ $# -eq 0 ]; then
+  # Default behavior - check changes between HEAD and upstream
+  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  UPSTREAM_BRANCH=$(git rev-parse --abbrev-ref "$CURRENT_BRANCH"@{upstream} 2>/dev/null || echo "")
+  
+  if [ -z "$UPSTREAM_BRANCH" ]; then
+    echo "No upstream branch set for current branch."
+    exit 0
+  fi
+  
+  OLD_REF="$UPSTREAM_BRANCH"
+  NEW_REF="HEAD"
+elif [ $# -eq 2 ]; then
+  # Use provided refs
+  OLD_REF="$1"
+  NEW_REF="$2"
+else
+  echo "Usage: git-update-deps [old-ref] [new-ref]"
+  exit 1
+fi
+
+# Get changed files
+CHANGED_FILES=$(git diff --name-only "$OLD_REF" "$NEW_REF" 2>/dev/null || echo "")
+
+# If no files changed (or refs don't exist), exit
+if [ -z "$CHANGED_FILES" ]; then
+  exit 0
+fi
+
+# Check for Python dependency changes (uv.lock or requirements.txt)
+if echo "$CHANGED_FILES" | grep -q "uv.lock\|requirements.txt"; then
+  if command -v uv &> /dev/null; then
+    echo "Python dependencies changed. Running 'uv sync'..."
+    uv sync
+  elif command -v pip &> /dev/null; then
+    echo "Python dependencies changed. Running 'pip install -r requirements.txt'..."
+    pip install -r requirements.txt
+  else
+    echo "Python dependencies changed but neither uv nor pip is available."
+  fi
+fi
+
+# Check for Node.js dependency changes
+if echo "$CHANGED_FILES" | grep -q "package.json\|package-lock.json\|yarn.lock"; then
+  if [ -f "package.json" ]; then
+    if [ -f "yarn.lock" ] && command -v yarn &> /dev/null; then
+      echo "Node.js dependencies changed. Running 'yarn install'..."
+      yarn install
+    elif command -v npm &> /dev/null; then
+      echo "Node.js dependencies changed. Running 'npm install'..."
+      npm install
+    else
+      echo "Node.js dependencies changed but neither yarn nor npm is available."
+    fi
+  fi
+fi
+
+# Check for Ruby dependency changes
+if echo "$CHANGED_FILES" | grep -q "Gemfile\|Gemfile.lock"; then
+  if command -v bundle &> /dev/null; then
+    echo "Ruby dependencies changed. Running 'bundle install'..."
+    bundle install
+  else
+    echo "Ruby dependencies changed but bundler is not available."
+  fi
+fi
+
+# Check for Rust dependency changes
+if echo "$CHANGED_FILES" | grep -q "Cargo.lock\|Cargo.toml"; then
+  if command -v cargo &> /dev/null; then
+    echo "Rust dependencies changed. Running 'cargo fetch'..."
+    cargo fetch
+  else
+    echo "Rust dependencies changed but cargo is not available."
+  fi
+fi
+
+# Check for Go dependency changes
+if echo "$CHANGED_FILES" | grep -q "go.mod\|go.sum"; then
+  if command -v go &> /dev/null; then
+    echo "Go dependencies changed. Running 'go mod download'..."
+    go mod download
+  else
+    echo "Go dependencies changed but go is not available."
+  fi
+fi
+
+# Add more dependency checks as needed
+
+exit 0

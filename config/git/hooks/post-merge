@@ -1,0 +1,5 @@
+#!/bin/bash
+# Hook executed after a successful merge (including git pull)
+
+# Run the update dependencies script with the previous HEAD and current HEAD
+git-update-deps ORIG_HEAD HEAD

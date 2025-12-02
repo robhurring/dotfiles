@@ -1,0 +1,15 @@
+#!/bin/bash
+# Hook executed after a checkout operation
+
+# Arguments provided to this hook:
+# $1 - the ref of the previous HEAD
+# $2 - the ref of the new HEAD
+# $3 - flag indicating if it's a branch checkout (1) or a file checkout (0)
+
+# Only run for branch checkouts, not file checkouts
+if [ "$3" != 1 ]; then
+    exit 0
+fi
+
+# Run the update dependencies script with the old and new HEAD
+git-update-deps "$1" "$2"
