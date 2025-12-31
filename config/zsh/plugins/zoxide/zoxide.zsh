@@ -8,5 +8,5 @@ export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
 
 # loadup zoxide
 eval "$(zoxide init zsh)"
-alias j-z
+alias j=z
 
