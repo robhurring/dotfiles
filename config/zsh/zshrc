@@ -49,6 +49,7 @@ bindkey '^t' history-beginning-search-forward
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
+bindkey '^Xgc' 'git commit -m ""\C-b'
 
 # edit command in editor
 autoload -z edit-command-line
@@ -66,6 +67,9 @@ zle -N self-insert url-quote-magic
 for lib ($ZHOME/lib/*.zsh); do
   source $lib
 done
+
+# zsh modules
+autoload zmv
 
 # load our shared config
 for lib ($ZHOME/share/*); do
