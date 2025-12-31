@@ -55,6 +55,9 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
+# zsh hook
+autoload -Uz add-zsh-hook
+
 # zsh magic
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
