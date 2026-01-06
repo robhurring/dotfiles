@@ -1,0 +1,11 @@
+# vim: ft=zsh
+
+# jq
+if (( $+commands[jq] )); then
+  alias -g JQ='| jq'
+fi
+
+alias -g NE='2>/dev/null'
+alias -g DN='2>/dev/null'
+alias -g NUL='>/dev/null 2>&1'
+alias -g C='| pbcopy'

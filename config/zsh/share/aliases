@@ -1,3 +1,5 @@
+# vim: ft=zsh
+
 # Navigation
 alias ls='ls -hH'
 alias ll='ls -lahF'
