@@ -10,6 +10,7 @@
   staged = diff --cached
   tar = "!f(){ git archive --format=tgz --prefix=$(basename $PWD)/ HEAD; }; f"
   serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+  pytype = "!f() { FILES=$(git diff --name-only $(git default)|grep -E '\\.py$'); if [ -n \"$FILES\" ]; then echo \"---> Running pytype on changed Python files\"; git diff --stat --color=always $(git default) -- $FILES | sed 's/^/    /'; echo; echo \"---> Analyzing files with pytype\"; echo \"$FILES\" | xargs uv run pytype --keep-going --jobs auto 2>&1 | sed 's/^/    /'; else echo \"---> No Python files changed\"; fi; }; f"
 
 # ===> assume
   assume   = update-index --assume-unchanged
