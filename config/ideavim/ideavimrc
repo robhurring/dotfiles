@@ -132,7 +132,6 @@ nmap <leader>t <Action>(ActivateTODOToolWindow)<CR>
 nmap <leader>g <Action>(Vcs.Operations.Popup)
 nmap ,ga <Action>(Annotate)
 nmap ,gh <Action>(Vcs.ShowHistoryForBlock)
-vmap ,gh <Action>(Vcs.ShowHistoryForBlock)
 
 nmap ,go <Action>(uk.co.ben_gibson.git.link.ui.actions.menu.BrowserAction)
 vmap ,go <Action>(uk.co.ben_gibson.git.link.ui.actions.menu.BrowserAction)

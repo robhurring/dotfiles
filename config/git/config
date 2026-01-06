@@ -41,9 +41,16 @@
   default = !git remote show origin|grep 'HEAD branch'|awk -F': ' '{print $2}'
 
   # creating formatted branches
-  brtag = "!f() { BRANCH=`git brname $*`; git checkout -b ${BRANCH%/}; }; f"
-  brname = "!f() { FORMAT=\"$1\" TICKET=\"$2\" MSG=\"${*:3}\"; printf $FORMAT $TICKET ${MSG// /-}; }; f"
+  brtag = "!f() { FORMAT=\"$1\" TICKET=\"$2\" MSG=\"${*:3}\"; BRANCH=$(printf \"$FORMAT\" \"$TICKET\" \"${MSG// /-}\"); git checkout -b ${BRANCH%/}; }; f"
   brcp = !git current-branch|pbcopy
+  wibr = "!git brtag \"u/$USER/%s/%s\""
+
+  # get WI from branch name
+  wi = "!git current-branch|awk '{split($0,a,\"/\");split(a[3],b,\"-\");print b[1] \"-\" b[2];}'|tr -d '\n'"
+  wicp = "!git wi|pbcopy&&pbpaste"
+
+  # open GUS to current branch WI
+  openwi = "!open https://gus.my.salesforce.com/apex/ADM_WorkLocator?bugorworknumber=$(git wi)"
 
 # ===> commit
   amend = "commit --amend --no-edit"
@@ -57,7 +64,6 @@
   pu = push -u
   citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; git commit -qm \"$OUT\"; }; f"
   ; citag debug
-  ; citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; }; f"
   ; citag = "!f() { TAG=$1 MSG=\"${*:2}\"; MSG=${MSG:=`date`}; echo \"\\033[1;30;48;5;141m$TAG - \\033[1;38;5;7m$MSG\\033[0m\"; git commit -qm \"[$TAG] - $MSG\"; }; f"
 
   wip = citag 'wip: %s'
@@ -208,5 +214,3 @@
 	defaultBranch = master
 [include]
   path = ~/.gitconfig.local
-[trace2]
-	maxFiles = 800
