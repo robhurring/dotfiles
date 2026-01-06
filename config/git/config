@@ -215,3 +215,5 @@
 	defaultBranch = master
 [include]
   path = ~/.gitconfig.local
+[branch "master"]
+	mergeoptions = --ff-only
