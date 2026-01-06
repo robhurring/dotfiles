@@ -1,6 +1,0 @@
-<application>
-  <component name="NotificationConfiguration">
-    <notification groupId="git.link.notification.important" displayType="STICKY_BALLOON" shouldLog="false" />
-    <notification groupId="Plugins Suggestion" displayType="NONE" />
-  </component>
-</application>
