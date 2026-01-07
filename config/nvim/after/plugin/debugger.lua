@@ -25,7 +25,8 @@ require('dap-go').setup {
   },
 }
 
-require('dap-python').setup('~/.local/share/venv/debugpy/bin/python')
+-- Use system python or fall back to 'python' command
+require('dap-python').setup(vim.fn.exepath('python3') or 'python')
 
 local dapui = require('dapui')
 dapui.setup({

@@ -3,7 +3,6 @@ local harpoon = require("harpoon")
 harpoon:setup()
 
 vim.keymap.set("n", "<c-m>", function() harpoon:list():add() end)
-vim.keymap.set("n", "<c-m>", function() harpoon:list():add() end)
 vim.keymap.set("n", "<c-s-a>", function() harpoon:list():remove() end)
 vim.keymap.set("n", "1", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "2", function() harpoon:list():select(2) end)
@@ -27,4 +26,5 @@ local function toggle_telescope(harpoon_files)
   }):find()
 end
 
-vim.keymap.set("n", "<c-h>", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
+-- Changed from <c-h> to avoid collision with split navigation
+vim.keymap.set("n", "<leader>h", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })

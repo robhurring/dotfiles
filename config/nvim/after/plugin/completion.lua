@@ -98,10 +98,6 @@ cmp.setup({
       end
     end, { 'i', 's' }),
   }),
-  experimental = {
-    ghost_text = true,
-    native_menu = false
-  },
 })
 
 -- Cmdline completion for :

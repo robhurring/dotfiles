@@ -1,5 +1,5 @@
 local config = {
-  cmd = { '/opt/homebrew/bin/jdtls' },
+  cmd = { vim.fn.exepath('jdtls') or '/opt/homebrew/bin/jdtls' },
   root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
 }
 

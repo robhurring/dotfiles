@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     'git',
     'clone',
@@ -19,17 +19,34 @@ require('lazy').setup({
   { 'embark-theme/vim', name = 'embark' },
   { 'catppuccin/nvim',  name = 'catppuccin' },
 
-  'nvim-tree/nvim-tree.lua',
-  'mbbill/undotree',
+  {
+    'nvim-tree/nvim-tree.lua',
+    cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
+    keys = {
+      { '<leader>e', desc = 'Toggle tree' },
+      { '<leader>E', desc = 'Find file in tree' }
+    }
+  },
+  {
+    'mbbill/undotree',
+    cmd = 'UndotreeToggle',
+    keys = { { '<leader>u', vim.cmd.UndotreeToggle, desc = 'Undotree' } }
+  },
   'wellle/targets.vim',
-  'tpope/vim-fugitive',
+  {
+    'tpope/vim-fugitive',
+    cmd = { 'Git', 'G', 'Gdiffsplit', 'Gread', 'Gwrite', 'Ggrep' }
+  },
   'tpope/vim-rhubarb',
   'tpope/vim-endwise',
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
   'vim-scripts/ReplaceWithRegister',
   'folke/lsp-colors.nvim',
-  'stevearc/oil.nvim',
+  {
+    'stevearc/oil.nvim',
+    keys = { { '-', desc = 'Open oil' } }
+  },
   -- 'github/copilot.vim',
 
   { "zbirenbaum/copilot.lua" },
@@ -54,7 +71,15 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.5',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    keys = {
+      { '<C-p>', desc = 'Find files' },
+      { '<C-space>', desc = 'Find files' },
+      { '<M-o>', desc = 'Find files' },
+      { '<leader>r', desc = 'Recent files' },
+      { '<leader><leader>', desc = 'Buffers' },
+      { '<leader>ps', desc = 'Grep' },
+    }
   },
 
   {
@@ -66,6 +91,9 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
   },
 
   {
@@ -74,6 +102,12 @@ require('lazy').setup({
 
   {
     'numToStr/Comment.nvim',
+    keys = {
+      { '<c-_>', mode = 'n' },
+      { '<M-/>', mode = 'n' },
+      { '<c-_>', mode = 'x' },
+      { '<M-/>', mode = 'x' },
+    },
     config = function()
       require('Comment').setup()
     end
@@ -124,12 +158,7 @@ require('lazy').setup({
   {
     'weirongxu/plantuml-previewer.vim',
     config = function()
-      -- local handle = io.popen("cat $(which plantuml) | grep plantuml.jar")
-      -- local result = handle and handle:read("*a") or ""
-      -- if handle then handle:close() end
-      --
-      -- local jar_path = result:match([[%s['"]?(%S+plantuml%.jar)]]) or ""
-      vim.g["plantuml_previewer#plantuml_jar_path"] = "/Users/rhurring/plantuml.jar"
+      vim.g["plantuml_previewer#plantuml_jar_path"] = vim.env.PLANTUML_JAR or vim.fn.expand("~/plantuml.jar")
     end,
     dependencies = {
       'tyru/open-browser.vim',
