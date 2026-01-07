@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, opts)
     vim.keymap.set('n', 'gD', telescope_builtin.lsp_definitions, opts)
     vim.keymap.set('n', '<c-]>', telescope_builtin.lsp_implementations, opts)
-    vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
+    -- gi removed - use <c-]> for implementations instead (avoids conflict with gr operator)
     vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end, opts)
 
     vim.keymap.set('n', '<leader>vr', function() vim.lsp.buf.references() end, opts)

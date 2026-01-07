@@ -1,3 +1,6 @@
+-- disable default "gri" mapping which conflicts with ReplaceWithRegister
+vim.keymap.del("n", "gri")
+
 vim.keymap.set('i', 'jk', '<Esc>l')
 vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 

@@ -4,3 +4,5 @@ ssl
 port
 port.lock
 updatedBrokenPlugins.db
+
+config/newnvim
