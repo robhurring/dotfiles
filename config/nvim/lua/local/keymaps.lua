@@ -59,11 +59,11 @@ vim.keymap.set({ 'n', 'x' }, 'k', function()
 end, { noremap = true, expr = true })
 
 -- toggle quick/loc
-vim.keymap.set('n', '<leader>q', function()
+vim.keymap.set('n', 'coq', function()
   require('toggles.quickfix').toggle()
 end)
 
-vim.keymap.set('n', '<leader>l', function()
+vim.keymap.set('n', 'col', function()
   require('toggles.location').toggle()
 end)
 
