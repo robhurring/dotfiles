@@ -1,3 +1,7 @@
+-- nvim-tree and oil configuration
+-- Kept separate for extensive configuration
+-- See lua/plugins/ui.lua for plugin declarations
+
 require('nvim-tree').setup({
   update_focused_file = {
     enable = true

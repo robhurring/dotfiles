@@ -1,3 +1,7 @@
+-- Complex DAP configuration with multiple adapters
+-- Kept separate from plugin spec for maintainability
+-- See lua/plugins/dap.lua for plugin declarations
+
 local dap = require('dap')
 
 require("mason-nvim-dap").setup({

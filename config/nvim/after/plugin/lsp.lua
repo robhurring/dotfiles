@@ -1,3 +1,6 @@
+-- Complex LSP configuration kept separate from plugin spec for maintainability
+-- See lua/plugins/lsp.lua for plugin declarations
+
 local telescope_builtin = require('telescope.builtin')
 local lsp_group = vim.api.nvim_create_augroup('local.lsp.group', { clear = true })
 

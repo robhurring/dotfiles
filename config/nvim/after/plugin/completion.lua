@@ -1,3 +1,7 @@
+-- Complex completion configuration with copilot orchestration
+-- Kept separate from plugin spec for maintainability
+-- See lua/plugins/lsp.lua for plugin declarations
+
 -- co/pilot setup
 local pilot = require("local.pilot").setup({
   enabled = false,
