@@ -18,11 +18,15 @@ BINFILES=$(BIN:%=$(HOME)/bin/%)
 
 ZHOME:=$(XDG_CONFIG_HOME)/zsh
 
+# VSCode/Cursor
+CURSOR_USER_DIR:=$(HOME)/Library/Application Support/Cursor/User
+VSCODE_USER_DIR:=$(HOME)/Library/Application Support/Code/User
+
 # Link etc & bin
 all: .setup $(DOTFILES) $(XDGFILES) $(BINFILES) zsh
 	@echo "All good."
 
-mac: all kitty tmux fzf brew
+mac: all kitty tmux fzf brew cursor vscode
 	@echo "Done!"
 
 kitty: $(HOME)/Library/Preferences/kitty/kitty.conf
@@ -30,6 +34,18 @@ kitty: $(HOME)/Library/Preferences/kitty/kitty.conf
 $(HOME)/Library/Preferences/kitty/kitty.conf:
 	mkdir -p $(dir $@)
 	ln -sfv $(XDG_CONFIG_HOME)/kitty/kitty.conf $@
+
+cursor:
+	@mkdir -p "$(CURSOR_USER_DIR)"
+	@ln -sfv $(XDG_CONFIG_HOME)/cursor/User/settings.json "$(CURSOR_USER_DIR)/settings.json"
+	@ln -sfv $(XDG_CONFIG_HOME)/cursor/User/keybindings.json "$(CURSOR_USER_DIR)/keybindings.json"
+	@echo "Cursor configured"
+
+vscode:
+	@mkdir -p "$(VSCODE_USER_DIR)"
+	@ln -sfv $(XDG_CONFIG_HOME)/cursor/User/settings.json "$(VSCODE_USER_DIR)/settings.json"
+	@ln -sfv $(XDG_CONFIG_HOME)/cursor/User/keybindings.json "$(VSCODE_USER_DIR)/keybindings.json"
+	@echo "VSCode configured"
 
 update:
 	-git pull
@@ -90,4 +106,4 @@ brew:
 	@type brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	@brew bundle check || brew bundle
 
-.PHONY: all mac extra .setup zsh tmux brew iterm kitty
+.PHONY: all mac extra .setup zsh tmux brew iterm kitty cursor vscode

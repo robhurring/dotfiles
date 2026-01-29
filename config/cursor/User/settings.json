@@ -1,0 +1,125 @@
+{
+  "vim.leader": "<space>",
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.incsearch": true,
+  "vim.ignorecase": true,
+  "vim.smartcase": true,
+  "vim.scrolloff": 3,
+  "vim.sidescrolloff": 3,
+  "vim.showmodename": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "Y"
+      ],
+      "after": [
+        "y",
+        "$"
+      ]
+    },
+    {
+      "before": [
+        "*"
+      ],
+      "after": [
+        "*",
+        "`",
+        "`"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "/"
+      ],
+      "commands": [
+        ":nohl"
+      ]
+    },
+    {
+      "before": [
+        "U"
+      ],
+      "commands": [
+        "redo"
+      ]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "."
+      ],
+      "commands": [
+        "editor.action.repeatLastAction"
+      ]
+    },
+    {
+      "before": [
+        "<"
+      ],
+      "commands": [
+        "editor.action.outdentLines"
+      ],
+      "after": [
+        "g",
+        "v"
+      ]
+    },
+    {
+      "before": [
+        ">"
+      ],
+      "commands": [
+        "editor.action.indentLines"
+      ],
+      "after": [
+        "g",
+        "v"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "p"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "d",
+        "P"
+      ]
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-k>": false,
+    "<C-j>": false,
+    "<C-h>": false,
+    "<C-l>": false,
+    "<C-q>": false
+  },
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "rgba(100, 100, 200, 0.4)",
+  "vim.highlightedyank.duration": 350,
+  "vim.surround": true,
+  "vim.commentary": true,
+  "vim.replaceWithRegister": true,
+  "editor.lineNumbers": "on",
+  "editor.scrollBeyondLastLine": false,
+  "editor.cursorSurroundingLines": 3,
+  "editor.wordWrap": "off",
+  "security.workspace.trust.enabled": false,
+  "files.autoSave": "off"
+}
