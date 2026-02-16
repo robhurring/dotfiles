@@ -4,10 +4,27 @@ alias uvs='uv sync --all-extras'
 
 # Auto activate virtualenvs
 auto-venv() {
-  if [[ -d .venv ]]; then
-    source .venv/bin/activate
-  elif [[ -d venv ]]; then
-    source venv/bin/activate
+  local dir="$PWD"
+  local venv_path=""
+  
+  # Search upward for .venv or venv
+  while [[ "$dir" != "/" ]]; do
+    if [[ -d "$dir/.venv" ]]; then
+      venv_path="$dir/.venv"
+      break
+    elif [[ -d "$dir/venv" ]]; then
+      venv_path="$dir/venv"
+      break
+    fi
+    dir="$(dirname "$dir")"
+  done
+  
+  # Activate if found, deactivate if not
+  if [[ -n "$venv_path" ]]; then
+    # Only activate if not already in this venv
+    if [[ "$VIRTUAL_ENV" != "$venv_path" ]]; then
+      source "$venv_path/bin/activate"
+    fi
   elif [[ -n "$VIRTUAL_ENV" ]]; then
     deactivate
   fi
