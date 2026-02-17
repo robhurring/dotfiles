@@ -42,6 +42,9 @@ alias erc='e ~/.zshrc'
 # alias ef=fuzzy-edit
 # alias fkill=fuzzy-kill
 
+# Ctrl+Space triggers fzf file picker
+# bindkey "^ " fzf-file-widget
+
 # function fzf-fuzzy-cds() {
 #   fuzzy-cds $1
 #   zle reset-prompt
