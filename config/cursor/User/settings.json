@@ -5,8 +5,6 @@
   "vim.incsearch": true,
   "vim.ignorecase": true,
   "vim.smartcase": true,
-  "vim.scrolloff": 3,
-  "vim.sidescrolloff": 3,
   "vim.showmodename": true,
   "vim.insertModeKeyBindings": [
     {
@@ -55,6 +53,90 @@
       "commands": [
         "redo"
       ]
+    },
+    {
+      "before": ["g", "d"],
+      "commands": ["editor.action.revealDefinition"]
+    },
+    {
+      "before": ["g", "i"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    {
+      "before": ["g", "t"],
+      "commands": ["editor.action.goToTypeDefinition"]
+    },
+    {
+      "before": ["g", "e"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["g", "E"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    {
+      "before": ["c", "o", "h"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["c", "o", "w"],
+      "commands": ["editor.action.toggleWordWrap"]
+    },
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": ["workbench.action.gotoSymbol"]
+    },
+    {
+      "before": ["<leader>", "h"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "commands": ["workbench.action.focusBelowGroup"]
+    },
+    {
+      "before": ["<leader>", "k"],
+      "commands": ["workbench.action.focusAboveGroup"]
+    },
+    {
+      "before": ["<leader>", "l"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    {
+      "before": ["<leader>", "="],
+      "commands": ["editor.action.formatDocument"]
+    },
+    {
+      "before": ["<leader>", "o"],
+      "commands": ["editor.action.organizeImports"]
+    },
+    {
+      "before": ["<leader>", "g"],
+      "commands": ["workbench.view.scm"]
+    },
+    {
+      "before": [",", "g", "a"],
+      "commands": ["gitlens.toggleFileBlame"]
+    },
+    {
+      "before": [",", "g", "h"],
+      "commands": ["gitlens.showQuickFileHistory"]
+    },
+    {
+      "before": ["]", "e"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["[", "e"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    {
+      "before": [",", "u"],
+      "commands": ["references-view.findReferences"]
+    },
+    {
+      "before": [",", "t"],
+      "commands": ["workbench.action.terminal.toggleTerminal"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -114,7 +196,6 @@
   "vim.highlightedyank.color": "rgba(100, 100, 200, 0.4)",
   "vim.highlightedyank.duration": 350,
   "vim.surround": true,
-  "vim.commentary": true,
   "vim.replaceWithRegister": true,
   "editor.lineNumbers": "on",
   "editor.scrollBeyondLastLine": false,

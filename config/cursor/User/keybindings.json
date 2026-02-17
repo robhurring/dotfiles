@@ -5,31 +5,10 @@
     "when": "editorTextFocus && vim.mode == 'Normal'"
   },
   {
-    "key": "space space",
-    "command": "workbench.action.gotoSymbol",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
+    "key": "ctrl+q",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "editorTextFocus"
   },
-  {
-    "key": "space h",
-    "command": "workbench.action.focusLeftGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "space j",
-    "command": "workbench.action.focusBelowGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "space k",
-    "command": "workbench.action.focusAboveGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "space l",
-    "command": "workbench.action.focusRightGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-
   {
     "key": "tab",
     "command": "editor.action.quickFix",
@@ -38,93 +17,6 @@
   {
     "key": "shift+r",
     "command": "editor.action.refactor",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-
-  {
-    "key": "space =",
-    "command": "editor.action.formatDocument",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "space o",
-    "command": "editor.action.organizeImports",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-
-  {
-    "key": "space g",
-    "command": "workbench.view.scm",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": ", g a",
-    "command": "gitlens.toggleFileBlame",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": ", g h",
-    "command": "gitlens.showQuickFileHistory",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-
-  {
-    "key": "g d",
-    "command": "editor.action.revealDefinition",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "g i",
-    "command": "editor.action.goToImplementation",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "g t",
-    "command": "editor.action.goToTypeDefinition",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "g e",
-    "command": "editor.action.marker.nextInFiles",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "shift+g e",
-    "command": "editor.action.marker.prevInFiles",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": ", u",
-    "command": "references-view.findReferences",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-
-  {
-    "key": "g /",
-    "command": "workbench.action.findInFiles",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-
-  {
-    "key": "ctrl+q",
-    "command": "workbench.action.closeActiveEditor",
-    "when": "editorTextFocus"
-  },
-
-  {
-    "key": ", t",
-    "command": "workbench.action.terminal.toggleTerminal",
-    "when": "vim.mode == 'Normal'"
-  },
-
-  {
-    "key": "c o h",
-    "command": "workbench.action.toggleSidebarVisibility",
-    "when": "editorTextFocus && vim.mode == 'Normal'"
-  },
-  {
-    "key": "c o w",
-    "command": "editor.action.toggleWordWrap",
     "when": "editorTextFocus && vim.mode == 'Normal'"
   }
 ]
