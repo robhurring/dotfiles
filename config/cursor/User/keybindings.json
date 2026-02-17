@@ -5,12 +5,22 @@
     "when": "editorTextFocus && vim.mode == 'Normal'"
   },
   {
+    "key": "ctrl+p",
+    "command": "editor.action.peekDefinition",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
     "key": "ctrl+q",
     "command": "workbench.action.closeActiveEditor",
     "when": "editorTextFocus"
   },
   {
     "key": "tab",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible"
+  },
+  {
+    "key": "shift+tab",
     "command": "editor.action.quickFix",
     "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible"
   },
@@ -18,5 +28,14 @@
     "key": "shift+r",
     "command": "editor.action.refactor",
     "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "cmd+1",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "shift+f6",
+    "command": "editor.action.rename",
+    "when": "editorTextFocus"
   }
 ]

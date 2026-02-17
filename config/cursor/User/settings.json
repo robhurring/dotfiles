@@ -204,7 +204,8 @@
   "security.workspace.trust.enabled": false,
   "files.autoSave": "off",
   "gitlens.currentLine.enabled": false,
-  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.hovers.enabled": false,
+  "gitlens.codeLens.enabled": false,
   "editor.codeLens": true,
   "references.preferredLocation": "view",
   "typescript.referencesCodeLens.enabled": true,
@@ -212,5 +213,15 @@
   "javascript.referencesCodeLens.enabled": true,
   "python.analysis.enableCodeLens": true,
   "workbench.colorTheme": "dark-jetbrains-color-theme",
-  "workbench.iconTheme": "jetbrains-file-icon-theme-auto"
+  "workbench.iconTheme": "jetbrains-file-icon-theme-auto",
+  "editor.fontFamily": "Hasklig",
+  "editor.fontSize": 15,
+  "editor.lineHeight": 1.2,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  }
 }
