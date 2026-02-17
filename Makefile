@@ -47,6 +47,16 @@ vscode:
 	@ln -sfv $(XDG_CONFIG_HOME)/cursor/User/keybindings.json "$(VSCODE_USER_DIR)/keybindings.json"
 	@echo "VSCode configured"
 
+cursor-extensions-export:
+	@cursor --list-extensions > $(CWD)/config/cursor/extensions.txt
+	@echo "Exported $$(wc -l < $(CWD)/config/cursor/extensions.txt | tr -d ' ') extensions"
+
+cursor-extensions:
+	@cat $(CWD)/config/cursor/extensions.txt | xargs -L 1 cursor --install-extension
+
+vscode-extensions:
+	@cat $(CWD)/config/cursor/extensions.txt | xargs -L 1 code --install-extension
+
 update:
 	-git pull
 	$(MAKE) all
@@ -106,4 +116,4 @@ brew:
 	@type brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	@brew bundle check || brew bundle
 
-.PHONY: all mac extra .setup zsh tmux brew iterm kitty cursor vscode
+.PHONY: all mac extra .setup zsh tmux brew iterm kitty cursor vscode cursor-extensions-export cursor-extensions vscode-extensions

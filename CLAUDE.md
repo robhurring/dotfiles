@@ -139,6 +139,13 @@ uvs            # uv sync
 **Editors:**
 - Neovim: Separate repo [robhurring/dotvim](https://github.com/robhurring/dotvim)
 - IdeaVim: `config/ideavim/ideavimrc`
+- Cursor/VSCode: `config/cursor/User/`
+
+**Cursor/VSCode Extensions:**
+- [Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
+- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+
+Note: Multi-key bindings must be defined in `vim.normalModeKeyBindingsNonRecursive` (settings.json), not keybindings.json. Cursor's chord system intercepts keys before vim can process them, breaking operators like `gr` (replaceWithRegister) and `gc` (commentary).
 
 ## Notable Scripts (bin/)
 

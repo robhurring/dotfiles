@@ -202,5 +202,15 @@
   "editor.cursorSurroundingLines": 3,
   "editor.wordWrap": "off",
   "security.workspace.trust.enabled": false,
-  "files.autoSave": "off"
+  "files.autoSave": "off",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
+  "editor.codeLens": true,
+  "references.preferredLocation": "view",
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "javascript.referencesCodeLens.enabled": true,
+  "python.analysis.enableCodeLens": true,
+  "workbench.colorTheme": "dark-jetbrains-color-theme",
+  "workbench.iconTheme": "jetbrains-file-icon-theme-auto"
 }
