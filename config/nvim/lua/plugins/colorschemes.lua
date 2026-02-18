@@ -4,4 +4,5 @@ return {
   'edeneast/nightfox.nvim',
   { 'embark-theme/vim', name = 'embark' },
   { 'catppuccin/nvim', name = 'catppuccin' },
+  'nickkadutskyi/jb.nvim',
 }

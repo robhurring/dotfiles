@@ -1,6 +1,37 @@
 return {
   {
+    'nvim-tree/nvim-web-devicons',
+    lazy = true,
+    config = function()
+      require('nvim-web-devicons').setup({
+        override = {
+          py = { icon = "🐍", name = "Python" },
+          js = { icon = "", name = "JavaScript" },
+          ts = { icon = "", name = "TypeScript" },
+          lua = { icon = "", name = "Lua" },
+          vim = { icon = "", name = "Vim" },
+          md = { icon = "", name = "Markdown" },
+          json = { icon = "", name = "JSON" },
+          yaml = { icon = "", name = "YAML" },
+          yml = { icon = "", name = "YAML" },
+          sh = { icon = "", name = "Shell" },
+          zsh = { icon = "", name = "Zsh" },
+          go = { icon = "", name = "Go" },
+          rb = { icon = "", name = "Ruby" },
+          rs = { icon = "", name = "Rust" },
+          java = { icon = "", name = "Java" },
+          html = { icon = "", name = "HTML" },
+          css = { icon = "", name = "CSS" },
+          txt = { icon = "", name = "Text" },
+        },
+        default = true,
+      })
+    end
+  },
+
+  {
     'nvim-tree/nvim-tree.lua',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
     keys = {
       { '<leader>e', desc = 'Toggle tree' },

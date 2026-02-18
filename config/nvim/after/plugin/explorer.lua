@@ -13,35 +13,33 @@ require('nvim-tree').setup({
     width = 30,
   },
   git = {
-    show_on_dirs = false
+    show_on_dirs = true,
+    show_on_open_dirs = true,
   },
   renderer = {
     group_empty = true,
     indent_markers = {
       enable = true
     },
+    highlight_git = true,
     icons = {
       show = {
         file = false,
-        folder = false,
+        folder = true,
         folder_arrow = true,
         git = false,
       },
       glyphs = {
-        default = '',
         folder = {
-          arrow_closed = "→",
-          arrow_open = "↓",
+          arrow_closed = "▸",
+          arrow_open = "▾",
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+          symlink_open = "",
         },
-        git = {
-          unstaged = "✗",
-          staged = "✓",
-          unmerged = "◌",
-          renamed = "R",
-          untracked = "?",
-          deleted = "✗",
-          ignored = "",
-        }
       }
     }
   },

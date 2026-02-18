@@ -7,7 +7,6 @@ vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '101'
 vim.opt.conceallevel = 0
 vim.opt.concealcursor = 'nc'
-vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.foldenable = false
 vim.opt.hidden = true
