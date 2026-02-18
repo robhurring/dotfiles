@@ -200,7 +200,7 @@ fuzzy-tmux-session() {
   choice=$(tmux list-sessions|fzf -1 --query="$1")
   if [ -n "$choice" ]; then
     name=$(echo "$choice"|cut -d':' -f1)
-    tmux-go "${name}"
+    tmux switch-client -t "${name}"
   fi
 }
 
