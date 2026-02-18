@@ -123,6 +123,14 @@
       "commands": ["gitlens.showQuickFileHistory"]
     },
     {
+      "before": [",", "g", "o"],
+      "commands": ["gitlens.openFileOnRemote"]
+    },
+    {
+      "before": [",", "g", "c"],
+      "commands": ["gitlens.copyRemoteFileUrlToClipboard"]
+    },
+    {
       "before": ["]", "e"],
       "commands": ["editor.action.marker.nextInFiles"]
     },
@@ -171,6 +179,14 @@
         "g",
         "v"
       ]
+    },
+    {
+      "before": [",", "g", "o"],
+      "commands": ["gitlens.openFileOnRemote"]
+    },
+    {
+      "before": [",", "g", "c"],
+      "commands": ["gitlens.copyRemoteFileUrlToClipboard"]
     },
     {
       "before": [
@@ -223,5 +239,13 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
     }
-  }
+  },
+  "security.promptForLocalFileProtocolHandling": false,
+  "git.openRepositoryInParentFolders": "always",
+  "gitlens.remotes": [
+    {
+      "domain": "git.soma.salesforce.com",
+      "type": "GitHub"
+    }
+  ]
 }
