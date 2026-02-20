@@ -6,7 +6,7 @@ require("local.options")
 require("local.plugins")
 require("local.keymaps")
 require("local.colors").setup({
-  colorscheme = "jb"
+  colorscheme = "kanagawa"
 })
 
 local localgroup = vim.api.nvim_create_augroup('local.group', { clear = true })
