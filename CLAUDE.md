@@ -4,15 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-**Target:** macOS · ZSH · Neovim · Kitty · JetBrains
+**Target:** macOS · ZSH · Neovim · Kitty · Ghostty · JetBrains
 
 Modular dotfiles using XDG Base Directory spec. Plugin-based ZSH architecture with extensive git workflow automation.
 
 ## Setup
 
 ```bash
-make install    # Bootstrap dependencies
-make mac        # macOS-specific setup
+make all        # Bootstrap dependencies + symlink everything
+make mac        # macOS-specific setup (runs all + kitty, tmux, fzf, brew, cursor, vscode)
 make update     # git pull + relink all
 ```
 
@@ -28,7 +28,13 @@ make update     # git pull + relink all
 Modular plugin loading from `config/zsh/plugins/`. Each plugin has an init file:
 - `python` - Auto-activates venv, `mkvenv`, `uvs` aliases
 - `fzf` - Fuzzy finder integration
-- `kubectl`, `docker` - Completions
+- `vi-mode` - Vim keybindings in ZSH
+- `tmux` - tmux integration (auto-start via `zstyle ':my:module:tmux' auto-start true`)
+- `zoxide` - Smart directory jumping
+- `kubectl`, `docker`, `terraform` - Completions
+- `fasd`, `tig`, `kitty` - Tool integrations
+
+Default plugins (from template): `tmux fzf fasd vi-mode docker terraform tig`
 
 Config: `~/.zshrc` (customize freely, copied from template)
 
@@ -127,7 +133,7 @@ uvs            # uv sync
 ## Configuration Locations
 
 **XDG compliance:**
-- Configs: `~/.config/zsh/`, `~/.config/git/config`, `~/.config/kitty/kitty.conf`
+- Configs: `~/.config/zsh/`, `~/.config/git/config`, `~/.config/kitty/kitty.conf`, `~/.config/ghostty/config`
 - Cache: `~/.cache/zsh_history`
 - Data: `~/.local/share/tmux/plugins`
 
@@ -137,7 +143,7 @@ uvs            # uv sync
 - Claude: `.claude/settings.local.json` (gitignored)
 
 **Editors:**
-- Neovim: Separate repo [robhurring/dotvim](https://github.com/robhurring/dotvim)
+- Neovim: `config/nvim/` (init.lua, lua/) — also mirrored at [robhurring/dotvim](https://github.com/robhurring/dotvim)
 - IdeaVim: `config/ideavim/ideavimrc`
 - Cursor/VSCode: `config/cursor/User/`
 
