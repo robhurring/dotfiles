@@ -1,12 +1,12 @@
 # config docs: https://ghostty.org/docs/config/reference
 
 font-family = Hasklig
-font-size = 15.0
+font-size = 15
+font-feature = -calt
 
-theme = nordfox
+theme = jellybeans
 
 # urls
-# link = true
 link-url = true
 
 # closing
@@ -14,5 +14,21 @@ confirm-close-surface = false
 quit-after-last-window-closed = true
 
 # mac settings
+macos-option-as-alt = true
 macos-titlebar-proxy-icon = hidden
 macos-icon = blueprint
+
+# keybindings — tab management
+keybind = super+t=new_tab
+keybind = super+w=close_surface
+keybind = super+shift+right_bracket=next_tab
+keybind = super+shift+left_bracket=previous_tab
+
+# keybindings — font size
+keybind = super+equal=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
+keybind = super+backspace=reset_font_size
+
+# keybindings — clipboard
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
