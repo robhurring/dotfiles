@@ -24,10 +24,10 @@ require('nvim-tree').setup({
     highlight_git = true,
     icons = {
       show = {
-        file = false,
+        file = true,
         folder = true,
         folder_arrow = true,
-        git = false,
+        git = true,
       },
       glyphs = {
         folder = {

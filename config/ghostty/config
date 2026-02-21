@@ -1,6 +1,6 @@
 # config docs: https://ghostty.org/docs/config/reference
 
-font-family = Hasklig
+font-family = Hasklug Nerd Font Mono
 font-size = 15
 font-feature = -calt
 

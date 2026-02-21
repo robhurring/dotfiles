@@ -251,10 +251,10 @@ hi('DiagnosticVirtualTextError',   { fg = p.error,   bg = p.bg_highlight })
 hi('DiagnosticVirtualTextWarn',    { fg = p.warning, bg = p.bg_highlight })
 hi('DiagnosticVirtualTextInfo',    { fg = p.info,    bg = p.bg_highlight })
 hi('DiagnosticVirtualTextHint',    { fg = p.hint,    bg = p.bg_highlight })
-hi('DiagnosticUnderlineError',     { underline = true, sp = p.error })
-hi('DiagnosticUnderlineWarn',      { underline = true, sp = p.warning })
-hi('DiagnosticUnderlineInfo',      { underline = true, sp = p.info })
-hi('DiagnosticUnderlineHint',      { underline = true, sp = p.hint })
+hi('DiagnosticUnderlineError',     { undercurl = true, sp = p.error })
+hi('DiagnosticUnderlineWarn',      { undercurl = true, sp = p.warning })
+hi('DiagnosticUnderlineInfo',      { undercurl = true, sp = p.info })
+hi('DiagnosticUnderlineHint',      { undercurl = true, sp = p.hint })
 
 -- ─── Git / Diff ───────────────────────────────────────────────────────────────
 

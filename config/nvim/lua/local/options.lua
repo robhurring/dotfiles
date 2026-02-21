@@ -37,6 +37,8 @@ vim.opt.splitright = true
 vim.opt.tabstop = 2
 vim.opt.tags:append({ './tags', './git/tags' })
 vim.opt.termguicolors = true
+vim.cmd([[let &t_Cs = "\e[4:3m"]])  -- undercurl on
+vim.cmd([[let &t_Ce = "\e[4:0m"]])  -- undercurl off
 vim.opt.ttimeoutlen = 100
 vim.opt.undofile = true
 vim.opt.updatetime = 4000
