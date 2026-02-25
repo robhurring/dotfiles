@@ -38,3 +38,5 @@ vim.api.nvim_create_autocmd({ 'WinLeave' }, {
     vim.opt_local.cursorline = false
   end,
 })
+
+require("local.today").setup()
