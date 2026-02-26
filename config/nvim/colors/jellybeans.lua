@@ -12,8 +12,8 @@ local p = {
   bg_dark      = '#16171a',
   bg_float     = '#2b2d30',
   bg_highlight = '#26282e',
-  bg_visual    = '#2a2828',
-  bg_search    = '#3a2e1a',
+  bg_visual    = '#2d4060',
+  bg_search    = '#4a3820',
 
   -- Foregrounds
   fg           = '#bcbec4',
@@ -108,7 +108,9 @@ hi('TabLine',         { fg = p.fg_dim, bg = p.bg_dark })
 hi('TabLineSel',      { fg = p.fg, bg = p.bg_highlight, bold = true })
 hi('TabLineFill',     { bg = p.bg_dark })
 hi('Visual',          { bg = p.bg_visual })
+hi('VisualNOS',       { bg = p.bg_visual })
 hi('Search',          { fg = p.fg, bg = p.bg_search, bold = true })
+hi('CurSearch',       { fg = p.bg, bg = p.cursor, bold = true })
 hi('IncSearch',       { fg = p.bg, bg = p.cursor, bold = true })
 hi('Pmenu',           { fg = p.fg_dark, bg = p.bg_float })
 hi('PmenuSel',        { fg = p.fg, bg = p.bg_highlight, bold = true })
