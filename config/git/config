@@ -116,7 +116,16 @@
 [core]
   whitespace = space-before-tab,tabwidth=2,trailing-space
   editor = "nvim"
+  pager = delta
   ; hooksPath = ~/.config/git/hooks
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  side-by-side = true
+  line-numbers = true
 [help]
   autocorrect = 1
 [status]
