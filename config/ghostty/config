@@ -9,7 +9,6 @@ theme = jellybeans
 
 # urls
 link-url = true
-keybind = super+physical:mouse_left=open_url
 
 # closing
 confirm-close-surface = false
