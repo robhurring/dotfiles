@@ -14,9 +14,6 @@
 # export PASSWORD_STORE_DIR=$XDG_CONFIG_HOME/password-store
 # export EDITOR=nvim
 
-# nvim
-# export NVIM_TUI_ENABLE_TRUE_COLOR=1
-# export NVIM_LISTEN_ADDRESS=/tmp/neovim.sock
 
 # go
 # export GOPATH=$HOME/Go
