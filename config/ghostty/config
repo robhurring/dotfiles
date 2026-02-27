@@ -2,6 +2,7 @@
 
 font-family = Hasklug Nerd Font Mono
 font-size = 15
+font-thicken = true
 font-feature = -calt
 
 theme = jellybeans
