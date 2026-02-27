@@ -17,7 +17,7 @@ quit-after-last-window-closed = true
 # mac settings
 macos-option-as-alt = true
 macos-titlebar-proxy-icon = hidden
-macos-icon = blueprint
+macos-icon = xray
 
 # keybindings — tab management
 keybind = super+t=new_tab
