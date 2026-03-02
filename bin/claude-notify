@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# claude-notify — Claude Code notification hook
+#
+# Displays a macOS notification with the message from Claude Code.
+#
+# Usage (in ~/.claude/settings.json):
+#   {
+#     "hooks": {
+#       "Notification": [
+#         { "matcher": "", "hooks": [{ "type": "command", "command": "claude-notify" }] }
+#       ]
+#     }
+#   }
+#
+# Called by Claude Code with JSON on stdin:
+#   {
+#     "session_id":        "abc123",
+#     "transcript_path":   "/Users/.../.claude/projects/.../session.jsonl",
+#     "cwd":               "/Users/...",
+#     "permission_mode":   "default",
+#     "hook_event_name":   "Notification",
+#     "message":           "Claude needs your permission to use Bash",
+#     "title":             "Permission needed",
+#     "notification_type": "permission_prompt" | "idle_prompt" | "auth_success" | "elicitation_dialog"
+#   }
+#
+# Exit codes: ignored by Claude Code (hook is fire-and-forget).
+
+data=$(cat)
+
+message=$(echo "$data" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('message','Claude needs your attention'))" 2>/dev/null || echo "Claude needs your attention")
+title=$(echo "$data" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('title','Claude Code'))" 2>/dev/null || echo "Claude Code")
+
+message="${message//\"/\\\"}"
+title="${title//\"/\\\"}"
+
+osascript -e "display notification \"$message\" with title \"$title\""
