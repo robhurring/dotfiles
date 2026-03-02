@@ -5,8 +5,7 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
-    config = function()
-      require 'nvim-treesitter.configs'.setup {
+    opts = {
         textobjects = {
           select = {
             enable = true,
@@ -26,7 +25,6 @@ return {
             include_surrounding_whitespace = true,
           },
         },
-      }
-    end
+      },
   },
 }

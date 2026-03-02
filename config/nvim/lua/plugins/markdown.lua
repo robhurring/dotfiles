@@ -3,7 +3,7 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
-    build = "cd app && npm install",
+    build = "cd app && yarn install",
     init = function()
       vim.g.mkdp_preview_options = { disable_sync_scroll = 0 }
       local function set_sync(val)
