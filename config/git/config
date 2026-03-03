@@ -138,9 +138,9 @@
   default = upstream
   autoSetupRemote = true
 [user]
-	name = Rob Hurring
-	email = rhurring@salesforce.com
-  signingkey=5C33DE2A
+	name = robhurring
+	email = robhurring@gmail.com
+  signingkey = 5C33DE2A
 [credential]
   helper = osxkeychain
 [instaweb]
