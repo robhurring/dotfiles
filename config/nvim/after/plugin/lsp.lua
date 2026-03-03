@@ -4,11 +4,22 @@
 local telescope_builtin = require('telescope.builtin')
 local lsp_group = vim.api.nvim_create_augroup('local.lsp.group', { clear = true })
 
+-- Hide hint-level diagnostics from gutter/virtual text; still visible via gl float
+vim.diagnostic.config({
+  virtual_text = { severity = { min = vim.diagnostic.severity.INFO } },
+  signs = { severity = { min = vim.diagnostic.severity.INFO } },
+  underline = { severity = { min = vim.diagnostic.severity.INFO } },
+})
+
 -- note: diagnostics are not exclusive to lsp servers
 -- so these can be global keybindings
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+
+vim.keymap.set('n', '<leader>vq', function()
+  telescope_builtin.diagnostics({ severity_limit = vim.diagnostic.severity.HINT })
+end, { desc = 'All diagnostics (including hints)' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
@@ -41,7 +52,7 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Mason setup
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls', 'gopls', 'jedi_language_server' },
+  ensure_installed = { 'lua_ls', 'gopls', 'pyright', 'ruff' },
   automatic_installation = true,
 })
 
@@ -70,8 +81,16 @@ vim.lsp.config('gopls', {
   capabilities = lsp_capabilities,
 })
 
-vim.lsp.config('jedi_language_server', {
+vim.lsp.config('pyright', {
   capabilities = lsp_capabilities,
+})
+
+vim.lsp.config('ruff', {
+  capabilities = lsp_capabilities,
+  on_attach = function(client)
+    -- ruff handles formatting/linting; disable hover in favor of pyright
+    client.server_capabilities.hoverProvider = false
+  end,
 })
 
 require("lsp-colors").setup({
