@@ -93,6 +93,7 @@ vim.keymap.set('n', '<localleader>ga', '<esc>:Git blame<cr>')
 vim.keymap.set({ 'i', 'n' }, '<c-s>', '<esc>:update<cr>')
 vim.keymap.set({ 'i', 'n' }, '<m-s>', '<esc>:update<cr>')
 vim.keymap.set('c', 'w!!', 'w !sudo tee > /dev/null %')
+vim.cmd.cnoreabbrev('Q', 'q')
 
 vim.keymap.set('n', '*', '*``')
 vim.keymap.set('n', '<leader>/', vim.cmd.noh, { silent = true })
