@@ -7,6 +7,9 @@ font-feature = -calt
 
 theme = jellybeans
 
+# notifications
+bell-features = system
+
 # urls
 link-url = true
 
