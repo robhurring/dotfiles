@@ -211,11 +211,14 @@
   abbreviateCommands = true
 [commit]
   gpgsign = true
-[sync]
+[git-sync]
   # run git cleanup after syncing
   cleanup = true
   # detect file changes and run after syncing
   update = true
+  deps = uv.lock:uv sync
+  deps = package-lock.json:npm install
+  deps = pom.xml:mvn install -q
 [pull]
   ff = only
 [gpg]

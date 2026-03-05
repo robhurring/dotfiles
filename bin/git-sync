@@ -1,4 +1,31 @@
 #!/usr/bin/env sh
+#
+# git-sync — Smart branch sync with auto-stash and dependency updates
+#
+# Fetches from remote and updates the current branch:
+#   - Behind only:        fast-forward merge
+#   - Ahead + behind:     rebase onto upstream
+#   - Ahead only:         reports commits to push, no changes made
+#
+# Dirty working trees are stashed before and restored after.
+#
+# Usage:
+#   git sync [remote]     # defaults to tracking remote, falls back to origin
+#
+# Git config options:
+#   git-sync.cleanup = true         Run `git cleanup` after a successful sync
+#
+#   git-sync.deps = <file>:<cmd>    Run <cmd> when <file> appears in changed files.
+#                                   Can be set multiple times for multiple rules.
+#                                   Supports global (~/.gitconfig) and per-repo overrides.
+#
+# Examples:
+#   [git-sync]
+#       cleanup = true
+#       deps = uv.lock:uv sync
+#       deps = package-lock.json:npm install
+#       deps = pom.xml:mvn install -q
+#       deps = Gemfile.lock:bundle install
 
 stashed=0
 
@@ -220,6 +247,24 @@ print_log() {
   run "git log --graph --no-decorate --oneline HEAD..${upstream}"
 }
 
+run_dep_updates() {
+  local start_sha="$1"
+  local rules changed_files
+
+  rules=$(git config --get-all git-sync.deps 2>/dev/null) || return 0
+  changed_files=$(git diff --name-only "$start_sha" HEAD 2>/dev/null)
+  [ -z "$changed_files" ] || [ -z "$rules" ] && return 0
+
+  echo "$rules" | while IFS= read -r rule; do
+    local pattern="${rule%%:*}"
+    local cmd="${rule#*:}"
+    if echo "$changed_files" | grep -qF "$pattern"; then
+      note "Dependency file '%s' changed, running: %s" "$pattern" "$cmd"
+      run "$cmd"
+    fi
+  done
+}
+
 do_update() {
   local kind="$1"
   local upstream="$2"
@@ -241,6 +286,7 @@ do_update() {
   fi
 
   do_unstash
+  run_dep_updates "$start_sha"
 
   echo
   quiet "HEAD moved from '%s' to '%s'" "$start_sha" "$(commit_short_sha)"
@@ -295,7 +341,7 @@ do_sync() {
   fi
 
   if [ $clean -eq 1 ]; then
-    local cleanup="$(git config sync.cleanup 2>/dev/null)"
+    local cleanup="$(git config git-sync.cleanup 2>/dev/null)"
     if [ "$cleanup" == "true" ]; then
       note "Cleaning merged branches"
       exec git cleanup
