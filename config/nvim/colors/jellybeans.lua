@@ -291,3 +291,7 @@ hi('NvimTreeGitDeleted',        { fg = p.sign_delete })
 
 -- LspInlayHint
 hi('LspInlayHint', { fg = p.param, bg = p.bg_highlight, italic = true })
+
+-- marks.nvim
+hi('MarkSignHL',    { fg = p.field })
+hi('MarkSignNumHL', { fg = p.field })
