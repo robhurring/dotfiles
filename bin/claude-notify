@@ -29,6 +29,18 @@
 
 data=$(cat)
 
+# If Ghostty is focused, just bell instead of a full notification
+frontmost=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true' 2>/dev/null)
+if echo "$frontmost" | grep -qi '^ghostty$'; then
+  # Write BEL to the tmux pane TTY so it reaches Ghostty
+  if [ -n "$TMUX" ]; then
+    printf '\a' > "$(tmux display-message -p '#{pane_tty}')"
+  else
+    printf '\a'
+  fi
+  exit 0
+fi
+
 message=$(echo "$data" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('message','Claude needs your attention'))" 2>/dev/null || echo "Claude needs your attention")
 title=$(echo "$data" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('title','Claude Code'))" 2>/dev/null || echo "Claude Code")
 

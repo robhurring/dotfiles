@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+# Claude Code status line (requires Nerd Font + true color terminal)
+
+input=$(cat)
+
+DIR=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
+DIR=$(basename "$DIR")
+
+WORKTREE=$(echo "$input" | jq -r '.worktree.name // empty')
+[ -n "$WORKTREE" ] && DIR="${DIR}  ${WORKTREE}"
+
+MODEL=$(echo "$input" | jq -r '.model.display_name // ""')
+
+PCT=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+FIVE_H=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+SEVEN_D=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+
+VIM_MODE=$(echo "$input" | jq -r '.vim.mode // empty')
+EXCEEDS_200K=$(echo "$input" | jq -r '.exceeds_200k_tokens // false')
+
+# True color helpers: \033[38;2;R;G;Bm (fg)  \033[48;2;R;G;Bm (bg)
+R="\033[0m"
+BOLD="\033[1m"
+SEP="\033[38;2;75;75;95m│${R}"
+
+# Palette — muted, low-contrast
+TEAL="\033[38;2;130;125;155m"      # context bar ok — muted purple-gray
+AMBER="\033[38;2;170;150;100m"     # context bar warn — dusty gold
+CORAL="\033[38;2;170;100;100m"     # context bar danger — muted rose
+LAVENDER="\033[38;2;100;100;115m"  # model name (dim)
+SLATE="\033[38;2;65;68;80m"        # dim text / separators
+PEACH="\033[38;2;180;130;100m"     # 200k+ warning
+SKY="\033[38;2;85;90;100m"         # directory (gray)
+MINT="\033[38;2;85;90;100m"        # worktree branch (gray)
+
+# Vim badge backgrounds
+VIM_INSERT_BG="\033[48;2;50;50;60m"    # muted gray
+VIM_NORMAL_BG="\033[48;2;40;55;80m"    # muted blue
+VIM_VISUAL_BG="\033[48;2;70;45;70m"    # muted plum
+
+WARN_THRESHOLD=80
+
+# --- Vim mode badge ---
+VIM_BADGE=""
+if [ -n "$VIM_MODE" ]; then
+  case "$VIM_MODE" in
+    insert)  VIM_BADGE="\033[38;2;160;160;175m${VIM_INSERT_BG}  I ${R} " ;;
+    normal)  VIM_BADGE="\033[38;2;150;170;200m${VIM_NORMAL_BG}  N ${R} " ;;
+    visual)  VIM_BADGE="\033[38;2;175;155;185m${VIM_VISUAL_BG} 󰒅 V ${R} " ;;
+    *)       VIM_BADGE="\033[38;2;160;160;175m${VIM_INSERT_BG}  ${VIM_MODE:0:1} ${R} " ;;
+  esac
+fi
+
+# --- Warnings (shown inside context bracket) ---
+WARNINGS=""
+[ "$EXCEEDS_200K" = "true" ] && WARNINGS=" ${PEACH} 200k+${R}"
+if [ -n "$FIVE_H" ]; then
+  FH_INT=$(printf '%.0f' "$FIVE_H")
+  [ "$FH_INT" -ge "$WARN_THRESHOLD" ] && WARNINGS="${WARNINGS} ${CORAL} 5h:${FH_INT}%${R}"
+fi
+if [ -n "$SEVEN_D" ]; then
+  SD_INT=$(printf '%.0f' "$SEVEN_D")
+  [ "$SD_INT" -ge "$WARN_THRESHOLD" ] && WARNINGS="${WARNINGS} ${CORAL} 7d:${SD_INT}%${R}"
+fi
+
+# --- Context bar ---
+if [ -n "$PCT" ]; then
+  PCT_INT=$(printf '%.0f' "$PCT")
+  BAR_WIDTH=10
+  FILLED=$((PCT_INT * BAR_WIDTH / 100))
+  EMPTY=$((BAR_WIDTH - FILLED))
+
+  if [ "$PCT_INT" -lt 50 ]; then
+    CTX_COLOR="$TEAL"
+  elif [ "$PCT_INT" -lt 75 ]; then
+    CTX_COLOR="$AMBER"
+  else
+    CTX_COLOR="$CORAL"
+  fi
+
+  BAR=""
+  if [ "$FILLED" -gt 0 ]; then
+    printf -v FILL "%${FILLED}s"
+    BAR="${FILL// /▓}"
+  fi
+  if [ "$EMPTY" -gt 0 ]; then
+    printf -v PAD "%${EMPTY}s"
+    BAR="${BAR}${PAD// /░}"
+  fi
+
+  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${CTX_COLOR}${BAR} ${PCT_INT}%${WARNINGS}${R}"
+else
+  printf -v PAD "%10s"
+  BAR="${PAD// /░}"
+  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${SLATE}${BAR} --%${R}"
+fi

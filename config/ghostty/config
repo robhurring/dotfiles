@@ -33,6 +33,9 @@ keybind = super+equal=increase_font_size:1
 keybind = super+minus=decrease_font_size:1
 keybind = super+backspace=reset_font_size
 
+# keybindings — tmux compatibility
+keybind = shift+enter=text:\x1b\r
+
 # keybindings — clipboard
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
