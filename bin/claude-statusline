@@ -3,11 +3,15 @@
 
 input=$(cat)
 
-DIR=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
-DIR=$(basename "$DIR")
-
+CWD=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
+BRANCH=$(git -C "$CWD" symbolic-ref --short HEAD 2>/dev/null || echo "detached")
 WORKTREE=$(echo "$input" | jq -r '.worktree.name // empty')
-[ -n "$WORKTREE" ] && DIR="${DIR}  ${WORKTREE}"
+
+if [ -n "$WORKTREE" ]; then
+  DIR="${WORKTREE}:${BRANCH}"
+else
+  DIR=" ${BRANCH}"
+fi
 
 MODEL=$(echo "$input" | jq -r '.model.display_name // ""')
 
