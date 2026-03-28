@@ -9,10 +9,10 @@ auto-venv() {
   
   # Search upward for .venv or venv
   while [[ "$dir" != "/" ]]; do
-    if [[ -d "$dir/.venv" ]]; then
+    if [[ -f "$dir/.venv/bin/activate" ]]; then
       venv_path="$dir/.venv"
       break
-    elif [[ -d "$dir/venv" ]]; then
+    elif [[ -f "$dir/venv/bin/activate" ]]; then
       venv_path="$dir/venv"
       break
     fi
