@@ -61,6 +61,7 @@
   co = checkout
   cp = cherry-pick
   ds = diff --stat
+  sdiff = -c delta.side-by-side=true diff
   empty = commit --allow-empty -m
   pu = push -u
   citag = "!f() { FORMAT=\"$1\" MSG=\"${*:2}\"; OUT=$(printf \"$FORMAT\" \"${MSG}\"); echo \"\\033[1;37;48;5;141m$OUT\\033[0m\"; git commit -qm \"$OUT\"; }; f"
@@ -124,7 +125,7 @@
 
 [delta]
   navigate = true
-  side-by-side = true
+  side-by-side = false
   line-numbers = true
 [help]
   autocorrect = 1
