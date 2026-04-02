@@ -1,4 +1,3 @@
-2gua.rainbow-brackets
 anan.jetbrains-darcula-theme
 anysphere.cursorpyright
 charliermarsh.ruff

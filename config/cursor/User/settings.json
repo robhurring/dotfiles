@@ -228,7 +228,7 @@
   "typescript.implementationsCodeLens.enabled": true,
   "javascript.referencesCodeLens.enabled": true,
   "python.analysis.enableCodeLens": true,
-  "workbench.colorTheme": "dark-jetbrains-color-theme",
+  "workbench.colorTheme": "JetBrains Darcula Theme",
   "workbench.iconTheme": "jetbrains-file-icon-theme-auto",
   "editor.fontFamily": "Hasklig",
   "editor.fontSize": 15,
