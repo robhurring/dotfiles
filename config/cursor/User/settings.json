@@ -145,6 +145,14 @@
     {
       "before": [",", "t"],
       "commands": ["workbench.action.terminal.toggleTerminal"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.chat.open"]
+    },
+    {
+      "before": ["<leader>", "S"],
+      "commands": ["workbench.action.chat.newChat"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -187,6 +195,14 @@
     {
       "before": [",", "g", "c"],
       "commands": ["gitlens.copyRemoteFileUrlToClipboard"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["aichat.insertselectionintochat"]
+    },
+    {
+      "before": ["<leader>", "e"],
+      "commands": ["cursorai.action.generateInTerminal"]
     },
     {
       "before": [
