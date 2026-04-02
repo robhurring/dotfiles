@@ -244,9 +244,8 @@
   "typescript.implementationsCodeLens.enabled": true,
   "javascript.referencesCodeLens.enabled": true,
   "python.analysis.enableCodeLens": true,
-  "workbench.colorTheme": "JetBrains Darcula Theme",
   "workbench.iconTheme": "jetbrains-file-icon-theme-auto",
-  "editor.fontFamily": "Hasklig",
+  "editor.fontFamily": "Hasklug Nerd Font",
   "editor.fontSize": 15,
   "editor.lineHeight": 1.2,
   "[python]": {
@@ -263,5 +262,7 @@
       "domain": "git.soma.salesforce.com",
       "type": "GitHub"
     }
-  ]
+  ],
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.preferredLocation": "sidebar"
 }

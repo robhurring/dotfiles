@@ -64,6 +64,26 @@
     "when": "inQuickOpen"
   },
   {
+    "key": "ctrl+h",
+    "command": "workbench.action.focusLeftGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.focusBelowGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.focusAboveGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.focusRightGroup",
+    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+  },
+  {
     "key": "cmd+r",
     "command": "workbench.action.debug.selectandstart"
   },
