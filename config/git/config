@@ -91,6 +91,13 @@
   undo = reset HEAD~1 --mixed
   up = "!f() { BASE=\"$(git symbolic-ref --short HEAD 2>/dev/null)\"; git pull --rebase origin $BASE; }; f"
 
+# ===> exploring
+  explore-what-changes = "!git log --format=format: --name-only --since='1 year ago' | sort | uniq -c | sort -nr | head -20"
+  explore-who-wrote-this = "!git shortlog -sn --no-merges"
+  explore-hot-spots = "!git log -i --grep='fix\\|bug\\|broken' --name-only --format='' | sort | uniq -c | sort -nr | head -20"
+  explore-commit-counts = "!git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c"
+  explore-fires = "!git log --format='%ad %h %s' --date=relative --since='1 year ago' | grep -iE 'revert|hotfix|emergency|rollback'"
+
 # ===> merging
   resolve = mergetool
 [color]
