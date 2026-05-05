@@ -298,6 +298,70 @@ do_modify() {
     done
 }
 
+# Function to show tasks grouped by board column (section)
+do_board() {
+    # Sync before getting tasks
+    if should_sync; then
+        do_sync
+    fi
+
+    echo "=== Board View ===" >&2
+    echo "" >&2
+
+    # Get all tasks in CSV format, strip ANSI codes, skip header
+    raw_tasks=$(todoist --csv list 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | tail -n +2)
+
+    if [ -z "$raw_tasks" ]; then
+        echo "(no tasks)" >&2
+        return
+    fi
+
+    # Extract unique sections, sorted
+    sections=$(echo "$raw_tasks" | awk -F',' '{
+        proj = $4
+        idx = index(proj, "/")
+        if (idx > 0) {
+            print substr(proj, idx + 1)
+        } else {
+            print "(unsectioned)"
+        }
+    }' | sort -u)
+
+    # Display tasks grouped by section, using todoist list with section filter
+    echo "$sections" | while IFS= read -r section; do
+        echo "📋 $section:" >&2
+        # Filter tasks belonging to this section and pass through todoist-style output
+        matched=$(echo "$raw_tasks" | awk -F',' -v s="$section" '{
+            proj = $4
+            idx = index(proj, "/")
+            if (idx > 0) {
+                task_section = substr(proj, idx + 1)
+            } else {
+                task_section = "(unsectioned)"
+            }
+            if (task_section == s) print $0
+        }')
+        if [ -n "$matched" ]; then
+            echo "$matched" | awk -F',' '{
+                id = $1
+                priority = $2
+                due_date = $3
+                project = $4
+                labels = $5
+                content = ""
+                for(i=6; i<=NF; i++) {
+                    if(i > 6) content = content ","
+                    content = content $i
+                }
+                printf "  %s  %s  %-20s %s\n", id, priority, due_date, content
+            }' >&2
+        else
+            echo "  (none)" >&2
+        fi
+        echo "" >&2
+    done
+}
+
 # Function to show usage
 show_usage() {
     echo "Usage: $0 <command> [options]"
@@ -305,6 +369,7 @@ show_usage() {
     echo "Common commands:"
     echo "  sync [-f]            Sync with Todoist servers (cached for 1 hour, use -f to force)"
     echo "  list                 List tasks (default command)"
+    echo "  board                List tasks grouped by board column (section)"
     echo "  count [-a]           Count tasks by category (overdue:p1:today) or total with -a"
     echo "  add <task>           Add a new task using quick add (supports natural language)"
     echo "  complete             Complete a task using FZF selection"
@@ -361,6 +426,8 @@ elif [ "$1" = "add" ]; then
     do_add "$@"
 elif [ "$1" = "complete" ]; then
     do_complete
+elif [ "$1" = "board" ]; then
+    do_board
 elif [ "$1" = "modify" ]; then
     do_modify "$@"
 else
