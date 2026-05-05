@@ -237,3 +237,6 @@
   path = ~/.gitconfig.local
 [branch "master"]
 	mergeoptions = --ff-only
+[credential "https://git.soma.salesforce.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
