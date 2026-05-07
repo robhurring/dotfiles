@@ -128,9 +128,9 @@ return {
   {
     'jpalardy/vim-slime',
     keys = {
-      { '<leader>s',  '<Plug>SlimeMotionSend', desc = 'Send motion to tmux' },
-      { '<leader>ss', '<Plug>SlimeLineSend',   desc = 'Send line to tmux' },
-      { '<leader>s',  '<Plug>SlimeRegionSend', mode = 'x', desc = 'Send selection to tmux' },
+      { '<leader>s',  function() return require('slime_trim').motion() end, expr = true, desc = 'Send motion to tmux (no trailing newline)' },
+      { '<leader>ss', '<Plug>SlimeLineSend', desc = 'Send line to tmux' },
+      { '<leader>s',  function() require('slime_trim').visual() end, mode = 'x', desc = 'Send selection to tmux (no trailing newline)' },
     },
     init = function()
       vim.g.slime_target = 'tmux'
