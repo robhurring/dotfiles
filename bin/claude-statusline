@@ -16,6 +16,19 @@ fi
 MODEL=$(echo "$input" | jq -r '.model.display_name // ""')
 
 PCT=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+USED_TOKENS=$(echo "$input" | jq -r '.context_window.total_input_tokens // empty')
+
+# Format used tokens as 235k / 1.2M
+USED_LABEL=""
+if [ -n "$USED_TOKENS" ]; then
+  if [ "$USED_TOKENS" -ge 1000000 ]; then
+    USED_LABEL=$(awk -v n="$USED_TOKENS" 'BEGIN{printf "%.1fM", n/1000000}')
+  elif [ "$USED_TOKENS" -ge 1000 ]; then
+    USED_LABEL="$((USED_TOKENS / 1000))k"
+  else
+    USED_LABEL="$USED_TOKENS"
+  fi
+fi
 FIVE_H=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 SEVEN_D=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 
@@ -92,9 +105,9 @@ if [ -n "$PCT" ]; then
     BAR="${BAR}${PAD// /░}"
   fi
 
-  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${CTX_COLOR}${BAR} ${PCT_INT}%${WARNINGS}${R}"
+  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${CTX_COLOR}${BAR} ${PCT_INT}%${USED_LABEL:+ ${SLATE}${USED_LABEL}${R}}${WARNINGS}${R}"
 else
   printf -v PAD "%10s"
   BAR="${PAD// /░}"
-  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${SLATE}${BAR} --%${R}"
+  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${SLATE}${BAR} --%${USED_LABEL:+ ${USED_LABEL}}${R}"
 fi
