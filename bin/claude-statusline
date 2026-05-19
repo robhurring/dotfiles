@@ -33,7 +33,6 @@ FIVE_H=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty'
 SEVEN_D=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 
 VIM_MODE=$(echo "$input" | jq -r '.vim.mode // empty')
-EXCEEDS_200K=$(echo "$input" | jq -r '.exceeds_200k_tokens // false')
 
 # True color helpers: \033[38;2;R;G;Bm (fg)  \033[48;2;R;G;Bm (bg)
 R="\033[0m"
@@ -46,7 +45,6 @@ AMBER="\033[38;2;170;150;100m"     # context bar warn — dusty gold
 CORAL="\033[38;2;170;100;100m"     # context bar danger — muted rose
 LAVENDER="\033[38;2;100;100;115m"  # model name (dim)
 SLATE="\033[38;2;65;68;80m"        # dim text / separators
-PEACH="\033[38;2;180;130;100m"     # 200k+ warning
 SKY="\033[38;2;85;90;100m"         # directory (gray)
 MINT="\033[38;2;85;90;100m"        # worktree branch (gray)
 
@@ -70,7 +68,6 @@ fi
 
 # --- Warnings (shown inside context bracket) ---
 WARNINGS=""
-[ "$EXCEEDS_200K" = "true" ] && WARNINGS=" ${PEACH} 200k+${R}"
 if [ -n "$FIVE_H" ]; then
   FH_INT=$(printf '%.0f' "$FIVE_H")
   [ "$FH_INT" -ge "$WARN_THRESHOLD" ] && WARNINGS="${WARNINGS} ${CORAL} 5h:${FH_INT}%${R}"
