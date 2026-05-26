@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 # Claude Code status line (requires Nerd Font + true color terminal)
+#
+# Mode is selected per-machine via ~/.claude/settings.json (not synced):
+#   claude-statusline --plan   # subscription: context + 5h session bar + 7d window
+#   claude-statusline --api    # API account: context only (no rate-limit windows)
+#
+# Both modes share: vim badge, dir/branch, model, and context count/max/%.
+
+MODE="plan"
+case "$1" in
+  --api)  MODE="api" ;;
+  --plan) MODE="plan" ;;
+esac
 
 input=$(cat)
 
@@ -17,18 +29,8 @@ MODEL=$(echo "$input" | jq -r '.model.display_name // ""')
 
 PCT=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
 USED_TOKENS=$(echo "$input" | jq -r '.context_window.total_input_tokens // empty')
+MAX_TOKENS=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
 
-# Format used tokens as 235k / 1.2M
-USED_LABEL=""
-if [ -n "$USED_TOKENS" ]; then
-  if [ "$USED_TOKENS" -ge 1000000 ]; then
-    USED_LABEL=$(awk -v n="$USED_TOKENS" 'BEGIN{printf "%.1fM", n/1000000}')
-  elif [ "$USED_TOKENS" -ge 1000 ]; then
-    USED_LABEL="$((USED_TOKENS / 1000))k"
-  else
-    USED_LABEL="$USED_TOKENS"
-  fi
-fi
 FIVE_H=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 SEVEN_D=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 
@@ -40,20 +42,46 @@ BOLD="\033[1m"
 SEP="\033[38;2;75;75;95m│${R}"
 
 # Palette — muted, low-contrast
-TEAL="\033[38;2;130;125;155m"      # context bar ok — muted purple-gray
-AMBER="\033[38;2;170;150;100m"     # context bar warn — dusty gold
-CORAL="\033[38;2;170;100;100m"     # context bar danger — muted rose
+TEAL="\033[38;2;130;125;155m"      # usage ok — muted purple-gray
+AMBER="\033[38;2;170;150;100m"     # usage warn — dusty gold
+CORAL="\033[38;2;170;100;100m"     # usage danger — muted rose
 LAVENDER="\033[38;2;100;100;115m"  # model name (dim)
-SLATE="\033[38;2;65;68;80m"        # dim text / separators
+SLATE="\033[38;2;65;68;80m"        # dim text / labels
 SKY="\033[38;2;85;90;100m"         # directory (gray)
-MINT="\033[38;2;85;90;100m"        # worktree branch (gray)
 
 # Vim badge backgrounds
 VIM_INSERT_BG="\033[48;2;50;50;60m"    # muted gray
 VIM_NORMAL_BG="\033[48;2;40;55;80m"    # muted blue
 VIM_VISUAL_BG="\033[48;2;70;45;70m"    # muted plum
 
-WARN_THRESHOLD=80
+# Pick a usage color (teal/amber/coral) for an integer percentage.
+usage_color() {
+  local v="$1"
+  if   [ "$v" -lt 50 ]; then printf "%b" "$TEAL"
+  elif [ "$v" -lt 75 ]; then printf "%b" "$AMBER"
+  else                       printf "%b" "$CORAL"
+  fi
+}
+
+# Format a token count: 850 -> 850, 150000 -> 150k, 1200000 -> 1.2M.
+fmt_tokens() {
+  local n="$1"
+  [ -z "$n" ] && { printf -- "--"; return; }
+  if   [ "$n" -ge 1000000 ]; then awk -v n="$n" 'BEGIN{printf "%.1fM", n/1000000}'
+  elif [ "$n" -ge 1000 ];    then printf "%dk" "$((n / 1000))"
+  else                            printf "%d" "$n"
+  fi
+}
+
+# Render a 10-cell bar (▓ filled, ░ empty) for an integer percentage.
+make_bar() {
+  local pct="$1" width=10 filled empty bar="" fill pad
+  filled=$((pct * width / 100))
+  empty=$((width - filled))
+  if [ "$filled" -gt 0 ]; then printf -v fill "%${filled}s"; bar="${fill// /▓}"; fi
+  if [ "$empty" -gt 0 ];  then printf -v pad  "%${empty}s";  bar="${bar}${pad// /░}"; fi
+  printf "%s" "$bar"
+}
 
 # --- Vim mode badge ---
 VIM_BADGE=""
@@ -66,45 +94,35 @@ if [ -n "$VIM_MODE" ]; then
   esac
 fi
 
-# --- Warnings (shown inside context bracket) ---
-WARNINGS=""
-if [ -n "$FIVE_H" ]; then
-  FH_INT=$(printf '%.0f' "$FIVE_H")
-  [ "$FH_INT" -ge "$WARN_THRESHOLD" ] && WARNINGS="${WARNINGS} ${CORAL} 5h:${FH_INT}%${R}"
-fi
-if [ -n "$SEVEN_D" ]; then
-  SD_INT=$(printf '%.0f' "$SEVEN_D")
-  [ "$SD_INT" -ge "$WARN_THRESHOLD" ] && WARNINGS="${WARNINGS} ${CORAL} 7d:${SD_INT}%${R}"
-fi
-
-# --- Context bar ---
+# --- Context: count / max / % (both modes) ---
 if [ -n "$PCT" ]; then
   PCT_INT=$(printf '%.0f' "$PCT")
-  BAR_WIDTH=10
-  FILLED=$((PCT_INT * BAR_WIDTH / 100))
-  EMPTY=$((BAR_WIDTH - FILLED))
-
-  if [ "$PCT_INT" -lt 50 ]; then
-    CTX_COLOR="$TEAL"
-  elif [ "$PCT_INT" -lt 75 ]; then
-    CTX_COLOR="$AMBER"
-  else
-    CTX_COLOR="$CORAL"
-  fi
-
-  BAR=""
-  if [ "$FILLED" -gt 0 ]; then
-    printf -v FILL "%${FILLED}s"
-    BAR="${FILL// /▓}"
-  fi
-  if [ "$EMPTY" -gt 0 ]; then
-    printf -v PAD "%${EMPTY}s"
-    BAR="${BAR}${PAD// /░}"
-  fi
-
-  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${CTX_COLOR}${BAR} ${PCT_INT}%${USED_LABEL:+ ${SLATE}${USED_LABEL}${R}}${WARNINGS}${R}"
+  CTX_COLOR=$(usage_color "$PCT_INT")
+  CTX="${SLATE}$(fmt_tokens "$USED_TOKENS")/$(fmt_tokens "$MAX_TOKENS")${R} ${CTX_COLOR}${PCT_INT}%${R}"
 else
-  printf -v PAD "%10s"
-  BAR="${PAD// /░}"
-  echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${SLATE}${BAR} --%${USED_LABEL:+ ${USED_LABEL}}${R}"
+  CTX="${SLATE}--/-- --%${R}"
 fi
+
+# --- Plan extras: 5h session bar + 7d window % ---
+PLAN=""
+if [ "$MODE" = "plan" ]; then
+  if [ -n "$FIVE_H" ]; then
+    FH_INT=$(printf '%.0f' "$FIVE_H")
+    FH_COLOR=$(usage_color "$FH_INT")
+    SESSION="${SLATE}5h${R} ${FH_COLOR}$(make_bar "$FH_INT") ${FH_INT}%${R}"
+  else
+    SESSION="${SLATE}5h $(make_bar 0) --%${R}"
+  fi
+
+  if [ -n "$SEVEN_D" ]; then
+    SD_INT=$(printf '%.0f' "$SEVEN_D")
+    SD_COLOR=$(usage_color "$SD_INT")
+    WINDOW="${SLATE}7d${R} ${SD_COLOR}${SD_INT}%${R}"
+  else
+    WINDOW="${SLATE}7d --%${R}"
+  fi
+
+  PLAN=" ${SEP} ${SESSION} ${SEP} ${WINDOW}"
+fi
+
+echo -e "${VIM_BADGE}${SKY} ${DIR}${R} ${SEP} ${LAVENDER}󰳗 ${MODEL}${R} ${SEP} ${CTX}${PLAN}${R}"
