@@ -10,6 +10,33 @@ return {
     config = function(_, opts)
       require("claudecode").setup(opts)
 
+      -- Auto-follow terminal output: nvim only tails a terminal when its
+      -- cursor is on the last line, so the Claude pane looks "stuck" while
+      -- you work in another window. Scroll any *unfocused* window showing the
+      -- buffer to the bottom on new output; leave the focused window alone so
+      -- scrolling up to read still works.
+      vim.api.nvim_create_autocmd("TermOpen", {
+        callback = function(args)
+          if vim.bo[args.buf].filetype ~= "snacks_terminal" then
+            return
+          end
+          vim.api.nvim_buf_attach(args.buf, false, {
+            on_lines = function(_, buf)
+              if not vim.api.nvim_buf_is_valid(buf) then
+                return true -- detach
+              end
+              local current = vim.api.nvim_get_current_win()
+              for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+                if win ~= current then
+                  local last = vim.api.nvim_buf_line_count(buf)
+                  pcall(vim.api.nvim_win_set_cursor, win, { last, 0 })
+                end
+              end
+            end,
+          })
+        end,
+      })
+
       -- Accept/deny all diffs commands
       vim.api.nvim_create_user_command("ClaudeCodeDiffAcceptAll", function()
         local diff = require("claudecode.diff")
@@ -63,6 +90,9 @@ return {
         split_side = "right",
         split_width_percentage = 0.40,
         provider = "snacks",
+        -- Fixed width ~ colorcolumn (101). snacks treats width > 1 as an
+        -- absolute column count, and snacks_win_opts overrides the percentage.
+        snacks_win_opts = { width = 102 },
       },
 
       -- Track visual selections for context
