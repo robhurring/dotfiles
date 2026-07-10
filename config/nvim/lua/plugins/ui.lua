@@ -45,7 +45,23 @@ return {
           }
         },
         sections = {
-          lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
+          lualine_a = {
+            {
+              'mode',
+              fmt = function(str) return str:sub(1, 1) end,
+              -- Terminal mode shares the normal-mode color in most themes;
+              -- give it its own, pulled from the theme (warm/orange highlight)
+              -- so it tracks the colorscheme like the other modes.
+              color = function()
+                if vim.fn.mode():find('t') then
+                  local u = require('lualine.utils.utils')
+                  local bg = u.extract_color_from_hllist('fg', { 'Constant', 'Boolean', 'PreProc' }, '#d19a66')
+                  local fg = u.extract_highlight_colors('Normal', 'bg') or '#282c34'
+                  return { bg = bg, fg = fg, gui = 'bold' }
+                end
+              end,
+            },
+          },
           lualine_b = {
             {
               'diagnostics',
