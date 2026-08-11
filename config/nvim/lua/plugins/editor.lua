@@ -1,6 +1,7 @@
 return {
   'wellle/targets.vim',
   'tpope/vim-endwise',
+  'tpope/vim-repeat', -- makes surround/ReplaceWithRegister repeatable with '.'
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
   'vim-scripts/ReplaceWithRegister',

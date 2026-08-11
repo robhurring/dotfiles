@@ -18,6 +18,27 @@ vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
   command = 'normal! g`"'
 })
 
+-- Reload files changed on disk (e.g. Claude editing the buffer in a side
+-- pane). autoread only permits reloads; checktime is what triggers them.
+-- These events fire when you return to a code window, so it reloads on focus.
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
+  pattern = '*',
+  group = localgroup,
+  callback = function()
+    if vim.fn.mode() ~= 'c' and vim.fn.getcmdwintype() == '' then
+      vim.cmd('checktime')
+    end
+  end,
+})
+
+-- Notify when a buffer was reloaded from disk underneath us.
+vim.api.nvim_create_autocmd('FileChangedShellPost', {
+  group = localgroup,
+  callback = function()
+    vim.notify('Buffer reloaded from disk', vim.log.levels.INFO)
+  end,
+})
+
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { 'init.lua' },
   group = localgroup,
