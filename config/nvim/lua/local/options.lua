@@ -15,10 +15,12 @@ vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.linebreak = true
 vim.opt.list = true
-vim.opt.listchars.extends = '»'
-vim.opt.listchars.nbsp = '∙'
-vim.opt.listchars.precedes = '«'
-vim.opt.listchars.tab = '-'
+vim.opt.listchars = {
+  extends = '»',
+  nbsp = '∙',
+  precedes = '«',
+  tab = '  ',
+}
 vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -59,4 +61,3 @@ vim.diagnostic.config({
   severity_sort = false,
   float = true,
 })
-
