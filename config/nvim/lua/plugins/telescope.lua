@@ -14,6 +14,25 @@ return {
     },
     config = function()
       local actions = require 'telescope.actions'
+      local previewers = require 'telescope.previewers'
+      local preview_utils = require 'telescope.previewers.utils'
+
+      local function binary_preview(filepath, bufnr, opts)
+        local ok, image = pcall(require, 'snacks.image')
+        if not ok or image.config.enabled == false or not image.supports_file(filepath) then
+          preview_utils.set_preview_message(bufnr, opts.winid, 'Binary cannot be previewed', opts.preview.msg_bg_fillchar)
+          return
+        end
+
+        local extension = vim.fn.fnamemodify(filepath, ':e'):lower()
+        if extension ~= 'png' and vim.fn.executable('magick') == 0 then
+          preview_utils.set_preview_message(bufnr, opts.winid, 'Image preview requires ImageMagick', opts.preview.msg_bg_fillchar)
+          return
+        end
+
+        image.buf.attach(bufnr, { src = filepath })
+      end
+
       require('telescope').setup {
         defaults = {
           layout_strategy = 'vertical',
@@ -25,7 +44,9 @@ return {
           },
           preview = {
             treesitter = false,
+            mime_hook = binary_preview,
           },
+          buffer_previewer_maker = previewers.buffer_previewer_maker,
           mappings = {
             i = {
               ["<c-j>"] = actions.move_selection_next,

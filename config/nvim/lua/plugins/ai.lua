@@ -1,8 +1,40 @@
--- AI assistant plugins (Claude Code integration)
+-- AI assistant plugins (Claude Code and OpenCode integrations)
 
 return {
   -- Required dependency for claudecode terminal
   { "folke/snacks.nvim", lazy = false },
+
+  {
+    "nickjvandyke/opencode.nvim",
+    version = "*",
+    config = function()
+      vim.g.opencode_opts = {
+        server = {
+          start = false,
+        },
+      }
+
+      vim.keymap.set({ "n", "x" }, "<localleader>oa", function()
+        require("opencode").ask("@this: ")
+      end, { desc = "Ask OpenCode" })
+
+      vim.keymap.set({ "n", "x" }, "<localleader>oc", function()
+        require("opencode").select()
+      end, { desc = "Select OpenCode action" })
+
+      vim.keymap.set({ "n", "x" }, "<localleader>os", function()
+        return require("opencode").operator("@this ")
+      end, { desc = "Send range to OpenCode", expr = true })
+
+      vim.keymap.set({ "n", "x" }, "go", function()
+        return require("opencode").operator("@this ")
+      end, { desc = "Append range to OpenCode", expr = true })
+
+      vim.keymap.set("n", "goo", function()
+        return require("opencode").operator("@this ") .. "_"
+      end, { desc = "Append line to OpenCode", expr = true })
+    end,
+  },
 
   {
     "coder/claudecode.nvim",
