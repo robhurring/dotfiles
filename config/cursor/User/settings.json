@@ -244,6 +244,7 @@
   "typescript.implementationsCodeLens.enabled": true,
   "javascript.referencesCodeLens.enabled": true,
   "python.analysis.enableCodeLens": true,
+  "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "workbench.iconTheme": "jetbrains-file-icon-theme-auto",
   "editor.fontFamily": "Hasklug Nerd Font",
   "editor.fontSize": 15,
