@@ -301,12 +301,6 @@
   },
   "security.promptForLocalFileProtocolHandling": false,
   "git.openRepositoryInParentFolders": "always",
-  "gitlens.remotes": [
-    {
-      "domain": "git.soma.salesforce.com",
-      "type": "GitHub"
-    }
-  ],
   "claudeCode.allowDangerouslySkipPermissions": true,
   "claudeCode.preferredLocation": "sidebar"
 }

@@ -44,14 +44,6 @@
   # creating formatted branches
   brtag = "!f() { FORMAT=\"$1\" TICKET=\"$2\" MSG=\"${*:3}\"; BRANCH=$(printf \"$FORMAT\" \"$TICKET\" \"${MSG// /-}\"); git checkout -b ${BRANCH%/}; }; f"
   brcp = !git current-branch|pbcopy
-  wibr = "!git brtag \"u/$USER/%s/%s\""
-
-  # get WI from branch name
-  wi = "!git current-branch|awk '{split($0,a,\"/\");split(a[3],b,\"-\");print b[1] \"-\" b[2];}'|tr -d '\n'"
-  wicp = "!git wi|pbcopy&&pbpaste"
-
-  # open GUS to current branch WI
-  openwi = "!open https://gus.my.salesforce.com/apex/ADM_WorkLocator?bugorworknumber=$(git wi)"
 
 # ===> commit
   amend = "commit --amend --no-edit"
@@ -237,8 +229,5 @@
   path = ~/.gitconfig.local
 [branch "master"]
 	mergeoptions = --ff-only
-[credential "https://git.soma.salesforce.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
