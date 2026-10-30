@@ -42,7 +42,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<tab>', function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set('n', '<F6>', function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set('n', '<leader>=', function() vim.lsp.buf.format({ async = true }) end, opts)
   end
 })
 

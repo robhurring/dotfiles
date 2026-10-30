@@ -4,8 +4,30 @@ vim.keymap.del("n", "gri")
 vim.keymap.set('i', 'jk', '<Esc>l')
 vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 
--- indent
-vim.keymap.set('n', '<leader>=', 'gg=G<C-o>')
+-- format with Conform, an attached LSP, or built-in indentation
+vim.keymap.set('n', '<leader>=', function()
+  local conform = require('conform')
+  local has_formatter = vim.iter(conform.list_formatters(0)):any(function(formatter)
+    return formatter.available
+  end)
+
+  if has_formatter then
+    conform.format({ async = true })
+    return
+  end
+
+  local has_lsp_formatter = vim.iter(vim.lsp.get_clients({ bufnr = 0 })):any(function(client)
+    return client:supports_method('textDocument/formatting')
+  end)
+  if has_lsp_formatter then
+    vim.lsp.buf.format({ async = true })
+    return
+  end
+
+  local view = vim.fn.winsaveview()
+  vim.cmd('normal! gg=G')
+  vim.fn.winrestview(view)
+end, { desc = 'Format buffer' })
 
 -- movement
 vim.keymap.set('n', '<c-q>', vim.cmd.bdelete)
