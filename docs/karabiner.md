@@ -89,6 +89,7 @@ it is) via `bin/toggle-window.applescript`.
 | `s` | Toggle Slack | **s**lack |
 | `t` | Toggle Ghostty | **t**erminal |
 | `w` | Toggle Google Chrome | **w**eb |
+| `b` | Toggle Buzz | **b**uzz |
 | `a` | osascript smoke test (notification + speech) | — |
 
 ### toggle-window.applescript
