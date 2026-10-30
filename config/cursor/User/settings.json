@@ -79,6 +79,10 @@
       "commands": ["workbench.action.toggleSidebarVisibility"]
     },
     {
+      "before": ["c", "o", "d"],
+      "commands": ["editor.debug.action.toggleBreakpoint"]
+    },
+    {
       "before": ["c", "o", "w"],
       "commands": ["editor.action.toggleWordWrap"]
     },
@@ -147,12 +151,36 @@
       "commands": ["workbench.action.terminal.toggleTerminal"]
     },
     {
+      "before": [",", "t", "t"],
+      "commands": ["testing.runAtCursor"]
+    },
+    {
+      "before": [",", "t", "d"],
+      "commands": ["testing.debugAtCursor"]
+    },
+    {
+      "before": [",", "t", "b"],
+      "commands": [{ "command": "workbench.action.tasks.runTask", "args": "Run Behave scenario at cursor" }]
+    },
+    {
       "before": ["<leader>", "s"],
       "commands": ["workbench.action.chat.open"]
     },
     {
       "before": ["<leader>", "S"],
       "commands": ["workbench.action.chat.newChat"]
+    },
+    {
+      "before": [",", "o", "a"],
+      "commands": ["opencode.openTerminal"]
+    },
+    {
+      "before": [",", "o", "s"],
+      "commands": ["opencode.addFilepathToTerminal"]
+    },
+    {
+      "before": ["g", "o", "o"],
+      "commands": ["expandLineSelection", "opencode.addFilepathToTerminal"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -205,6 +233,18 @@
       "commands": ["cursorai.action.generateInTerminal"]
     },
     {
+      "before": [",", "o", "a"],
+      "commands": ["opencode.openTerminal"]
+    },
+    {
+      "before": [",", "o", "s"],
+      "commands": ["opencode.addFilepathToTerminal"]
+    },
+    {
+      "before": ["g", "o"],
+      "commands": ["opencode.addFilepathToTerminal"]
+    },
+    {
       "before": [
         "<leader>",
         "p"
@@ -247,8 +287,11 @@
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "workbench.iconTheme": "jetbrains-file-icon-theme-auto",
   "editor.fontFamily": "Hasklug Nerd Font",
-  "editor.fontSize": 15,
+  "editor.fontSize": 14,
+  "terminal.integrated.fontFamily": "Hasklug Nerd Font",
+  "terminal.integrated.fontSize": 14,
   "editor.lineHeight": 1.2,
+  "python.terminal.activateEnvironment": false,
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true,

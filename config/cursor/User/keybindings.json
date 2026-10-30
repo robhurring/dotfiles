@@ -30,10 +30,6 @@
     "when": "editorTextFocus && vim.mode == 'Normal'"
   },
   {
-    "key": "cmd+1",
-    "command": "workbench.action.toggleSidebarVisibility"
-  },
-  {
     "key": "shift+f6",
     "command": "editor.action.rename",
     "when": "editorTextFocus"
@@ -61,22 +57,44 @@
   {
     "key": "ctrl+h",
     "command": "workbench.action.focusLeftGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+    "when": "!suggestWidgetVisible && !inQuickOpen && !terminalAltBufferActive"
   },
   {
     "key": "ctrl+j",
     "command": "workbench.action.focusBelowGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+    "when": "!suggestWidgetVisible && !inQuickOpen && !terminalAltBufferActive"
   },
   {
     "key": "ctrl+k",
     "command": "workbench.action.focusAboveGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+    "when": "!suggestWidgetVisible && !inQuickOpen && !terminalAltBufferActive"
   },
   {
     "key": "ctrl+l",
     "command": "workbench.action.focusRightGroup",
-    "when": "editorTextFocus && vim.mode == 'Normal' && !suggestWidgetVisible && !inQuickOpen"
+    "when": "!suggestWidgetVisible && !inQuickOpen && !terminalAltBufferActive"
+  },
+  {
+    "key": "cmd+;",
+    "command": "opencode.openTerminal"
+  },
+  {
+    "key": "cmd+;",
+    "command": "workbench.action.focusFirstEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+alt+e",
+    "command": "workbench.action.focusFirstEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+shift+;",
+    "command": "opencode.openNewTerminal"
+  },
+  {
+    "key": "cmd+alt+k",
+    "command": "opencode.addFilepathToTerminal"
   },
   {
     "key": "cmd+r",
