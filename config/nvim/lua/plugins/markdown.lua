@@ -4,10 +4,76 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = "cd app && yarn install",
+    dependencies = { "nvim-telescope/telescope.nvim" },
     init = function()
       vim.g.mkdp_theme = 'light'
       vim.g.mkdp_preview_options = { disable_sync_scroll = 1 }
       vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreview<cr>", { desc = "Start markdown preview" })
+      vim.keymap.set("n", "<leader>mh", function()
+        local headings = {}
+        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+        local in_fence = false
+
+        for line_number, line in ipairs(lines) do
+          if line:match("^%s*```") or line:match("^%s*~~~") then
+            in_fence = not in_fence
+          elseif not in_fence then
+            local hashes, title = line:match("^%s*(#+)%s+(.+)%s*$")
+            if hashes and #hashes <= 6 then
+              title = title:gsub("%s+#+%s*$", "")
+              table.insert(headings, {
+                display = string.rep("  ", #hashes - 1) .. title,
+                ordinal = title,
+                lnum = line_number,
+              })
+            elseif line_number > 1 and line:match("^%s*[=-]+%s*$") and lines[line_number - 1]:match("%S") then
+              local level = line:match("=") and 1 or 2
+              local setext_title = vim.trim(lines[line_number - 1])
+              table.insert(headings, {
+                display = string.rep("  ", level - 1) .. setext_title,
+                ordinal = setext_title,
+                lnum = line_number - 1,
+              })
+            end
+          end
+        end
+
+        if vim.tbl_isempty(headings) then
+          vim.notify("No Markdown headings found", vim.log.levels.INFO)
+          return
+        end
+
+        local pickers = require("telescope.pickers")
+        local finders = require("telescope.finders")
+        local config = require("telescope.config").values
+        local actions = require("telescope.actions")
+        local action_state = require("telescope.actions.state")
+
+        pickers.new({}, {
+          prompt_title = "Markdown headings",
+          finder = finders.new_table({
+            results = headings,
+            entry_maker = function(entry)
+              return {
+                value = entry,
+                display = entry.display,
+                ordinal = entry.ordinal,
+                lnum = entry.lnum,
+              }
+            end,
+          }),
+          sorter = config.generic_sorter({}),
+          attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+              local selection = action_state.get_selected_entry()
+              actions.close(prompt_bufnr)
+              vim.api.nvim_win_set_cursor(0, { selection.lnum, 0 })
+              vim.cmd("normal! zz")
+            end)
+            return true
+          end,
+        }):find()
+      end, { desc = "Find markdown heading" })
       vim.keymap.set("n", "<leader>ms", function()
         local opts = vim.g.mkdp_preview_options or {}
         opts.disable_sync_scroll = opts.disable_sync_scroll == 0 and 1 or 0
