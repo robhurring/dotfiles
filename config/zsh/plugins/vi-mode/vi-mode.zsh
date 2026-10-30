@@ -51,5 +51,3 @@ bindkey -M vicmd 'v' edit-command-line
 bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^K' up-history
-bindkey '^J' down-history
-
